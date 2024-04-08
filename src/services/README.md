@@ -1,71 +1,3 @@
-# Celitech Typescript SDK 1.0.0
-
-The Typescript SDK for Celitech.
-
-- API version: 1.0.0
-- SDK version: 1.0.0
-
-## Table of Contents
-
-- [About the API](#requirements)
-- [Installation](#installation)
-- [Environment Variables](#environment-variables)
-- [API Endpoint Services](#api-endpoint-services)
-- [API Models](#api-models)
-- [Sample Usage](#sample-usage)
-- [Celitech Services](#celitech-services)
-- [License](#license)
-
-## About the API
-
-Welcome to the CELITECH API documentation! Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/) # Introduction This guide is your go-to resource for the CELITECH API, with full documentation and schemas. Need help? Email us at support@celitech.com. Partners refers to online service providers that use our eSIM API. Access levels include Gold, Platinum, and Diamond. ## API The CELITECH API is designed for use by partner platforms, including both web and mobile applications. It's assumed all endpoint calls are initiated from the backend of an integrated platform. API URL: `https://api.celitech.net/v1` ## Authentication & Authorization CELITECH API uses the OAuth 2.0 protocol for authentication and authorization. The endpoints are protected using client credentials flow which is based on a token exchange. The token has a defined life span (typically 1 hour), after which a new token must be obtained. To begin, obtain OAuth 2.0 client credentials ( **CLIENT_ID** & **CLIENT_SECRET** ) from the [CELITECH Dashboard](https://www.dashboard.celitech.com/). Then your client application requests an access token from the CELITECH Authorization Server, extracts a token from the response, and sends the token to the CELITECH API that you want to access. Security Scheme Type: `OAuth2` Flow type: `clientCredentials` Token URL: `https://auth.celitech.net/oauth2/token`
-
-## Installation
-
-```sh
-npm install celitech-sdk
-```
-
-## Environment Variables
-
-You will need the following environment variables in order to access all the features of this SDK:
-
-| Name          | Description             |
-| :------------ | :---------------------- |
-| CLIENT_ID     | Client ID parameter     |
-| CLIENT_SECRET | Client Secret parameter |
-
-You can set these environment variables on the command line or you can use
-whatever tooling your project has in place to manage environment variables. If
-you are using a `.env` file, we have provided a template with the variable names
-in the `.env.example` file in the same directory as this readme.
-
-## Sample Usage
-
-Here is a simple program demonstrating usage of this SDK. It can also be found in the `examples/src/index.ts` file in this directory.
-
-When running the sample make sure to use `npm install` to install all the dependencies.
-
-```Typescript
-import { Celitech } from '@Celitech/celitech-sdk';
-
-
-const sdk = new Celitech();
-
-(async () => {
-  try {
-    const result = await sdk.destinations
-      .listDestinations();
-    console.log(result);
-  } catch (err) {
-    const error = err as Error;
-    console.error(error.message);
-  }
-})();
-
-
-```
-
 # Celitech Services
 
 A list of all services and services methods.
@@ -460,7 +392,3 @@ const sdk = new Celitech();
 })();
 
 ```
-
-## License
-
-License: MIT. See license in LICENSE.
