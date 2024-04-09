@@ -23,7 +23,7 @@ Welcome to the CELITECH API documentation! Useful links: [Homepage](https://www.
 ## Installation
 
 ```sh
-npm install celitech
+npm install celitech-sdk
 ```
 
 ## Environment Variables
@@ -47,7 +47,7 @@ Here is a simple program demonstrating usage of this SDK. It can also be found i
 When running the sample make sure to use `npm install` to install all the dependencies.
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 
 const sdk = new Celitech();
@@ -129,7 +129,7 @@ ListDestinationsResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -169,7 +169,7 @@ ListPackagesResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -198,7 +198,7 @@ CreatePurchaseResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -237,7 +237,7 @@ ListPurchasesResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -266,7 +266,7 @@ TopUpEsimResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -295,7 +295,7 @@ EditPurchaseResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -326,7 +326,7 @@ GetPurchaseConsumptionResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -357,7 +357,7 @@ GetEsimResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -388,7 +388,7 @@ GetEsimDeviceResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -419,7 +419,7 @@ GetEsimHistoryResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
@@ -450,7 +450,7 @@ GetEsimMacResponse
 **Example Usage Code Snippet**
 
 ```Typescript
-import { Celitech } from 'celitech';
+import { Celitech } from 'celitech-sdk';
 
 const sdk = new Celitech();
 
