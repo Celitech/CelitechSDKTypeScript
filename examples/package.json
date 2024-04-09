@@ -1,9 +1,9 @@
 {
-  "name": "celitech-example",
+  "name": "celitech-sdk-example",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "celitech": "file:../"
+    "celitech-sdk": "file:../"
   },
   "scripts": {
     "setup": "npm --prefix ../ install && npm --prefix ../ run build && npm install",
