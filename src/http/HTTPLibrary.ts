@@ -124,7 +124,7 @@ export default class HTTPLibrary implements HTTPClient {
   }
 
   private getUserAgentHeader(): Headers {
-    const userAgentBase = 'Celitech/1.1.46';
+    const userAgentBase = 'Celitech/1.1.47';
 
     let userAgent = '';
     if (typeof window !== 'undefined') {
