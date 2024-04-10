@@ -23,18 +23,18 @@ describe('test Purchases', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
         .get(
-          '/purchases?iccid=1143679495&afterDate=consequatur&beforeDate=occaecati&afterCursor=aperiam&limit=4&after=1&before=5',
+          '/purchases?iccid=8212563013&afterDate=reiciendis&beforeDate=assumenda&afterCursor=totam&limit=1&after=8&before=2',
         )
         .reply(200, { data: {} });
       return sdk.purchases
         .listPurchases({
-          iccid: '1143679495',
-          afterDate: 'consequatur',
-          beforeDate: 'occaecati',
-          afterCursor: 'aperiam',
-          limit: 4,
-          after: 1,
-          before: 5,
+          iccid: '8212563013',
+          afterDate: 'reiciendis',
+          beforeDate: 'assumenda',
+          afterCursor: 'totam',
+          limit: 1,
+          after: 8,
+          before: 2,
         })
         .then((r: any) => expect(r.data).toEqual({}));
     });
@@ -68,26 +68,26 @@ describe('test Purchases', () => {
   describe('test getPurchaseConsumption', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/dolore/consumption')
+        .get('/purchases/dolorem/consumption')
         .reply(200, { data: {} });
       return sdk.purchases
-        .getPurchaseConsumption('dolore')
+        .getPurchaseConsumption('dolorem')
         .then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/fuga/consumption')
+        .get('/purchases/labore/consumption')
         .reply(200, { data: {} });
       return expect(async () => await sdk.purchases.getPurchaseConsumption()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/maxime/consumption')
+        .get('/purchases/saepe/consumption')
         .reply(404, { data: {} });
       return expect(
-        async () => await sdk.purchases.getPurchaseConsumption('maxime'),
+        async () => await sdk.purchases.getPurchaseConsumption('saepe'),
       ).rejects.toThrow();
     });
   });
