@@ -15,14 +15,14 @@ export class PackagesService extends BaseService {
    * @description List of available packages
 
    * @param optionalParams - Optional parameters
-   * @param optionalParams.destination - Needed input variable
-   * @param optionalParams.startDate - Needed input variable
-   * @param optionalParams.endDate - Needed input variable
-   * @param optionalParams.afterCursor - Needed input variable
-   * @param optionalParams.limit - Needed input variable
-   * @param optionalParams.startTime - Needed input variable
-   * @param optionalParams.endTime - Needed input variable
-   * @param optionalParams.duration - Needed input variable
+   * @param optionalParams.destination - ISO representation of the package's destination. Optional, unless startDate and endDate are used, then it becomes mandatory.
+   * @param optionalParams.startDate - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
+   * @param optionalParams.endDate - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 60 days after Start date.
+   * @param optionalParams.afterCursor - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
+   * @param optionalParams.limit - Maximum number of packages to be returned in the response. The value must be greater than 0 and less than or equal to 160. If not provided, the default value is 20
+   * @param optionalParams.startTime - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months
+   * @param optionalParams.endTime - Epoch value representing the end time of the package's validity. End time can be maximum 60 days after Start time
+   * @param optionalParams.duration - Duration in seconds for the package's validity. If this parameter is present, it will override the startTime and endTime parameters. The maximum duration for a package's validity period is 60 days
    * @returns {Promise<ListPackagesResponse>} - The promise with the result
    */
   async listPackages(

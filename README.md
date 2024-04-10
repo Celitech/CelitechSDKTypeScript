@@ -151,16 +151,16 @@ List Packages
 
 Optional parameters are passed as part of the last parameter to the method. Ex. {optionalParam1 : 'value1', optionalParam2: 'value2'}
 
-| Name        | Type   | Description |
-| :---------- | :----- | :---------- |
-| destination | string |             |
-| startDate   | string |             |
-| endDate     | string |             |
-| afterCursor | string |             |
-| limit       | number |             |
-| startTime   | number |             |
-| endTime     | number |             |
-| duration    | number |             |
+| Name        | Type   | Description                                                                                                                                                                                                         |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| destination | string | ISO representation of the package's destination. Optional, unless startDate and endDate are used, then it becomes mandatory.                                                                                        |
+| startDate   | string | Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.                                                                      |
+| endDate     | string | End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 60 days after Start date.                                                                                                    |
+| afterCursor | string | To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data. |
+| limit       | number | Maximum number of packages to be returned in the response. The value must be greater than 0 and less than or equal to 160. If not provided, the default value is 20                                                 |
+| startTime   | number | Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months                                                              |
+| endTime     | number | Epoch value representing the end time of the package's validity. End time can be maximum 60 days after Start time                                                                                                   |
+| duration    | number | Duration in seconds for the package's validity. If this parameter is present, it will override the startTime and endTime parameters. The maximum duration for a package's validity period is 60 days                |
 
 **Return Type**
 
@@ -220,15 +220,15 @@ List Purchases
 
 Optional parameters are passed as part of the last parameter to the method. Ex. {optionalParam1 : 'value1', optionalParam2: 'value2'}
 
-| Name        | Type   | Description                                                                     |
-| :---------- | :----- | :------------------------------------------------------------------------------ |
-| iccid       | string |                                                                                 |
-| afterDate   | string | Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'   |
-| beforeDate  | string | End date of the interval for filtering purchases in the format 'yyyy-MM-dd'     |
-| afterCursor | string |                                                                                 |
-| limit       | number |                                                                                 |
-| after       | number | Epoch value representing the start of the time interval for filtering purchases |
-| before      | number | Epoch value representing the end of the time interval for filtering purchases   |
+| Name        | Type   | Description                                                                                                                                                                                                         |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| iccid       | string | ID of the eSIM                                                                                                                                                                                                      |
+| afterDate   | string | Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                       |
+| beforeDate  | string | End date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                         |
+| afterCursor | string | To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data. |
+| limit       | number | Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20                                                |
+| after       | number | Epoch value representing the start of the time interval for filtering purchases                                                                                                                                     |
+| before      | number | Epoch value representing the end of the time interval for filtering purchases                                                                                                                                       |
 
 **Return Type**
 
@@ -315,9 +315,9 @@ Get Purchase Consumption
 
 **Required Parameters**
 
-| Name       | Type   | Description |
-| :--------- | :----- | :---------- |
-| purchaseId | string |             |
+| Name       | Type   | Description        |
+| :--------- | :----- | :----------------- |
+| purchaseId | string | ID of the purchase |
 
 **Return Type**
 
@@ -346,9 +346,9 @@ Get eSIM Status
 
 **Required Parameters**
 
-| Name  | Type   | Description |
-| :---- | :----- | :---------- |
-| iccid | string |             |
+| Name  | Type   | Description    |
+| :---- | :----- | :------------- |
+| iccid | string | ID of the eSIM |
 
 **Return Type**
 
@@ -377,9 +377,9 @@ Get eSIM Device
 
 **Required Parameters**
 
-| Name  | Type   | Description |
-| :---- | :----- | :---------- |
-| iccid | string |             |
+| Name  | Type   | Description    |
+| :---- | :----- | :------------- |
+| iccid | string | ID of the eSIM |
 
 **Return Type**
 
@@ -408,9 +408,9 @@ Get eSIM History
 
 **Required Parameters**
 
-| Name  | Type   | Description |
-| :---- | :----- | :---------- |
-| iccid | string |             |
+| Name  | Type   | Description    |
+| :---- | :----- | :------------- |
+| iccid | string | ID of the eSIM |
 
 **Return Type**
 
@@ -439,9 +439,9 @@ Get eSIM MAC
 
 **Required Parameters**
 
-| Name  | Type   | Description |
-| :---- | :----- | :---------- |
-| iccid | string |             |
+| Name  | Type   | Description    |
+| :---- | :----- | :------------- |
+| iccid | string | ID of the eSIM |
 
 **Return Type**
 
