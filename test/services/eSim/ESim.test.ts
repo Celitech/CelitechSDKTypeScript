@@ -22,92 +22,92 @@ describe('test ESim', () => {
   describe('test getEsim', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim?iccid=4074440375')
+        .get('/esim?iccid=4030873117')
         .reply(200, { data: {} });
-      return sdk.eSim.getEsim('4074440375').then((r: any) => expect(r.data).toEqual({}));
+      return sdk.eSim.getEsim('4030873117').then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim?iccid=8937715849')
+        .get('/esim?iccid=3263483194')
         .reply(200, { data: {} });
       return expect(async () => await sdk.eSim.getEsim()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim?iccid=7765514114')
+        .get('/esim?iccid=9669353400')
         .reply(404, { data: {} });
-      return expect(async () => await sdk.eSim.getEsim('7765514114')).rejects.toThrow();
+      return expect(async () => await sdk.eSim.getEsim('9669353400')).rejects.toThrow();
     });
   });
 
   describe('test getEsimDevice', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/2421431858/device')
+        .get('/esim/1766622092/device')
         .reply(200, { data: {} });
-      return sdk.eSim.getEsimDevice('2421431858').then((r: any) => expect(r.data).toEqual({}));
+      return sdk.eSim.getEsimDevice('1766622092').then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/9004679999/device')
+        .get('/esim/3721850392/device')
         .reply(200, { data: {} });
       return expect(async () => await sdk.eSim.getEsimDevice()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/6260919308/device')
+        .get('/esim/1341951653/device')
         .reply(404, { data: {} });
-      return expect(async () => await sdk.eSim.getEsimDevice('6260919308')).rejects.toThrow();
+      return expect(async () => await sdk.eSim.getEsimDevice('1341951653')).rejects.toThrow();
     });
   });
 
   describe('test getEsimHistory', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/1514877367/history')
+        .get('/esim/9908906825/history')
         .reply(200, { data: {} });
-      return sdk.eSim.getEsimHistory('1514877367').then((r: any) => expect(r.data).toEqual({}));
+      return sdk.eSim.getEsimHistory('9908906825').then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/4134469293/history')
+        .get('/esim/3192394243/history')
         .reply(200, { data: {} });
       return expect(async () => await sdk.eSim.getEsimHistory()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/7909407966/history')
+        .get('/esim/8476386240/history')
         .reply(404, { data: {} });
-      return expect(async () => await sdk.eSim.getEsimHistory('7909407966')).rejects.toThrow();
+      return expect(async () => await sdk.eSim.getEsimHistory('8476386240')).rejects.toThrow();
     });
   });
 
   describe('test getEsimMac', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/7785282496/mac')
+        .get('/esim/7289754193/mac')
         .reply(200, { data: {} });
-      return sdk.eSim.getEsimMac('7785282496').then((r: any) => expect(r.data).toEqual({}));
+      return sdk.eSim.getEsimMac('7289754193').then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/9371782028/mac')
+        .get('/esim/6010727734/mac')
         .reply(200, { data: {} });
       return expect(async () => await sdk.eSim.getEsimMac()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/esim/7462590854/mac')
+        .get('/esim/2916699598/mac')
         .reply(404, { data: {} });
-      return expect(async () => await sdk.eSim.getEsimMac('7462590854')).rejects.toThrow();
+      return expect(async () => await sdk.eSim.getEsimMac('2916699598')).rejects.toThrow();
     });
   });
 });
