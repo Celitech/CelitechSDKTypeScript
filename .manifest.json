@@ -1,6 +1,6 @@
 {
   "liblabVersion": "1.1.43",
-  "date": "2024-04-10T11:48:04.215Z",
+  "date": "2024-04-10T12:15:09.380Z",
   "config": {
     "authentication": {},
     "deliveryType": "zip",
@@ -17,7 +17,7 @@
       }
     ],
     "fileOutput": "/tmp",
-    "tempDir": "/tmp/liblab-codegen-1.1.43-pKxrhM",
+    "tempDir": "/tmp/liblab-codegen-1.1.43-irFFXa",
     "inferServiceNames": false,
     "httpLibrary": {
       "name": "axios",
@@ -30,7 +30,7 @@
     "privateRepo": false,
     "githubRef": "",
     "sdkName": "Celitech",
-    "sdkVersion": "1.1.47",
+    "sdkVersion": "1.1.48",
     "retry": {
       "enabled": true,
       "maxAttempts": 3,
