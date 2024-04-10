@@ -22,11 +22,11 @@ export class PurchasesService extends BaseService {
    * @description This endpoint can be used to list all the successful purchases made between a given interval.
 
    * @param optionalParams - Optional parameters
-   * @param optionalParams.iccid - Needed input variable
+   * @param optionalParams.iccid - ID of the eSIM
    * @param optionalParams.afterDate - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
    * @param optionalParams.beforeDate - End date of the interval for filtering purchases in the format 'yyyy-MM-dd'
-   * @param optionalParams.afterCursor - Needed input variable
-   * @param optionalParams.limit - Needed input variable
+   * @param optionalParams.afterCursor - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
+   * @param optionalParams.limit - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
    * @param optionalParams.after - Epoch value representing the start of the time interval for filtering purchases
    * @param optionalParams.before - Epoch value representing the end of the time interval for filtering purchases
    * @returns {Promise<ListPurchasesResponse>} - The promise with the result
@@ -176,7 +176,7 @@ export class PurchasesService extends BaseService {
    * @summary Get Purchase Consumption
    * @description This endpoint can be called for consumption notifications (e.g. every 1 hour or when the user clicks a button). It returns the data balance (consumption) of purchased packages.
 
-   * @param purchaseId Needed input variable
+   * @param purchaseId ID of the purchase
    * @returns {Promise<GetPurchaseConsumptionResponse>} - The promise with the result
    */
   async getPurchaseConsumption(purchaseId: string): Promise<GetPurchaseConsumptionResponse> {

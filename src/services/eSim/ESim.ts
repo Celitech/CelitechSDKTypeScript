@@ -17,7 +17,7 @@ export class ESimService extends BaseService {
    * @summary Get eSIM Status
    * @description Get status from eSIM
 
-   * @param iccid Needed input variable
+   * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimResponse>} - The promise with the result
    */
   async getEsim(iccid: string): Promise<GetEsimResponse> {
@@ -53,7 +53,7 @@ export class ESimService extends BaseService {
    * @summary Get eSIM Device
    * @description Get device info from an installed eSIM
 
-   * @param iccid Needed input variable
+   * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimDeviceResponse>} - The promise with the result
    */
   async getEsimDevice(iccid: string): Promise<GetEsimDeviceResponse> {
@@ -86,7 +86,7 @@ export class ESimService extends BaseService {
    * @summary Get eSIM History
    * @description Get history from an eSIM
 
-   * @param iccid Needed input variable
+   * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimHistoryResponse>} - The promise with the result
    */
   async getEsimHistory(iccid: string): Promise<GetEsimHistoryResponse> {
@@ -119,7 +119,7 @@ export class ESimService extends BaseService {
    * @summary Get eSIM MAC
    * @description Get MAC from eSIM
 
-   * @param iccid Needed input variable
+   * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimMacResponse>} - The promise with the result
    */
   async getEsimMac(iccid: string): Promise<GetEsimMacResponse> {
