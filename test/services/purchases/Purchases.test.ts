@@ -23,18 +23,18 @@ describe('test Purchases', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
         .get(
-          '/purchases?iccid=1546907373&afterDate=adipisci&beforeDate=quia&afterCursor=incidunt&limit=9&after=9&before=9',
+          '/purchases?iccid=1115357324&afterDate=laborum&beforeDate=dolore&afterCursor=aperiam&limit=2&after=3&before=3',
         )
         .reply(200, { data: {} });
       return sdk.purchases
         .listPurchases({
-          iccid: '1546907373',
-          afterDate: 'adipisci',
-          beforeDate: 'quia',
-          afterCursor: 'incidunt',
-          limit: 9,
-          after: 9,
-          before: 9,
+          iccid: '1115357324',
+          afterDate: 'laborum',
+          beforeDate: 'dolore',
+          afterCursor: 'aperiam',
+          limit: 2,
+          after: 3,
+          before: 3,
         })
         .then((r: any) => expect(r.data).toEqual({}));
     });
@@ -68,26 +68,26 @@ describe('test Purchases', () => {
   describe('test getPurchaseConsumption', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/odio/consumption')
+        .get('/purchases/iste/consumption')
         .reply(200, { data: {} });
       return sdk.purchases
-        .getPurchaseConsumption('odio')
+        .getPurchaseConsumption('iste')
         .then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/quidem/consumption')
+        .get('/purchases/eligendi/consumption')
         .reply(200, { data: {} });
       return expect(async () => await sdk.purchases.getPurchaseConsumption()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/quibusdam/consumption')
+        .get('/purchases/voluptatum/consumption')
         .reply(404, { data: {} });
       return expect(
-        async () => await sdk.purchases.getPurchaseConsumption('quibusdam'),
+        async () => await sdk.purchases.getPurchaseConsumption('voluptatum'),
       ).rejects.toThrow();
     });
   });
