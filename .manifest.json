@@ -1,6 +1,6 @@
 {
-  "liblabVersion": "1.1.44",
-  "date": "2024-04-24T10:44:21.756Z",
+  "liblabVersion": "1.1.45",
+  "date": "2024-04-29T12:24:08.345Z",
   "config": {
     "authentication": {},
     "deliveryType": "zip",
@@ -17,7 +17,7 @@
       }
     ],
     "fileOutput": "/tmp",
-    "tempDir": "/tmp/liblab-codegen-1.1.44-w3Stpo",
+    "tempDir": "/tmp/liblab-codegen-1.1.45-DcoRwl",
     "inferServiceNames": false,
     "httpLibrary": {
       "name": "axios",
@@ -68,6 +68,10 @@
     "enforceRequestValidation": false,
     "denoteCommon": false,
     "includeOptionalSnippetParameters": false,
+    "githubRepoName": "CelitechSDKTypeScript",
+    "publishing": {
+      "githubOrg": "Celitech"
+    },
     "hooks": {
       "enabled": true,
       "sourceDir": "/tmp/resources/hooks"

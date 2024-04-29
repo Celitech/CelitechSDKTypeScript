@@ -153,7 +153,7 @@ Optional parameters are passed as part of the last parameter to the method. Ex. 
 
 | Name        | Type   | Description                                                                                                                                                                                                         |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| destination | string | ISO representation of the package's destination. Optional, unless startDate and endDate are used, then it becomes mandatory.                                                                                        |
+| destination | string | ISO representation of the package's destination.                                                                                                                                                                    |
 | startDate   | string | Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.                                                                      |
 | endDate     | string | End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 60 days after Start date.                                                                                                    |
 | afterCursor | string | To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data. |
