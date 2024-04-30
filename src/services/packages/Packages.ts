@@ -15,7 +15,7 @@ export class PackagesService extends BaseService {
    * @description List of available packages
 
    * @param optionalParams - Optional parameters
-   * @param optionalParams.destination - ISO representation of the package's destination. Optional, unless startDate and endDate are used, then it becomes mandatory.
+   * @param optionalParams.destination - ISO representation of the package's destination.
    * @param optionalParams.startDate - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
    * @param optionalParams.endDate - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 60 days after Start date.
    * @param optionalParams.afterCursor - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
