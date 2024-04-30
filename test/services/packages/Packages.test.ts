@@ -23,19 +23,19 @@ describe('test Packages', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
         .get(
-          '/packages?destination=ullam&startDate=alias&endDate=reiciendis&afterCursor=excepturi&limit=1&startTime=5&endTime=2&duration=9',
+          '/packages?destination=odio&startDate=optio&endDate=vitae&afterCursor=quia&limit=6&startTime=5&endTime=3&duration=5',
         )
         .reply(200, { data: {} });
       return sdk.packages
         .listPackages({
-          destination: 'ullam',
-          startDate: 'alias',
-          endDate: 'reiciendis',
-          afterCursor: 'excepturi',
-          limit: 1,
+          destination: 'odio',
+          startDate: 'optio',
+          endDate: 'vitae',
+          afterCursor: 'quia',
+          limit: 6,
           startTime: 5,
-          endTime: 2,
-          duration: 9,
+          endTime: 3,
+          duration: 5,
         })
         .then((r: any) => expect(r.data).toEqual({}));
     });
