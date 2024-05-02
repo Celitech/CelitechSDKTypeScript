@@ -1,9 +1,9 @@
-# Celitech Typescript SDK 1.1.54
+# Celitech Typescript SDK 1.1.55
 
 The Typescript SDK for Celitech.
 
-- API version: 1.1.54
-- SDK version: 1.1.54
+- API version: 1.1.55
+- SDK version: 1.1.55
 
 ## Table of Contents
 
