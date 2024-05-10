@@ -1,9 +1,9 @@
-# Celitech Typescript SDK 1.1.56
+# Celitech Typescript SDK 1.1.57
 
 The Typescript SDK for Celitech.
 
-- API version: 1.1.56
-- SDK version: 1.1.56
+- API version: 1.1.57
+- SDK version: 1.1.57
 
 ## Table of Contents
 
@@ -203,7 +203,13 @@ import { Celitech } from 'celitech-sdk';
 const sdk = new Celitech();
 
 (async () => {
-  const result = await sdk.purchases.createPurchase();
+  const input = {
+    dataLimitInGB: 1,
+    destination: 'FRA',
+    endDate: '2023-11-20',
+    startDate: '2023-11-01',
+  };
+  const result = await sdk.purchases.createPurchase(input);
   console.log(result);
 })();
 
@@ -271,7 +277,13 @@ import { Celitech } from 'celitech-sdk';
 const sdk = new Celitech();
 
 (async () => {
-  const result = await sdk.purchases.topUpEsim();
+  const input = {
+    dataLimitInGB: 1,
+    endDate: '2023-11-20',
+    iccid: '1111222233334444555',
+    startDate: '2023-11-01',
+  };
+  const result = await sdk.purchases.topUpEsim(input);
   console.log(result);
 })();
 
@@ -300,7 +312,12 @@ import { Celitech } from 'celitech-sdk';
 const sdk = new Celitech();
 
 (async () => {
-  const result = await sdk.purchases.editPurchase();
+  const input = {
+    endDate: '2023-11-20',
+    purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
+    startDate: '2023-11-01',
+  };
+  const result = await sdk.purchases.editPurchase(input);
   console.log(result);
 })();
 
