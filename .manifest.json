@@ -1,6 +1,6 @@
 {
-  "liblabVersion": "1.1.46",
-  "date": "2024-05-10T09:26:41.914Z",
+  "liblabVersion": "1.1.47",
+  "date": "2024-05-17T11:21:13.992Z",
   "config": {
     "authentication": {},
     "deliveryType": "zip",
@@ -17,7 +17,7 @@
       }
     ],
     "fileOutput": "/tmp",
-    "tempDir": "/tmp/liblab-codegen-1.1.46-RO5mVY",
+    "tempDir": "/tmp/liblab-codegen-1.1.47-JPxny6",
     "inferServiceNames": false,
     "httpLibrary": {
       "name": "axios",

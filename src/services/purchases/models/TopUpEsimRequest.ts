@@ -12,7 +12,7 @@ export interface TopUpEsimRequest {
    */
   startDate: string;
   /**
-   * End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 60 days after Start date.
+   * End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
    */
   endDate: string;
   /**
@@ -26,7 +26,7 @@ export interface TopUpEsimRequest {
   startTime?: number;
   /**
    * @deprecated
-   * Epoch value representing the end time of the package's validity. End time can be maximum 60 days after Start time.
+   * Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time.
    */
   endTime?: number;
 }
