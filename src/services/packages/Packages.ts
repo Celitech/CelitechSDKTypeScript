@@ -12,7 +12,7 @@ const hook: CustomHook = new CustomHook();
 export class PackagesService extends BaseService {
   /**
    * @summary List Packages
-   * @description List of available packages
+   * @description List Packages
 
    * @param optionalParams - Optional parameters
    * @param optionalParams.destination - ISO representation of the package's destination.

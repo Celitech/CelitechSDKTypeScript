@@ -10,7 +10,7 @@ const hook: CustomHook = new CustomHook();
 export class DestinationsService extends BaseService {
   /**
    * @summary List Destinations
-   * @description Name of the destinations
+   * @description List Destinations
 
    * @returns {Promise<ListDestinationsResponse>} - The promise with the result
    */

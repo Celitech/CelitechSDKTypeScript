@@ -15,7 +15,7 @@ const hook: CustomHook = new CustomHook();
 export class ESimService extends BaseService {
   /**
    * @summary Get eSIM Status
-   * @description Get status from eSIM
+   * @description Get eSIM Status
 
    * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimResponse>} - The promise with the result
@@ -51,7 +51,7 @@ export class ESimService extends BaseService {
 
   /**
    * @summary Get eSIM Device
-   * @description Get device info from an installed eSIM
+   * @description Get eSIM Device
 
    * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimDeviceResponse>} - The promise with the result
@@ -84,7 +84,7 @@ export class ESimService extends BaseService {
 
   /**
    * @summary Get eSIM History
-   * @description Get history from an eSIM
+   * @description Get eSIM History
 
    * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimHistoryResponse>} - The promise with the result
@@ -117,7 +117,7 @@ export class ESimService extends BaseService {
 
   /**
    * @summary Get eSIM MAC
-   * @description Get MAC from eSIM
+   * @description Get eSIM MAC
 
    * @param iccid ID of the eSIM
    * @returns {Promise<GetEsimMacResponse>} - The promise with the result

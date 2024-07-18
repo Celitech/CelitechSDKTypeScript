@@ -33,9 +33,13 @@ export interface ListPurchasesResponse {
     createdAt?: number;
     esim?: Esim;
     /**
-     * The source indicates where the eSIM was purchased, which can be from the API, dashboard, or landing-page. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
+     * The source indicates where the eSIM was purchased, which can be from the API, dashboard, landing-page or promo-page. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
      */
     source?: string;
+    /**
+     * The referenceId that was provided by the partner during the purchase or topup flow. This identifier can be used for analytics and debugging purposes.
+     */
+    referenceId?: string;
     package_?: Package_;
   }[];
   afterCursor?: string | null;

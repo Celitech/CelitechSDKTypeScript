@@ -20,6 +20,10 @@ export interface TopUpEsimRequest {
    */
   email?: string;
   /**
+   * An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
+   */
+  referenceId?: string;
+  /**
    * @deprecated
    * Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months.
    */

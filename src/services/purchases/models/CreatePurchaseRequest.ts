@@ -20,6 +20,10 @@ export interface CreatePurchaseRequest {
    */
   email?: string;
   /**
+   * An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
+   */
+  referenceId?: string;
+  /**
    * Customize the network brand of the issued eSIM. This parameter is accessible to platforms with Diamond tier and requires an alphanumeric string of up to 15 characters
    */
   networkBrand?: string;
