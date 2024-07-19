@@ -23,18 +23,18 @@ describe('test Purchases', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
         .get(
-          '/purchases?iccid=2394839789&afterDate=cumque&beforeDate=vero&referenceId=molestias&afterCursor=excepturi&limit=2&after=2&before=7',
+          '/purchases?iccid=7686427787&afterDate=quasi&beforeDate=similique&referenceId=aspernatur&afterCursor=voluptatibus&limit=1&after=3&before=7',
         )
         .reply(200, { data: {} });
       return sdk.purchases
         .listPurchases({
-          iccid: '2394839789',
-          afterDate: 'cumque',
-          beforeDate: 'vero',
-          referenceId: 'molestias',
-          afterCursor: 'excepturi',
-          limit: 2,
-          after: 2,
+          iccid: '7686427787',
+          afterDate: 'quasi',
+          beforeDate: 'similique',
+          referenceId: 'aspernatur',
+          afterCursor: 'voluptatibus',
+          limit: 1,
+          after: 3,
           before: 7,
         })
         .then((r: any) => expect(r.data).toEqual({}));
@@ -69,26 +69,26 @@ describe('test Purchases', () => {
   describe('test getPurchaseConsumption', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/ducimus/consumption')
+        .get('/purchases/maiores/consumption')
         .reply(200, { data: {} });
       return sdk.purchases
-        .getPurchaseConsumption('ducimus')
+        .getPurchaseConsumption('maiores')
         .then((r: any) => expect(r.data).toEqual({}));
     });
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/odio/consumption')
+        .get('/purchases/iste/consumption')
         .reply(200, { data: {} });
       return expect(async () => await sdk.purchases.getPurchaseConsumption()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/veniam/consumption')
+        .get('/purchases/earum/consumption')
         .reply(404, { data: {} });
       return expect(
-        async () => await sdk.purchases.getPurchaseConsumption('veniam'),
+        async () => await sdk.purchases.getPurchaseConsumption('earum'),
       ).rejects.toThrow();
     });
   });
