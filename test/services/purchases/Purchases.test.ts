@@ -23,19 +23,19 @@ describe('test Purchases', () => {
     test('test api call', () => {
       const scope = nock('https://api.celitech.net/v1')
         .get(
-          '/purchases?iccid=7833212157&afterDate=suscipit&beforeDate=saepe&referenceId=in&afterCursor=ab&limit=6&after=4&before=7',
+          '/purchases?iccid=3522183314&afterDate=consequuntur&beforeDate=rerum&referenceId=ex&afterCursor=eaque&limit=6&after=9&before=6',
         )
         .reply(200, { data: {} });
       return sdk.purchases
         .listPurchases({
-          iccid: '7833212157',
-          afterDate: 'suscipit',
-          beforeDate: 'saepe',
-          referenceId: 'in',
-          afterCursor: 'ab',
+          iccid: '3522183314',
+          afterDate: 'consequuntur',
+          beforeDate: 'rerum',
+          referenceId: 'ex',
+          afterCursor: 'eaque',
           limit: 6,
-          after: 4,
-          before: 7,
+          after: 9,
+          before: 6,
         })
         .then((r: any) => expect(r.data).toEqual({}));
     });
@@ -78,17 +78,17 @@ describe('test Purchases', () => {
 
     test('test will throw error if required fields missing', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/laborum/consumption')
+        .get('/purchases/perferendis/consumption')
         .reply(200, { data: {} });
       return expect(async () => await sdk.purchases.getPurchaseConsumption()).rejects.toThrow();
     });
 
     test('test will throw error on a non-200 response', () => {
       const scope = nock('https://api.celitech.net/v1')
-        .get('/purchases/voluptas/consumption')
+        .get('/purchases/rerum/consumption')
         .reply(404, { data: {} });
       return expect(
-        async () => await sdk.purchases.getPurchaseConsumption('voluptas'),
+        async () => await sdk.purchases.getPurchaseConsumption('rerum'),
       ).rejects.toThrow();
     });
   });
