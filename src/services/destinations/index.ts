@@ -1,1 +1,1 @@
-export type { ListDestinationsResponse } from './models/ListDestinationsResponse';
+export * from './destinations';

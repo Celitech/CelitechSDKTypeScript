@@ -1,42 +1,67 @@
-import { DestinationsService } from './services/destinations/Destinations';
-import { ESimService } from './services/eSim/ESim';
-import { PackagesService } from './services/packages/Packages';
-import { PurchasesService } from './services/purchases/Purchases';
+import { Environment } from './http/environment';
+import { SdkConfig } from './http/types';
+import { DestinationsService } from './services/destinations';
+import { PackagesService } from './services/packages';
+import { PurchasesService } from './services/purchases';
+import { ESimService } from './services/e-sim';
 
-export * from './models';
-
-export * as DestinationsModels from './services/destinations';
-export * as ESimModels from './services/eSim';
-export * as PackagesModels from './services/packages';
-export * as PurchasesModels from './services/purchases';
-
-export * from './http/errors';
-
-/**
- * Welcome to the CELITECH API documentation!  Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/)
- */
 export class Celitech {
-  public destinations: DestinationsService;
-  public eSim: ESimService;
-  public packages: PackagesService;
-  public purchases: PurchasesService;
+  public readonly destinations: DestinationsService;
 
-  constructor() {
-    this.destinations = new DestinationsService();
-    this.eSim = new ESimService();
-    this.packages = new PackagesService();
-    this.purchases = new PurchasesService();
+  public readonly packages: PackagesService;
+
+  public readonly purchases: PurchasesService;
+
+  public readonly eSim: ESimService;
+
+  constructor(public config: SdkConfig) {
+    const baseUrl = config.environment || config.baseUrl || Environment.DEFAULT;
+    this.config = {
+      ...config,
+      baseUrl,
+    };
+    this.destinations = new DestinationsService(this.config);
+
+    this.packages = new PackagesService(this.config);
+
+    this.purchases = new PurchasesService(this.config);
+
+    this.eSim = new ESimService(this.config);
   }
 
-  /**
-   * Sets the baseUrl that the SDK will use for its requests.
-   * @param {string} url
-   */
-  setBaseUrl(url: string): void {
-    this.destinations.setBaseUrl(url);
-    this.eSim.setBaseUrl(url);
-    this.packages.setBaseUrl(url);
-    this.purchases.setBaseUrl(url);
+  set baseUrl(baseUrl: string) {
+    this.destinations.baseUrl = baseUrl;
+    this.packages.baseUrl = baseUrl;
+    this.purchases.baseUrl = baseUrl;
+    this.eSim.baseUrl = baseUrl;
+  }
+
+  set environment(environment: Environment) {
+    this.destinations.baseUrl = environment;
+    this.packages.baseUrl = environment;
+    this.purchases.baseUrl = environment;
+    this.eSim.baseUrl = environment;
+  }
+
+  set timeout(timeout: number) {
+    this.destinations.timeout = timeout;
+    this.packages.timeout = timeout;
+    this.purchases.timeout = timeout;
+    this.eSim.timeout = timeout;
+  }
+
+  set clientId(clientId: string) {
+    this.destinations.clientId = clientId;
+    this.packages.clientId = clientId;
+    this.purchases.clientId = clientId;
+    this.eSim.clientId = clientId;
+  }
+
+  set clientSecret(clientSecret: string) {
+    this.destinations.clientSecret = clientSecret;
+    this.packages.clientSecret = clientSecret;
+    this.purchases.clientSecret = clientSecret;
+    this.eSim.clientSecret = clientSecret;
   }
 }
 

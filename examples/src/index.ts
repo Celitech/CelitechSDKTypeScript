@@ -1,13 +1,12 @@
 import { Celitech } from 'celitech-sdk';
 
-const sdk = new Celitech();
-
 (async () => {
-  try {
-    const result = await sdk.destinations.listDestinations();
-    console.log(result);
-  } catch (err) {
-    const error = err as Error;
-    console.error(error.message);
-  }
+  const celitech = new Celitech({
+    clientId: 'client-id',
+    clientSecret: 'client-secret',
+  });
+
+  const { data } = await celitech.destinations.listDestinations();
+
+  console.log(data);
 })();
