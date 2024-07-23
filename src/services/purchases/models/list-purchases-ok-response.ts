@@ -1,0 +1,49 @@
+import { z } from 'zod';
+import { purchases, purchasesRequest, purchasesResponse } from './purchases';
+
+/**
+ * The shape of the model inside the application code - what the users use
+ */
+export const listPurchasesOkResponse: any = z.lazy(() => {
+  return z.object({
+    purchases: z.array(purchases).optional(),
+    afterCursor: z.string().optional().nullable(),
+  });
+});
+
+/**
+ *
+ * @typedef  {ListPurchasesOkResponse} listPurchasesOkResponse
+ * @property {Purchases[]}
+ * @property {string} - The cursor value representing the end of the current page of results. Use this cursor value as the "afterCursor" parameter in your next request to retrieve the subsequent page of results. It ensures that you continue fetching data from where you left off, facilitating smooth pagination.
+ */
+export type ListPurchasesOkResponse = z.infer<typeof listPurchasesOkResponse>;
+
+/**
+ * The shape of the model mapping from the api schema into the application shape.
+ * Is equal to application shape if all property names match the api schema
+ */
+export const listPurchasesOkResponseResponse: any = z.lazy(() => {
+  return z
+    .object({
+      purchases: z.array(purchasesResponse).optional(),
+      afterCursor: z.string().optional().nullable(),
+    })
+    .transform((data) => ({
+      purchases: data['purchases'],
+      afterCursor: data['afterCursor'],
+    }));
+});
+
+/**
+ * The shape of the model mapping from the application shape into the api schema.
+ * Is equal to application shape if all property names match the api schema
+ */
+export const listPurchasesOkResponseRequest: any = z.lazy(() => {
+  return z
+    .object({ purchases: z.array(purchasesRequest).nullish(), afterCursor: z.string().nullish() })
+    .transform((data) => ({
+      purchases: data['purchases'],
+      afterCursor: data['afterCursor'],
+    }));
+});

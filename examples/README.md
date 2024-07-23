@@ -1,4 +1,4 @@
-# celitech-sdk-example
+# celitech-sdk
 
 A basic example of how to use the celitech-sdk package.
 
