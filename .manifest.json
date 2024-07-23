@@ -1,14 +1,14 @@
 {
   "liblabVersion": "2.1.22",
-  "date": "2024-07-23T10:02:49.564Z",
+  "date": "2024-07-23T14:32:38.632Z",
   "config": {
-    "apiId": 812,
+    "apiId": 819,
     "sdkName": "Celitech",
-    "sdkVersion": "1.1.70",
+    "sdkVersion": "1.1.71",
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
     "languages": ["typescript"],
-    "apiVersion": "1.1.70",
+    "apiVersion": "1.1.71",
     "specFilePath": "swagger.yaml",
     "languageOptions": {
       "python": {
@@ -26,7 +26,7 @@
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.70"
+        "sdkVersion": "1.1.71"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
@@ -41,7 +41,7 @@
           }
         ],
         "githubRepoName": "CelitechSDKPHP",
-        "sdkVersion": "1.1.70"
+        "sdkVersion": "1.1.71"
       },
       "typescript": {
         "bundle": false,
@@ -61,7 +61,7 @@
         "githubRepoName": "CelitechSDKTypeScript",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "1.1.70"
+        "sdkVersion": "1.1.71"
       }
     },
     "publishing": {
@@ -101,10 +101,10 @@
     },
     "multiTenant": true,
     "hooksLocation": {
-      "bucketKey": "6338/hooks.zip",
+      "bucketKey": "6342/hooks.zip",
       "bucketName": "prod-liblab-api-stack-hooks"
     },
-    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/812/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240723%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240723T100242Z&X-Amz-Expires=43200&X-Amz-Signature=780f7bf2ea1e31a6fda4ca5af122c9149e29160ec904c5c2d09806f3a752cfbb&X-Amz-SignedHeaders=host&x-id=GetObject",
+    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/819/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240723%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240723T143233Z&X-Amz-Expires=43200&X-Amz-Signature=e60e010fbb2260e633a3b6b6919d9e94ea1120bd4e68b4ff4215e5c4f959f644&X-Amz-SignedHeaders=host&x-id=GetObject",
     "includeWatermark": false,
     "language": "typescript",
     "deliveryMethod": "zip",
