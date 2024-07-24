@@ -49,7 +49,7 @@ export class CustomHook implements Hook {
 
       console.log('tokenResponse', tokenResponse);
 
-      if (!tokenResponse.error) {
+      if (tokenResponse.error) {
         throw new Error(tokenResponse.error);
       }
 
