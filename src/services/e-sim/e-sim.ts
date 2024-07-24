@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
-import { Request } from '../../http/transport/request';
+import { RequestBuilder } from '../../http/transport/request-builder';
 import { GetEsimOkResponse, getEsimOkResponseResponse } from './models/get-esim-ok-response';
 import { GetEsimParams } from './request-params';
 import { GetEsimDeviceOkResponse, getEsimDeviceOkResponseResponse } from './models/get-esim-device-ok-response';
@@ -16,17 +16,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimOkResponse>>} Successful Response
    */
   async getEsim(params: GetEsimParams, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/esim',
-      config: this.config,
-      responseSchema: getEsimOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addQueryParam('iccid', params?.iccid);
+    const request = new RequestBuilder<GetEsimOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/esim')
+      .setRequestSchema(z.any())
+      .setResponseSchema(getEsimOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addQueryParam('iccid', params?.iccid)
+      .build();
     return this.client.call<GetEsimOkResponse>(request);
   }
 
@@ -36,17 +39,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimDeviceOkResponse>>} Successful Response
    */
   async getEsimDevice(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimDeviceOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/esim/{iccid}/device',
-      config: this.config,
-      responseSchema: getEsimDeviceOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addPathParam('iccid', iccid);
+    const request = new RequestBuilder<GetEsimDeviceOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/esim/{iccid}/device')
+      .setRequestSchema(z.any())
+      .setResponseSchema(getEsimDeviceOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam('iccid', iccid)
+      .build();
     return this.client.call<GetEsimDeviceOkResponse>(request);
   }
 
@@ -56,17 +62,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimHistoryOkResponse>>} Successful Response
    */
   async getEsimHistory(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimHistoryOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/esim/{iccid}/history',
-      config: this.config,
-      responseSchema: getEsimHistoryOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addPathParam('iccid', iccid);
+    const request = new RequestBuilder<GetEsimHistoryOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/esim/{iccid}/history')
+      .setRequestSchema(z.any())
+      .setResponseSchema(getEsimHistoryOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam('iccid', iccid)
+      .build();
     return this.client.call<GetEsimHistoryOkResponse>(request);
   }
 
@@ -76,17 +85,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimMacOkResponse>>} Successful Response
    */
   async getEsimMac(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimMacOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/esim/{iccid}/mac',
-      config: this.config,
-      responseSchema: getEsimMacOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addPathParam('iccid', iccid);
+    const request = new RequestBuilder<GetEsimMacOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/esim/{iccid}/mac')
+      .setRequestSchema(z.any())
+      .setResponseSchema(getEsimMacOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam('iccid', iccid)
+      .build();
     return this.client.call<GetEsimMacOkResponse>(request);
   }
 }
