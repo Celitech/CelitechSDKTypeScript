@@ -7,10 +7,17 @@ let CURRENT_EXPIRY = -1;
 
 export class CustomHook implements Hook {
   public async beforeRequest(request: HttpRequest, params: Map<string, string>): Promise<HttpRequest> {
+    console.log('request', request);
+    console.log('params', params);
+
     if (request.path.endsWith('/oauth/token')) return request;
 
     const clientId = params.get('clientId') || '';
     const clientSecret = params.get('clientSecret') || '';
+
+    console.log('clientId', clientId);
+    console.log('clientSecret', clientSecret);
+
     if (!clientId || !clientSecret) {
       throw new Error('Missing clientId and/or clientSecret constructor parameters');
     }
@@ -26,6 +33,10 @@ export class CustomHook implements Hook {
       // Fetch a fresh Oauth token
       // Retrieve the new access token and expiry, and set them to the global variables
       const tokenResponse = await this.getToken(input);
+
+      console.log('tokenResponse', tokenResponse);
+      console.log('tokenResponse.data', tokenResponse.data);
+
       const { expires_in, access_token } = tokenResponse.data;
 
       if (!expires_in || !access_token) {
@@ -37,6 +48,8 @@ export class CustomHook implements Hook {
 
     // Set the Bearer token in the request header
     const authorization = `Bearer ${CURRENT_TOKEN}`;
+
+    console.log('authorization', authorization);
 
     if (!request.headers) {
       request.headers = new Map();
