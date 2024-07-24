@@ -4,7 +4,7 @@ import { purchases, purchasesRequest, purchasesResponse } from './purchases';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const listPurchasesOkResponse: any = z.lazy(() => {
+export const listPurchasesOkResponse = z.lazy(() => {
   return z.object({
     purchases: z.array(purchases).optional(),
     afterCursor: z.string().optional().nullable(),
@@ -23,7 +23,7 @@ export type ListPurchasesOkResponse = z.infer<typeof listPurchasesOkResponse>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const listPurchasesOkResponseResponse: any = z.lazy(() => {
+export const listPurchasesOkResponseResponse = z.lazy(() => {
   return z
     .object({
       purchases: z.array(purchasesResponse).optional(),
@@ -39,7 +39,7 @@ export const listPurchasesOkResponseResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const listPurchasesOkResponseRequest: any = z.lazy(() => {
+export const listPurchasesOkResponseRequest = z.lazy(() => {
   return z
     .object({ purchases: z.array(purchasesRequest).nullish(), afterCursor: z.string().nullish() })
     .transform((data) => ({

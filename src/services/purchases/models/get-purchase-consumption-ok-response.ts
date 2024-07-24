@@ -3,7 +3,7 @@ import { z } from 'zod';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const getPurchaseConsumptionOkResponse: any = z.lazy(() => {
+export const getPurchaseConsumptionOkResponse = z.lazy(() => {
   return z.object({
     dataUsageRemainingInBytes: z.number().optional(),
     status: z.string().optional(),
@@ -22,7 +22,7 @@ export type GetPurchaseConsumptionOkResponse = z.infer<typeof getPurchaseConsump
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const getPurchaseConsumptionOkResponseResponse: any = z.lazy(() => {
+export const getPurchaseConsumptionOkResponseResponse = z.lazy(() => {
   return z
     .object({
       dataUsageRemainingInBytes: z.number().optional(),
@@ -38,7 +38,7 @@ export const getPurchaseConsumptionOkResponseResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const getPurchaseConsumptionOkResponseRequest: any = z.lazy(() => {
+export const getPurchaseConsumptionOkResponseRequest = z.lazy(() => {
   return z
     .object({ dataUsageRemainingInBytes: z.number().nullish(), status: z.string().nullish() })
     .transform((data) => ({

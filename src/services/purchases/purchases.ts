@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
-import { Request } from '../../http/transport/request';
+import { RequestBuilder } from '../../http/transport/request-builder';
 import { ListPurchasesOkResponse, listPurchasesOkResponseResponse } from './models/list-purchases-ok-response';
 import { ListPurchasesParams } from './request-params';
 import { CreatePurchaseRequest, createPurchaseRequestRequest } from './models/create-purchase-request';
@@ -33,24 +33,27 @@ export class PurchasesService extends BaseService {
     params?: ListPurchasesParams,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListPurchasesOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/purchases',
-      config: this.config,
-      responseSchema: listPurchasesOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addQueryParam('iccid', params?.iccid);
-    request.addQueryParam('afterDate', params?.afterDate);
-    request.addQueryParam('beforeDate', params?.beforeDate);
-    request.addQueryParam('referenceId', params?.referenceId);
-    request.addQueryParam('afterCursor', params?.afterCursor);
-    request.addQueryParam('limit', params?.limit);
-    request.addQueryParam('after', params?.after);
-    request.addQueryParam('before', params?.before);
+    const request = new RequestBuilder<ListPurchasesOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/purchases')
+      .setRequestSchema(z.any())
+      .setResponseSchema(listPurchasesOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addQueryParam('iccid', params?.iccid)
+      .addQueryParam('afterDate', params?.afterDate)
+      .addQueryParam('beforeDate', params?.beforeDate)
+      .addQueryParam('referenceId', params?.referenceId)
+      .addQueryParam('afterCursor', params?.afterCursor)
+      .addQueryParam('limit', params?.limit)
+      .addQueryParam('after', params?.after)
+      .addQueryParam('before', params?.before)
+      .build();
     return this.client.call<ListPurchasesOkResponse>(request);
   }
 
@@ -62,18 +65,21 @@ export class PurchasesService extends BaseService {
     body: CreatePurchaseRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<CreatePurchaseOkResponse>> {
-    const request = new Request({
-      method: 'POST',
-      body,
-      path: '/purchases',
-      config: this.config,
-      responseSchema: createPurchaseOkResponseResponse,
-      requestSchema: createPurchaseRequestRequest,
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addHeaderParam('Content-Type', 'application/json');
+    const request = new RequestBuilder<CreatePurchaseOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('POST')
+      .setPath('/purchases')
+      .setRequestSchema(createPurchaseRequestRequest)
+      .setResponseSchema(createPurchaseOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addHeaderParam('Content-Type', 'application/json')
+      .addBody(body)
+      .build();
     return this.client.call<CreatePurchaseOkResponse>(request);
   }
 
@@ -82,18 +88,21 @@ export class PurchasesService extends BaseService {
    * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} Successful Response
    */
   async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
-    const request = new Request({
-      method: 'POST',
-      body,
-      path: '/purchases/topup',
-      config: this.config,
-      responseSchema: topUpEsimOkResponseResponse,
-      requestSchema: topUpEsimRequestRequest,
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addHeaderParam('Content-Type', 'application/json');
+    const request = new RequestBuilder<TopUpEsimOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('POST')
+      .setPath('/purchases/topup')
+      .setRequestSchema(topUpEsimRequestRequest)
+      .setResponseSchema(topUpEsimOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addHeaderParam('Content-Type', 'application/json')
+      .addBody(body)
+      .build();
     return this.client.call<TopUpEsimOkResponse>(request);
   }
 
@@ -105,18 +114,21 @@ export class PurchasesService extends BaseService {
     body: EditPurchaseRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<EditPurchaseOkResponse>> {
-    const request = new Request({
-      method: 'POST',
-      body,
-      path: '/purchases/edit',
-      config: this.config,
-      responseSchema: editPurchaseOkResponseResponse,
-      requestSchema: editPurchaseRequestRequest,
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addHeaderParam('Content-Type', 'application/json');
+    const request = new RequestBuilder<EditPurchaseOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('POST')
+      .setPath('/purchases/edit')
+      .setRequestSchema(editPurchaseRequestRequest)
+      .setResponseSchema(editPurchaseOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addHeaderParam('Content-Type', 'application/json')
+      .addBody(body)
+      .build();
     return this.client.call<EditPurchaseOkResponse>(request);
   }
 
@@ -129,17 +141,20 @@ export class PurchasesService extends BaseService {
     purchaseId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<GetPurchaseConsumptionOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/purchases/{purchaseId}/consumption',
-      config: this.config,
-      responseSchema: getPurchaseConsumptionOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addPathParam('purchaseId', purchaseId);
+    const request = new RequestBuilder<GetPurchaseConsumptionOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/purchases/{purchaseId}/consumption')
+      .setRequestSchema(z.any())
+      .setResponseSchema(getPurchaseConsumptionOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam('purchaseId', purchaseId)
+      .build();
     return this.client.call<GetPurchaseConsumptionOkResponse>(request);
   }
 }
