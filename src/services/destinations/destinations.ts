@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
-import { Request } from '../../http/transport/request';
+import { RequestBuilder } from '../../http/transport/request-builder';
 import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from './models/list-destinations-ok-response';
 
 export class DestinationsService extends BaseService {
@@ -11,16 +11,19 @@ export class DestinationsService extends BaseService {
    * @returns {Promise<HttpResponse<ListDestinationsOkResponse>>} Successful Response
    */
   async listDestinations(requestConfig?: RequestConfig): Promise<HttpResponse<ListDestinationsOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/destinations',
-      config: this.config,
-      responseSchema: listDestinationsOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
+    const request = new RequestBuilder<ListDestinationsOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/destinations')
+      .setRequestSchema(z.any())
+      .setResponseSchema(listDestinationsOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .build();
     return this.client.call<ListDestinationsOkResponse>(request);
   }
 }

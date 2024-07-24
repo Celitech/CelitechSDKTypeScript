@@ -1,21 +1,28 @@
 import { ZodType } from 'zod';
-import { ContentType, HttpMethod, SdkConfig, RetryOptions, RequestConfig } from '../types';
+import { ContentType, HttpMethod, SdkConfig, RetryOptions, RequestConfig, ValidationOptions } from '../types';
 import { serializeHeader, serializePath, serializeQuery } from '../serializer';
 import { HttpRequest } from '../hooks/hook';
 
-interface CreateRequestParameters<T> {
+export interface CreateRequestParameters<T> {
+  baseUrl: string;
   method: HttpMethod;
   body?: any;
+  headers: Map<string, unknown>;
+  queryParams: Map<string, unknown>;
+  pathParams: Map<string, unknown>;
   path: string;
   config: SdkConfig;
   responseSchema: ZodType<T, any, any>;
   requestSchema: ZodType;
   requestContentType: ContentType;
   responseContentType: ContentType;
-  requestConfig?: RequestConfig;
+  validation: ValidationOptions;
+  retry: RetryOptions;
 }
 
 export class Request<T> {
+  public baseUrl: string = '';
+
   public headers: Map<string, unknown> = new Map();
 
   public queryParams: Map<string, unknown> = new Map();
@@ -40,23 +47,33 @@ export class Request<T> {
 
   private readonly pathPattern: string;
 
+  public validation: ValidationOptions = {} as any;
+
+  public retry: RetryOptions = {} as any;
+
   constructor(params: CreateRequestParameters<T>) {
+    this.baseUrl = params.baseUrl;
     this.method = params.method;
     this.pathPattern = params.path;
     this.body = params.body;
     this.path = this.constructPath();
     this.config = params.config;
+    this.pathParams = params.pathParams;
+    this.headers = params.headers;
+    this.queryParams = params.queryParams;
     this.responseSchema = params.responseSchema;
     this.requestSchema = params.requestSchema;
     this.requestContentType = params.requestContentType;
     this.responseContentType = params.responseContentType;
-    this.applyRequestConfig(params.requestConfig);
+    this.retry = params.retry;
+    this.validation = params.validation;
   }
 
   addHeaderParam(key: string, value: unknown): void {
     if (value === undefined) {
       return;
     }
+
     this.headers.set(key, value);
   }
 
@@ -64,6 +81,7 @@ export class Request<T> {
     if (value === undefined) {
       return;
     }
+
     this.queryParams.set(key, value);
   }
 
@@ -71,6 +89,7 @@ export class Request<T> {
     if (value === undefined) {
       return;
     }
+
     this.pathParams.set(key, value);
   }
 
@@ -78,14 +97,8 @@ export class Request<T> {
     if (body === undefined) {
       return;
     }
-    this.body = body;
-  }
 
-  getRetry(): Required<RetryOptions> {
-    return {
-      attempts: this.config.retry?.attempts ?? 3,
-      delayMs: this.config.retry?.delayMs ?? 150,
-    };
+    this.body = body;
   }
 
   getFetchArgs(): { url: string; requestInit: RequestInit } {
@@ -94,9 +107,13 @@ export class Request<T> {
       requestInit: {
         method: this.method,
         body: this.body,
-        headers: this.constructHeadersInit(),
       },
     };
+
+    const headersInit = this.constructHeadersInit();
+    if (!!headersInit) {
+      fetchArgs.requestInit['headers'] = headersInit;
+    }
 
     if (this.config.timeout !== undefined) {
       fetchArgs.requestInit = {
@@ -109,39 +126,28 @@ export class Request<T> {
   }
 
   public updateFromHookRequest(hookRequest: HttpRequest) {
+    this.baseUrl = hookRequest.baseUrl;
     this.method = hookRequest.method;
     this.path = hookRequest.path;
     this.body = hookRequest.body;
-    this.headers = hookRequest.headers || new Map();
-    this.queryParams = hookRequest.queryParams || new Map();
+    this.headers = hookRequest.headers;
+    this.queryParams = hookRequest.queryParams;
   }
 
-  private applyRequestConfig(requestConfig: RequestConfig | undefined) {
-    this.config = {
-      ...this.config,
-      retry: {
-        attempts: requestConfig?.retry?.attempts || this.config.retry?.attempts || 3,
-        delayMs: requestConfig?.retry?.delayMs || this.config.retry?.delayMs || 150,
-      },
-      validation: {
-        responseValidation: this.applyResponseValidation(requestConfig),
-      },
+  public toHookRequest(): HttpRequest {
+    return {
+      baseUrl: this.baseUrl,
+      method: this.method,
+      path: this.path,
+      headers: this.headers,
+      body: this.body,
+      queryParams: this.queryParams,
     };
-  }
-
-  private applyResponseValidation(requestConfig: RequestConfig | undefined): boolean {
-    if (requestConfig?.validation?.responseValidation !== undefined) {
-      return requestConfig?.validation.responseValidation;
-    }
-    if (this.config?.validation?.responseValidation !== undefined) {
-      return this.config?.validation?.responseValidation;
-    }
-    return true;
   }
 
   private constructFullUrl(): string {
     const queryString = this.constructQueryString();
-    return `${this.config.baseUrl}${this.constructPath()}${queryString}`;
+    return `${this.baseUrl}${this.constructPath()}${queryString}`;
   }
 
   private constructPath(): string {
@@ -149,8 +155,11 @@ export class Request<T> {
     return serializePath(this.pathPattern, pathParamsRecord);
   }
 
-  private constructHeadersInit(): HeadersInit {
+  private constructHeadersInit(): HeadersInit | undefined {
     const headerParamsRecord: Record<string, unknown> = this.constructParamsRecord(this.headers);
+    if (Object.entries(headerParamsRecord).length === 0) {
+      return undefined;
+    }
     return serializeHeader(headerParamsRecord);
   }
 

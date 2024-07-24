@@ -5,7 +5,7 @@ import { purchasesEsim, purchasesEsimRequest, purchasesEsimResponse } from './pu
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const purchases: any = z.lazy(() => {
+export const purchases = z.lazy(() => {
   return z.object({
     id: z.string().optional(),
     startDate: z.string().optional(),
@@ -42,7 +42,7 @@ export type Purchases = z.infer<typeof purchases>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const purchasesResponse: any = z.lazy(() => {
+export const purchasesResponse = z.lazy(() => {
   return z
     .object({
       id: z.string().optional(),
@@ -76,7 +76,7 @@ export const purchasesResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const purchasesRequest: any = z.lazy(() => {
+export const purchasesRequest = z.lazy(() => {
   return z
     .object({
       id: z.string().nullish(),

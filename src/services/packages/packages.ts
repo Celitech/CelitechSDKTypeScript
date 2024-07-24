@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
-import { Request } from '../../http/transport/request';
+import { RequestBuilder } from '../../http/transport/request-builder';
 import { ListPackagesOkResponse, listPackagesOkResponseResponse } from './models/list-packages-ok-response';
 import { ListPackagesParams } from './request-params';
 
@@ -23,24 +23,27 @@ export class PackagesService extends BaseService {
     params?: ListPackagesParams,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListPackagesOkResponse>> {
-    const request = new Request({
-      method: 'GET',
-      path: '/packages',
-      config: this.config,
-      responseSchema: listPackagesOkResponseResponse,
-      requestSchema: z.any(),
-      requestContentType: ContentType.Json,
-      responseContentType: ContentType.Json,
-      requestConfig,
-    });
-    request.addQueryParam('destination', params?.destination);
-    request.addQueryParam('startDate', params?.startDate);
-    request.addQueryParam('endDate', params?.endDate);
-    request.addQueryParam('afterCursor', params?.afterCursor);
-    request.addQueryParam('limit', params?.limit);
-    request.addQueryParam('startTime', params?.startTime);
-    request.addQueryParam('endTime', params?.endTime);
-    request.addQueryParam('duration', params?.duration);
+    const request = new RequestBuilder<ListPackagesOkResponse>()
+      .setConfig(this.config)
+      .setBaseUrl(this.config)
+      .setMethod('GET')
+      .setPath('/packages')
+      .setRequestSchema(z.any())
+      .setResponseSchema(listPackagesOkResponseResponse)
+      .setRequestContentType(ContentType.Json)
+      .setResponseContentType(ContentType.Json)
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addQueryParam('destination', params?.destination)
+      .addQueryParam('startDate', params?.startDate)
+      .addQueryParam('endDate', params?.endDate)
+      .addQueryParam('afterCursor', params?.afterCursor)
+      .addQueryParam('limit', params?.limit)
+      .addQueryParam('startTime', params?.startTime)
+      .addQueryParam('endTime', params?.endTime)
+      .addQueryParam('duration', params?.duration)
+      .build();
     return this.client.call<ListPackagesOkResponse>(request);
   }
 }

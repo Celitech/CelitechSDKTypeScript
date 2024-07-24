@@ -8,7 +8,7 @@ import {
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const getEsimOkResponse: any = z.lazy(() => {
+export const getEsimOkResponse = z.lazy(() => {
   return z.object({
     esim: getEsimOkResponseEsim.optional(),
   });
@@ -25,7 +25,7 @@ export type GetEsimOkResponse = z.infer<typeof getEsimOkResponse>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimOkResponseResponse: any = z.lazy(() => {
+export const getEsimOkResponseResponse = z.lazy(() => {
   return z
     .object({
       esim: getEsimOkResponseEsimResponse.optional(),
@@ -39,7 +39,7 @@ export const getEsimOkResponseResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimOkResponseRequest: any = z.lazy(() => {
+export const getEsimOkResponseRequest = z.lazy(() => {
   return z.object({ esim: getEsimOkResponseEsimRequest.nullish() }).transform((data) => ({
     esim: data['esim'],
   }));
