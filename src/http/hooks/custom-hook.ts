@@ -35,9 +35,8 @@ export class CustomHook implements Hook {
       const tokenResponse = await this.getToken(input);
 
       console.log('tokenResponse', tokenResponse);
-      console.log('tokenResponse.data', tokenResponse.data);
 
-      const { expires_in, access_token } = tokenResponse.data;
+      const { expires_in, access_token } = tokenResponse;
 
       if (!expires_in || !access_token) {
         throw new Error('There is an issue with getting the oauth token');
