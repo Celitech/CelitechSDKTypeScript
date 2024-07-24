@@ -4,7 +4,7 @@ import { history, historyRequest, historyResponse } from './history';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const getEsimHistoryOkResponseEsim: any = z.lazy(() => {
+export const getEsimHistoryOkResponseEsim = z.lazy(() => {
   return z.object({
     iccid: z.string().min(18).max(22).optional(),
     history: z.array(history).optional(),
@@ -23,7 +23,7 @@ export type GetEsimHistoryOkResponseEsim = z.infer<typeof getEsimHistoryOkRespon
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimHistoryOkResponseEsimResponse: any = z.lazy(() => {
+export const getEsimHistoryOkResponseEsimResponse = z.lazy(() => {
   return z
     .object({
       iccid: z.string().min(18).max(22).optional(),
@@ -39,7 +39,7 @@ export const getEsimHistoryOkResponseEsimResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimHistoryOkResponseEsimRequest: any = z.lazy(() => {
+export const getEsimHistoryOkResponseEsimRequest = z.lazy(() => {
   return z.object({ iccid: z.string().nullish(), history: z.array(historyRequest).nullish() }).transform((data) => ({
     iccid: data['iccid'],
     history: data['history'],

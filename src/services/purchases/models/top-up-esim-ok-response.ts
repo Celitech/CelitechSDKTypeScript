@@ -13,7 +13,7 @@ import {
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const topUpEsimOkResponse: any = z.lazy(() => {
+export const topUpEsimOkResponse = z.lazy(() => {
   return z.object({
     purchase: topUpEsimOkResponsePurchase.optional(),
     profile: topUpEsimOkResponseProfile.optional(),
@@ -32,7 +32,7 @@ export type TopUpEsimOkResponse = z.infer<typeof topUpEsimOkResponse>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const topUpEsimOkResponseResponse: any = z.lazy(() => {
+export const topUpEsimOkResponseResponse = z.lazy(() => {
   return z
     .object({
       purchase: topUpEsimOkResponsePurchaseResponse.optional(),
@@ -48,7 +48,7 @@ export const topUpEsimOkResponseResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const topUpEsimOkResponseRequest: any = z.lazy(() => {
+export const topUpEsimOkResponseRequest = z.lazy(() => {
   return z
     .object({
       purchase: topUpEsimOkResponsePurchaseRequest.nullish(),

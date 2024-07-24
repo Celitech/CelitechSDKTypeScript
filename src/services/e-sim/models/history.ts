@@ -3,7 +3,7 @@ import { z } from 'zod';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const history: any = z.lazy(() => {
+export const history = z.lazy(() => {
   return z.object({
     status: z.string().optional(),
     statusDate: z.string().optional(),
@@ -24,7 +24,7 @@ export type History = z.infer<typeof history>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const historyResponse: any = z.lazy(() => {
+export const historyResponse = z.lazy(() => {
   return z
     .object({
       status: z.string().optional(),
@@ -42,7 +42,7 @@ export const historyResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const historyRequest: any = z.lazy(() => {
+export const historyRequest = z.lazy(() => {
   return z
     .object({ status: z.string().nullish(), statusDate: z.string().nullish(), date: z.number().nullish() })
     .transform((data) => ({

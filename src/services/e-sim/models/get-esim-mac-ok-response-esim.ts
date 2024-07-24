@@ -3,7 +3,7 @@ import { z } from 'zod';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const getEsimMacOkResponseEsim: any = z.lazy(() => {
+export const getEsimMacOkResponseEsim = z.lazy(() => {
   return z.object({
     iccid: z.string().min(18).max(22).optional(),
     smdpAddress: z.string().optional(),
@@ -24,7 +24,7 @@ export type GetEsimMacOkResponseEsim = z.infer<typeof getEsimMacOkResponseEsim>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimMacOkResponseEsimResponse: any = z.lazy(() => {
+export const getEsimMacOkResponseEsimResponse = z.lazy(() => {
   return z
     .object({
       iccid: z.string().min(18).max(22).optional(),
@@ -42,7 +42,7 @@ export const getEsimMacOkResponseEsimResponse: any = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimMacOkResponseEsimRequest: any = z.lazy(() => {
+export const getEsimMacOkResponseEsimRequest = z.lazy(() => {
   return z
     .object({
       iccid: z.string().nullish(),
