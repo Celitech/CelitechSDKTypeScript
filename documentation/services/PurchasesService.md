@@ -87,8 +87,8 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
     networkBrand: 'CELITECH',
-    startTime: 2.37,
-    endTime: 8.12,
+    startTime: 7.96,
+    endTime: 6.46,
   };
 
   const { data } = await celitech.purchases.createPurchase(input);
@@ -132,8 +132,8 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
-    startTime: 8.12,
-    endTime: 4.35,
+    startTime: 8.55,
+    endTime: 4.61,
   };
 
   const { data } = await celitech.purchases.topUpEsim(input);
@@ -174,8 +174,8 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
     startDate: '2023-11-01',
     endDate: '2023-11-20',
-    startTime: 8.76,
-    endTime: 4.68,
+    startTime: 7.91,
+    endTime: 7.83,
   };
 
   const { data } = await celitech.purchases.editPurchase(input);
