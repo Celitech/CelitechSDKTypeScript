@@ -1,5 +1,5 @@
 import { Environment } from '../http/environment';
-import { HttpClient } from '../http';
+import { HttpClient } from '../http/client';
 import { SdkConfig } from '../http/types';
 
 export class BaseService {

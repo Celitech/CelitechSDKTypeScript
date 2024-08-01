@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { BaseService } from '../base-service';
-import { ContentType, HttpResponse } from '../../http';
-import { RequestConfig } from '../../http/types';
+import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from './models/list-destinations-ok-response';
 

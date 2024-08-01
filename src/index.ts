@@ -5,6 +5,11 @@ import { PackagesService } from './services/packages';
 import { PurchasesService } from './services/purchases';
 import { ESimService } from './services/e-sim';
 
+export * as Destinations from './services/destinations';
+export * as Packages from './services/packages';
+export * as Purchases from './services/purchases';
+export * as ESim from './services/e-sim';
+
 export class Celitech {
   public readonly destinations: DestinationsService;
 

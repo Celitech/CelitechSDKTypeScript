@@ -1,1 +1,1 @@
-export * from './destinations';
+export { DestinationsService } from './destinations';

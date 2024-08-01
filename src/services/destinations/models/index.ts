@@ -1,2 +1,2 @@
-export * from './list-destinations-ok-response';
-export * from './destinations';
+export type { ListDestinationsOkResponse } from './list-destinations-ok-response';
+export type { Destinations } from './destinations';

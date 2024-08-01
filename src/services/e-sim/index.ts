@@ -1,1 +1,1 @@
-export * from './e-sim';
+export { ESimService } from './e-sim';
