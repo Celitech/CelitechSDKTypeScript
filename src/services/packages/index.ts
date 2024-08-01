@@ -1,1 +1,1 @@
-export * from './packages';
+export { PackagesService } from './packages';

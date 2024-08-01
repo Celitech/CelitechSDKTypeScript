@@ -1,9 +1,9 @@
-export * from './get-esim-ok-response';
-export * from './get-esim-device-ok-response';
-export * from './get-esim-history-ok-response';
-export * from './get-esim-mac-ok-response';
-export * from './get-esim-ok-response-esim';
-export * from './device';
-export * from './get-esim-history-ok-response-esim';
-export * from './history';
-export * from './get-esim-mac-ok-response-esim';
+export type { GetEsimOkResponse } from './get-esim-ok-response';
+export type { GetEsimDeviceOkResponse } from './get-esim-device-ok-response';
+export type { GetEsimHistoryOkResponse } from './get-esim-history-ok-response';
+export type { GetEsimMacOkResponse } from './get-esim-mac-ok-response';
+export type { GetEsimOkResponseEsim } from './get-esim-ok-response-esim';
+export type { Device } from './device';
+export type { GetEsimHistoryOkResponseEsim } from './get-esim-history-ok-response-esim';
+export type { History } from './history';
+export type { GetEsimMacOkResponseEsim } from './get-esim-mac-ok-response-esim';
