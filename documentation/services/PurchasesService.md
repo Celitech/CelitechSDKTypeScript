@@ -71,7 +71,8 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
+import { CreatePurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
 
 (async () => {
   const celitech = new Celitech({
@@ -117,7 +118,8 @@ This endpoint is used to top-up an eSIM with the previously associated destinati
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
+import { TopUpEsimRequest } from 'celitech-sdk/services/src/services/purchases/models';
 
 (async () => {
   const celitech = new Celitech({
@@ -162,7 +164,8 @@ This endpoint allows you to modify the dates of an existing package with a futur
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
+import { EditPurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
 
 (async () => {
   const celitech = new Celitech({

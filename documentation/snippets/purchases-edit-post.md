@@ -1,5 +1,6 @@
 ```typescript
-import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
+import { EditPurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
 
 (async () => {
   const celitech = new Celitech({
