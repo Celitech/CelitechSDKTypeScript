@@ -1,5 +1,6 @@
 ```typescript
-import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
+import { TopUpEsimRequest } from 'celitech-sdk/services/src/services/purchases/models';
 
 (async () => {
   const celitech = new Celitech({
