@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
+import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from './models/list-destinations-ok-response';
 
 export class DestinationsService extends BaseService {

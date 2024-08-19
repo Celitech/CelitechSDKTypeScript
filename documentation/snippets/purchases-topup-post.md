@@ -1,6 +1,5 @@
 ```typescript
-import { Celitech } from 'celitech-sdk';
-import { TopUpEsimRequest } from 'celitech-sdk/services/src/services/purchases/models';
+import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -8,7 +7,7 @@ import { TopUpEsimRequest } from 'celitech-sdk/services/src/services/purchases/m
     clientSecret: 'client-secret',
   });
 
-  const input: TopUpEsimRequest = {
+  const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555',
     dataLimitInGb: 1,
     startDate: '2023-11-01',

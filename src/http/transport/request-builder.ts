@@ -1,7 +1,8 @@
 import z, { ZodType } from 'zod';
-import { Request, CreateRequestParameters } from './request';
+import { Request, CreateRequestParameters, RequestParameter } from './request';
 import { ContentType, HttpMethod, SdkConfig, RequestConfig, RetryOptions, ValidationOptions } from '../types';
 import { Environment } from '../environment';
+import { SerializationStyle } from '../serialization/base-serializer';
 
 export class RequestBuilder<T> {
   private params: CreateRequestParameters<T>;
@@ -109,32 +110,50 @@ export class RequestBuilder<T> {
     return this;
   }
 
-  addPathParam(key: string, value: unknown): RequestBuilder<T> {
-    if (value === undefined) {
+  addPathParam(param: Partial<RequestParameter>): RequestBuilder<T> {
+    if (param.value === undefined || param.key === undefined) {
       return this;
     }
 
-    this.params.pathParams.set(key, value);
+    this.params.pathParams.set(param.key, {
+      key: param.key,
+      value: param.value,
+      explode: param.explode ?? true,
+      style: param.style ?? SerializationStyle.SIMPLE,
+      encode: param.encode ?? true,
+    });
 
     return this;
   }
 
-  addQueryParam(key: string, value: unknown): RequestBuilder<T> {
-    if (value === undefined) {
+  addQueryParam(param: Partial<RequestParameter>): RequestBuilder<T> {
+    if (param.value === undefined || param.key === undefined) {
       return this;
     }
 
-    this.params.queryParams.set(key, value);
+    this.params.queryParams.set(param.key, {
+      key: param.key,
+      value: param.value,
+      explode: param.explode ?? true,
+      style: param.style ?? SerializationStyle.FORM,
+      encode: param.encode ?? true,
+    });
 
     return this;
   }
 
-  addHeaderParam(key: string, value: unknown): RequestBuilder<T> {
-    if (value === undefined) {
+  addHeaderParam(param: Partial<RequestParameter>): RequestBuilder<T> {
+    if (param.value === undefined || param.key === undefined) {
       return this;
     }
 
-    this.params.headers.set(key, value);
+    this.params.headers.set(param.key, {
+      key: param.key,
+      value: param.value,
+      explode: param.explode ?? true,
+      style: param.style ?? SerializationStyle.SIMPLE,
+      encode: param.encode ?? false,
+    });
 
     return this;
   }

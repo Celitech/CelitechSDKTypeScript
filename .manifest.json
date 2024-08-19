@@ -1,14 +1,14 @@
 {
-  "liblabVersion": "2.1.25",
-  "date": "2024-08-07T12:57:36.404Z",
+  "liblabVersion": "2.1.28",
+  "date": "2024-08-19T10:56:55.729Z",
   "config": {
-    "apiId": 1005,
+    "apiId": 1041,
     "sdkName": "Celitech",
-    "sdkVersion": "1.1.85",
+    "sdkVersion": "1.1.86",
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
     "languages": ["typescript"],
-    "apiVersion": "1.1.85",
+    "apiVersion": "1.1.86",
     "specFilePath": "swagger.yaml",
     "docs": ["api", "snippets"],
     "languageOptions": {
@@ -27,7 +27,7 @@
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.85"
+        "sdkVersion": "1.1.86"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
@@ -43,10 +43,10 @@
         ],
         "githubRepoName": "CelitechSDKPHP",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.85"
+        "sdkVersion": "1.1.86"
       },
       "typescript": {
-        "bundle": false,
+        "bundle": true,
         "exportClassDefault": false,
         "httpClient": "axios",
         "npmName": "celitech-sdk",
@@ -62,12 +62,13 @@
         ],
         "githubRepoName": "CelitechSDKTypeScript",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.85"
+        "sdkVersion": "1.1.86"
       }
     },
     "publishing": {
       "githubOrg": "Celitech"
     },
+    "apiName": "CELITECH API",
     "devContainer": true,
     "environmentVariables": [
       {
@@ -102,18 +103,18 @@
     },
     "multiTenant": true,
     "hooksLocation": {
-      "bucketKey": "6573/hooks.zip",
+      "bucketKey": "6715/hooks.zip",
       "bucketName": "prod-liblab-api-stack-hooks"
     },
-    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/1005/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240807%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240807T125731Z&X-Amz-Expires=43200&X-Amz-Signature=c7bbb5388e84c9ea3a476c648d7dbfdcbb60e1868482ba20c2604ff2d67e2c9a&X-Amz-SignedHeaders=host&x-id=GetObject",
+    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/1041/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240819%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240819T105649Z&X-Amz-Expires=43200&X-Amz-Signature=8bd0949987f672124a3206897b13893cf4349fb62ead0f12e2af151bfeed3225&X-Amz-SignedHeaders=host&x-id=GetObject",
     "includeWatermark": false,
     "language": "typescript",
     "deliveryMethod": "zip",
     "hooks": {
-      "enabled": false,
-      "sourceDir": ""
+      "enabled": true,
+      "sourceDir": "/tmp/resources/hooks"
     },
-    "bundle": false,
+    "bundle": true,
     "exportClassDefault": false,
     "httpClient": "axios",
     "npmName": "celitech-sdk",
@@ -132,7 +133,7 @@
     "zodVersion": "3.22.0",
     "compilerOptions": {
       "target": "es6",
-      "module": "commonjs",
+      "module": "Node16",
       "lib": ["es2017", "dom"]
     },
     "usesFormData": false,
@@ -141,7 +142,7 @@
     "httpLibrary": {
       "name": "axios",
       "packages": {
-        "axios": "^1.6.8"
+        "axios": "^1.7.4"
       },
       "languages": ["typescript"]
     },
@@ -160,7 +161,6 @@
     "examples/README.md",
     "examples/src/index.ts",
     "src/http/client.ts",
-    "src/http/serializer.ts",
     "src/services/destinations/models/list-destinations-ok-response.ts",
     "src/services/packages/models/list-packages-ok-response.ts",
     "src/services/purchases/models/list-purchases-ok-response.ts",
@@ -204,6 +204,7 @@
     "src/services/packages/index.ts",
     "src/services/purchases/index.ts",
     "src/services/e-sim/index.ts",
+    "src/http/index.ts",
     "src/http/handlers/handler-chain.ts",
     "src/http/types.ts",
     "src/http/error.ts",
@@ -238,6 +239,12 @@
     ".devcontainer/devcontainer.json",
     "src/http/transport/request.ts",
     "src/http/transport/request-builder.ts",
+    "src/http/serialization/base-serializer.ts",
+    "src/http/serialization/query-serializer.ts",
+    "src/http/serialization/path-serializer.ts",
+    "src/http/serialization/header-serializer.ts",
+    "src/http/transport/request-fetch-adapter.ts",
+    "src/http/transport/transport-hook-adapter.ts",
     "documentation/models/ListDestinationsOkResponse.md",
     "documentation/models/ListPackagesOkResponse.md",
     "documentation/models/GetEsimOkResponse.md",
