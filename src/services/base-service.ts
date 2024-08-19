@@ -3,9 +3,11 @@ import { HttpClient } from '../http/client';
 import { SdkConfig } from '../http/types';
 
 export class BaseService {
-  public client: HttpClient = new HttpClient(this.config);
+  public client: HttpClient;
 
-  constructor(public config: SdkConfig) {}
+  constructor(public config: SdkConfig) {
+    this.client = new HttpClient(this.config);
+  }
 
   set baseUrl(baseUrl: string) {
     this.config.baseUrl = baseUrl;

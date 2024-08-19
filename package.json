@@ -1,11 +1,16 @@
 {
   "name": "celitech-sdk",
-  "version": "1.1.85",
+  "version": "1.1.86",
   "description": "Welcome to the CELITECH API documentation!  Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/) ",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "source": "./src/index.ts",
+  "main": "./dist/commonjs/index.js",
+  "module": "./dist/esm/index.js",
+  "browser": "./dist/index.umd.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/commonjs/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsup-node src/index.ts --format cjs,esm --dts --clean",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "typescript",
@@ -13,12 +18,24 @@
     "api",
     "client"
   ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "author": "CELITECH",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "tsup": "^6.7.0"
   },
   "dependencies": {
     "zod": "3.22.0"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   }
 }

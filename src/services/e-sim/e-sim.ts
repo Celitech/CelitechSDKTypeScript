@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
+import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { GetEsimOkResponse, getEsimOkResponseResponse } from './models/get-esim-ok-response';
 import { GetEsimParams } from './request-params';
 import { GetEsimDeviceOkResponse, getEsimDeviceOkResponseResponse } from './models/get-esim-device-ok-response';
@@ -27,7 +28,10 @@ export class ESimService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addQueryParam('iccid', params?.iccid)
+      .addQueryParam({
+        key: 'iccid',
+        value: params?.iccid,
+      })
       .build();
     return this.client.call<GetEsimOkResponse>(request);
   }
@@ -50,7 +54,10 @@ export class ESimService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('iccid', iccid)
+      .addPathParam({
+        key: 'iccid',
+        value: iccid,
+      })
       .build();
     return this.client.call<GetEsimDeviceOkResponse>(request);
   }
@@ -73,7 +80,10 @@ export class ESimService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('iccid', iccid)
+      .addPathParam({
+        key: 'iccid',
+        value: iccid,
+      })
       .build();
     return this.client.call<GetEsimHistoryOkResponse>(request);
   }
@@ -96,7 +106,10 @@ export class ESimService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('iccid', iccid)
+      .addPathParam({
+        key: 'iccid',
+        value: iccid,
+      })
       .build();
     return this.client.call<GetEsimMacOkResponse>(request);
   }

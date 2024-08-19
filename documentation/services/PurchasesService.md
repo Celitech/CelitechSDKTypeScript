@@ -71,8 +71,7 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech } from 'celitech-sdk';
-import { CreatePurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
+import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -80,7 +79,7 @@ import { CreatePurchaseRequest } from 'celitech-sdk/services/src/services/purcha
     clientSecret: 'client-secret',
   });
 
-  const input: CreatePurchaseRequest = {
+  const createPurchaseRequest: CreatePurchaseRequest = {
     destination: 'FRA',
     dataLimitInGb: 1,
     startDate: '2023-11-01',
@@ -118,8 +117,7 @@ This endpoint is used to top-up an eSIM with the previously associated destinati
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech } from 'celitech-sdk';
-import { TopUpEsimRequest } from 'celitech-sdk/services/src/services/purchases/models';
+import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -127,7 +125,7 @@ import { TopUpEsimRequest } from 'celitech-sdk/services/src/services/purchases/m
     clientSecret: 'client-secret',
   });
 
-  const input: TopUpEsimRequest = {
+  const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555',
     dataLimitInGb: 1,
     startDate: '2023-11-01',
@@ -164,8 +162,7 @@ This endpoint allows you to modify the dates of an existing package with a futur
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech } from 'celitech-sdk';
-import { EditPurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
+import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -173,7 +170,7 @@ import { EditPurchaseRequest } from 'celitech-sdk/services/src/services/purchase
     clientSecret: 'client-secret',
   });
 
-  const input: EditPurchaseRequest = {
+  const editPurchaseRequest: EditPurchaseRequest = {
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
     startDate: '2023-11-01',
     endDate: '2023-11-20',

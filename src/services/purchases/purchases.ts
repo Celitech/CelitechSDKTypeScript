@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
+import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ListPurchasesOkResponse, listPurchasesOkResponseResponse } from './models/list-purchases-ok-response';
 import { ListPurchasesParams } from './request-params';
 import { CreatePurchaseRequest, createPurchaseRequestRequest } from './models/create-purchase-request';
@@ -44,14 +45,38 @@ export class PurchasesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addQueryParam('iccid', params?.iccid)
-      .addQueryParam('afterDate', params?.afterDate)
-      .addQueryParam('beforeDate', params?.beforeDate)
-      .addQueryParam('referenceId', params?.referenceId)
-      .addQueryParam('afterCursor', params?.afterCursor)
-      .addQueryParam('limit', params?.limit)
-      .addQueryParam('after', params?.after)
-      .addQueryParam('before', params?.before)
+      .addQueryParam({
+        key: 'iccid',
+        value: params?.iccid,
+      })
+      .addQueryParam({
+        key: 'afterDate',
+        value: params?.afterDate,
+      })
+      .addQueryParam({
+        key: 'beforeDate',
+        value: params?.beforeDate,
+      })
+      .addQueryParam({
+        key: 'referenceId',
+        value: params?.referenceId,
+      })
+      .addQueryParam({
+        key: 'afterCursor',
+        value: params?.afterCursor,
+      })
+      .addQueryParam({
+        key: 'limit',
+        value: params?.limit,
+      })
+      .addQueryParam({
+        key: 'after',
+        value: params?.after,
+      })
+      .addQueryParam({
+        key: 'before',
+        value: params?.before,
+      })
       .build();
     return this.client.call<ListPurchasesOkResponse>(request);
   }
@@ -76,7 +101,7 @@ export class PurchasesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<CreatePurchaseOkResponse>(request);
@@ -99,7 +124,7 @@ export class PurchasesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<TopUpEsimOkResponse>(request);
@@ -125,7 +150,7 @@ export class PurchasesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<EditPurchaseOkResponse>(request);
@@ -152,7 +177,10 @@ export class PurchasesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('purchaseId', purchaseId)
+      .addPathParam({
+        key: 'purchaseId',
+        value: purchaseId,
+      })
       .build();
     return this.client.call<GetPurchaseConsumptionOkResponse>(request);
   }

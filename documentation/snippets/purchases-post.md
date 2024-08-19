@@ -1,6 +1,5 @@
 ```typescript
-import { Celitech } from 'celitech-sdk';
-import { CreatePurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
+import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -8,7 +7,7 @@ import { CreatePurchaseRequest } from 'celitech-sdk/services/src/services/purcha
     clientSecret: 'client-secret',
   });
 
-  const input: CreatePurchaseRequest = {
+  const createPurchaseRequest: CreatePurchaseRequest = {
     destination: 'FRA',
     dataLimitInGb: 1,
     startDate: '2023-11-01',

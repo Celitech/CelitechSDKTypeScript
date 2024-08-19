@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
+import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ListPackagesOkResponse, listPackagesOkResponseResponse } from './models/list-packages-ok-response';
 import { ListPackagesParams } from './request-params';
 
@@ -34,14 +35,38 @@ export class PackagesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addQueryParam('destination', params?.destination)
-      .addQueryParam('startDate', params?.startDate)
-      .addQueryParam('endDate', params?.endDate)
-      .addQueryParam('afterCursor', params?.afterCursor)
-      .addQueryParam('limit', params?.limit)
-      .addQueryParam('startTime', params?.startTime)
-      .addQueryParam('endTime', params?.endTime)
-      .addQueryParam('duration', params?.duration)
+      .addQueryParam({
+        key: 'destination',
+        value: params?.destination,
+      })
+      .addQueryParam({
+        key: 'startDate',
+        value: params?.startDate,
+      })
+      .addQueryParam({
+        key: 'endDate',
+        value: params?.endDate,
+      })
+      .addQueryParam({
+        key: 'afterCursor',
+        value: params?.afterCursor,
+      })
+      .addQueryParam({
+        key: 'limit',
+        value: params?.limit,
+      })
+      .addQueryParam({
+        key: 'startTime',
+        value: params?.startTime,
+      })
+      .addQueryParam({
+        key: 'endTime',
+        value: params?.endTime,
+      })
+      .addQueryParam({
+        key: 'duration',
+        value: params?.duration,
+      })
       .build();
     return this.client.call<ListPackagesOkResponse>(request);
   }

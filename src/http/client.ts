@@ -1,4 +1,4 @@
-import { SerializationStyle, serializePath, serializeQuery } from './serializer';
+import { SerializationStyle } from './serialization/base-serializer';
 import { HttpMethod, HttpResponse, Options, RetryOptions, SdkConfig } from './types';
 import { RequestHandlerChain } from './handlers/handler-chain';
 import { HookHandler } from './handlers/hook-handler';
@@ -25,15 +25,6 @@ export class HttpClient {
 
   call<T>(request: Request<T>): Promise<HttpResponse<T>> {
     return this.requestHandlerChain.callChain(request);
-  }
-
-  buildPath(
-    pathPattern: string,
-    pathArguments: Record<string, unknown>,
-    style = SerializationStyle.SIMPLE,
-    explode = false,
-  ): string {
-    return serializePath(pathPattern, pathArguments, style, explode);
   }
 
   setBaseUrl(url: string): void {

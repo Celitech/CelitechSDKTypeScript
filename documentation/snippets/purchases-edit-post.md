@@ -1,6 +1,5 @@
 ```typescript
-import { Celitech } from 'celitech-sdk';
-import { EditPurchaseRequest } from 'celitech-sdk/services/src/services/purchases/models';
+import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -8,7 +7,7 @@ import { EditPurchaseRequest } from 'celitech-sdk/services/src/services/purchase
     clientSecret: 'client-secret',
   });
 
-  const input: EditPurchaseRequest = {
+  const editPurchaseRequest: EditPurchaseRequest = {
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
     startDate: '2023-11-01',
     endDate: '2023-11-20',
