@@ -20,7 +20,7 @@ export interface HttpMetadata {
   headers: Record<string, string>;
 }
 
-export interface HttpResponse<T> {
+export interface HttpResponse<T = unknown> {
   data?: T;
   metadata: HttpMetadata;
   raw: ArrayBuffer;
