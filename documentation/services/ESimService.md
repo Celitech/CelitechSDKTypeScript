@@ -4,12 +4,12 @@ A list of all methods in the `ESimService` service. Click on the method name to 
 
 | Methods                           | Description      |
 | :-------------------------------- | :--------------- |
-| [getESIM](#getesim)               | Get eSIM Status  |
-| [getESIMDevice](#getesimdevice)   | Get eSIM Device  |
-| [getESIMHistory](#getesimhistory) | Get eSIM History |
-| [getESIMMac](#getesimmac)         | Get eSIM MAC     |
+| [getEsim](#getesim)               | Get eSIM Status  |
+| [getEsimDevice](#getesimdevice)   | Get eSIM Device  |
+| [getEsimHistory](#getesimhistory) | Get eSIM History |
+| [getEsimMac](#getesimmac)         | Get eSIM MAC     |
 
-## getESIM
+## getEsim
 
 Get eSIM Status
 
@@ -45,7 +45,7 @@ import { Celitech } from 'celitech-sdk';
 })();
 ```
 
-## getESIMDevice
+## getEsimDevice
 
 Get eSIM Device
 
@@ -79,7 +79,7 @@ import { Celitech } from 'celitech-sdk';
 })();
 ```
 
-## getESIMHistory
+## getEsimHistory
 
 Get eSIM History
 
@@ -113,7 +113,7 @@ import { Celitech } from 'celitech-sdk';
 })();
 ```
 
-## getESIMMac
+## getEsimMac
 
 Get eSIM MAC
 

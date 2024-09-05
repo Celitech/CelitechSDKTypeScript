@@ -2,7 +2,7 @@ import { ZodType } from 'zod';
 import { Environment } from './environment';
 import { Request } from './transport/request';
 
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
 
 export interface SdkConfig {
   baseUrl?: string;
@@ -20,7 +20,7 @@ export interface HttpMetadata {
   headers: Record<string, string>;
 }
 
-export interface HttpResponse<T> {
+export interface HttpResponse<T = unknown> {
   data?: T;
   metadata: HttpMetadata;
   raw: ArrayBuffer;
