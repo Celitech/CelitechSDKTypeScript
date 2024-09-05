@@ -1,11 +1,11 @@
-# Celitech TypeScript SDK 1.1.86
+# Celitech TypeScript SDK 1.1.87
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
 ## Versions
 
 - API version: `1.1.0`
-- SDK version: `1.1.86`
+- SDK version: `1.1.87`
 
 ## About the API
 
@@ -18,6 +18,7 @@ Welcome to the CELITECH API documentation! Useful links: [Homepage](https://www.
   - [Installation](#installation)
   - [Environment Variables](#environment-variables)
 - [Setting a Custom Timeout](#setting-a-custom-timeout)
+- [Sample Usage](#sample-usage)
 - [Services](#services)
 - [Models](#models)
 - [License](#license)
@@ -55,6 +56,25 @@ You can set a custom timeout for the SDK's HTTP requests as follows:
 
 ```ts
 const celitech = new Celitech({ timeout: 10000 });
+```
+
+# Sample Usage
+
+Below is a comprehensive example demonstrating how to authenticate and call a simple endpoint:
+
+```ts
+import { Celitech } from 'celitech-sdk';
+
+(async () => {
+  const celitech = new Celitech({
+    clientId: 'client-id',
+    clientSecret: 'client-secret',
+  });
+
+  const { data } = await celitech.destinations.listDestinations();
+
+  console.log(data);
+})();
 ```
 
 ## Services
