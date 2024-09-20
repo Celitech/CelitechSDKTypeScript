@@ -1,6 +1,6 @@
 {
-  "liblabVersion": "2.1.31",
-  "date": "2024-09-05T11:13:05.819Z",
+  "liblabVersion": "2.4.0",
+  "date": "2024-09-20T20:17:27.332Z",
   "config": {
     "apiId": 1117,
     "sdkName": "Celitech",
@@ -48,7 +48,7 @@
       "typescript": {
         "bundle": true,
         "exportClassDefault": false,
-        "httpClient": "axios",
+        "httpClient": "fetch",
         "npmName": "celitech-sdk",
         "additionalConstructorParameters": [
           {
@@ -103,7 +103,7 @@
     },
     "multiTenant": true,
     "hooksLocation": {
-      "bucketKey": "7002/hooks.zip",
+      "bucketKey": "7312/hooks.zip",
       "bucketName": "prod-liblab-api-stack-hooks"
     },
     "includeWatermark": false,
@@ -115,7 +115,7 @@
     },
     "bundle": true,
     "exportClassDefault": false,
-    "httpClient": "axios",
+    "httpClient": "fetch",
     "npmName": "celitech-sdk",
     "additionalConstructorParameters": [
       {
@@ -133,17 +133,19 @@
     "compilerOptions": {
       "target": "es6",
       "module": "Node16",
-      "lib": ["es2017", "dom"]
+      "lib": ["es2018", "dom"]
     },
     "usesFormData": false,
     "authentication": {},
     "fileOutput": "/tmp",
     "httpLibrary": {
-      "name": "axios",
-      "packages": {
-        "axios": "^1.7.4"
-      },
-      "languages": ["typescript"]
+      "name": "fetch",
+      "packages": {},
+      "languages": ["typescript"],
+      "types": {
+        "packageName": "@types/isomorphic-fetch",
+        "version": "^0.0.36"
+      }
     },
     "auth": [],
     "customQueries": {
@@ -242,7 +244,7 @@
     "src/http/serialization/query-serializer.ts",
     "src/http/serialization/path-serializer.ts",
     "src/http/serialization/header-serializer.ts",
-    "src/http/transport/request-axios-adapter.ts",
+    "src/http/transport/request-fetch-adapter.ts",
     "src/http/transport/transport-hook-adapter.ts",
     "documentation/models/ListDestinationsOkResponse.md",
     "documentation/models/ListPackagesOkResponse.md",
