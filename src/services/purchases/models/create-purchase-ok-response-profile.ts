@@ -6,6 +6,7 @@ import { z } from 'zod';
 export const createPurchaseOkResponseProfile = z.lazy(() => {
   return z.object({
     iccid: z.string().min(18).max(22).optional(),
+    manualActivationCode: z.string().optional(),
     activationCode: z.string().min(1000).max(8000).optional(),
   });
 });
@@ -14,6 +15,7 @@ export const createPurchaseOkResponseProfile = z.lazy(() => {
  *
  * @typedef  {CreatePurchaseOkResponseProfile} createPurchaseOkResponseProfile
  * @property {string} - ID of the eSIM
+ * @property {string} - Manual Activation Code of the eSIM
  * @property {string} - QR Code of the eSIM as base64
  */
 export type CreatePurchaseOkResponseProfile = z.infer<typeof createPurchaseOkResponseProfile>;
@@ -26,10 +28,12 @@ export const createPurchaseOkResponseProfileResponse = z.lazy(() => {
   return z
     .object({
       iccid: z.string().min(18).max(22).optional(),
+      manualActivationCode: z.string().optional(),
       activationCode: z.string().min(1000).max(8000).optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
+      manualActivationCode: data['manualActivationCode'],
       activationCode: data['activationCode'],
     }));
 });
@@ -39,8 +43,15 @@ export const createPurchaseOkResponseProfileResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const createPurchaseOkResponseProfileRequest = z.lazy(() => {
-  return z.object({ iccid: z.string().nullish(), activationCode: z.string().nullish() }).transform((data) => ({
-    iccid: data['iccid'],
-    activationCode: data['activationCode'],
-  }));
+  return z
+    .object({
+      iccid: z.string().nullish(),
+      manualActivationCode: z.string().nullish(),
+      activationCode: z.string().nullish(),
+    })
+    .transform((data) => ({
+      iccid: data['iccid'],
+      manualActivationCode: data['manualActivationCode'],
+      activationCode: data['activationCode'],
+    }));
 });

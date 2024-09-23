@@ -34,8 +34,8 @@ export class PurchasesService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListPurchasesOkResponse>> {
     const request = new RequestBuilder<ListPurchasesOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/purchases')
       .setRequestSchema(z.any())
@@ -90,8 +90,8 @@ export class PurchasesService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<CreatePurchaseOkResponse>> {
     const request = new RequestBuilder<CreatePurchaseOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/purchases')
       .setRequestSchema(createPurchaseRequestRequest)
@@ -113,8 +113,8 @@ export class PurchasesService extends BaseService {
    */
   async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
     const request = new RequestBuilder<TopUpEsimOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/purchases/topup')
       .setRequestSchema(topUpEsimRequestRequest)
@@ -139,8 +139,8 @@ export class PurchasesService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<EditPurchaseOkResponse>> {
     const request = new RequestBuilder<EditPurchaseOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/purchases/edit')
       .setRequestSchema(editPurchaseRequestRequest)
@@ -166,8 +166,8 @@ export class PurchasesService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<GetPurchaseConsumptionOkResponse>> {
     const request = new RequestBuilder<GetPurchaseConsumptionOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/purchases/{purchaseId}/consumption')
       .setRequestSchema(z.any())
