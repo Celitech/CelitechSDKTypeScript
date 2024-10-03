@@ -1,16 +1,17 @@
 {
-  "liblabVersion": "2.1.31",
-  "date": "2024-09-05T11:13:05.819Z",
+  "liblabVersion": "2.5.1",
+  "date": "2024-10-03T21:56:56.310Z",
   "config": {
-    "apiId": 1117,
+    "apiId": 1249,
     "sdkName": "Celitech",
-    "sdkVersion": "1.1.87",
+    "sdkVersion": "1.1.88",
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
     "languages": ["typescript"],
-    "apiVersion": "1.1.87",
+    "apiVersion": "1.1.88",
+    "apiName": "Celitech",
     "specFilePath": "swagger.yaml",
-    "docs": ["api", "snippets"],
+    "docs": ["api", "snippets", "enhancedApiSpec"],
     "languageOptions": {
       "python": {
         "alwaysInitializeOptionals": true,
@@ -27,7 +28,7 @@
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.87"
+        "sdkVersion": "1.1.88"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
@@ -43,12 +44,12 @@
         ],
         "githubRepoName": "CelitechSDKPHP",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.87"
+        "sdkVersion": "1.1.88"
       },
       "typescript": {
         "bundle": true,
         "exportClassDefault": false,
-        "httpClient": "axios",
+        "httpClient": "fetch",
         "npmName": "celitech-sdk",
         "additionalConstructorParameters": [
           {
@@ -62,13 +63,23 @@
         ],
         "githubRepoName": "CelitechSDKTypeScript",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.87"
+        "sdkVersion": "1.1.88",
+        "generateEnumAs": "enum"
       }
     },
     "publishing": {
       "githubOrg": "Celitech"
     },
-    "apiName": "CELITECH API",
+    "integrations": {
+      "enhancedApiSpec": {
+        "githubRepoName": "CelitechCoreAPIReference",
+        "targetBranch": "main",
+        "provider": "redocly",
+        "redocly": {
+          "openapiPath": "swagger.yaml"
+        }
+      }
+    },
     "devContainer": true,
     "environmentVariables": [
       {
@@ -103,7 +114,7 @@
     },
     "multiTenant": true,
     "hooksLocation": {
-      "bucketKey": "7002/hooks.zip",
+      "bucketKey": "7524/hooks.zip",
       "bucketName": "prod-liblab-api-stack-hooks"
     },
     "includeWatermark": false,
@@ -115,7 +126,7 @@
     },
     "bundle": true,
     "exportClassDefault": false,
-    "httpClient": "axios",
+    "httpClient": "fetch",
     "npmName": "celitech-sdk",
     "additionalConstructorParameters": [
       {
@@ -128,22 +139,25 @@
       }
     ],
     "githubRepoName": "CelitechSDKTypeScript",
+    "generateEnumAs": "enum",
     "typescriptVersion": "5.3.3",
     "zodVersion": "3.22.0",
     "compilerOptions": {
       "target": "es6",
       "module": "Node16",
-      "lib": ["es2017", "dom"]
+      "lib": ["es2018", "dom"]
     },
     "usesFormData": false,
     "authentication": {},
     "fileOutput": "/tmp",
     "httpLibrary": {
-      "name": "axios",
-      "packages": {
-        "axios": "^1.7.4"
-      },
-      "languages": ["typescript"]
+      "name": "fetch",
+      "packages": {},
+      "languages": ["typescript"],
+      "types": {
+        "packageName": "@types/isomorphic-fetch",
+        "version": "^0.0.36"
+      }
     },
     "auth": [],
     "customQueries": {
@@ -242,7 +256,7 @@
     "src/http/serialization/query-serializer.ts",
     "src/http/serialization/path-serializer.ts",
     "src/http/serialization/header-serializer.ts",
-    "src/http/transport/request-axios-adapter.ts",
+    "src/http/transport/request-fetch-adapter.ts",
     "src/http/transport/transport-hook-adapter.ts",
     "documentation/models/ListDestinationsOkResponse.md",
     "documentation/models/ListPackagesOkResponse.md",

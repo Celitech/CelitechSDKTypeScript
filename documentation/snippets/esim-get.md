@@ -8,7 +8,7 @@ import { Celitech } from 'celitech-sdk';
   });
 
   const { data } = await celitech.eSim.getEsim({
-    iccid: '1111222233334444555',
+    iccid: '1111222233334444555000',
   });
 
   console.log(data);

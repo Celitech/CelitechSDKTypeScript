@@ -24,8 +24,8 @@ export class PackagesService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListPackagesOkResponse>> {
     const request = new RequestBuilder<ListPackagesOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/packages')
       .setRequestSchema(z.any())
