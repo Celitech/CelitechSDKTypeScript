@@ -50,11 +50,11 @@ export class Celitech {
     this.eSim.baseUrl = environment;
   }
 
-  set timeout(timeout: number) {
-    this.destinations.timeout = timeout;
-    this.packages.timeout = timeout;
-    this.purchases.timeout = timeout;
-    this.eSim.timeout = timeout;
+  set timeoutMs(timeoutMs: number) {
+    this.destinations.timeoutMs = timeoutMs;
+    this.packages.timeoutMs = timeoutMs;
+    this.purchases.timeoutMs = timeoutMs;
+    this.eSim.timeoutMs = timeoutMs;
   }
 
   set clientId(clientId: string) {

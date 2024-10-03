@@ -12,8 +12,8 @@ export class DestinationsService extends BaseService {
    */
   async listDestinations(requestConfig?: RequestConfig): Promise<HttpResponse<ListDestinationsOkResponse>> {
     const request = new RequestBuilder<ListDestinationsOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/destinations')
       .setRequestSchema(z.any())

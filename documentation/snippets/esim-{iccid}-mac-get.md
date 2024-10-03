@@ -7,7 +7,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'client-secret',
   });
 
-  const { data } = await celitech.eSim.getEsimMac('1111222233334444555');
+  const { data } = await celitech.eSim.getEsimMac('1111222233334444555000');
 
   console.log(data);
 })();

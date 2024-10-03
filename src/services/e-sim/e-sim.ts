@@ -17,8 +17,8 @@ export class ESimService extends BaseService {
    */
   async getEsim(params: GetEsimParams, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimOkResponse>> {
     const request = new RequestBuilder<GetEsimOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim')
       .setRequestSchema(z.any())
@@ -43,8 +43,8 @@ export class ESimService extends BaseService {
    */
   async getEsimDevice(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimDeviceOkResponse>> {
     const request = new RequestBuilder<GetEsimDeviceOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim/{iccid}/device')
       .setRequestSchema(z.any())
@@ -69,8 +69,8 @@ export class ESimService extends BaseService {
    */
   async getEsimHistory(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimHistoryOkResponse>> {
     const request = new RequestBuilder<GetEsimHistoryOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim/{iccid}/history')
       .setRequestSchema(z.any())
@@ -95,8 +95,8 @@ export class ESimService extends BaseService {
    */
   async getEsimMac(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimMacOkResponse>> {
     const request = new RequestBuilder<GetEsimMacOkResponse>()
-      .setConfig(this.config)
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim/{iccid}/mac')
       .setRequestSchema(z.any())
