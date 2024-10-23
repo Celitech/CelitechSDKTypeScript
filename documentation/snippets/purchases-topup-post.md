@@ -18,7 +18,7 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     endTime: 4.35,
   };
 
-  const { data } = await celitech.purchases.topUpEsim(input);
+  const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
 
   console.log(data);
 })();
