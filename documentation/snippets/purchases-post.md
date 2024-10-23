@@ -19,7 +19,7 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     endTime: 8.12,
   };
 
-  const { data } = await celitech.purchases.createPurchase(input);
+  const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
 
   console.log(data);
 })();

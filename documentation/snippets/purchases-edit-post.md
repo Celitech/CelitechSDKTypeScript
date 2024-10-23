@@ -15,7 +15,7 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
     endTime: 4.68,
   };
 
-  const { data } = await celitech.purchases.editPurchase(input);
+  const { data } = await celitech.purchases.editPurchase(editPurchaseRequest);
 
   console.log(data);
 })();

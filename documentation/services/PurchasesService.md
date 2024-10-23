@@ -91,7 +91,7 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     endTime: 8.12,
   };
 
-  const { data } = await celitech.purchases.createPurchase(input);
+  const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
 
   console.log(data);
 })();
@@ -136,7 +136,7 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     endTime: 4.35,
   };
 
-  const { data } = await celitech.purchases.topUpEsim(input);
+  const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
 
   console.log(data);
 })();
@@ -178,7 +178,7 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
     endTime: 4.68,
   };
 
-  const { data } = await celitech.purchases.editPurchase(input);
+  const { data } = await celitech.purchases.editPurchase(editPurchaseRequest);
 
   console.log(data);
 })();
