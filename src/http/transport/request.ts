@@ -5,7 +5,6 @@ import { QuerySerializer } from '../serialization/query-serializer';
 import { HeaderSerializer } from '../serialization/header-serializer';
 import { HttpRequest } from '../hooks/hook';
 import { SerializationStyle } from '../serialization/base-serializer';
-import { OAuthTokenManager } from '../oauth/token-manager';
 
 export interface CreateRequestParameters<FullResponse, Page = unknown[]> {
   baseUrl: string;
@@ -23,8 +22,6 @@ export interface CreateRequestParameters<FullResponse, Page = unknown[]> {
   validation: ValidationOptions;
   retry: RetryOptions;
   pagination?: RequestPagination<Page>;
-  scopes: Set<string>;
-  tokenManager: OAuthTokenManager;
 }
 
 export interface RequestParameter {
@@ -74,9 +71,6 @@ export class Request<T = unknown, PageSchema = unknown[]> {
 
   public pagination?: RequestPagination<PageSchema>;
 
-  public scopes: Set<string>;
-
-  public tokenManager: OAuthTokenManager;
   private readonly pathPattern: string;
 
   constructor(params: CreateRequestParameters<T, PageSchema>) {
@@ -96,8 +90,6 @@ export class Request<T = unknown, PageSchema = unknown[]> {
     this.retry = params.retry;
     this.validation = params.validation;
     this.pagination = params.pagination;
-    this.scopes = params.scopes;
-    this.tokenManager = params.tokenManager;
   }
 
   addHeaderParam(key: string, param: RequestParameter): void {
@@ -197,8 +189,6 @@ export class Request<T = unknown, PageSchema = unknown[]> {
       responseContentType: overrides?.responseContentType ?? this.responseContentType,
       retry: overrides?.retry ?? this.retry,
       validation: overrides?.validation ?? this.validation,
-      scopes: overrides?.scopes ?? new Set<string>(),
-      tokenManager: this.tokenManager,
     };
     return new Request<T>({
       ...createRequestParams,
