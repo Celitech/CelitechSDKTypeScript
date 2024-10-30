@@ -1,18 +1,35 @@
 {
-  "liblabVersion": "2.7.0",
-  "date": "2024-10-23T15:17:13.474Z",
+  "liblabVersion": "2.9.0",
+  "date": "2024-10-30T12:30:28.254Z",
   "config": {
-    "apiId": 1312,
+    "apiId": 1348,
     "sdkName": "Celitech",
-    "sdkVersion": "1.1.89",
+    "sdkVersion": "1.1.90",
+    "languages": ["typescript"],
+    "auth": ["oauth"],
+    "docs": ["snippets"],
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
-    "languages": ["typescript"],
-    "apiVersion": "1.1.89",
+    "apiVersion": "1.1.90",
     "apiName": "Celitech",
     "specFilePath": "swagger.yaml",
-    "docs": ["api", "snippets", "enhancedApiSpec"],
     "languageOptions": {
+      "java": {
+        "additionalConstructorParameters": [
+          {
+            "name": "clientId",
+            "example": "client-id"
+          },
+          {
+            "name": "clientSecret",
+            "example": "client-secret"
+          }
+        ],
+        "githubRepoName": "CelitechSDKJava",
+        "homepage": "https://docs.celitech.com/",
+        "liblabVersion": "2",
+        "sdkVersion": "1.1.90"
+      },
       "python": {
         "alwaysInitializeOptionals": true,
         "additionalConstructorParameters": [
@@ -28,7 +45,7 @@
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.89"
+        "sdkVersion": "1.1.90"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
@@ -44,7 +61,7 @@
         ],
         "githubRepoName": "CelitechSDKPHP",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.89"
+        "sdkVersion": "1.1.90"
       },
       "typescript": {
         "bundle": true,
@@ -63,21 +80,16 @@
         ],
         "githubRepoName": "CelitechSDKTypeScript",
         "liblabVersion": "2",
-        "sdkVersion": "1.1.89",
+        "sdkVersion": "1.1.90",
         "generateEnumAs": "enum"
       }
     },
     "publishing": {
       "githubOrg": "Celitech"
     },
-    "integrations": {
-      "enhancedApiSpec": {
-        "githubRepoName": "CelitechCoreAPIReference",
-        "targetBranch": "main",
-        "provider": "redocly",
-        "redocly": {
-          "openapiPath": "swagger.yaml"
-        }
+    "authentication": {
+      "oauth": {
+        "enabled": true
       }
     },
     "devContainer": true,
@@ -114,7 +126,7 @@
     },
     "multiTenant": true,
     "hooksLocation": {
-      "bucketKey": "7742/hooks.zip",
+      "bucketKey": "7880/hooks.zip",
       "bucketName": "prod-liblab-api-stack-hooks"
     },
     "includeWatermark": false,
@@ -148,7 +160,6 @@
       "lib": ["es2018", "dom"]
     },
     "usesFormData": false,
-    "authentication": {},
     "fileOutput": "/tmp",
     "httpLibrary": {
       "name": "fetch",
@@ -159,7 +170,6 @@
         "version": "^0.0.36"
       }
     },
-    "auth": [],
     "customQueries": {
       "paths": [],
       "rawQueries": [],
@@ -174,6 +184,8 @@
     "examples/README.md",
     "examples/src/index.ts",
     "src/http/client.ts",
+    "src/services/o-auth/models/get-access-token-request.ts",
+    "src/services/o-auth/models/get-access-token-ok-response.ts",
     "src/services/destinations/models/list-destinations-ok-response.ts",
     "src/services/packages/models/list-packages-ok-response.ts",
     "src/services/purchases/models/list-purchases-ok-response.ts",
@@ -188,6 +200,7 @@
     "src/services/e-sim/models/get-esim-device-ok-response.ts",
     "src/services/e-sim/models/get-esim-history-ok-response.ts",
     "src/services/e-sim/models/get-esim-mac-ok-response.ts",
+    "src/services/o-auth/models/grant-type.ts",
     "src/services/destinations/models/destinations.ts",
     "src/services/packages/models/packages.ts",
     "src/services/purchases/models/purchases.ts",
@@ -204,15 +217,18 @@
     "src/services/e-sim/models/get-esim-mac-ok-response-esim.ts",
     ".gitignore",
     "src/services/base-service.ts",
+    "src/services/o-auth/o-auth.ts",
     "src/services/destinations/destinations.ts",
     "src/services/packages/packages.ts",
     "src/services/purchases/purchases.ts",
     "src/services/e-sim/e-sim.ts",
     "src/index.ts",
+    "src/services/o-auth/models/index.ts",
     "src/services/destinations/models/index.ts",
     "src/services/packages/models/index.ts",
     "src/services/purchases/models/index.ts",
     "src/services/e-sim/models/index.ts",
+    "src/services/o-auth/index.ts",
     "src/services/destinations/index.ts",
     "src/services/packages/index.ts",
     "src/services/purchases/index.ts",
@@ -229,6 +245,7 @@
     "src/http/environment.ts",
     "src/http/handlers/response-validation-handler.ts",
     "./LICENSE",
+    "documentation/snippets/oauth2-token-post.md",
     "documentation/snippets/destinations-get.md",
     "documentation/snippets/packages-get.md",
     "documentation/snippets/purchases-get.md",
@@ -243,6 +260,7 @@
     "src/services/packages/request-params.ts",
     "src/services/purchases/request-params.ts",
     "src/services/e-sim/request-params.ts",
+    "documentation/models/GetAccessTokenOkResponse.md",
     "documentation/models/CreatePurchaseRequest.md",
     "documentation/models/TopUpEsimRequest.md",
     "documentation/models/EditPurchaseRequest.md",
@@ -258,11 +276,15 @@
     "src/http/serialization/header-serializer.ts",
     "src/http/transport/request-fetch-adapter.ts",
     "src/http/transport/transport-hook-adapter.ts",
+    "src/http/oauth/token-manager.ts",
+    "src/http/handlers/oauth-handler.ts",
+    "documentation/models/GetAccessTokenRequest.md",
     "documentation/models/ListDestinationsOkResponse.md",
     "documentation/models/ListPackagesOkResponse.md",
     "documentation/models/GetEsimOkResponse.md",
     "documentation/models/GetEsimDeviceOkResponse.md",
     "documentation/models/GetEsimMacOkResponse.md",
+    "documentation/services/OAuthService.md",
     "documentation/services/DestinationsService.md",
     "documentation/services/PackagesService.md",
     "documentation/models/CreatePurchaseOkResponse.md",
