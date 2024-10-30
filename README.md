@@ -1,11 +1,11 @@
-# Celitech TypeScript SDK 1.1.91
+# Celitech TypeScript SDK 1.1.92
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
 ## Versions
 
 - API version: `1.1.0`
-- SDK version: `1.1.91`
+- SDK version: `1.1.92`
 
 ## About the API
 
@@ -16,8 +16,6 @@ Welcome to the CELITECH API documentation! Useful links: [Homepage](https://www.
 - [Setup & Configuration](#setup--configuration)
   - [Supported Language Versions](#supported-language-versions)
   - [Installation](#installation)
-- [Authentication](#authentication)
-  - [OAuth Authentication](#oauth-authentication)
   - [Environment Variables](#environment-variables)
 - [Setting a Custom Timeout](#setting-a-custom-timeout)
 - [Sample Usage](#sample-usage)
@@ -37,24 +35,6 @@ To get started with the SDK, we recommend installing using `npm`:
 
 ```bash
 npm install celitech-sdk
-```
-
-## Authentication
-
-### OAuth Authentication
-
-The Celitech API uses OAuth for authentication.
-
-You need to provide the OAuth parameters when initializing the SDK.
-
-```ts
-
-```
-
-If you need to set or update the OAuth parameters after the SDK initialization, you can use:
-
-```ts
-
 ```
 
 ## Environment Variables
@@ -106,7 +86,6 @@ The SDK provides various services to interact with the API.
 
 | Name                                                                 |
 | :------------------------------------------------------------------- |
-| [OAuthService](documentation/services/OAuthService.md)               |
 | [DestinationsService](documentation/services/DestinationsService.md) |
 | [PackagesService](documentation/services/PackagesService.md)         |
 | [PurchasesService](documentation/services/PurchasesService.md)       |
@@ -123,8 +102,6 @@ The SDK includes several models that represent the data structures used in API r
 
 | Name                                                                                         | Description |
 | :------------------------------------------------------------------------------------------- | :---------- |
-| [GetAccessTokenRequest](documentation/models/GetAccessTokenRequest.md)                       |             |
-| [GetAccessTokenOkResponse](documentation/models/GetAccessTokenOkResponse.md)                 |             |
 | [ListDestinationsOkResponse](documentation/models/ListDestinationsOkResponse.md)             |             |
 | [ListPackagesOkResponse](documentation/models/ListPackagesOkResponse.md)                     |             |
 | [ListPurchasesOkResponse](documentation/models/ListPurchasesOkResponse.md)                   |             |
