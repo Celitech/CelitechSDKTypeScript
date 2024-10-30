@@ -3,6 +3,7 @@ import { Request, CreateRequestParameters, RequestParameter, RequestPagination }
 import { ContentType, HttpMethod, SdkConfig, RequestConfig, RetryOptions, ValidationOptions } from '../types';
 import { Environment } from '../environment';
 import { SerializationStyle } from '../serialization/base-serializer';
+import { OAuthTokenManager } from '../oauth/token-manager';
 
 export class RequestBuilder<FullResponse, Page extends unknown[] = unknown[]> {
   private params: CreateRequestParameters<FullResponse, Page>;
@@ -12,7 +13,7 @@ export class RequestBuilder<FullResponse, Page extends unknown[] = unknown[]> {
       baseUrl: Environment.DEFAULT,
       method: 'GET',
       path: '',
-      config: {},
+      config: { clientId: '', clientSecret: '' },
       responseSchema: z.any(),
       requestSchema: z.any(),
       requestContentType: ContentType.Json,
@@ -27,6 +28,8 @@ export class RequestBuilder<FullResponse, Page extends unknown[] = unknown[]> {
       pathParams: new Map(),
       queryParams: new Map(),
       headers: new Map(),
+      scopes: new Set(),
+      tokenManager: new OAuthTokenManager(),
     };
   }
 
@@ -105,6 +108,16 @@ export class RequestBuilder<FullResponse, Page extends unknown[] = unknown[]> {
 
   setPagination(pagination: RequestPagination<Page>): RequestBuilder<FullResponse, Page> {
     this.params.pagination = pagination;
+    return this;
+  }
+
+  setScopes(scopes: string[]): RequestBuilder<FullResponse, Page> {
+    this.params.scopes = new Set(scopes);
+    return this;
+  }
+
+  setTokenManager(tokenManager: OAuthTokenManager): RequestBuilder<FullResponse, Page> {
+    this.params.tokenManager = tokenManager;
     return this;
   }
 

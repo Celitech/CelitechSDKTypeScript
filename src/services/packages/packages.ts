@@ -30,6 +30,7 @@ export class PackagesService extends BaseService {
       .setPath('/packages')
       .setRequestSchema(z.any())
       .setResponseSchema(listPackagesOkResponseResponse)
+      .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
       .setResponseContentType(ContentType.Json)
       .setRetryAttempts(this.config, requestConfig)
