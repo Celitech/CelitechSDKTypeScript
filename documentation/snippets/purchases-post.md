@@ -15,8 +15,8 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
     networkBrand: 'CELITECH',
-    startTime: 2.37,
-    endTime: 8.12,
+    startTime: 5.74,
+    endTime: 9.23,
   };
 
   const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
