@@ -1,6 +1,6 @@
 {
   "name": "celitech-sdk",
-  "version": "1.1.97",
+  "version": "1.2.0",
   "description": "Welcome to the CELITECH API documentation!  Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/) ",
   "source": "./src/index.ts",
   "main": "./dist/index.js",
