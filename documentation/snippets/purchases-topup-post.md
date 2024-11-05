@@ -14,8 +14,8 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
-    startTime: 8.12,
-    endTime: 4.35,
+    startTime: 0.8,
+    endTime: 5.82,
   };
 
   const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
