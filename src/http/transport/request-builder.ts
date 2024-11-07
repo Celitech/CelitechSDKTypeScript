@@ -12,7 +12,7 @@ export class RequestBuilder<FullResponse, Page extends unknown[] = unknown[]> {
       baseUrl: Environment.DEFAULT,
       method: 'GET',
       path: '',
-      config: {},
+      config: { clientId: '', clientSecret: '' },
       responseSchema: z.any(),
       requestSchema: z.any(),
       requestContentType: ContentType.Json,

@@ -1,6 +1,6 @@
 {
   "name": "Celitech",
-  "version": "1.2.5",
+  "version": "1.2.9",
   "private": true,
   "dependencies": {
     "celitech-sdk": "file:../",
