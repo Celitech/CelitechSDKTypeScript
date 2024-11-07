@@ -8,6 +8,8 @@ export interface SdkConfig {
   baseUrl?: string;
   environment?: Environment;
   timeoutMs?: number;
+  clientId: string;
+  clientSecret: string;
   clientId?: string;
   clientSecret?: string;
   retry?: RetryOptions;
