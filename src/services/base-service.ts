@@ -1,11 +1,15 @@
 import { Environment } from '../http/environment';
 import { HttpClient } from '../http/client';
 import { SdkConfig } from '../http/types';
+import { OAuthTokenManager } from '../http/oauth/token-manager';
 
 export class BaseService {
   public client: HttpClient;
 
-  constructor(public config: SdkConfig) {
+  constructor(
+    public config: SdkConfig,
+    protected tokenManager: OAuthTokenManager,
+  ) {
     this.client = new HttpClient(this.config);
   }
 
@@ -19,6 +23,14 @@ export class BaseService {
 
   set timeoutMs(timeoutMs: number) {
     this.config.timeoutMs = timeoutMs;
+  }
+
+  set clientId(clientId: string) {
+    this.config.clientId = clientId;
+  }
+
+  set clientSecret(clientSecret: string) {
+    this.config.clientSecret = clientSecret;
   }
 
   set clientId(clientId: string) {
