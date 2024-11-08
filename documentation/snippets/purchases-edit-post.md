@@ -2,10 +2,7 @@
 import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
-    clientId: 'client-id',
-    clientSecret: 'client-secret',
-  });
+  const celitech = new Celitech({});
 
   const editPurchaseRequest: EditPurchaseRequest = {
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',

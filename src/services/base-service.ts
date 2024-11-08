@@ -32,12 +32,4 @@ export class BaseService {
   set clientSecret(clientSecret: string) {
     this.config.clientSecret = clientSecret;
   }
-
-  set clientId(clientId: string) {
-    this.config.clientId = clientId;
-  }
-
-  set clientSecret(clientSecret: string) {
-    this.config.clientSecret = clientSecret;
-  }
 }

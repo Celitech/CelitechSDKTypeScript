@@ -2,10 +2,7 @@
 import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
-    clientId: 'client-id',
-    clientSecret: 'client-secret',
-  });
+  const celitech = new Celitech({});
 
   const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555000',

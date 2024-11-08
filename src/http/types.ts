@@ -10,8 +10,6 @@ export interface SdkConfig {
   timeoutMs?: number;
   clientId: string;
   clientSecret: string;
-  clientId?: string;
-  clientSecret?: string;
   retry?: RetryOptions;
   validation?: ValidationOptions;
 }
