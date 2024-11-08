@@ -1,16 +1,16 @@
 {
   "liblabVersion": "2.9.3",
-  "date": "2024-11-08T10:42:46.726Z",
+  "date": "2024-11-08T13:37:11.008Z",
   "config": {
-    "apiId": 1414,
+    "apiId": 1418,
     "sdkName": "Celitech",
-    "sdkVersion": "1.3.3",
+    "sdkVersion": "1.3.6",
     "languages": ["typescript"],
     "auth": ["oauth"],
     "docs": ["snippets", "enhancedApiSpec"],
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
-    "apiVersion": "1.3.3",
+    "apiVersion": "1.3.6",
     "apiName": "Celitech",
     "specFilePath": "swagger.yaml",
     "languageOptions": {
@@ -25,37 +25,17 @@
             "organizationUrl": "https://www.celitech.com/"
           }
         ],
-        "additionalConstructorParameters": [
-          {
-            "name": "clientId",
-            "example": "client-id"
-          },
-          {
-            "name": "clientSecret",
-            "example": "client-secret"
-          }
-        ],
         "githubRepoName": "CelitechSDKJava",
         "homepage": "https://docs.celitech.com/",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.3"
+        "sdkVersion": "1.3.6"
       },
       "python": {
         "alwaysInitializeOptionals": true,
-        "additionalConstructorParameters": [
-          {
-            "name": "client_id",
-            "example": "client-id"
-          },
-          {
-            "name": "client_secret",
-            "example": "client-secret"
-          }
-        ],
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.3"
+        "sdkVersion": "1.3.6"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
@@ -71,7 +51,7 @@
         ],
         "githubRepoName": "CelitechSDKPHP",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.3"
+        "sdkVersion": "1.3.6"
       },
       "typescript": {
         "bundle": true,
@@ -80,7 +60,7 @@
         "npmName": "celitech-sdk",
         "githubRepoName": "CelitechSDKTypeScript",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.3",
+        "sdkVersion": "1.3.6",
         "generateEnumAs": "enum"
       }
     },
@@ -136,7 +116,7 @@
     },
     "multiTenant": true,
     "hooksLocation": {
-      "bucketKey": "8042/hooks.zip",
+      "bucketKey": "8046/hooks.zip",
       "bucketName": "prod-liblab-api-stack-hooks"
     },
     "includeWatermark": false,
