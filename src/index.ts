@@ -84,22 +84,6 @@ export class Celitech {
     this.purchases.clientSecret = clientSecret;
     this.eSim.clientSecret = clientSecret;
   }
-
-  set clientId(clientId: string) {
-    this.oAuth.clientId = clientId;
-    this.destinations.clientId = clientId;
-    this.packages.clientId = clientId;
-    this.purchases.clientId = clientId;
-    this.eSim.clientId = clientId;
-  }
-
-  set clientSecret(clientSecret: string) {
-    this.oAuth.clientSecret = clientSecret;
-    this.destinations.clientSecret = clientSecret;
-    this.packages.clientSecret = clientSecret;
-    this.purchases.clientSecret = clientSecret;
-    this.eSim.clientSecret = clientSecret;
-  }
 }
 
 // c029837e0e474b76bc487506e8799df5e3335891efe4fb02bda7a1441840310c

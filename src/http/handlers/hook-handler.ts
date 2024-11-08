@@ -29,10 +29,8 @@ export class HookHandler implements RequestHandler {
     throw await hook.onError(nextRequest, response, hookParams);
   }
 
-  private getHookParams<T>(request: Request<T>): Map<string, string> {
+  private getHookParams<T>(_request: Request<T>): Map<string, string> {
     const hookParams: Map<string, string> = new Map();
-    hookParams.set('clientId', request.config.clientId || '');
-    hookParams.set('clientSecret', request.config.clientSecret || '');
     return hookParams;
   }
 }
