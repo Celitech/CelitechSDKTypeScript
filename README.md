@@ -1,11 +1,11 @@
-# Celitech TypeScript SDK 1.3.7
+# Celitech TypeScript SDK 1.3.8
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
 ## Versions
 
 - API version: `1.1.0`
-- SDK version: `1.3.7`
+- SDK version: `1.3.8`
 
 ## About the API
 
@@ -48,13 +48,15 @@ The Celitech API uses OAuth for authentication.
 You need to provide the OAuth parameters when initializing the SDK.
 
 ```ts
-
+const sdk = new Celitech({ clientSecret: 'CLIENT_SECRET', clientId: 'CLIENT_ID' });
 ```
 
 If you need to set or update the OAuth parameters after the SDK initialization, you can use:
 
 ```ts
-
+const sdk = new Celitech();
+sdk.clientId = 'CLIENT_ID';
+sdk.clientSecret = 'CLIENT_SECRET';
 ```
 
 ## Environment Variables
@@ -86,7 +88,10 @@ Below is a comprehensive example demonstrating how to authenticate and call a si
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const { data } = await celitech.destinations.listDestinations();
 

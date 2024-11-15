@@ -28,7 +28,6 @@ export class RequestBuilder<FullResponse, Page extends unknown[] = unknown[]> {
       pathParams: new Map(),
       queryParams: new Map(),
       headers: new Map(),
-      scopes: new Set(),
       tokenManager: new OAuthTokenManager(),
     };
   }

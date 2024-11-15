@@ -21,7 +21,7 @@ export class OAuthToken {
 export class OAuthTokenManager {
   private static instance: OAuthTokenManager;
 
-  private token?: OAuthToken = new OAuthToken('', new Set(), null);
+  private token?: OAuthToken;
 
   public async getToken(scopes: Set<string>, config: SdkConfig): Promise<OAuthToken> {
     if (this.token?.hasAllScopes(scopes)) {

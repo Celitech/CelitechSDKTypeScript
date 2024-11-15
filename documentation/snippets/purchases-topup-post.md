@@ -2,7 +2,10 @@
 import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555000',
@@ -11,8 +14,6 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
-    startTime: 4.64,
-    endTime: 2.83,
   };
 
   const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
