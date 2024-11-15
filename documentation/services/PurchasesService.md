@@ -40,7 +40,10 @@ This endpoint can be used to list all the successful purchases made between a gi
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const { data } = await celitech.purchases.listPurchases({});
 
@@ -71,7 +74,10 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const createPurchaseRequest: CreatePurchaseRequest = {
     destination: 'FRA',
@@ -81,8 +87,6 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
     networkBrand: 'CELITECH',
-    startTime: 2.34,
-    endTime: 1.15,
   };
 
   const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
@@ -114,7 +118,10 @@ This endpoint is used to top-up an eSIM with the previously associated destinati
 import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555000',
@@ -123,8 +130,6 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
-    startTime: 4.64,
-    endTime: 2.83,
   };
 
   const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
@@ -156,14 +161,15 @@ This endpoint allows you to modify the dates of an existing package with a futur
 import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const editPurchaseRequest: EditPurchaseRequest = {
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
     startDate: '2023-11-01',
     endDate: '2023-11-20',
-    startTime: 4.34,
-    endTime: 2.17,
   };
 
   const { data } = await celitech.purchases.editPurchase(editPurchaseRequest);
@@ -195,7 +201,10 @@ This endpoint can be called for consumption notifications (e.g. every 1 hour or 
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const { data } = await celitech.purchases.getPurchaseConsumption('4973fa15-6979-4daa-9cf3-672620df819c');
 

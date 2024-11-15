@@ -2,7 +2,10 @@
 import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientSecret: 'CLIENT_SECRET',
+    clientId: 'CLIENT_ID',
+  });
 
   const createPurchaseRequest: CreatePurchaseRequest = {
     destination: 'FRA',
@@ -12,8 +15,6 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     email: 'example@domain.com',
     referenceId: 'abc111222333444',
     networkBrand: 'CELITECH',
-    startTime: 2.34,
-    endTime: 1.15,
   };
 
   const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);

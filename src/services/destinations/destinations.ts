@@ -18,6 +18,7 @@ export class DestinationsService extends BaseService {
       .setPath('/destinations')
       .setRequestSchema(z.any())
       .setResponseSchema(listDestinationsOkResponseResponse)
+      .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
       .setResponseContentType(ContentType.Json)

@@ -23,7 +23,7 @@ export interface CreateRequestParameters<FullResponse, Page = unknown[]> {
   validation: ValidationOptions;
   retry: RetryOptions;
   pagination?: RequestPagination<Page>;
-  scopes: Set<string>;
+  scopes?: Set<string>;
   tokenManager: OAuthTokenManager;
 }
 
@@ -74,7 +74,7 @@ export class Request<T = unknown, PageSchema = unknown[]> {
 
   public pagination?: RequestPagination<PageSchema>;
 
-  public scopes: Set<string>;
+  public scopes?: Set<string>;
 
   public tokenManager: OAuthTokenManager;
   private readonly pathPattern: string;
@@ -197,7 +197,7 @@ export class Request<T = unknown, PageSchema = unknown[]> {
       responseContentType: overrides?.responseContentType ?? this.responseContentType,
       retry: overrides?.retry ?? this.retry,
       validation: overrides?.validation ?? this.validation,
-      scopes: overrides?.scopes ?? new Set<string>(),
+      scopes: overrides?.scopes,
       tokenManager: this.tokenManager,
     };
     return new Request<T>({
