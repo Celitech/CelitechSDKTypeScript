@@ -24,8 +24,8 @@ import { Celitech } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
   const { data } = await celitech.destinations.listDestinations();

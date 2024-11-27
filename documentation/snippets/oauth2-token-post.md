@@ -3,17 +3,11 @@ import { Celitech, GetAccessTokenRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
-  const grantType = GrantType.CLIENT_CREDENTIALS;
-
-  const getAccessTokenRequest: GetAccessTokenRequest = {
-    grantType: grantType,
-    clientId: 'client_id',
-    clientSecret: 'client_secret',
-  };
+  const getAccessTokenRequest: GetAccessTokenRequest = {};
 
   const { data } = await celitech.oAuth.getAccessToken(getAccessTokenRequest);
 
