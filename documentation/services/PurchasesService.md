@@ -41,8 +41,8 @@ import { Celitech } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
   const { data } = await celitech.purchases.listPurchases({});
@@ -75,8 +75,8 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
   const createPurchaseRequest: CreatePurchaseRequest = {
@@ -84,9 +84,6 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     dataLimitInGb: 1,
     startDate: '2023-11-01',
     endDate: '2023-11-20',
-    email: 'example@domain.com',
-    referenceId: 'abc111222333444',
-    networkBrand: 'CELITECH',
   };
 
   const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
@@ -119,8 +116,8 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
   const topUpEsimRequest: TopUpEsimRequest = {
@@ -128,8 +125,6 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     dataLimitInGb: 1,
     startDate: '2023-11-01',
     endDate: '2023-11-20',
-    email: 'example@domain.com',
-    referenceId: 'abc111222333444',
   };
 
   const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
@@ -162,8 +157,8 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
   const editPurchaseRequest: EditPurchaseRequest = {
@@ -202,8 +197,8 @@ import { Celitech } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
-    clientSecret: 'CLIENT_SECRET',
     clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
   });
 
   const { data } = await celitech.purchases.getPurchaseConsumption('4973fa15-6979-4daa-9cf3-672620df819c');
