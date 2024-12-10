@@ -4,15 +4,31 @@ import { OAuthTokenManager } from '../oauth/token-manager';
 import { SerializationStyle } from '../serialization/base-serializer';
 
 export class OAuthHandler implements RequestHandler {
-  public next?: RequestHandler;
+  next?: RequestHandler;
 
-  public async handle<T>(request: Request<T>): Promise<HttpResponse<T>> {
+  async handle<T>(request: Request<T>): Promise<HttpResponse<T>> {
     if (!this.next) {
       throw new Error(`No next handler set in OAuthHandler`);
     }
 
+    await this.addToken(request);
+
+    return this.next.handle(request);
+  }
+
+  async *stream<T>(request: Request<T>): AsyncGenerator<HttpResponse<T>> {
+    if (!this.next) {
+      throw new Error(`No next handler set in OAuthHandler`);
+    }
+
+    await this.addToken(request);
+
+    yield* this.next.stream(request);
+  }
+
+  private async addToken<T>(request: Request<T>): Promise<void> {
     if (!request.scopes) {
-      return this.next?.handle(request);
+      return;
     }
 
     const token = await request.tokenManager.getToken(request.scopes, request.config);
@@ -27,7 +43,5 @@ export class OAuthHandler implements RequestHandler {
         isOffset: false,
       });
     }
-
-    return this.next.handle(request);
   }
 }

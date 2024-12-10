@@ -1,5 +1,4 @@
-import { SerializationStyle } from './serialization/base-serializer';
-import { HttpMethod, HttpResponse, Options, RetryOptions, SdkConfig } from './types';
+import { HttpResponse, SdkConfig } from './types';
 import { RequestHandlerChain } from './handlers/handler-chain';
 import { HookHandler } from './handlers/hook-handler';
 import { ResponseValidationHandler } from './handlers/response-validation-handler';
@@ -27,6 +26,10 @@ export class HttpClient {
 
   call<T>(request: Request<T>): Promise<HttpResponse<T>> {
     return this.requestHandlerChain.callChain(request);
+  }
+
+  async *stream<T>(request: Request<T>): AsyncGenerator<HttpResponse<T>> {
+    yield* this.requestHandlerChain.streamChain(request);
   }
 
   public async callPaginated<FullResponse, Page>(request: Request<FullResponse, Page>): Promise<HttpResponse<Page>> {
