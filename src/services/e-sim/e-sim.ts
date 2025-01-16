@@ -16,17 +16,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimOkResponse>>} Successful Response
    */
   async getEsim(params: GetEsimParams, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimOkResponse>> {
-    const request = new RequestBuilder<GetEsimOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim')
       .setRequestSchema(z.any())
-      .setResponseSchema(getEsimOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: getEsimOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -44,17 +47,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimDeviceOkResponse>>} Successful Response
    */
   async getEsimDevice(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimDeviceOkResponse>> {
-    const request = new RequestBuilder<GetEsimDeviceOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim/{iccid}/device')
       .setRequestSchema(z.any())
-      .setResponseSchema(getEsimDeviceOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: getEsimDeviceOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -72,17 +78,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimHistoryOkResponse>>} Successful Response
    */
   async getEsimHistory(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimHistoryOkResponse>> {
-    const request = new RequestBuilder<GetEsimHistoryOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim/{iccid}/history')
       .setRequestSchema(z.any())
-      .setResponseSchema(getEsimHistoryOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: getEsimHistoryOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -100,17 +109,20 @@ export class ESimService extends BaseService {
    * @returns {Promise<HttpResponse<GetEsimMacOkResponse>>} Successful Response
    */
   async getEsimMac(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimMacOkResponse>> {
-    const request = new RequestBuilder<GetEsimMacOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/esim/{iccid}/mac')
       .setRequestSchema(z.any())
-      .setResponseSchema(getEsimMacOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: getEsimMacOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)

@@ -32,4 +32,8 @@ export class BaseService {
   set clientSecret(clientSecret: string) {
     this.config.clientSecret = clientSecret;
   }
+
+  set oAuthBaseUrl(oAuthBaseUrl: string) {
+    this.config.oAuthBaseUrl = oAuthBaseUrl;
+  }
 }
