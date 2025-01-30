@@ -6,27 +6,27 @@ import { SerializationStyle } from '../serialization/base-serializer';
 export class OAuthHandler implements RequestHandler {
   next?: RequestHandler;
 
-  async handle<T>(request: Request<T>): Promise<HttpResponse<T>> {
+  async handle<T>(request: Request): Promise<HttpResponse<T>> {
     if (!this.next) {
       throw new Error(`No next handler set in OAuthHandler`);
     }
 
     await this.addToken(request);
 
-    return this.next.handle(request);
+    return this.next.handle<T>(request);
   }
 
-  async *stream<T>(request: Request<T>): AsyncGenerator<HttpResponse<T>> {
+  async *stream<T>(request: Request): AsyncGenerator<HttpResponse<T>> {
     if (!this.next) {
       throw new Error(`No next handler set in OAuthHandler`);
     }
 
     await this.addToken(request);
 
-    yield* this.next.stream(request);
+    yield* this.next.stream<T>(request);
   }
 
-  private async addToken<T>(request: Request<T>): Promise<void> {
+  private async addToken(request: Request): Promise<void> {
     if (!request.scopes) {
       return;
     }

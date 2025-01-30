@@ -33,7 +33,7 @@ export class OAuthTokenManager {
     const oAuth = new OAuthService(
       {
         ...config,
-        baseUrl: 'https://auth.celitech.net',
+        baseUrl: config.oAuthBaseUrl || 'https://auth.celitech.net',
       },
       this,
     );

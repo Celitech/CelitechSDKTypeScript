@@ -15,16 +15,19 @@ export class OAuthService extends BaseService {
     body: GetAccessTokenRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<GetAccessTokenOkResponse>> {
-    const request = new RequestBuilder<GetAccessTokenOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/oauth2/token')
       .setRequestSchema(getAccessTokenRequestRequest)
-      .setResponseSchema(getAccessTokenOkResponseResponse)
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.FormUrlEncoded)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: getAccessTokenOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)

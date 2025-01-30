@@ -33,17 +33,20 @@ export class PurchasesService extends BaseService {
     params?: ListPurchasesParams,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListPurchasesOkResponse>> {
-    const request = new RequestBuilder<ListPurchasesOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/purchases')
       .setRequestSchema(z.any())
-      .setResponseSchema(listPurchasesOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listPurchasesOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -91,17 +94,20 @@ export class PurchasesService extends BaseService {
     body: CreatePurchaseRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<CreatePurchaseOkResponse>> {
-    const request = new RequestBuilder<CreatePurchaseOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/purchases')
       .setRequestSchema(createPurchaseRequestRequest)
-      .setResponseSchema(createPurchaseOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: createPurchaseOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -116,17 +122,20 @@ export class PurchasesService extends BaseService {
    * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} Successful Response
    */
   async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
-    const request = new RequestBuilder<TopUpEsimOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/purchases/topup')
       .setRequestSchema(topUpEsimRequestRequest)
-      .setResponseSchema(topUpEsimOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: topUpEsimOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -144,17 +153,20 @@ export class PurchasesService extends BaseService {
     body: EditPurchaseRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<EditPurchaseOkResponse>> {
-    const request = new RequestBuilder<EditPurchaseOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/purchases/edit')
       .setRequestSchema(editPurchaseRequestRequest)
-      .setResponseSchema(editPurchaseOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: editPurchaseOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -173,17 +185,20 @@ export class PurchasesService extends BaseService {
     purchaseId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<GetPurchaseConsumptionOkResponse>> {
-    const request = new RequestBuilder<GetPurchaseConsumptionOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/purchases/{purchaseId}/consumption')
       .setRequestSchema(z.any())
-      .setResponseSchema(getPurchaseConsumptionOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: getPurchaseConsumptionOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
