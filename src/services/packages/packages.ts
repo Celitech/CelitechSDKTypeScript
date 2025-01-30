@@ -23,17 +23,20 @@ export class PackagesService extends BaseService {
     params?: ListPackagesParams,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListPackagesOkResponse>> {
-    const request = new RequestBuilder<ListPackagesOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/packages')
       .setRequestSchema(z.any())
-      .setResponseSchema(listPackagesOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listPackagesOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)

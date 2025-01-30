@@ -84,6 +84,14 @@ export class Celitech {
     this.purchases.clientSecret = clientSecret;
     this.eSim.clientSecret = clientSecret;
   }
+
+  set oAuthBaseUrl(oAuthBaseUrl: string) {
+    this.oAuth.oAuthBaseUrl = oAuthBaseUrl;
+    this.destinations.oAuthBaseUrl = oAuthBaseUrl;
+    this.packages.oAuthBaseUrl = oAuthBaseUrl;
+    this.purchases.oAuthBaseUrl = oAuthBaseUrl;
+    this.eSim.oAuthBaseUrl = oAuthBaseUrl;
+  }
 }
 
 // c029837e0e474b76bc487506e8799df5e3335891efe4fb02bda7a1441840310c

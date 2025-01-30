@@ -11,17 +11,20 @@ export class DestinationsService extends BaseService {
    * @returns {Promise<HttpResponse<ListDestinationsOkResponse>>} Successful Response
    */
   async listDestinations(requestConfig?: RequestConfig): Promise<HttpResponse<ListDestinationsOkResponse>> {
-    const request = new RequestBuilder<ListDestinationsOkResponse>()
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/destinations')
       .setRequestSchema(z.any())
-      .setResponseSchema(listDestinationsOkResponseResponse)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listDestinationsOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
