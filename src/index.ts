@@ -6,12 +6,14 @@ import { DestinationsService } from './services/destinations';
 import { PackagesService } from './services/packages';
 import { PurchasesService } from './services/purchases';
 import { ESimService } from './services/e-sim';
+import { IFrameService } from './services/i-frame';
 
 export * from './services/o-auth';
 export * from './services/destinations';
 export * from './services/packages';
 export * from './services/purchases';
 export * from './services/e-sim';
+export * from './services/i-frame';
 
 export type * from './http';
 
@@ -25,6 +27,8 @@ export class Celitech {
   public readonly purchases: PurchasesService;
 
   public readonly eSim: ESimService;
+
+  public readonly iFrame: IFrameService;
 
   protected tokenManager: OAuthTokenManager = new OAuthTokenManager();
 
@@ -43,6 +47,8 @@ export class Celitech {
     this.purchases = new PurchasesService(this.config, this.tokenManager);
 
     this.eSim = new ESimService(this.config, this.tokenManager);
+
+    this.iFrame = new IFrameService(this.config, this.tokenManager);
   }
 
   set baseUrl(baseUrl: string) {
@@ -51,6 +57,7 @@ export class Celitech {
     this.packages.baseUrl = baseUrl;
     this.purchases.baseUrl = baseUrl;
     this.eSim.baseUrl = baseUrl;
+    this.iFrame.baseUrl = baseUrl;
   }
 
   set environment(environment: Environment) {
@@ -59,6 +66,7 @@ export class Celitech {
     this.packages.baseUrl = environment;
     this.purchases.baseUrl = environment;
     this.eSim.baseUrl = environment;
+    this.iFrame.baseUrl = environment;
   }
 
   set timeoutMs(timeoutMs: number) {
@@ -67,6 +75,7 @@ export class Celitech {
     this.packages.timeoutMs = timeoutMs;
     this.purchases.timeoutMs = timeoutMs;
     this.eSim.timeoutMs = timeoutMs;
+    this.iFrame.timeoutMs = timeoutMs;
   }
 
   set clientId(clientId: string) {
@@ -75,6 +84,7 @@ export class Celitech {
     this.packages.clientId = clientId;
     this.purchases.clientId = clientId;
     this.eSim.clientId = clientId;
+    this.iFrame.clientId = clientId;
   }
 
   set clientSecret(clientSecret: string) {
@@ -83,6 +93,7 @@ export class Celitech {
     this.packages.clientSecret = clientSecret;
     this.purchases.clientSecret = clientSecret;
     this.eSim.clientSecret = clientSecret;
+    this.iFrame.clientSecret = clientSecret;
   }
 
   set oAuthBaseUrl(oAuthBaseUrl: string) {
@@ -91,6 +102,7 @@ export class Celitech {
     this.packages.oAuthBaseUrl = oAuthBaseUrl;
     this.purchases.oAuthBaseUrl = oAuthBaseUrl;
     this.eSim.oAuthBaseUrl = oAuthBaseUrl;
+    this.iFrame.oAuthBaseUrl = oAuthBaseUrl;
   }
 }
 
