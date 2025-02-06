@@ -1,4 +1,4 @@
-# Celitech TypeScript SDK 1.3.34
+# Celitech TypeScript SDK 1.3.38
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
@@ -7,11 +7,13 @@ Welcome to the Celitech SDK documentation. This guide will help you get started 
 ## Versions
 
 - API version: `1.1.0`
-- SDK version: `1.3.34`
+- SDK version: `1.3.38`
 
 ## About the API
 
-Welcome to the CELITECH API documentation! Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/)
+Welcome to the CELITECH API documentation!
+
+Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/)
 
 ## Table of Contents
 
@@ -50,7 +52,7 @@ The Celitech API uses OAuth for authentication.
 You need to provide the OAuth parameters when initializing the SDK.
 
 ```ts
-const sdk = new Celitech({ clientSecret: 'CLIENT_SECRET', clientId: 'CLIENT_ID' });
+const sdk = new Celitech({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET' });
 ```
 
 If you need to set or update the OAuth parameters after the SDK initialization, you can use:
@@ -115,6 +117,7 @@ The SDK provides various services to interact with the API.
 | [PackagesService](documentation/services/PackagesService.md)         |
 | [PurchasesService](documentation/services/PurchasesService.md)       |
 | [ESimService](documentation/services/ESimService.md)                 |
+| [IFrameService](documentation/services/IFrameService.md)             |
 
 </details>
 
@@ -143,6 +146,7 @@ The SDK includes several models that represent the data structures used in API r
 | [GetEsimDeviceOkResponse](documentation/models/GetEsimDeviceOkResponse.md)                   |             |
 | [GetEsimHistoryOkResponse](documentation/models/GetEsimHistoryOkResponse.md)                 |             |
 | [GetEsimMacOkResponse](documentation/models/GetEsimMacOkResponse.md)                         |             |
+| [TokenOkResponse](documentation/models/TokenOkResponse.md)                                   |             |
 
 </details>
 

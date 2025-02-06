@@ -1,10 +1,10 @@
 {
-  "liblabVersion": "2.13.0",
-  "date": "2025-02-03T12:01:55.687Z",
+  "liblabVersion": "2.14.0",
+  "date": "2025-02-06T11:04:06.466Z",
   "config": {
-    "apiId": 1722,
+    "apiId": 1746,
     "sdkName": "Celitech",
-    "sdkVersion": "1.3.34",
+    "sdkVersion": "1.3.38",
     "languages": ["typescript"],
     "auth": ["oauth"],
     "docs": ["snippets", "enhancedApiSpec"],
@@ -13,7 +13,7 @@
     "rawConfig": {
       "sdkName": "Celitech",
       "apiName": "Celitech",
-      "apiVersion": "1.3.34",
+      "apiVersion": "1.3.38",
       "specFilePath": "swagger.yaml",
       "languages": ["typescript", "python", "php", "java"],
       "docs": ["snippets", "enhancedApiSpec"],
@@ -52,25 +52,25 @@
       "languageOptions": {
         "typescript": {
           "githubRepoName": "CelitechSDKTypeScript",
-          "sdkVersion": "1.3.34",
+          "sdkVersion": "1.3.38",
           "liblabVersion": "2",
           "npmName": "celitech-sdk"
         },
         "python": {
           "githubRepoName": "CelitechSDKPython",
-          "sdkVersion": "1.3.34",
+          "sdkVersion": "1.3.38",
           "liblabVersion": "2",
           "pypiPackageName": "celitech-sdk"
         },
         "php": {
           "githubRepoName": "CelitechSDKPHP",
-          "sdkVersion": "1.3.34",
+          "sdkVersion": "1.3.38",
           "liblabVersion": "2",
           "packageName": "celitech-sdk/sdk"
         },
         "java": {
           "githubRepoName": "CelitechSDKJava",
-          "sdkVersion": "1.3.34",
+          "sdkVersion": "1.3.38",
           "liblabVersion": "2",
           "groupId": "io.github.celitech",
           "artifactId": "celitech-sdk",
@@ -98,7 +98,7 @@
         "githubOrg": "Celitech"
       }
     },
-    "apiVersion": "1.3.34",
+    "apiVersion": "1.3.38",
     "apiName": "Celitech",
     "specFilePath": "swagger.yaml",
     "languageOptions": {
@@ -116,20 +116,20 @@
         "githubRepoName": "CelitechSDKJava",
         "homepage": "https://docs.celitech.com/",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.34"
+        "sdkVersion": "1.3.38"
       },
       "python": {
         "alwaysInitializeOptionals": true,
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.34"
+        "sdkVersion": "1.3.38"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
         "githubRepoName": "CelitechSDKPHP",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.34"
+        "sdkVersion": "1.3.38"
       },
       "typescript": {
         "bundle": true,
@@ -138,7 +138,7 @@
         "npmName": "celitech-sdk",
         "githubRepoName": "CelitechSDKTypeScript",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.34",
+        "sdkVersion": "1.3.38",
         "generateEnumAs": "enum"
       }
     },
@@ -256,6 +256,7 @@
     "src/services/e-sim/models/get-esim-device-ok-response.ts",
     "src/services/e-sim/models/get-esim-history-ok-response.ts",
     "src/services/e-sim/models/get-esim-mac-ok-response.ts",
+    "src/services/i-frame/models/token-ok-response.ts",
     "src/services/o-auth/models/grant-type.ts",
     "src/services/destinations/models/destinations.ts",
     "src/services/packages/models/packages.ts",
@@ -278,17 +279,20 @@
     "src/services/packages/packages.ts",
     "src/services/purchases/purchases.ts",
     "src/services/e-sim/e-sim.ts",
+    "src/services/i-frame/i-frame.ts",
     "src/index.ts",
     "src/services/o-auth/models/index.ts",
     "src/services/destinations/models/index.ts",
     "src/services/packages/models/index.ts",
     "src/services/purchases/models/index.ts",
     "src/services/e-sim/models/index.ts",
+    "src/services/i-frame/models/index.ts",
     "src/services/o-auth/index.ts",
     "src/services/destinations/index.ts",
     "src/services/packages/index.ts",
     "src/services/purchases/index.ts",
     "src/services/e-sim/index.ts",
+    "src/services/i-frame/index.ts",
     "src/http/index.ts",
     "src/http/handlers/handler-chain.ts",
     "src/http/types.ts",
@@ -313,6 +317,7 @@
     "documentation/snippets/esim-{iccid}-device-get.md",
     "documentation/snippets/esim-{iccid}-history-get.md",
     "documentation/snippets/esim-{iccid}-mac-get.md",
+    "documentation/snippets/iframe-token-post.md",
     "src/services/packages/request-params.ts",
     "src/services/purchases/request-params.ts",
     "src/services/e-sim/request-params.ts",
@@ -322,6 +327,7 @@
     "documentation/models/EditPurchaseRequest.md",
     "documentation/models/EditPurchaseOkResponse.md",
     "documentation/models/GetPurchaseConsumptionOkResponse.md",
+    "documentation/models/TokenOkResponse.md",
     "src/http/handlers/request-validation-handler.ts",
     ".devcontainer/devcontainer.json",
     "src/http/transport/request.ts",
@@ -345,6 +351,7 @@
     "documentation/services/OAuthService.md",
     "documentation/services/DestinationsService.md",
     "documentation/services/PackagesService.md",
+    "documentation/services/IFrameService.md",
     "documentation/models/CreatePurchaseOkResponse.md",
     "documentation/models/TopUpEsimOkResponse.md",
     "documentation/models/GetEsimHistoryOkResponse.md",
