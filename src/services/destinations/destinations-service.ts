@@ -8,6 +8,7 @@ import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from '
 export class DestinationsService extends BaseService {
   /**
    * List Destinations
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListDestinationsOkResponse>>} Successful Response
    */
   async listDestinations(requestConfig?: RequestConfig): Promise<HttpResponse<ListDestinationsOkResponse>> {
