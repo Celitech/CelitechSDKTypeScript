@@ -13,6 +13,7 @@ export class ESimService extends BaseService {
   /**
    * Get eSIM Status
    * @param {string} iccid - ID of the eSIM
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetEsimOkResponse>>} Successful Response
    */
   async getEsim(params: GetEsimParams, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimOkResponse>> {
@@ -44,6 +45,7 @@ export class ESimService extends BaseService {
   /**
    * Get eSIM Device
    * @param {string} iccid - ID of the eSIM
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetEsimDeviceOkResponse>>} Successful Response
    */
   async getEsimDevice(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimDeviceOkResponse>> {
@@ -75,6 +77,7 @@ export class ESimService extends BaseService {
   /**
    * Get eSIM History
    * @param {string} iccid - ID of the eSIM
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetEsimHistoryOkResponse>>} Successful Response
    */
   async getEsimHistory(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimHistoryOkResponse>> {
@@ -106,6 +109,7 @@ export class ESimService extends BaseService {
   /**
    * Get eSIM MAC
    * @param {string} iccid - ID of the eSIM
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetEsimMacOkResponse>>} Successful Response
    */
   async getEsimMac(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimMacOkResponse>> {
