@@ -36,7 +36,7 @@ export const listDestinationsOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const listDestinationsOkResponseRequest = z.lazy(() => {
-  return z.object({ destinations: z.array(destinationsRequest).nullish() }).transform((data) => ({
+  return z.object({ destinations: z.array(destinationsRequest).optional() }).transform((data) => ({
     destinations: data['destinations'],
   }));
 });

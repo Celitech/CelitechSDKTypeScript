@@ -45,9 +45,9 @@ export const createPurchaseOkResponseProfileResponse = z.lazy(() => {
 export const createPurchaseOkResponseProfileRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().nullish(),
-      activationCode: z.string().nullish(),
-      manualActivationCode: z.string().nullish(),
+      iccid: z.string().optional(),
+      activationCode: z.string().optional(),
+      manualActivationCode: z.string().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

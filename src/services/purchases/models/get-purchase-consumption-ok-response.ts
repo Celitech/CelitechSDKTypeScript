@@ -40,7 +40,7 @@ export const getPurchaseConsumptionOkResponseResponse = z.lazy(() => {
  */
 export const getPurchaseConsumptionOkResponseRequest = z.lazy(() => {
   return z
-    .object({ dataUsageRemainingInBytes: z.number().nullish(), status: z.string().nullish() })
+    .object({ dataUsageRemainingInBytes: z.number().optional(), status: z.string().optional() })
     .transform((data) => ({
       dataUsageRemainingInBytes: data['dataUsageRemainingInBytes'],
       status: data['status'],

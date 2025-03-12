@@ -51,8 +51,8 @@ export const createPurchaseOkResponseResponse = z.lazy(() => {
 export const createPurchaseOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchase: createPurchaseOkResponsePurchaseRequest.nullish(),
-      profile: createPurchaseOkResponseProfileRequest.nullish(),
+      purchase: createPurchaseOkResponsePurchaseRequest.optional(),
+      profile: createPurchaseOkResponseProfileRequest.optional(),
     })
     .transform((data) => ({
       purchase: data['purchase'],

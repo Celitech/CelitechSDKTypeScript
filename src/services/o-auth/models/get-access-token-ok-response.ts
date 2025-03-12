@@ -44,7 +44,7 @@ export const getAccessTokenOkResponseResponse = z.lazy(() => {
  */
 export const getAccessTokenOkResponseRequest = z.lazy(() => {
   return z
-    .object({ accessToken: z.string().nullish(), tokenType: z.string().nullish(), expiresIn: z.number().nullish() })
+    .object({ accessToken: z.string().optional(), tokenType: z.string().optional(), expiresIn: z.number().optional() })
     .transform((data) => ({
       access_token: data['accessToken'],
       token_type: data['tokenType'],
