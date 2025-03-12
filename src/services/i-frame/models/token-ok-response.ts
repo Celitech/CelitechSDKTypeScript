@@ -35,7 +35,7 @@ export const tokenOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const tokenOkResponseRequest = z.lazy(() => {
-  return z.object({ token: z.string().nullish() }).transform((data) => ({
+  return z.object({ token: z.string().optional() }).transform((data) => ({
     token: data['token'],
   }));
 });

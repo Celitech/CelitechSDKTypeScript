@@ -53,11 +53,11 @@ export const packageResponse = z.lazy(() => {
 export const packageRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      dataLimitInBytes: z.number().nullish(),
-      destination: z.string().nullish(),
-      destinationName: z.string().nullish(),
-      priceInCents: z.number().nullish(),
+      id: z.string().optional(),
+      dataLimitInBytes: z.number().optional(),
+      destination: z.string().optional(),
+      destinationName: z.string().optional(),
+      priceInCents: z.number().optional(),
     })
     .transform((data) => ({
       id: data['id'],
