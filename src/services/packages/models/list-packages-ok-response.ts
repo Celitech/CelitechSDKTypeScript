@@ -41,7 +41,7 @@ export const listPackagesOkResponseResponse = z.lazy(() => {
  */
 export const listPackagesOkResponseRequest = z.lazy(() => {
   return z
-    .object({ packages: z.array(packagesRequest).nullish(), afterCursor: z.string().nullish() })
+    .object({ packages: z.array(packagesRequest).optional(), afterCursor: z.string().nullable().optional() })
     .transform((data) => ({
       packages: data['packages'],
       afterCursor: data['afterCursor'],

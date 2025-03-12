@@ -69,15 +69,15 @@ export const createPurchaseRequestResponse = z.lazy(() => {
 export const createPurchaseRequestRequest = z.lazy(() => {
   return z
     .object({
-      destination: z.string().nullish(),
-      dataLimitInGb: z.number().nullish(),
-      startDate: z.string().nullish(),
-      endDate: z.string().nullish(),
-      email: z.string().nullish(),
-      referenceId: z.string().nullish(),
-      networkBrand: z.string().nullish(),
-      startTime: z.number().nullish(),
-      endTime: z.number().nullish(),
+      destination: z.string(),
+      dataLimitInGb: z.number(),
+      startDate: z.string(),
+      endDate: z.string(),
+      email: z.string().optional(),
+      referenceId: z.string().optional(),
+      networkBrand: z.string().optional(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
     })
     .transform((data) => ({
       destination: data['destination'],

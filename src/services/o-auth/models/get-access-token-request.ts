@@ -44,7 +44,7 @@ export const getAccessTokenRequestResponse = z.lazy(() => {
  */
 export const getAccessTokenRequestRequest = z.lazy(() => {
   return z
-    .object({ grantType: z.string().nullish(), clientId: z.string().nullish(), clientSecret: z.string().nullish() })
+    .object({ grantType: z.string().optional(), clientId: z.string().optional(), clientSecret: z.string().optional() })
     .transform((data) => ({
       grant_type: data['grantType'],
       client_id: data['clientId'],

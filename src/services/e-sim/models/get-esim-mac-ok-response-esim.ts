@@ -45,9 +45,9 @@ export const getEsimMacOkResponseEsimResponse = z.lazy(() => {
 export const getEsimMacOkResponseEsimRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().nullish(),
-      smdpAddress: z.string().nullish(),
-      manualActivationCode: z.string().nullish(),
+      iccid: z.string().optional(),
+      smdpAddress: z.string().optional(),
+      manualActivationCode: z.string().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

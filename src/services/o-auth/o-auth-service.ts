@@ -9,6 +9,7 @@ import { GetAccessTokenOkResponse, getAccessTokenOkResponseResponse } from './mo
 export class OAuthService extends BaseService {
   /**
    * This endpoint was added by liblab
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetAccessTokenOkResponse>>} Successful Response
    */
   async getAccessToken(

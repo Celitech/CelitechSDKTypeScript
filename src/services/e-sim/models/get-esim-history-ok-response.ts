@@ -40,7 +40,7 @@ export const getEsimHistoryOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const getEsimHistoryOkResponseRequest = z.lazy(() => {
-  return z.object({ esim: getEsimHistoryOkResponseEsimRequest.nullish() }).transform((data) => ({
+  return z.object({ esim: getEsimHistoryOkResponseEsimRequest.optional() }).transform((data) => ({
     esim: data['esim'],
   }));
 });
