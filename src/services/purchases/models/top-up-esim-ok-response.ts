@@ -51,8 +51,8 @@ export const topUpEsimOkResponseResponse = z.lazy(() => {
 export const topUpEsimOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchase: topUpEsimOkResponsePurchaseRequest.nullish(),
-      profile: topUpEsimOkResponseProfileRequest.nullish(),
+      purchase: topUpEsimOkResponsePurchaseRequest.optional(),
+      profile: topUpEsimOkResponseProfileRequest.optional(),
     })
     .transform((data) => ({
       purchase: data['purchase'],
