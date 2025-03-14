@@ -1,2 +1,2 @@
-export { PurchasesService } from './purchases';
+export { PurchasesService } from './purchases-service';
 export * from './models';

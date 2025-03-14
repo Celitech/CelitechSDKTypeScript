@@ -1,3 +1,5 @@
+export type { CreatePurchaseV2Request } from './create-purchase-v2-request';
+export type { CreatePurchaseV2OkResponse } from './create-purchase-v2-ok-response';
 export type { ListPurchasesOkResponse } from './list-purchases-ok-response';
 export type { CreatePurchaseRequest } from './create-purchase-request';
 export type { CreatePurchaseOkResponse } from './create-purchase-ok-response';
@@ -6,6 +8,8 @@ export type { TopUpEsimOkResponse } from './top-up-esim-ok-response';
 export type { EditPurchaseRequest } from './edit-purchase-request';
 export type { EditPurchaseOkResponse } from './edit-purchase-ok-response';
 export type { GetPurchaseConsumptionOkResponse } from './get-purchase-consumption-ok-response';
+export type { CreatePurchaseV2OkResponsePurchase } from './create-purchase-v2-ok-response-purchase';
+export type { CreatePurchaseV2OkResponseProfile } from './create-purchase-v2-ok-response-profile';
 export type { Purchases } from './purchases';
 export type { Package_ } from './package_';
 export type { PurchasesEsim } from './purchases-esim';
