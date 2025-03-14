@@ -109,6 +109,57 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     return this;
   }
 
+  addAccessTokenAuth(accessToken?: string, prefix?: string): RequestBuilder<Page> {
+    if (accessToken === undefined) {
+      return this;
+    }
+
+    this.params.headers.set('Authorization', {
+      key: 'Authorization',
+      value: `${prefix ?? 'Bearer'} ${accessToken}`,
+      explode: false,
+      style: SerializationStyle.SIMPLE,
+      encode: true,
+      isLimit: false,
+      isOffset: false,
+    });
+    return this;
+  }
+
+  addBasicAuth(username?: string, password?: string): RequestBuilder<Page> {
+    if (username === undefined || password === undefined) {
+      return this;
+    }
+
+    this.params.headers.set('Authorization', {
+      key: 'Authorization',
+      value: `Basic ${this.toBase64(`${username}:${password}`)}`,
+      explode: false,
+      style: SerializationStyle.SIMPLE,
+      encode: true,
+      isLimit: false,
+      isOffset: false,
+    });
+    return this;
+  }
+
+  addApiKeyAuth(apiKey?: string, keyName?: string): RequestBuilder<Page> {
+    if (apiKey === undefined) {
+      return this;
+    }
+
+    this.params.headers.set(keyName ?? 'X-API-Key', {
+      key: keyName ?? 'X-API-Key',
+      value: apiKey,
+      explode: false,
+      style: SerializationStyle.SIMPLE,
+      encode: true,
+      isLimit: false,
+      isOffset: false,
+    });
+    return this;
+  }
+
   addResponse(response: ResponseDefinition): RequestBuilder<Page> {
     this.params.responses.push(response);
     return this;
@@ -177,5 +228,13 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
 
   public build(): Request<Page> {
     return new Request<Page>(this.params);
+  }
+
+  private toBase64(str: string): string {
+    if (typeof window === 'undefined') {
+      return Buffer.from(str, 'utf-8').toString('base64');
+    } else {
+      return btoa(unescape(encodeURIComponent(str)));
+    }
   }
 }

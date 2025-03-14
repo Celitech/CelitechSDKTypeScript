@@ -1,2 +1,2 @@
-export { ESimService } from './e-sim';
+export { ESimService } from './e-sim-service';
 export * from './models';

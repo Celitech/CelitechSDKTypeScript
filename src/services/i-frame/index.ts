@@ -1,2 +1,2 @@
-export { IFrameService } from './i-frame';
+export { IFrameService } from './i-frame-service';
 export * from './models';
