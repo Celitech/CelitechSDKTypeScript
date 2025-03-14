@@ -1,10 +1,10 @@
 {
-  "liblabVersion": "2.14.0",
-  "date": "2025-02-06T11:04:06.466Z",
+  "liblabVersion": "2.22.0",
+  "date": "2025-03-14T18:43:00.130Z",
   "config": {
-    "apiId": 1746,
+    "apiId": 1897,
     "sdkName": "Celitech",
-    "sdkVersion": "1.3.38",
+    "sdkVersion": "1.3.42",
     "languages": ["typescript"],
     "auth": ["oauth"],
     "docs": ["snippets", "enhancedApiSpec"],
@@ -13,7 +13,7 @@
     "rawConfig": {
       "sdkName": "Celitech",
       "apiName": "Celitech",
-      "apiVersion": "1.3.38",
+      "apiVersion": "1.3.42",
       "specFilePath": "swagger.yaml",
       "languages": ["typescript", "python", "php", "java"],
       "docs": ["snippets", "enhancedApiSpec"],
@@ -52,25 +52,25 @@
       "languageOptions": {
         "typescript": {
           "githubRepoName": "CelitechSDKTypeScript",
-          "sdkVersion": "1.3.38",
+          "sdkVersion": "1.3.42",
           "liblabVersion": "2",
           "npmName": "celitech-sdk"
         },
         "python": {
           "githubRepoName": "CelitechSDKPython",
-          "sdkVersion": "1.3.38",
+          "sdkVersion": "1.3.42",
           "liblabVersion": "2",
           "pypiPackageName": "celitech-sdk"
         },
         "php": {
           "githubRepoName": "CelitechSDKPHP",
-          "sdkVersion": "1.3.38",
+          "sdkVersion": "1.3.42",
           "liblabVersion": "2",
           "packageName": "celitech-sdk/sdk"
         },
         "java": {
           "githubRepoName": "CelitechSDKJava",
-          "sdkVersion": "1.3.38",
+          "sdkVersion": "1.3.42",
           "liblabVersion": "2",
           "groupId": "io.github.celitech",
           "artifactId": "celitech-sdk",
@@ -98,13 +98,14 @@
         "githubOrg": "Celitech"
       }
     },
-    "apiVersion": "1.3.38",
+    "apiVersion": "1.3.42",
     "apiName": "Celitech",
     "specFilePath": "swagger.yaml",
     "languageOptions": {
       "java": {
         "groupId": "io.github.celitech",
         "artifactId": "celitech-sdk",
+        "includeKotlinSnippets": false,
         "developers": [
           {
             "name": "CELITECH",
@@ -116,20 +117,20 @@
         "githubRepoName": "CelitechSDKJava",
         "homepage": "https://docs.celitech.com/",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.38"
+        "sdkVersion": "1.3.42"
       },
       "python": {
         "alwaysInitializeOptionals": true,
         "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.38"
+        "sdkVersion": "1.3.42"
       },
       "php": {
         "packageName": "celitech-sdk/sdk",
         "githubRepoName": "CelitechSDKPHP",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.38"
+        "sdkVersion": "1.3.42"
       },
       "typescript": {
         "bundle": true,
@@ -138,7 +139,7 @@
         "npmName": "celitech-sdk",
         "githubRepoName": "CelitechSDKTypeScript",
         "liblabVersion": "2",
-        "sdkVersion": "1.3.38",
+        "sdkVersion": "1.3.42",
         "generateEnumAs": "enum"
       }
     },
@@ -200,9 +201,9 @@
       "enabled": false,
       "sourceDir": ""
     },
+    "httpClient": "fetch",
     "bundle": true,
     "exportClassDefault": false,
-    "httpClient": "fetch",
     "npmName": "celitech-sdk",
     "githubRepoName": "CelitechSDKTypeScript",
     "generateEnumAs": "enum",
@@ -244,6 +245,8 @@
     "src/services/o-auth/models/get-access-token-ok-response.ts",
     "src/services/destinations/models/list-destinations-ok-response.ts",
     "src/services/packages/models/list-packages-ok-response.ts",
+    "src/services/purchases/models/create-purchase-v2-request.ts",
+    "src/services/purchases/models/create-purchase-v2-ok-response.ts",
     "src/services/purchases/models/list-purchases-ok-response.ts",
     "src/services/purchases/models/create-purchase-request.ts",
     "src/services/purchases/models/create-purchase-ok-response.ts",
@@ -260,6 +263,8 @@
     "src/services/o-auth/models/grant-type.ts",
     "src/services/destinations/models/destinations.ts",
     "src/services/packages/models/packages.ts",
+    "src/services/purchases/models/create-purchase-v2-ok-response-purchase.ts",
+    "src/services/purchases/models/create-purchase-v2-ok-response-profile.ts",
     "src/services/purchases/models/purchases.ts",
     "src/services/purchases/models/package_.ts",
     "src/services/purchases/models/purchases-esim.ts",
@@ -274,12 +279,12 @@
     "src/services/e-sim/models/get-esim-mac-ok-response-esim.ts",
     ".gitignore",
     "src/services/base-service.ts",
-    "src/services/o-auth/o-auth.ts",
-    "src/services/destinations/destinations.ts",
-    "src/services/packages/packages.ts",
-    "src/services/purchases/purchases.ts",
-    "src/services/e-sim/e-sim.ts",
-    "src/services/i-frame/i-frame.ts",
+    "src/services/o-auth/o-auth-service.ts",
+    "src/services/destinations/destinations-service.ts",
+    "src/services/packages/packages-service.ts",
+    "src/services/purchases/purchases-service.ts",
+    "src/services/e-sim/e-sim-service.ts",
+    "src/services/i-frame/i-frame-service.ts",
     "src/index.ts",
     "src/services/o-auth/models/index.ts",
     "src/services/destinations/models/index.ts",
@@ -308,6 +313,7 @@
     "documentation/snippets/oauth2-token-post.md",
     "documentation/snippets/destinations-get.md",
     "documentation/snippets/packages-get.md",
+    "documentation/snippets/purchases-v2-post.md",
     "documentation/snippets/purchases-get.md",
     "documentation/snippets/purchases-post.md",
     "documentation/snippets/purchases-topup-post.md",
@@ -322,6 +328,7 @@
     "src/services/purchases/request-params.ts",
     "src/services/e-sim/request-params.ts",
     "documentation/models/GetAccessTokenOkResponse.md",
+    "documentation/models/CreatePurchaseV2Request.md",
     "documentation/models/CreatePurchaseRequest.md",
     "documentation/models/TopUpEsimRequest.md",
     "documentation/models/EditPurchaseRequest.md",
@@ -352,6 +359,7 @@
     "documentation/services/DestinationsService.md",
     "documentation/services/PackagesService.md",
     "documentation/services/IFrameService.md",
+    "documentation/models/CreatePurchaseV2OkResponse.md",
     "documentation/models/CreatePurchaseOkResponse.md",
     "documentation/models/TopUpEsimOkResponse.md",
     "documentation/models/GetEsimHistoryOkResponse.md",
