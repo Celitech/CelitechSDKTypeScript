@@ -7,6 +7,11 @@ import { ListPurchasesOkResponse, listPurchasesOkResponseResponse } from './mode
 import { ListPurchasesParams } from './request-params';
 import { CreatePurchaseRequest, createPurchaseRequestRequest } from './models/create-purchase-request';
 import { CreatePurchaseOkResponse, createPurchaseOkResponseResponse } from './models/create-purchase-ok-response';
+import { CreatePurchaseV2Request, createPurchaseV2RequestRequest } from './models/create-purchase-v2-request';
+import {
+  CreatePurchaseV2OkResponse,
+  createPurchaseV2OkResponseResponse,
+} from './models/create-purchase-v2-ok-response';
 import { TopUpEsimRequest, topUpEsimRequestRequest } from './models/top-up-esim-request';
 import { TopUpEsimOkResponse, topUpEsimOkResponseResponse } from './models/top-up-esim-ok-response';
 import { EditPurchaseRequest, editPurchaseRequestRequest } from './models/edit-purchase-request';
@@ -19,14 +24,15 @@ import {
 export class PurchasesService extends BaseService {
   /**
    * This endpoint can be used to list all the successful purchases made between a given interval.
-   * @param {string} [iccid] - ID of the eSIM
-   * @param {string} [afterDate] - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
-   * @param {string} [beforeDate] - End date of the interval for filtering purchases in the format 'yyyy-MM-dd'
-   * @param {string} [referenceId] - The referenceId that was provided by the partner during the purchase or topup flow.
-   * @param {string} [afterCursor] - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
-   * @param {number} [limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
-   * @param {number} [after] - Epoch value representing the start of the time interval for filtering purchases
-   * @param {number} [before] - Epoch value representing the end of the time interval for filtering purchases
+   * @param {string} [params.iccid] - ID of the eSIM
+   * @param {string} [params.afterDate] - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
+   * @param {string} [params.beforeDate] - End date of the interval for filtering purchases in the format 'yyyy-MM-dd'
+   * @param {string} [params.referenceId] - The referenceId that was provided by the partner during the purchase or topup flow.
+   * @param {string} [params.afterCursor] - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
+   * @param {number} [params.limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
+   * @param {number} [params.after] - Epoch value representing the start of the time interval for filtering purchases
+   * @param {number} [params.before] - Epoch value representing the end of the time interval for filtering purchases
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListPurchasesOkResponse>>} Successful Response
    */
   async listPurchases(
@@ -88,6 +94,7 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<CreatePurchaseOkResponse>>} Successful Response
    */
   async createPurchase(
@@ -118,7 +125,40 @@ export class PurchasesService extends BaseService {
   }
 
   /**
-   * This endpoint is used to top-up an eSIM with the previously associated destination by providing an existing ICCID and the package details. The top-up is not feasible for eSIMs in "DELETED" or "ERROR" state.
+   * This endpoint is used to purchase a new eSIM by providing the package details.
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} Successful Response
+   */
+  async createPurchaseV2(
+    body: CreatePurchaseV2Request,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<CreatePurchaseV2OkResponse[]>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(this.config)
+      .setConfig(this.config)
+      .setMethod('POST')
+      .setPath('/purchases/v2')
+      .setRequestSchema(createPurchaseV2RequestRequest)
+      .setScopes([])
+      .setTokenManager(this.tokenManager)
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: z.array(createPurchaseV2OkResponseResponse),
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
+      .addBody(body)
+      .build();
+    return this.client.call<CreatePurchaseV2OkResponse[]>(request);
+  }
+
+  /**
+   * This endpoint is used to top-up an eSIM with the previously associated destination by providing an existing ICCID and the package details. The top-up is only feasible for eSIMs in "ENABLED" or "INSTALLED" state. You can check this state using the Get eSIM Status endpoint.
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} Successful Response
    */
   async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
@@ -147,6 +187,7 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint allows you to modify the dates of an existing package with a future activation start time. Editing can only be performed for packages that have not been activated, and it cannot change the package size. The modification must not change the package duration category to ensure pricing consistency.
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} Successful Response
    */
   async editPurchase(
@@ -179,6 +220,7 @@ export class PurchasesService extends BaseService {
   /**
    * This endpoint can be called for consumption notifications (e.g. every 1 hour or when the user clicks a button). It returns the data balance (consumption) of purchased packages.
    * @param {string} purchaseId - ID of the purchase
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetPurchaseConsumptionOkResponse>>} Successful Response
    */
   async getPurchaseConsumption(
