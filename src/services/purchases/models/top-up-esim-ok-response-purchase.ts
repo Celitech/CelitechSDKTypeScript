@@ -61,13 +61,13 @@ export const topUpEsimOkResponsePurchaseResponse = z.lazy(() => {
 export const topUpEsimOkResponsePurchaseRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      packageId: z.string().nullish(),
-      startDate: z.string().nullish(),
-      endDate: z.string().nullish(),
-      createdDate: z.string().nullish(),
-      startTime: z.number().nullish(),
-      endTime: z.number().nullish(),
+      id: z.string().optional(),
+      packageId: z.string().optional(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
+      createdDate: z.string().optional(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
     })
     .transform((data) => ({
       id: data['id'],
