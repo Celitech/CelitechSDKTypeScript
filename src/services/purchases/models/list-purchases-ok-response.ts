@@ -41,7 +41,7 @@ export const listPurchasesOkResponseResponse = z.lazy(() => {
  */
 export const listPurchasesOkResponseRequest = z.lazy(() => {
   return z
-    .object({ purchases: z.array(purchasesRequest).nullish(), afterCursor: z.string().nullish() })
+    .object({ purchases: z.array(purchasesRequest).optional(), afterCursor: z.string().nullable().optional() })
     .transform((data) => ({
       purchases: data['purchases'],
       afterCursor: data['afterCursor'],
