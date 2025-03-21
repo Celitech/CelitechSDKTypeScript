@@ -36,7 +36,7 @@ export const getEsimDeviceOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const getEsimDeviceOkResponseRequest = z.lazy(() => {
-  return z.object({ device: deviceRequest.nullish() }).transform((data) => ({
+  return z.object({ device: deviceRequest.optional() }).transform((data) => ({
     device: data['device'],
   }));
 });
