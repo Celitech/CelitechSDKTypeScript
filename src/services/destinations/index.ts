@@ -1,2 +1,2 @@
-export { DestinationsService } from './destinations';
+export { DestinationsService } from './destinations-service';
 export * from './models';

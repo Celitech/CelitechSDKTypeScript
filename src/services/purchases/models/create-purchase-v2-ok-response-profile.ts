@@ -3,42 +3,38 @@ import { z } from 'zod';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const getEsimOkResponseEsim = z.lazy(() => {
+export const createPurchaseV2OkResponseProfile = z.lazy(() => {
   return z.object({
     iccid: z.string().min(18).max(22).optional(),
-    smdpAddress: z.string().optional(),
+    activationCode: z.string().min(1000).max(8000).optional(),
     manualActivationCode: z.string().optional(),
-    status: z.string().optional(),
   });
 });
 
 /**
  *
- * @typedef  {GetEsimOkResponseEsim} getEsimOkResponseEsim
+ * @typedef  {CreatePurchaseV2OkResponseProfile} createPurchaseV2OkResponseProfile
  * @property {string} - ID of the eSIM
- * @property {string} - SM-DP+ Address
- * @property {string} - The manual activation code
- * @property {string} - Status of the eSIM, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
+ * @property {string} - QR Code of the eSIM as base64
+ * @property {string} - Manual Activation Code of the eSIM
  */
-export type GetEsimOkResponseEsim = z.infer<typeof getEsimOkResponseEsim>;
+export type CreatePurchaseV2OkResponseProfile = z.infer<typeof createPurchaseV2OkResponseProfile>;
 
 /**
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimOkResponseEsimResponse = z.lazy(() => {
+export const createPurchaseV2OkResponseProfileResponse = z.lazy(() => {
   return z
     .object({
       iccid: z.string().min(18).max(22).optional(),
-      smdpAddress: z.string().optional(),
+      activationCode: z.string().min(1000).max(8000).optional(),
       manualActivationCode: z.string().optional(),
-      status: z.string().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
-      smdpAddress: data['smdpAddress'],
+      activationCode: data['activationCode'],
       manualActivationCode: data['manualActivationCode'],
-      status: data['status'],
     }));
 });
 
@@ -46,18 +42,16 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const getEsimOkResponseEsimRequest = z.lazy(() => {
+export const createPurchaseV2OkResponseProfileRequest = z.lazy(() => {
   return z
     .object({
       iccid: z.string().optional(),
-      smdpAddress: z.string().optional(),
+      activationCode: z.string().optional(),
       manualActivationCode: z.string().optional(),
-      status: z.string().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
-      smdpAddress: data['smdpAddress'],
+      activationCode: data['activationCode'],
       manualActivationCode: data['manualActivationCode'],
-      status: data['status'],
     }));
 });

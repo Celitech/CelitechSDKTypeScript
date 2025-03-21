@@ -49,10 +49,10 @@ export const deviceResponse = z.lazy(() => {
 export const deviceRequest = z.lazy(() => {
   return z
     .object({
-      oem: z.string().nullish(),
-      hardwareName: z.string().nullish(),
-      hardwareModel: z.string().nullish(),
-      eid: z.string().nullish(),
+      oem: z.string().optional(),
+      hardwareName: z.string().optional(),
+      hardwareModel: z.string().optional(),
+      eid: z.string().optional(),
     })
     .transform((data) => ({
       oem: data['oem'],

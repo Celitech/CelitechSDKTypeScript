@@ -1,2 +1,2 @@
-export { PackagesService } from './packages';
+export { PackagesService } from './packages-service';
 export * from './models';

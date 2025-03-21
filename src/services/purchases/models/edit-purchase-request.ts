@@ -53,11 +53,11 @@ export const editPurchaseRequestResponse = z.lazy(() => {
 export const editPurchaseRequestRequest = z.lazy(() => {
   return z
     .object({
-      purchaseId: z.string().nullish(),
-      startDate: z.string().nullish(),
-      endDate: z.string().nullish(),
-      startTime: z.number().nullish(),
-      endTime: z.number().nullish(),
+      purchaseId: z.string(),
+      startDate: z.string(),
+      endDate: z.string(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
     })
     .transform((data) => ({
       purchaseId: data['purchaseId'],
