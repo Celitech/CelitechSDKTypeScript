@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { destinations, destinationsRequest, destinationsResponse } from './destinations';
+import { Destinations, destinations, destinationsRequest, destinationsResponse } from './destinations';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +36,11 @@ export const listDestinationsOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const listDestinationsOkResponseRequest = z.lazy(() => {
-  return z.object({ destinations: z.array(destinationsRequest).nullish() }).transform((data) => ({
-    destinations: data['destinations'],
-  }));
+  return z
+    .object({
+      destinations: z.array(destinationsRequest).optional(),
+    })
+    .transform((data) => ({
+      destinations: data['destinations'],
+    }));
 });

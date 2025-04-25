@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { purchases, purchasesRequest, purchasesResponse } from './purchases';
+import { Purchases, purchases, purchasesRequest, purchasesResponse } from './purchases';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -41,7 +41,10 @@ export const listPurchasesOkResponseResponse = z.lazy(() => {
  */
 export const listPurchasesOkResponseRequest = z.lazy(() => {
   return z
-    .object({ purchases: z.array(purchasesRequest).nullish(), afterCursor: z.string().nullish() })
+    .object({
+      purchases: z.array(purchasesRequest).optional(),
+      afterCursor: z.string().optional().nullable(),
+    })
     .transform((data) => ({
       purchases: data['purchases'],
       afterCursor: data['afterCursor'],

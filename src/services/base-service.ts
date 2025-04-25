@@ -36,4 +36,8 @@ export class BaseService {
   set oAuthBaseUrl(oAuthBaseUrl: string) {
     this.config.oAuthBaseUrl = oAuthBaseUrl;
   }
+
+  set accessToken(accessToken: string) {
+    this.config.accessToken = accessToken;
+  }
 }

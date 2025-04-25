@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { history, historyRequest, historyResponse } from './history';
+import { History, history, historyRequest, historyResponse } from './history';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -40,8 +40,13 @@ export const getEsimHistoryOkResponseEsimResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const getEsimHistoryOkResponseEsimRequest = z.lazy(() => {
-  return z.object({ iccid: z.string().nullish(), history: z.array(historyRequest).nullish() }).transform((data) => ({
-    iccid: data['iccid'],
-    history: data['history'],
-  }));
+  return z
+    .object({
+      iccid: z.string().min(18).max(22).optional(),
+      history: z.array(historyRequest).optional(),
+    })
+    .transform((data) => ({
+      iccid: data['iccid'],
+      history: data['history'],
+    }));
 });

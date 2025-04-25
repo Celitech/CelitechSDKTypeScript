@@ -45,9 +45,9 @@ export const destinationsResponse = z.lazy(() => {
 export const destinationsRequest = z.lazy(() => {
   return z
     .object({
-      name: z.string().nullish(),
-      destination: z.string().nullish(),
-      supportedCountries: z.array(z.string()).nullish(),
+      name: z.string().optional(),
+      destination: z.string().optional(),
+      supportedCountries: z.array(z.string()).optional(),
     })
     .transform((data) => ({
       name: data['name'],

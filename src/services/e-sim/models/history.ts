@@ -44,7 +44,11 @@ export const historyResponse = z.lazy(() => {
  */
 export const historyRequest = z.lazy(() => {
   return z
-    .object({ status: z.string().nullish(), statusDate: z.string().nullish(), date: z.number().nullish() })
+    .object({
+      status: z.string().optional(),
+      statusDate: z.string().optional(),
+      date: z.number().optional(),
+    })
     .transform((data) => ({
       status: data['status'],
       statusDate: data['statusDate'],

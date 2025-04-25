@@ -65,14 +65,14 @@ export const topUpEsimRequestResponse = z.lazy(() => {
 export const topUpEsimRequestRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().nullish(),
-      dataLimitInGb: z.number().nullish(),
-      startDate: z.string().nullish(),
-      endDate: z.string().nullish(),
-      email: z.string().nullish(),
-      referenceId: z.string().nullish(),
-      startTime: z.number().nullish(),
-      endTime: z.number().nullish(),
+      iccid: z.string().min(18).max(22),
+      dataLimitInGb: z.number(),
+      startDate: z.string(),
+      endDate: z.string(),
+      email: z.string().optional(),
+      referenceId: z.string().optional(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  GetEsimOkResponseEsim,
   getEsimOkResponseEsim,
   getEsimOkResponseEsimRequest,
   getEsimOkResponseEsimResponse,
@@ -40,7 +41,11 @@ export const getEsimOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const getEsimOkResponseRequest = z.lazy(() => {
-  return z.object({ esim: getEsimOkResponseEsimRequest.nullish() }).transform((data) => ({
-    esim: data['esim'],
-  }));
+  return z
+    .object({
+      esim: getEsimOkResponseEsimRequest.optional(),
+    })
+    .transform((data) => ({
+      esim: data['esim'],
+    }));
 });

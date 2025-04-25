@@ -2,7 +2,7 @@ import { ZodType } from 'zod';
 import { Environment } from './environment';
 import { Request } from './transport/request';
 
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS';
 
 export interface SdkConfig {
   baseUrl?: string;
@@ -11,6 +11,7 @@ export interface SdkConfig {
   clientId: string;
   clientSecret: string;
   oAuthBaseUrl?: string;
+  accessToken?: string;
   retry?: RetryOptions;
   validation?: ValidationOptions;
 }
@@ -62,6 +63,7 @@ export interface Options<T> {
 export interface RequestConfig {
   retry?: RetryOptions;
   validation?: ValidationOptions;
+  baseUrl?: string;
 }
 
 export interface RetryOptions {

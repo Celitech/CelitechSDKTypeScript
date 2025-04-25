@@ -35,7 +35,11 @@ export const purchasesEsimResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const purchasesEsimRequest = z.lazy(() => {
-  return z.object({ iccid: z.string().nullish() }).transform((data) => ({
-    iccid: data['iccid'],
-  }));
+  return z
+    .object({
+      iccid: z.string().min(18).max(22).optional(),
+    })
+    .transform((data) => ({
+      iccid: data['iccid'],
+    }));
 });

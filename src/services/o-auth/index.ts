@@ -1,2 +1,2 @@
-export { OAuthService } from './o-auth';
+export { OAuthService } from './o-auth-service';
 export * from './models';
