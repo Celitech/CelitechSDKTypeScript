@@ -15,7 +15,8 @@ export * from './services/purchases';
 export * from './services/e-sim';
 export * from './services/i-frame';
 
-export type * from './http';
+export * from './http';
+export { Environment } from './http/environment';
 
 export class Celitech {
   public readonly oAuth: OAuthService;
@@ -33,11 +34,6 @@ export class Celitech {
   protected tokenManager: OAuthTokenManager = new OAuthTokenManager();
 
   constructor(public config: SdkConfig) {
-    const baseUrl = config.environment || config.baseUrl || Environment.DEFAULT;
-    this.config = {
-      ...config,
-      baseUrl,
-    };
     this.oAuth = new OAuthService(this.config, this.tokenManager);
 
     this.destinations = new DestinationsService(this.config, this.tokenManager);
@@ -103,6 +99,15 @@ export class Celitech {
     this.purchases.oAuthBaseUrl = oAuthBaseUrl;
     this.eSim.oAuthBaseUrl = oAuthBaseUrl;
     this.iFrame.oAuthBaseUrl = oAuthBaseUrl;
+  }
+
+  set accessToken(accessToken: string) {
+    this.oAuth.accessToken = accessToken;
+    this.destinations.accessToken = accessToken;
+    this.packages.accessToken = accessToken;
+    this.purchases.accessToken = accessToken;
+    this.eSim.accessToken = accessToken;
+    this.iFrame.accessToken = accessToken;
   }
 }
 

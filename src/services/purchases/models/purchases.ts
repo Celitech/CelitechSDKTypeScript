@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { packageRequest, packageResponse, package_ } from './package_';
-import { purchasesEsim, purchasesEsimRequest, purchasesEsimResponse } from './purchases-esim';
+import { Package_, packageRequest, packageResponse, package_ } from './package_';
+import { PurchasesEsim, purchasesEsim, purchasesEsimRequest, purchasesEsimResponse } from './purchases-esim';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -33,7 +33,7 @@ export const purchases = z.lazy(() => {
  * @property {number} - Epoch value representing the date of creation of the purchase
  * @property {Package_}
  * @property {PurchasesEsim}
- * @property {string} - The source indicates where the eSIM was purchased, which can be from the API, dashboard, landing-page or promo-page. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
+ * @property {string} - The source indicates where the eSIM was purchased, which can be from the API, dashboard, landing-page, promo-page or iframe. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
  * @property {string} - The referenceId that was provided by the partner during the purchase or topup flow. This identifier can be used for analytics and debugging purposes.
  */
 export type Purchases = z.infer<typeof purchases>;
@@ -79,17 +79,17 @@ export const purchasesResponse = z.lazy(() => {
 export const purchasesRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      startDate: z.string().nullish(),
-      endDate: z.string().nullish(),
-      createdDate: z.string().nullish(),
-      startTime: z.number().nullish(),
-      endTime: z.number().nullish(),
-      createdAt: z.number().nullish(),
-      package: packageRequest.nullish(),
-      esim: purchasesEsimRequest.nullish(),
-      source: z.string().nullish(),
-      referenceId: z.string().nullish(),
+      id: z.string().optional(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
+      createdDate: z.string().optional(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
+      createdAt: z.number().optional(),
+      package: packageRequest.optional(),
+      esim: purchasesEsimRequest.optional(),
+      source: z.string().optional(),
+      referenceId: z.string().optional(),
     })
     .transform((data) => ({
       id: data['id'],

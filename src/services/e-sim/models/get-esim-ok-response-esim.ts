@@ -49,10 +49,10 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
 export const getEsimOkResponseEsimRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().nullish(),
-      smdpAddress: z.string().nullish(),
-      manualActivationCode: z.string().nullish(),
-      status: z.string().nullish(),
+      iccid: z.string().min(18).max(22).optional(),
+      smdpAddress: z.string().optional(),
+      manualActivationCode: z.string().optional(),
+      status: z.string().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

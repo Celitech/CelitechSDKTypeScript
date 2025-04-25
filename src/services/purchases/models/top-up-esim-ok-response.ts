@@ -1,10 +1,12 @@
 import { z } from 'zod';
 import {
+  TopUpEsimOkResponsePurchase,
   topUpEsimOkResponsePurchase,
   topUpEsimOkResponsePurchaseRequest,
   topUpEsimOkResponsePurchaseResponse,
 } from './top-up-esim-ok-response-purchase';
 import {
+  TopUpEsimOkResponseProfile,
   topUpEsimOkResponseProfile,
   topUpEsimOkResponseProfileRequest,
   topUpEsimOkResponseProfileResponse,
@@ -51,8 +53,8 @@ export const topUpEsimOkResponseResponse = z.lazy(() => {
 export const topUpEsimOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchase: topUpEsimOkResponsePurchaseRequest.nullish(),
-      profile: topUpEsimOkResponseProfileRequest.nullish(),
+      purchase: topUpEsimOkResponsePurchaseRequest.optional(),
+      profile: topUpEsimOkResponseProfileRequest.optional(),
     })
     .transform((data) => ({
       purchase: data['purchase'],

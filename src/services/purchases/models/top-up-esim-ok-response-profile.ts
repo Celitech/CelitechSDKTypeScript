@@ -35,7 +35,11 @@ export const topUpEsimOkResponseProfileResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const topUpEsimOkResponseProfileRequest = z.lazy(() => {
-  return z.object({ iccid: z.string().nullish() }).transform((data) => ({
-    iccid: data['iccid'],
-  }));
+  return z
+    .object({
+      iccid: z.string().min(18).max(22).optional(),
+    })
+    .transform((data) => ({
+      iccid: data['iccid'],
+    }));
 });

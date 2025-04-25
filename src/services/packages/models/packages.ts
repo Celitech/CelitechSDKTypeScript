@@ -57,12 +57,12 @@ export const packagesResponse = z.lazy(() => {
 export const packagesRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      destination: z.string().nullish(),
-      dataLimitInBytes: z.number().nullish(),
-      minDays: z.number().nullish(),
-      maxDays: z.number().nullish(),
-      priceInCents: z.number().nullish(),
+      id: z.string().optional(),
+      destination: z.string().optional(),
+      dataLimitInBytes: z.number().optional(),
+      minDays: z.number().optional(),
+      maxDays: z.number().optional(),
+      priceInCents: z.number().optional(),
     })
     .transform((data) => ({
       id: data['id'],

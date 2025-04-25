@@ -1,4 +1,4 @@
-# Celitech TypeScript SDK 1.3.38
+# Celitech TypeScript SDK 1.3.42
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
@@ -6,8 +6,8 @@ Welcome to the Celitech SDK documentation. This guide will help you get started 
 
 ## Versions
 
-- API version: `1.1.0`
-- SDK version: `1.3.38`
+- API version: `1.3.42`
+- SDK version: `1.3.42`
 
 ## About the API
 
@@ -133,20 +133,48 @@ The SDK includes several models that represent the data structures used in API r
 | [GetAccessTokenRequest](documentation/models/GetAccessTokenRequest.md)                       |             |
 | [GetAccessTokenOkResponse](documentation/models/GetAccessTokenOkResponse.md)                 |             |
 | [ListDestinationsOkResponse](documentation/models/ListDestinationsOkResponse.md)             |             |
+| [\_\_](documentation/models/__.md)                                                           |             |
+| [\_1](documentation/models/_1.md)                                                            |             |
 | [ListPackagesOkResponse](documentation/models/ListPackagesOkResponse.md)                     |             |
+| [\_2](documentation/models/_2.md)                                                            |             |
+| [\_3](documentation/models/_3.md)                                                            |             |
+| [CreatePurchaseV2Request](documentation/models/CreatePurchaseV2Request.md)                   |             |
+| [CreatePurchaseV2OkResponse](documentation/models/CreatePurchaseV2OkResponse.md)             |             |
+| [\_4](documentation/models/_4.md)                                                            |             |
+| [\_5](documentation/models/_5.md)                                                            |             |
 | [ListPurchasesOkResponse](documentation/models/ListPurchasesOkResponse.md)                   |             |
+| [\_6](documentation/models/_6.md)                                                            |             |
+| [\_7](documentation/models/_7.md)                                                            |             |
 | [CreatePurchaseRequest](documentation/models/CreatePurchaseRequest.md)                       |             |
 | [CreatePurchaseOkResponse](documentation/models/CreatePurchaseOkResponse.md)                 |             |
+| [\_8](documentation/models/_8.md)                                                            |             |
+| [\_9](documentation/models/_9.md)                                                            |             |
 | [TopUpEsimRequest](documentation/models/TopUpEsimRequest.md)                                 |             |
 | [TopUpEsimOkResponse](documentation/models/TopUpEsimOkResponse.md)                           |             |
+| [\_10](documentation/models/_10.md)                                                          |             |
+| [\_11](documentation/models/_11.md)                                                          |             |
 | [EditPurchaseRequest](documentation/models/EditPurchaseRequest.md)                           |             |
 | [EditPurchaseOkResponse](documentation/models/EditPurchaseOkResponse.md)                     |             |
+| [\_12](documentation/models/_12.md)                                                          |             |
+| [\_13](documentation/models/_13.md)                                                          |             |
 | [GetPurchaseConsumptionOkResponse](documentation/models/GetPurchaseConsumptionOkResponse.md) |             |
+| [\_14](documentation/models/_14.md)                                                          |             |
+| [\_15](documentation/models/_15.md)                                                          |             |
 | [GetEsimOkResponse](documentation/models/GetEsimOkResponse.md)                               |             |
+| [\_16](documentation/models/_16.md)                                                          |             |
+| [\_17](documentation/models/_17.md)                                                          |             |
 | [GetEsimDeviceOkResponse](documentation/models/GetEsimDeviceOkResponse.md)                   |             |
+| [\_18](documentation/models/_18.md)                                                          |             |
+| [\_19](documentation/models/_19.md)                                                          |             |
 | [GetEsimHistoryOkResponse](documentation/models/GetEsimHistoryOkResponse.md)                 |             |
+| [\_20](documentation/models/_20.md)                                                          |             |
+| [\_21](documentation/models/_21.md)                                                          |             |
 | [GetEsimMacOkResponse](documentation/models/GetEsimMacOkResponse.md)                         |             |
+| [\_22](documentation/models/_22.md)                                                          |             |
+| [\_23](documentation/models/_23.md)                                                          |             |
 | [TokenOkResponse](documentation/models/TokenOkResponse.md)                                   |             |
+| [\_24](documentation/models/_24.md)                                                          |             |
+| [\_25](documentation/models/_25.md)                                                          |             |
 
 </details>
 

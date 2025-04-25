@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { device, deviceRequest, deviceResponse } from './device';
+import { Device, device, deviceRequest, deviceResponse } from './device';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +36,11 @@ export const getEsimDeviceOkResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const getEsimDeviceOkResponseRequest = z.lazy(() => {
-  return z.object({ device: deviceRequest.nullish() }).transform((data) => ({
-    device: data['device'],
-  }));
+  return z
+    .object({
+      device: deviceRequest.optional(),
+    })
+    .transform((data) => ({
+      device: data['device'],
+    }));
 });

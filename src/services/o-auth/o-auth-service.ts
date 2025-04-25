@@ -3,12 +3,14 @@ import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
+import { Environment } from '../../http/environment';
 import { GetAccessTokenRequest, getAccessTokenRequestRequest } from './models/get-access-token-request';
 import { GetAccessTokenOkResponse, getAccessTokenOkResponseResponse } from './models/get-access-token-ok-response';
 
 export class OAuthService extends BaseService {
   /**
    * This endpoint was added by liblab
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<GetAccessTokenOkResponse>>} Successful Response
    */
   async getAccessToken(
@@ -16,7 +18,7 @@ export class OAuthService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<GetAccessTokenOkResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/oauth2/token')
