@@ -8,11 +8,12 @@ import { PurchasesEsim, purchasesEsim, purchasesEsimRequest, purchasesEsimRespon
 export const purchases = z.lazy(() => {
   return z.object({
     id: z.string().optional(),
-    startDate: z.string().optional(),
-    endDate: z.string().optional(),
+    startDate: z.string().optional().nullable(),
+    endDate: z.string().optional().nullable(),
+    duration: z.number().optional().nullable(),
     createdDate: z.string().optional(),
-    startTime: z.number().optional(),
-    endTime: z.number().optional(),
+    startTime: z.number().optional().nullable(),
+    endTime: z.number().optional().nullable(),
     createdAt: z.number().optional(),
     package: package_.optional(),
     esim: purchasesEsim.optional(),
@@ -27,6 +28,7 @@ export const purchases = z.lazy(() => {
  * @property {string} - ID of the purchase
  * @property {string} - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
  * @property {string} - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} - It designates the number of days the eSIM is valid for within 90-day validity from issuance date.
  * @property {string} - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
  * @property {number} - Epoch value representing the start time of the package's validity
  * @property {number} - Epoch value representing the end time of the package's validity
@@ -46,11 +48,12 @@ export const purchasesResponse = z.lazy(() => {
   return z
     .object({
       id: z.string().optional(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
+      startDate: z.string().optional().nullable(),
+      endDate: z.string().optional().nullable(),
+      duration: z.number().optional().nullable(),
       createdDate: z.string().optional(),
-      startTime: z.number().optional(),
-      endTime: z.number().optional(),
+      startTime: z.number().optional().nullable(),
+      endTime: z.number().optional().nullable(),
       createdAt: z.number().optional(),
       package: packageResponse.optional(),
       esim: purchasesEsimResponse.optional(),
@@ -61,6 +64,7 @@ export const purchasesResponse = z.lazy(() => {
       id: data['id'],
       startDate: data['startDate'],
       endDate: data['endDate'],
+      duration: data['duration'],
       createdDate: data['createdDate'],
       startTime: data['startTime'],
       endTime: data['endTime'],
@@ -80,11 +84,12 @@ export const purchasesRequest = z.lazy(() => {
   return z
     .object({
       id: z.string().optional(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
+      startDate: z.string().optional().nullable(),
+      endDate: z.string().optional().nullable(),
+      duration: z.number().optional().nullable(),
       createdDate: z.string().optional(),
-      startTime: z.number().optional(),
-      endTime: z.number().optional(),
+      startTime: z.number().optional().nullable(),
+      endTime: z.number().optional().nullable(),
       createdAt: z.number().optional(),
       package: packageRequest.optional(),
       esim: purchasesEsimRequest.optional(),
@@ -95,6 +100,7 @@ export const purchasesRequest = z.lazy(() => {
       id: data['id'],
       startDate: data['startDate'],
       endDate: data['endDate'],
+      duration: data['duration'],
       createdDate: data['createdDate'],
       startTime: data['startTime'],
       endTime: data['endTime'],
