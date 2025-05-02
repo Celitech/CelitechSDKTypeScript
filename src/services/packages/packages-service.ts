@@ -11,18 +11,22 @@ import { ListPackagesParams } from './request-params';
 
 export class PackagesService extends BaseService {
   /**
-   * List Packages
-   * @param {string} [params.destination] - ISO representation of the package's destination.
-   * @param {string} [params.startDate] - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
-   * @param {string} [params.endDate] - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
-   * @param {string} [params.afterCursor] - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
-   * @param {number} [params.limit] - Maximum number of packages to be returned in the response. The value must be greater than 0 and less than or equal to 160. If not provided, the default value is 20
-   * @param {number} [params.startTime] - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months
-   * @param {number} [params.endTime] - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time
-   * @param {number} [params.duration] - Duration in seconds for the package's validity. If this parameter is present, it will override the startTime and endTime parameters. The maximum duration for a package's validity period is 90 days
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<ListPackagesOkResponse>>} Successful Response
-   */
+ * List Packages
+ * @param {string} [params.destination] - ISO representation of the package's destination.
+ * @param {string} [params.startDate] - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
+ * @param {string} [params.endDate] - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
+ * @param {number} [params.dataLimitInGb] - Size of the package in GB.
+- **Limited Packages (1, 2, 3, 5, 8, 20GB)
+- **Unlimited Packages (Region-3 only):** Use **-1** for unlimited.
+
+ * @param {string} [params.afterCursor] - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
+ * @param {number} [params.limit] - Maximum number of packages to be returned in the response. The value must be greater than 0 and less than or equal to 160. If not provided, the default value is 20
+ * @param {number} [params.startTime] - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months
+ * @param {number} [params.endTime] - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time
+ * @param {number} [params.duration] - Duration in seconds for the package's validity. If this parameter is present, it will override the startTime and endTime parameters. The maximum duration for a package's validity period is 90 days
+ * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+ * @returns {Promise<HttpResponse<ListPackagesOkResponse>>} Successful Response
+ */
   async listPackages(
     params?: ListPackagesParams,
     requestConfig?: RequestConfig,
@@ -65,6 +69,10 @@ export class PackagesService extends BaseService {
       .addQueryParam({
         key: 'endDate',
         value: params?.endDate,
+      })
+      .addQueryParam({
+        key: 'dataLimitInGB',
+        value: params?.dataLimitInGb,
       })
       .addQueryParam({
         key: 'afterCursor',
