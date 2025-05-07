@@ -17,6 +17,7 @@ export const purchases = z.lazy(() => {
     package: package_.optional(),
     esim: purchasesEsim.optional(),
     source: z.string().optional(),
+    purchaseType: z.string().optional(),
     referenceId: z.string().optional(),
   });
 });
@@ -33,8 +34,9 @@ export const purchases = z.lazy(() => {
  * @property {number} - Epoch value representing the date of creation of the purchase
  * @property {Package_}
  * @property {PurchasesEsim}
- * @property {string} - The source indicates where the eSIM was purchased, which can be from the API, dashboard, landing-page, promo-page or iframe. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
- * @property {string} - The referenceId that was provided by the partner during the purchase or topup flow. This identifier can be used for analytics and debugging purposes.
+ * @property {string} - The `source` indicates whether the purchase was made from the API, dashboard, landing-page, promo-page or iframe. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
+ * @property {string} - The `purchaseType` indicates whether this is the initial purchase that creates the eSIM (First Purchase) or a subsequent top-up on an existing eSIM (Top-up Purchase).
+ * @property {string} - The `referenceId` that was provided by the partner during the purchase or top-up flow. This identifier can be used for analytics and debugging purposes.
  */
 export type Purchases = z.infer<typeof purchases>;
 
@@ -55,6 +57,7 @@ export const purchasesResponse = z.lazy(() => {
       package: packageResponse.optional(),
       esim: purchasesEsimResponse.optional(),
       source: z.string().optional(),
+      purchaseType: z.string().optional(),
       referenceId: z.string().optional(),
     })
     .transform((data) => ({
@@ -68,6 +71,7 @@ export const purchasesResponse = z.lazy(() => {
       package: data['package'],
       esim: data['esim'],
       source: data['source'],
+      purchaseType: data['purchaseType'],
       referenceId: data['referenceId'],
     }));
 });
@@ -89,6 +93,7 @@ export const purchasesRequest = z.lazy(() => {
       package: packageRequest.optional(),
       esim: purchasesEsimRequest.optional(),
       source: z.string().optional(),
+      purchaseType: z.string().optional(),
       referenceId: z.string().optional(),
     })
     .transform((data) => ({
@@ -102,6 +107,7 @@ export const purchasesRequest = z.lazy(() => {
       package: data['package'],
       esim: data['esim'],
       source: data['source'],
+      purchaseType: data['purchaseType'],
       referenceId: data['referenceId'],
     }));
 });
