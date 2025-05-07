@@ -10,8 +10,6 @@ import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
   const createPurchaseV2Request: CreatePurchaseV2Request = {
     destination: 'FRA',
     dataLimitInGb: 1,
-    startDate: '2023-11-01',
-    endDate: '2023-11-20',
     quantity: 1,
   };
 
