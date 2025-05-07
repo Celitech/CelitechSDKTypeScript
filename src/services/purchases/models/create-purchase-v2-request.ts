@@ -13,6 +13,7 @@ export const createPurchaseV2Request = z.lazy(() => {
     email: z.string().optional(),
     referenceId: z.string().optional(),
     networkBrand: z.string().optional(),
+    emailBrand: z.string().optional(),
   });
 });
 
@@ -27,6 +28,7 @@ export const createPurchaseV2Request = z.lazy(() => {
  * @property {string} - Email address where the purchase confirmation email will be sent (including QR Code & activation steps)
  * @property {string} - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
  * @property {string} - Customize the network brand of the issued eSIM. This parameter is accessible to platforms with Diamond tier and requires an alphanumeric string of up to 15 characters.
+ * @property {string} - Customize the email brand. This parameter is accessible to platforms with Diamond tier and requires an alphanumeric string of up to 25 characters.
  */
 export type CreatePurchaseV2Request = z.infer<typeof createPurchaseV2Request>;
 
@@ -45,6 +47,7 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
       email: z.string().optional(),
       referenceId: z.string().optional(),
       networkBrand: z.string().optional(),
+      emailBrand: z.string().optional(),
     })
     .transform((data) => ({
       destination: data['destination'],
@@ -55,6 +58,7 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
       email: data['email'],
       referenceId: data['referenceId'],
       networkBrand: data['networkBrand'],
+      emailBrand: data['emailBrand'],
     }));
 });
 
@@ -73,6 +77,7 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
       email: z.string().optional(),
       referenceId: z.string().optional(),
       networkBrand: z.string().optional(),
+      emailBrand: z.string().optional(),
     })
     .transform((data) => ({
       destination: data['destination'],
@@ -83,5 +88,6 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
       email: data['email'],
       referenceId: data['referenceId'],
       networkBrand: data['networkBrand'],
+      emailBrand: data['emailBrand'],
     }));
 });
