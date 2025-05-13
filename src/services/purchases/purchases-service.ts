@@ -36,10 +36,16 @@ import { _15 } from './models/_15';
 
 export class PurchasesService extends BaseService {
   /**
-   * This endpoint is used to purchase a new eSIM by providing the package details.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} Successful Response
-   */
+ * This endpoint lets you purchase a new eSIM by providing the package details.You must include **either**:
+  - Both `startDate` and `endDate` (to set a fixed date range),  
+  **or**
+  - `duration` (to set how many days the eSIM will be active).
+
+These options cannot be used together, only one of them should be provided.
+
+ * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+ * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} Successful Response
+ */
   async createPurchaseV2(
     body: CreatePurchaseV2Request,
     requestConfig?: RequestConfig,
@@ -200,10 +206,17 @@ export class PurchasesService extends BaseService {
   }
 
   /**
-   * This endpoint is used to top-up an eSIM with the previously associated destination by providing an existing ICCID and the package details. The top-up is only feasible for eSIMs in "ENABLED" or "INSTALLED" state. You can check this state using the Get eSIM Status endpoint.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} Successful Response
-   */
+ * This endpoint lets you top up an existing eSIM by providing its ICCID and the new package details.   The destination must be the same as the one used in the original purchase.Top-up is only allowed for eSIMs that are in the **"ENABLED"** or **"INSTALLED"** state.   You can check the current state using the **Get eSIM Status** endpoint.
+You must include **either**:
+  - Both `startDate` and `endDate` (to set a fixed date range),  
+  **or**
+  - `duration` (to set how many days the eSIM will be active).
+
+These options cannot be used together — only one of them should be provided.
+
+ * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+ * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} Successful Response
+ */
   async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
     const request = new RequestBuilder()
       .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
@@ -239,7 +252,7 @@ export class PurchasesService extends BaseService {
   }
 
   /**
-   * This endpoint allows you to modify the dates of an existing package with a future activation start time. Editing can only be performed for packages that have not been activated, and it cannot change the package size. The modification must not change the package duration category to ensure pricing consistency.
+   * This endpoint allows you to modify the dates of an existing package with a future activation start time. Editing can only be performed for packages that have not been activated, and it cannot change the package size. The modification must not change the package duration category to ensure pricing consistency. Duration based packages cannot be edited.
    * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} Successful Response
    */
