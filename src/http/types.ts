@@ -4,17 +4,28 @@ import { Request } from './transport/request';
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS';
 
-export interface SdkConfig {
+export interface BaseConfig {
+  retry?: RetryOptions;
+  validation?: ValidationOptions;
   baseUrl?: string;
   environment?: Environment;
   timeoutMs?: number;
+  oAuthBaseUrl?: string;
+}
+
+interface ClientCredentialAuthConfig extends BaseConfig {
   clientId: string;
   clientSecret: string;
-  oAuthBaseUrl?: string;
-  accessToken?: string;
-  retry?: RetryOptions;
-  validation?: ValidationOptions;
+  accessToken?: never;
 }
+
+interface TokenAuthConfig extends BaseConfig {
+  clientId?: never;
+  clientSecret?: never;
+  accessToken: string;
+}
+
+export type SdkConfig = ClientCredentialAuthConfig | TokenAuthConfig;
 
 export interface HttpMetadata {
   status: number;

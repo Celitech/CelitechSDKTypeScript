@@ -16,7 +16,9 @@ export class OAuthHandler implements RequestHandler {
       return this.next.handle<T>(request);
     }
 
-    // TODO: @CAMERON - this is where we should add a warning if they're in an insecure environment
+    if (!request.config.clientId || !request.config.clientSecret) {
+      return this.next.handle<T>(request);
+    }
 
     await this.manageToken(request);
 
