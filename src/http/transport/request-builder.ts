@@ -26,8 +26,8 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       requestSchema: z.any(),
       requestContentType: ContentType.Json,
       retry: {
-        attempts: 3,
-        delayMs: 150,
+        attempts: 1,
+        delayMs: 0,
       },
       validation: {
         responseValidation: true,
