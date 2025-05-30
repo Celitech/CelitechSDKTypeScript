@@ -28,6 +28,10 @@ export class OAuthTokenManager {
       return this.token;
     }
 
+    if (!config.clientId || !config.clientSecret) {
+      throw new Error('OAuthError: clientId and clientSecret are required for token management.');
+    }
+
     const updatedScopes = new Set([...scopes, ...(this.token?.scopes || [])]);
 
     const oAuth = new OAuthService(
