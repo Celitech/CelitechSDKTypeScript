@@ -3,6 +3,7 @@ import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
+import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
 import { GetEsimOkResponse, getEsimOkResponseResponse } from './models/get-esim-ok-response';
 import { _16 } from './models/_16';

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ThrowableError } from '../../../http/errors/throwable-error';
 
 export type I_3Schema = {
   message?: string;
@@ -14,12 +15,19 @@ export const _3Response = z.lazy(() => {
     }));
 });
 
-export class _3 extends Error {
-  constructor(message?: string, response?: unknown) {
+export class _3 extends ThrowableError {
+  constructor(
+    public message: string,
+    protected response?: unknown,
+  ) {
     super(message);
 
     const parsedResponse = _3Response.parse(response);
 
     this.message = parsedResponse.message || '';
+  }
+
+  public throw() {
+    throw new _3(this.message, this.response);
   }
 }
