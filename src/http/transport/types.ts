@@ -2,6 +2,7 @@ import { ZodType } from 'zod';
 import { ContentType, HttpMethod, SdkConfig, RetryOptions, ValidationOptions } from '../types';
 import { SerializationStyle } from '../serialization/base-serializer';
 import { OAuthTokenManager } from '../oauth/token-manager';
+import { ThrowableError } from '../errors/throwable-error';
 
 export interface ResponseDefinition {
   schema: ZodType;
@@ -10,7 +11,7 @@ export interface ResponseDefinition {
 }
 
 export interface ErrorDefinition {
-  error: new (...args: any[]) => Error;
+  error: new (...args: any[]) => ThrowableError;
   contentType: ContentType;
   status: number;
 }
