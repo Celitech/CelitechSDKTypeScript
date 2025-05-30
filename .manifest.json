@@ -1,6 +1,6 @@
 {
-  "liblabVersion": "2.25.10",
-  "date": "2025-04-25T16:42:37.514Z",
+  "liblabVersion": "2.25.23",
+  "date": "2025-05-30T16:47:31.937Z",
   "config": {
     "apiId": 1897,
     "sdkName": "Celitech",
@@ -34,7 +34,7 @@
         },
         "responseHeaders": false,
         "retry": {
-          "enabled": true,
+          "enabled": false,
           "maxAttempts": 3,
           "retryDelay": 150
         },
@@ -98,11 +98,19 @@
         "githubOrg": "Celitech"
       }
     },
+    "liblabConfigVersion": "1.0.0",
     "apiVersion": "1.3.42",
     "apiName": "Celitech",
     "specFilePath": "swagger.yaml",
+    "createDocs": false,
     "languageOptions": {
       "java": {
+        "githubRepoName": "CelitechSDKJava",
+        "homepage": "https://docs.celitech.com/",
+        "ignoreFiles": [],
+        "liblabVersion": "2",
+        "renameIllegalModelProperties": true,
+        "sdkVersion": "1.3.42",
         "groupId": "io.github.celitech",
         "artifactId": "celitech-sdk",
         "includeKotlinSnippets": false,
@@ -113,38 +121,43 @@
             "organization": "Celitech",
             "organizationUrl": "https://www.celitech.com"
           }
-        ],
-        "githubRepoName": "CelitechSDKJava",
-        "homepage": "https://docs.celitech.com/",
-        "liblabVersion": "2",
-        "sdkVersion": "1.3.42"
+        ]
       },
       "python": {
-        "alwaysInitializeOptionals": true,
-        "pypiPackageName": "celitech-sdk",
         "githubRepoName": "CelitechSDKPython",
+        "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "1.3.42"
+        "renameIllegalModelProperties": true,
+        "sdkVersion": "1.3.42",
+        "alwaysInitializeOptionals": true,
+        "pypiPackageName": "celitech-sdk"
       },
       "php": {
-        "packageName": "celitech-sdk/sdk",
         "githubRepoName": "CelitechSDKPHP",
+        "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "1.3.42"
+        "renameIllegalModelProperties": true,
+        "sdkVersion": "1.3.42",
+        "packageName": "celitech-sdk/sdk"
       },
       "typescript": {
-        "bundle": true,
-        "exportClassDefault": false,
-        "httpClient": "fetch",
-        "npmName": "celitech-sdk",
         "githubRepoName": "CelitechSDKTypeScript",
+        "ignoreFiles": [],
         "liblabVersion": "2",
+        "renameIllegalModelProperties": true,
         "sdkVersion": "1.3.42",
-        "generateEnumAs": "enum"
+        "bundle": true,
+        "denoteCommon": false,
+        "exportClassDefault": false,
+        "generateEnumAs": "enum",
+        "httpClient": "fetch",
+        "npmName": "celitech-sdk"
       }
     },
+    "validationsToIgnore": [],
     "publishing": {
-      "githubOrg": "Celitech"
+      "githubOrg": "Celitech",
+      "platform": "github"
     },
     "integrations": {
       "enhancedApiSpec": {
@@ -155,6 +168,10 @@
           "openapiPath": "swagger.yaml"
         }
       }
+    },
+    "analytics": {
+      "streaming": false,
+      "pagination": false
     },
     "authentication": {
       "oauth": {
@@ -175,8 +192,6 @@
     ],
     "generateEnv": true,
     "includeOptionalSnippetParameters": false,
-    "inferServiceNames": false,
-    "injectedModels": [],
     "license": {
       "type": "MIT",
       "name": "MIT",
@@ -184,16 +199,9 @@
       "path": "MIT.ejs"
     },
     "responseHeaders": false,
-    "generateMCP": false,
+    "buildAllModels": false,
     "retry": {
-      "enabled": true,
-      "maxAttempts": 3,
-      "retryDelay": 150,
-      "maxDelay": 5000,
-      "retryDelayJitter": 50,
-      "backOffFactor": 2,
-      "httpCodesToRetry": [408, 429, 500, 502, 503, 504],
-      "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+      "enabled": false
     },
     "multiTenant": true,
     "includeWatermark": false,
@@ -204,11 +212,14 @@
       "sourceDir": ""
     },
     "httpClient": "fetch",
-    "bundle": true,
-    "exportClassDefault": false,
-    "npmName": "celitech-sdk",
     "githubRepoName": "CelitechSDKTypeScript",
+    "ignoreFiles": [],
+    "renameIllegalModelProperties": true,
+    "bundle": true,
+    "denoteCommon": false,
+    "exportClassDefault": false,
     "generateEnumAs": "enum",
+    "npmName": "celitech-sdk",
     "typescriptVersion": "5.3.3",
     "zodVersion": "3.22.0",
     "compilerOptions": {
@@ -219,6 +230,7 @@
     "namingStrategy": "base",
     "usesFormData": false,
     "fileOutput": "/tmp",
+    "inferServiceNames": false,
     "httpLibrary": {
       "name": "fetch",
       "packages": {},
@@ -343,7 +355,6 @@
     "documentation/snippets/packages-get.md",
     "documentation/snippets/purchases-v2-post.md",
     "documentation/snippets/purchases-get.md",
-    "documentation/snippets/purchases-post.md",
     "documentation/snippets/purchases-topup-post.md",
     "documentation/snippets/purchases-edit-post.md",
     "documentation/snippets/purchases-{purchaseId}-consumption-get.md",
@@ -407,6 +418,7 @@
     "src/http/errors/validation-error.ts",
     "src/http/transport/types.ts",
     "src/services/o-auth/models/grant-type.ts",
+    "src/http/errors/throwable-error.ts",
     "documentation/models/GetAccessTokenRequest.md",
     "documentation/models/ListDestinationsOkResponse.md",
     "documentation/models/ListPackagesOkResponse.md",
