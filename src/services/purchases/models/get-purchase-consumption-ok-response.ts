@@ -11,12 +11,9 @@ export const getPurchaseConsumptionOkResponse = z.lazy(() => {
 });
 
 /**
- * 
- * @typedef  {GetPurchaseConsumptionOkResponse} getPurchaseConsumptionOkResponse   
- * @property {number} - Remaining balance of the package in byte. 
-For ``limited packages``, this field indicates the remaining data in bytes. 
-For ``unlimited packages``, it will return ``-1`` as an identifier.
-
+ *
+ * @typedef  {GetPurchaseConsumptionOkResponse} getPurchaseConsumptionOkResponse
+ * @property {number} - Remaining balance of the package in bytes
  * @property {string} - Status of the connectivity, possible values are 'ACTIVE' or 'NOT_ACTIVE'
  */
 export type GetPurchaseConsumptionOkResponse = z.infer<typeof getPurchaseConsumptionOkResponse>;

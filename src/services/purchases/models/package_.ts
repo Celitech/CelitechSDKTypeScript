@@ -14,11 +14,10 @@ export const package_ = z.lazy(() => {
 });
 
 /**
- * 
- * @typedef  {Package_} package_   
+ *
+ * @typedef  {Package_} package_
  * @property {string} - ID of the package
- * @property {number} - Size of the package in bytes. For ``limited packages``, this field will return the data limit in bytes. For ``unlimited packages``, it will return ``-1`` as an identifier.
-
+ * @property {number} - Size of the package in Bytes
  * @property {string} - ISO representation of the package's destination.
  * @property {string} - Name of the package's destination
  * @property {number} - Price of the package in cents

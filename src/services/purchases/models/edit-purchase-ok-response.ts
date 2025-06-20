@@ -6,10 +6,10 @@ import { z } from 'zod';
 export const editPurchaseOkResponse = z.lazy(() => {
   return z.object({
     purchaseId: z.string().optional(),
-    newStartDate: z.string().optional().nullable(),
-    newEndDate: z.string().optional().nullable(),
-    newStartTime: z.number().optional().nullable(),
-    newEndTime: z.number().optional().nullable(),
+    newStartDate: z.string().optional(),
+    newEndDate: z.string().optional(),
+    newStartTime: z.number().optional(),
+    newEndTime: z.number().optional(),
   });
 });
 
@@ -32,10 +32,10 @@ export const editPurchaseOkResponseResponse = z.lazy(() => {
   return z
     .object({
       purchaseId: z.string().optional(),
-      newStartDate: z.string().optional().nullable(),
-      newEndDate: z.string().optional().nullable(),
-      newStartTime: z.number().optional().nullable(),
-      newEndTime: z.number().optional().nullable(),
+      newStartDate: z.string().optional(),
+      newEndDate: z.string().optional(),
+      newStartTime: z.number().optional(),
+      newEndTime: z.number().optional(),
     })
     .transform((data) => ({
       purchaseId: data['purchaseId'],
@@ -54,10 +54,10 @@ export const editPurchaseOkResponseRequest = z.lazy(() => {
   return z
     .object({
       purchaseId: z.string().optional(),
-      newStartDate: z.string().optional().nullable(),
-      newEndDate: z.string().optional().nullable(),
-      newStartTime: z.number().optional().nullable(),
-      newEndTime: z.number().optional().nullable(),
+      newStartDate: z.string().optional(),
+      newEndDate: z.string().optional(),
+      newStartTime: z.number().optional(),
+      newEndTime: z.number().optional(),
     })
     .transform((data) => ({
       purchaseId: data['purchaseId'],
