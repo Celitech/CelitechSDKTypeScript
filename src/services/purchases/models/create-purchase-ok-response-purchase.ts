@@ -7,11 +7,11 @@ export const createPurchaseOkResponsePurchase = z.lazy(() => {
   return z.object({
     id: z.string().optional(),
     packageId: z.string().optional(),
-    startDate: z.string().optional().nullable(),
-    endDate: z.string().optional().nullable(),
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
     createdDate: z.string().optional(),
-    startTime: z.number().optional().nullable(),
-    endTime: z.number().optional().nullable(),
+    startTime: z.number().optional(),
+    endTime: z.number().optional(),
   });
 });
 
@@ -37,11 +37,11 @@ export const createPurchaseOkResponsePurchaseResponse = z.lazy(() => {
     .object({
       id: z.string().optional(),
       packageId: z.string().optional(),
-      startDate: z.string().optional().nullable(),
-      endDate: z.string().optional().nullable(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
       createdDate: z.string().optional(),
-      startTime: z.number().optional().nullable(),
-      endTime: z.number().optional().nullable(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -63,11 +63,11 @@ export const createPurchaseOkResponsePurchaseRequest = z.lazy(() => {
     .object({
       id: z.string().optional(),
       packageId: z.string().optional(),
-      startDate: z.string().optional().nullable(),
-      endDate: z.string().optional().nullable(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
       createdDate: z.string().optional(),
-      startTime: z.number().optional().nullable(),
-      endTime: z.number().optional().nullable(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
     })
     .transform((data) => ({
       id: data['id'],

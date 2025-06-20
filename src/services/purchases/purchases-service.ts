@@ -240,7 +240,7 @@ export class PurchasesService extends BaseService {
   }
 
   /**
-   * This endpoint allows you to modify the dates of an existing package with a future activation start time. Editing can only be performed for packages that have not been activated, and it cannot change the package size. The modification must not change the package duration category to ensure pricing consistency. Duration based packages cannot be edited.
+   * This endpoint allows you to modify the dates of an existing package with a future activation start time. Editing can only be performed for packages that have not been activated, and it cannot change the package size. The modification must not change the package duration category to ensure pricing consistency.
    * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} Successful Response
    */

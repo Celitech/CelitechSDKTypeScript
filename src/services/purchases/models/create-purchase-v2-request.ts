@@ -7,6 +7,8 @@ export const createPurchaseV2Request = z.lazy(() => {
   return z.object({
     destination: z.string(),
     dataLimitInGb: z.number(),
+    startDate: z.string(),
+    endDate: z.string(),
     quantity: z.number().gte(1).lte(5),
     email: z.string().optional(),
     referenceId: z.string().optional(),
@@ -16,15 +18,12 @@ export const createPurchaseV2Request = z.lazy(() => {
 });
 
 /**
- * 
- * @typedef  {CreatePurchaseV2Request} createPurchaseV2Request   
+ *
+ * @typedef  {CreatePurchaseV2Request} createPurchaseV2Request
  * @property {string} - ISO representation of the package's destination.
- * @property {number} - Size of the package in GB.
-
-For ``limited packages``, the available options are: ``0.5, 1, 2, 3, 5, 8, 20GB`` (supports `duration` or `startDate` / `endDate`).
-
-For ``unlimited packages`` (available to Region-3), please use ``-1`` as an identifier (supports `duration` only).
-
+ * @property {number} - Size of the package in GB. The available options are 0.5, 1, 2, 3, 5, 8, 20GB
+ * @property {string} - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
+ * @property {string} - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
  * @property {number} - Number of eSIMs to purchase.
  * @property {string} - Email address where the purchase confirmation email will be sent (including QR Code & activation steps)
  * @property {string} - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
@@ -42,6 +41,8 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
     .object({
       destination: z.string(),
       dataLimitInGB: z.number(),
+      startDate: z.string(),
+      endDate: z.string(),
       quantity: z.number().gte(1).lte(5),
       email: z.string().optional(),
       referenceId: z.string().optional(),
@@ -51,6 +52,8 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
     .transform((data) => ({
       destination: data['destination'],
       dataLimitInGb: data['dataLimitInGB'],
+      startDate: data['startDate'],
+      endDate: data['endDate'],
       quantity: data['quantity'],
       email: data['email'],
       referenceId: data['referenceId'],
@@ -68,6 +71,8 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
     .object({
       destination: z.string(),
       dataLimitInGb: z.number(),
+      startDate: z.string(),
+      endDate: z.string(),
       quantity: z.number().gte(1).lte(5),
       email: z.string().optional(),
       referenceId: z.string().optional(),
@@ -77,6 +82,8 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
     .transform((data) => ({
       destination: data['destination'],
       dataLimitInGB: data['dataLimitInGb'],
+      startDate: data['startDate'],
+      endDate: data['endDate'],
       quantity: data['quantity'],
       email: data['email'],
       referenceId: data['referenceId'],
