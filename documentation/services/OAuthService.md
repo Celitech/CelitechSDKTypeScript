@@ -29,10 +29,7 @@ This endpoint was added by liblab
 import { Celitech, GetAccessTokenRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-  });
+  const celitech = new Celitech({});
 
   const getAccessTokenRequest: GetAccessTokenRequest = {};
 
