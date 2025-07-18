@@ -2,10 +2,7 @@
 import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-  });
+  const celitech = new Celitech({});
 
   const createPurchaseV2Request: CreatePurchaseV2Request = {
     destination: 'FRA',
