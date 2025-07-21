@@ -1,4 +1,4 @@
-# Celitech TypeScript SDK 1.3.44
+# Celitech TypeScript SDK 1.3.45
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
@@ -6,8 +6,8 @@ Welcome to the Celitech SDK documentation. This guide will help you get started 
 
 ## Versions
 
-- API version: `1.3.44`
-- SDK version: `1.3.44`
+- API version: `1.3.45`
+- SDK version: `1.3.45`
 
 ## About the API
 
@@ -92,10 +92,7 @@ Below is a comprehensive example demonstrating how to authenticate and call a si
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-  });
+  const celitech = new Celitech({});
 
   const { data } = await celitech.destinations.listDestinations();
 

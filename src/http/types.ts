@@ -20,8 +20,8 @@ interface ClientCredentialAuthConfig extends BaseConfig {
 }
 
 interface TokenAuthConfig extends BaseConfig {
-  clientId?: never;
   clientSecret?: never;
+  clientId?: never;
   accessToken: string;
 }
 
