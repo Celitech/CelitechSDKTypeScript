@@ -33,7 +33,10 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
+  });
 
   const createPurchaseV2Request: CreatePurchaseV2Request = {
     destination: 'FRA',
@@ -79,7 +82,10 @@ This endpoint can be used to list all the successful purchases made between a gi
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
+  });
 
   const { data } = await celitech.purchases.listPurchases({});
 
@@ -110,7 +116,10 @@ This endpoint is used to top-up an eSIM with the previously associated destinati
 import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
+  });
 
   const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555000',
@@ -148,7 +157,10 @@ This endpoint allows you to modify the dates of an existing package with a futur
 import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
+  });
 
   const editPurchaseRequest: EditPurchaseRequest = {
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
@@ -185,7 +197,10 @@ This endpoint can be called for consumption notifications (e.g. every 1 hour or 
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
+  });
 
   const { data } = await celitech.purchases.getPurchaseConsumption('4973fa15-6979-4daa-9cf3-672620df819c');
 

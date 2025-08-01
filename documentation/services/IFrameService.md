@@ -23,7 +23,10 @@ Generate a new token to be used in the iFrame
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({});
+  const celitech = new Celitech({
+    clientId: 'CLIENT_ID',
+    clientSecret: 'CLIENT_SECRET',
+  });
 
   const { data } = await celitech.iFrame.token();
 
