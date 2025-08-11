@@ -1,4 +1,4 @@
-# Celitech TypeScript SDK 1.3.48
+# Celitech TypeScript SDK 1.3.49
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
@@ -6,8 +6,8 @@ Welcome to the Celitech SDK documentation. This guide will help you get started 
 
 ## Versions
 
-- API version: `1.3.48`
-- SDK version: `1.3.48`
+- API version: `1.3.49`
+- SDK version: `1.3.49`
 
 ## About the API
 
