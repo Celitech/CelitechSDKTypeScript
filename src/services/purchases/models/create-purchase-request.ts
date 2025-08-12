@@ -21,7 +21,7 @@ export const createPurchaseRequest = z.lazy(() => {
 /**
  *
  * @typedef  {CreatePurchaseRequest} createPurchaseRequest
- * @property {string} - ISO representation of the package's destination.
+ * @property {string} - ISO representation of the package's destination. Supports both ISO2 (e.g., 'FR') and ISO3 (e.g., 'FRA') country codes.
  * @property {number} - Size of the package in GB. The available options are 0.5, 1, 2, 3, 5, 8, 20GB
  * @property {string} - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
  * @property {string} - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
