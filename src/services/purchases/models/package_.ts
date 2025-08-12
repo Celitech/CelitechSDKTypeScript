@@ -8,6 +8,7 @@ export const package_ = z.lazy(() => {
     id: z.string().optional(),
     dataLimitInBytes: z.number().optional(),
     destination: z.string().optional(),
+    destinationIso2: z.string().optional(),
     destinationName: z.string().optional(),
     priceInCents: z.number().optional(),
   });
@@ -18,7 +19,8 @@ export const package_ = z.lazy(() => {
  * @typedef  {Package_} package_
  * @property {string} - ID of the package
  * @property {number} - Size of the package in Bytes
- * @property {string} - ISO representation of the package's destination.
+ * @property {string} - ISO3 representation of the package's destination.
+ * @property {string} - ISO2 representation of the package's destination.
  * @property {string} - Name of the package's destination
  * @property {number} - Price of the package in cents
  */
@@ -34,6 +36,7 @@ export const packageResponse = z.lazy(() => {
       id: z.string().optional(),
       dataLimitInBytes: z.number().optional(),
       destination: z.string().optional(),
+      destinationISO2: z.string().optional(),
       destinationName: z.string().optional(),
       priceInCents: z.number().optional(),
     })
@@ -41,6 +44,7 @@ export const packageResponse = z.lazy(() => {
       id: data['id'],
       dataLimitInBytes: data['dataLimitInBytes'],
       destination: data['destination'],
+      destinationIso2: data['destinationISO2'],
       destinationName: data['destinationName'],
       priceInCents: data['priceInCents'],
     }));
@@ -56,6 +60,7 @@ export const packageRequest = z.lazy(() => {
       id: z.string().optional(),
       dataLimitInBytes: z.number().optional(),
       destination: z.string().optional(),
+      destinationIso2: z.string().optional(),
       destinationName: z.string().optional(),
       priceInCents: z.number().optional(),
     })
@@ -63,6 +68,7 @@ export const packageRequest = z.lazy(() => {
       id: data['id'],
       dataLimitInBytes: data['dataLimitInBytes'],
       destination: data['destination'],
+      destinationISO2: data['destinationIso2'],
       destinationName: data['destinationName'],
       priceInCents: data['priceInCents'],
     }));
