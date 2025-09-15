@@ -1,31 +1,33 @@
 import { ContentType } from '../types';
 
 export function getContentTypeDefinition(contentType: string): ContentType {
-  if (contentType.startsWith('application/') && contentType.includes('xml')) {
+  const ct = contentType.toLowerCase();
+
+  if (ct.startsWith('application/') && ct.includes('xml')) {
     return ContentType.Xml;
   }
 
-  if (contentType.toLowerCase() === 'application/x-www-form-urlencoded') {
+  if (ct === 'application/x-www-form-urlencoded') {
     return ContentType.FormUrlEncoded;
   }
 
-  if (contentType.toLowerCase() === 'text/event-stream') {
+  if (ct === 'text/event-stream') {
     return ContentType.EventStream;
   }
 
-  if (contentType.toLowerCase().startsWith('text/')) {
+  if (ct.startsWith('text/')) {
     return ContentType.Text;
   }
 
-  if (contentType.toLowerCase().startsWith('image/')) {
+  if (ct.startsWith('image/')) {
     return ContentType.Image;
   }
 
-  if (contentType.toLowerCase() === 'application/octet-stream') {
+  if (ct === 'application/octet-stream' || ct === 'application/pdf') {
     return ContentType.Binary;
   }
 
-  if (contentType.toLowerCase() === 'application/json') {
+  if (ct === 'application/json') {
     return ContentType.Json;
   }
 
