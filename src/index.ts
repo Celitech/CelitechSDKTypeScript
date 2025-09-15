@@ -1,7 +1,6 @@
 import { Environment } from './http/environment';
 import { SdkConfig } from './http/types';
 import { OAuthTokenManager } from './http/oauth/token-manager';
-import { OAuthService } from './services/o-auth';
 import { DestinationsService } from './services/destinations';
 import { PackagesService } from './services/packages';
 import { PurchasesService } from './services/purchases';
@@ -19,8 +18,6 @@ export * from './http';
 export { Environment } from './http/environment';
 
 export class Celitech {
-  public readonly oAuth: OAuthService;
-
   public readonly destinations: DestinationsService;
 
   public readonly packages: PackagesService;
@@ -34,8 +31,6 @@ export class Celitech {
   protected tokenManager: OAuthTokenManager = new OAuthTokenManager();
 
   constructor(public config: SdkConfig) {
-    this.oAuth = new OAuthService(this.config, this.tokenManager);
-
     this.destinations = new DestinationsService(this.config, this.tokenManager);
 
     this.packages = new PackagesService(this.config, this.tokenManager);
@@ -48,7 +43,6 @@ export class Celitech {
   }
 
   set baseUrl(baseUrl: string) {
-    this.oAuth.baseUrl = baseUrl;
     this.destinations.baseUrl = baseUrl;
     this.packages.baseUrl = baseUrl;
     this.purchases.baseUrl = baseUrl;
@@ -57,7 +51,6 @@ export class Celitech {
   }
 
   set environment(environment: Environment) {
-    this.oAuth.baseUrl = environment;
     this.destinations.baseUrl = environment;
     this.packages.baseUrl = environment;
     this.purchases.baseUrl = environment;
@@ -66,7 +59,6 @@ export class Celitech {
   }
 
   set timeoutMs(timeoutMs: number) {
-    this.oAuth.timeoutMs = timeoutMs;
     this.destinations.timeoutMs = timeoutMs;
     this.packages.timeoutMs = timeoutMs;
     this.purchases.timeoutMs = timeoutMs;
@@ -75,7 +67,6 @@ export class Celitech {
   }
 
   set clientId(clientId: string) {
-    this.oAuth.clientId = clientId;
     this.destinations.clientId = clientId;
     this.packages.clientId = clientId;
     this.purchases.clientId = clientId;
@@ -84,7 +75,6 @@ export class Celitech {
   }
 
   set clientSecret(clientSecret: string) {
-    this.oAuth.clientSecret = clientSecret;
     this.destinations.clientSecret = clientSecret;
     this.packages.clientSecret = clientSecret;
     this.purchases.clientSecret = clientSecret;
@@ -93,7 +83,6 @@ export class Celitech {
   }
 
   set oAuthBaseUrl(oAuthBaseUrl: string) {
-    this.oAuth.oAuthBaseUrl = oAuthBaseUrl;
     this.destinations.oAuthBaseUrl = oAuthBaseUrl;
     this.packages.oAuthBaseUrl = oAuthBaseUrl;
     this.purchases.oAuthBaseUrl = oAuthBaseUrl;
@@ -102,7 +91,6 @@ export class Celitech {
   }
 
   set accessToken(accessToken: string) {
-    this.oAuth.accessToken = accessToken;
     this.destinations.accessToken = accessToken;
     this.packages.accessToken = accessToken;
     this.purchases.accessToken = accessToken;

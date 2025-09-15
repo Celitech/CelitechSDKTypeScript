@@ -102,6 +102,20 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     return this;
   }
 
+  setFilename(filename?: string): RequestBuilder<Page> {
+    if (filename !== undefined) {
+      this.params.filename = filename;
+    }
+    return this;
+  }
+
+  setFilenames(filenames?: string[]): RequestBuilder<Page> {
+    if (filenames !== undefined) {
+      this.params.filenames = filenames;
+    }
+    return this;
+  }
+
   setPagination(pagination: RequestPagination<Page>): RequestBuilder<Page> {
     this.params.pagination = pagination;
     return this;

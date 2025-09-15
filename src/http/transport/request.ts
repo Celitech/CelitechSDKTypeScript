@@ -45,6 +45,10 @@ export class Request<PageSchema = unknown[]> {
 
   public pagination?: RequestPagination<PageSchema>;
 
+  public filename?: string;
+
+  public filenames?: string[];
+
   public scopes?: Set<string>;
 
   public tokenManager: OAuthTokenManager;
@@ -67,6 +71,8 @@ export class Request<PageSchema = unknown[]> {
     this.retry = params.retry;
     this.validation = params.validation;
     this.pagination = params.pagination;
+    this.filename = params.filename;
+    this.filenames = params.filenames;
     this.scopes = params.scopes;
     this.tokenManager = params.tokenManager;
   }
@@ -170,6 +176,8 @@ export class Request<PageSchema = unknown[]> {
       requestContentType: overrides?.requestContentType ?? this.requestContentType,
       retry: overrides?.retry ?? this.retry,
       validation: overrides?.validation ?? this.validation,
+      filename: overrides?.filename ?? this.filename,
+      filenames: overrides?.filenames ?? this.filenames,
       scopes: overrides?.scopes,
       tokenManager: this.tokenManager,
     };
