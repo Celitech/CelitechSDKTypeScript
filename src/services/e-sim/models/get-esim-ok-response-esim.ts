@@ -9,6 +9,7 @@ export const getEsimOkResponseEsim = z.lazy(() => {
     smdpAddress: z.string().optional(),
     manualActivationCode: z.string().optional(),
     status: z.string().optional(),
+    isTopUpAllowed: z.boolean().optional(),
   });
 });
 
@@ -19,6 +20,7 @@ export const getEsimOkResponseEsim = z.lazy(() => {
  * @property {string} - SM-DP+ Address
  * @property {string} - The manual activation code
  * @property {string} - Status of the eSIM, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
+ * @property {boolean} - Indicates whether the eSIM is currently eligible for a top-up. This flag should be checked before attempting a top-up request.
  */
 export type GetEsimOkResponseEsim = z.infer<typeof getEsimOkResponseEsim>;
 
@@ -33,12 +35,14 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
       smdpAddress: z.string().optional(),
       manualActivationCode: z.string().optional(),
       status: z.string().optional(),
+      isTopUpAllowed: z.boolean().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
       smdpAddress: data['smdpAddress'],
       manualActivationCode: data['manualActivationCode'],
       status: data['status'],
+      isTopUpAllowed: data['isTopUpAllowed'],
     }));
 });
 
@@ -53,11 +57,13 @@ export const getEsimOkResponseEsimRequest = z.lazy(() => {
       smdpAddress: z.string().optional(),
       manualActivationCode: z.string().optional(),
       status: z.string().optional(),
+      isTopUpAllowed: z.boolean().optional(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
       smdpAddress: data['smdpAddress'],
       manualActivationCode: data['manualActivationCode'],
       status: data['status'],
+      isTopUpAllowed: data['isTopUpAllowed'],
     }));
 });
