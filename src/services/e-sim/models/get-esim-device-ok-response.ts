@@ -6,7 +6,7 @@ import { Device, device, deviceRequest, deviceResponse } from './device';
  */
 export const getEsimDeviceOkResponse = z.lazy(() => {
   return z.object({
-    device: device.optional(),
+    device: device,
   });
 });
 
@@ -24,7 +24,7 @@ export type GetEsimDeviceOkResponse = z.infer<typeof getEsimDeviceOkResponse>;
 export const getEsimDeviceOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      device: deviceResponse.optional(),
+      device: deviceResponse,
     })
     .transform((data) => ({
       device: data['device'],
@@ -38,7 +38,7 @@ export const getEsimDeviceOkResponseResponse = z.lazy(() => {
 export const getEsimDeviceOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      device: deviceRequest.optional(),
+      device: deviceRequest,
     })
     .transform((data) => ({
       device: data['device'],

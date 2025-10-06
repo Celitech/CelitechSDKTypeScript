@@ -7,17 +7,17 @@ import { PurchasesEsim, purchasesEsim, purchasesEsimRequest, purchasesEsimRespon
  */
 export const purchases = z.lazy(() => {
   return z.object({
-    id: z.string().optional(),
-    startDate: z.string().optional(),
-    endDate: z.string().optional(),
-    createdDate: z.string().optional(),
+    id: z.string(),
+    startDate: z.string(),
+    endDate: z.string(),
+    createdDate: z.string(),
     startTime: z.number().optional(),
     endTime: z.number().optional(),
     createdAt: z.number().optional(),
-    package: package_.optional(),
-    esim: purchasesEsim.optional(),
-    source: z.string().optional(),
-    purchaseType: z.string().optional(),
+    package: package_,
+    esim: purchasesEsim,
+    source: z.string(),
+    purchaseType: z.string(),
     referenceId: z.string().optional().nullable(),
   });
 });
@@ -47,17 +47,17 @@ export type Purchases = z.infer<typeof purchases>;
 export const purchasesResponse = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
-      createdDate: z.string().optional(),
+      id: z.string(),
+      startDate: z.string(),
+      endDate: z.string(),
+      createdDate: z.string(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
       createdAt: z.number().optional(),
-      package: packageResponse.optional(),
-      esim: purchasesEsimResponse.optional(),
-      source: z.string().optional(),
-      purchaseType: z.string().optional(),
+      package: packageResponse,
+      esim: purchasesEsimResponse,
+      source: z.string(),
+      purchaseType: z.string(),
       referenceId: z.string().optional().nullable(),
     })
     .transform((data) => ({
@@ -83,17 +83,17 @@ export const purchasesResponse = z.lazy(() => {
 export const purchasesRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
-      createdDate: z.string().optional(),
+      id: z.string(),
+      startDate: z.string(),
+      endDate: z.string(),
+      createdDate: z.string(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
       createdAt: z.number().optional(),
-      package: packageRequest.optional(),
-      esim: purchasesEsimRequest.optional(),
-      source: z.string().optional(),
-      purchaseType: z.string().optional(),
+      package: packageRequest,
+      esim: purchasesEsimRequest,
+      source: z.string(),
+      purchaseType: z.string(),
       referenceId: z.string().optional().nullable(),
     })
     .transform((data) => ({

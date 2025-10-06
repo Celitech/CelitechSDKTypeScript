@@ -4,7 +4,7 @@
 
 | Name | Type                         | Required | Description |
 | :--- | :--------------------------- | :------- | :---------- |
-| esim | GetEsimHistoryOkResponseEsim | ❌       |             |
+| esim | GetEsimHistoryOkResponseEsim | ✅       |             |
 
 # GetEsimHistoryOkResponseEsim
 
@@ -12,5 +12,5 @@
 
 | Name    | Type      | Required | Description    |
 | :------ | :-------- | :------- | :------------- |
-| iccid   | string    | ❌       | ID of the eSIM |
-| history | History[] | ❌       |                |
+| iccid   | string    | ✅       | ID of the eSIM |
+| history | History[] | ✅       |                |

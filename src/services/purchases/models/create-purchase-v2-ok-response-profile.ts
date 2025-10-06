@@ -5,9 +5,9 @@ import { z } from 'zod';
  */
 export const createPurchaseV2OkResponseProfile = z.lazy(() => {
   return z.object({
-    iccid: z.string().min(18).max(22).optional(),
-    activationCode: z.string().min(1000).max(8000).optional(),
-    manualActivationCode: z.string().optional(),
+    iccid: z.string().min(18).max(22),
+    activationCode: z.string().min(1000).max(8000),
+    manualActivationCode: z.string(),
   });
 });
 
@@ -27,9 +27,9 @@ export type CreatePurchaseV2OkResponseProfile = z.infer<typeof createPurchaseV2O
 export const createPurchaseV2OkResponseProfileResponse = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      activationCode: z.string().min(1000).max(8000).optional(),
-      manualActivationCode: z.string().optional(),
+      iccid: z.string().min(18).max(22),
+      activationCode: z.string().min(1000).max(8000),
+      manualActivationCode: z.string(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
@@ -45,9 +45,9 @@ export const createPurchaseV2OkResponseProfileResponse = z.lazy(() => {
 export const createPurchaseV2OkResponseProfileRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      activationCode: z.string().min(1000).max(8000).optional(),
-      manualActivationCode: z.string().optional(),
+      iccid: z.string().min(18).max(22),
+      activationCode: z.string().min(1000).max(8000),
+      manualActivationCode: z.string(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

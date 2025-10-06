@@ -6,7 +6,7 @@ import { Destinations, destinations, destinationsRequest, destinationsResponse }
  */
 export const listDestinationsOkResponse = z.lazy(() => {
   return z.object({
-    destinations: z.array(destinations).optional(),
+    destinations: z.array(destinations),
   });
 });
 
@@ -24,7 +24,7 @@ export type ListDestinationsOkResponse = z.infer<typeof listDestinationsOkRespon
 export const listDestinationsOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      destinations: z.array(destinationsResponse).optional(),
+      destinations: z.array(destinationsResponse),
     })
     .transform((data) => ({
       destinations: data['destinations'],
@@ -38,7 +38,7 @@ export const listDestinationsOkResponseResponse = z.lazy(() => {
 export const listDestinationsOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      destinations: z.array(destinationsRequest).optional(),
+      destinations: z.array(destinationsRequest),
     })
     .transform((data) => ({
       destinations: data['destinations'],

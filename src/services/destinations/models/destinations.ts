@@ -5,10 +5,10 @@ import { z } from 'zod';
  */
 export const destinations = z.lazy(() => {
   return z.object({
-    name: z.string().optional(),
-    destination: z.string().optional(),
-    destinationIso2: z.string().optional(),
-    supportedCountries: z.array(z.string()).optional(),
+    name: z.string(),
+    destination: z.string(),
+    destinationIso2: z.string(),
+    supportedCountries: z.array(z.string()),
   });
 });
 
@@ -29,10 +29,10 @@ export type Destinations = z.infer<typeof destinations>;
 export const destinationsResponse = z.lazy(() => {
   return z
     .object({
-      name: z.string().optional(),
-      destination: z.string().optional(),
-      destinationISO2: z.string().optional(),
-      supportedCountries: z.array(z.string()).optional(),
+      name: z.string(),
+      destination: z.string(),
+      destinationISO2: z.string(),
+      supportedCountries: z.array(z.string()),
     })
     .transform((data) => ({
       name: data['name'],
@@ -49,10 +49,10 @@ export const destinationsResponse = z.lazy(() => {
 export const destinationsRequest = z.lazy(() => {
   return z
     .object({
-      name: z.string().optional(),
-      destination: z.string().optional(),
-      destinationIso2: z.string().optional(),
-      supportedCountries: z.array(z.string()).optional(),
+      name: z.string(),
+      destination: z.string(),
+      destinationIso2: z.string(),
+      supportedCountries: z.array(z.string()),
     })
     .transform((data) => ({
       name: data['name'],

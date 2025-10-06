@@ -5,7 +5,7 @@ import { z } from 'zod';
  */
 export const tokenOkResponse = z.lazy(() => {
   return z.object({
-    token: z.string().optional(),
+    token: z.string(),
   });
 });
 
@@ -23,7 +23,7 @@ export type TokenOkResponse = z.infer<typeof tokenOkResponse>;
 export const tokenOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      token: z.string().optional(),
+      token: z.string(),
     })
     .transform((data) => ({
       token: data['token'],
@@ -37,7 +37,7 @@ export const tokenOkResponseResponse = z.lazy(() => {
 export const tokenOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      token: z.string().optional(),
+      token: z.string(),
     })
     .transform((data) => ({
       token: data['token'],

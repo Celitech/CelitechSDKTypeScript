@@ -17,8 +17,8 @@ import {
  */
 export const topUpEsimOkResponse = z.lazy(() => {
   return z.object({
-    purchase: topUpEsimOkResponsePurchase.optional(),
-    profile: topUpEsimOkResponseProfile.optional(),
+    purchase: topUpEsimOkResponsePurchase,
+    profile: topUpEsimOkResponseProfile,
   });
 });
 
@@ -37,8 +37,8 @@ export type TopUpEsimOkResponse = z.infer<typeof topUpEsimOkResponse>;
 export const topUpEsimOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      purchase: topUpEsimOkResponsePurchaseResponse.optional(),
-      profile: topUpEsimOkResponseProfileResponse.optional(),
+      purchase: topUpEsimOkResponsePurchaseResponse,
+      profile: topUpEsimOkResponseProfileResponse,
     })
     .transform((data) => ({
       purchase: data['purchase'],
@@ -53,8 +53,8 @@ export const topUpEsimOkResponseResponse = z.lazy(() => {
 export const topUpEsimOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchase: topUpEsimOkResponsePurchaseRequest.optional(),
-      profile: topUpEsimOkResponseProfileRequest.optional(),
+      purchase: topUpEsimOkResponsePurchaseRequest,
+      profile: topUpEsimOkResponseProfileRequest,
     })
     .transform((data) => ({
       purchase: data['purchase'],

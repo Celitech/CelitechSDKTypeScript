@@ -5,10 +5,10 @@ import { z } from 'zod';
  */
 export const device = z.lazy(() => {
   return z.object({
-    oem: z.string().optional(),
-    hardwareName: z.string().optional(),
-    hardwareModel: z.string().optional(),
-    eid: z.string().optional(),
+    oem: z.string(),
+    hardwareName: z.string(),
+    hardwareModel: z.string(),
+    eid: z.string(),
   });
 });
 
@@ -29,10 +29,10 @@ export type Device = z.infer<typeof device>;
 export const deviceResponse = z.lazy(() => {
   return z
     .object({
-      oem: z.string().optional(),
-      hardwareName: z.string().optional(),
-      hardwareModel: z.string().optional(),
-      eid: z.string().optional(),
+      oem: z.string(),
+      hardwareName: z.string(),
+      hardwareModel: z.string(),
+      eid: z.string(),
     })
     .transform((data) => ({
       oem: data['oem'],
@@ -49,10 +49,10 @@ export const deviceResponse = z.lazy(() => {
 export const deviceRequest = z.lazy(() => {
   return z
     .object({
-      oem: z.string().optional(),
-      hardwareName: z.string().optional(),
-      hardwareModel: z.string().optional(),
-      eid: z.string().optional(),
+      oem: z.string(),
+      hardwareName: z.string(),
+      hardwareModel: z.string(),
+      eid: z.string(),
     })
     .transform((data) => ({
       oem: data['oem'],

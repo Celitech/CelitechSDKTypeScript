@@ -5,11 +5,11 @@ import { z } from 'zod';
  */
 export const getEsimOkResponseEsim = z.lazy(() => {
   return z.object({
-    iccid: z.string().min(18).max(22).optional(),
-    smdpAddress: z.string().optional(),
-    manualActivationCode: z.string().optional(),
-    status: z.string().optional(),
-    isTopUpAllowed: z.boolean().optional(),
+    iccid: z.string().min(18).max(22),
+    smdpAddress: z.string(),
+    manualActivationCode: z.string(),
+    status: z.string(),
+    isTopUpAllowed: z.boolean(),
   });
 });
 
@@ -31,11 +31,11 @@ export type GetEsimOkResponseEsim = z.infer<typeof getEsimOkResponseEsim>;
 export const getEsimOkResponseEsimResponse = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      smdpAddress: z.string().optional(),
-      manualActivationCode: z.string().optional(),
-      status: z.string().optional(),
-      isTopUpAllowed: z.boolean().optional(),
+      iccid: z.string().min(18).max(22),
+      smdpAddress: z.string(),
+      manualActivationCode: z.string(),
+      status: z.string(),
+      isTopUpAllowed: z.boolean(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
@@ -53,11 +53,11 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
 export const getEsimOkResponseEsimRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      smdpAddress: z.string().optional(),
-      manualActivationCode: z.string().optional(),
-      status: z.string().optional(),
-      isTopUpAllowed: z.boolean().optional(),
+      iccid: z.string().min(18).max(22),
+      smdpAddress: z.string(),
+      manualActivationCode: z.string(),
+      status: z.string(),
+      isTopUpAllowed: z.boolean(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

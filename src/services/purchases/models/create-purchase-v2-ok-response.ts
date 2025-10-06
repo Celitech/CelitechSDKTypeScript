@@ -17,8 +17,8 @@ import {
  */
 export const createPurchaseV2OkResponse = z.lazy(() => {
   return z.object({
-    purchase: createPurchaseV2OkResponsePurchase.optional(),
-    profile: createPurchaseV2OkResponseProfile.optional(),
+    purchase: createPurchaseV2OkResponsePurchase,
+    profile: createPurchaseV2OkResponseProfile,
   });
 });
 
@@ -37,8 +37,8 @@ export type CreatePurchaseV2OkResponse = z.infer<typeof createPurchaseV2OkRespon
 export const createPurchaseV2OkResponseResponse = z.lazy(() => {
   return z
     .object({
-      purchase: createPurchaseV2OkResponsePurchaseResponse.optional(),
-      profile: createPurchaseV2OkResponseProfileResponse.optional(),
+      purchase: createPurchaseV2OkResponsePurchaseResponse,
+      profile: createPurchaseV2OkResponseProfileResponse,
     })
     .transform((data) => ({
       purchase: data['purchase'],
@@ -53,8 +53,8 @@ export const createPurchaseV2OkResponseResponse = z.lazy(() => {
 export const createPurchaseV2OkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchase: createPurchaseV2OkResponsePurchaseRequest.optional(),
-      profile: createPurchaseV2OkResponseProfileRequest.optional(),
+      purchase: createPurchaseV2OkResponsePurchaseRequest,
+      profile: createPurchaseV2OkResponseProfileRequest,
     })
     .transform((data) => ({
       purchase: data['purchase'],

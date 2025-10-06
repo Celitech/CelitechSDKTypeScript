@@ -5,9 +5,9 @@ import { z } from 'zod';
  */
 export const editPurchaseOkResponse = z.lazy(() => {
   return z.object({
-    purchaseId: z.string().optional(),
-    newStartDate: z.string().optional(),
-    newEndDate: z.string().optional(),
+    purchaseId: z.string(),
+    newStartDate: z.string(),
+    newEndDate: z.string(),
     newStartTime: z.number().optional(),
     newEndTime: z.number().optional(),
   });
@@ -31,9 +31,9 @@ export type EditPurchaseOkResponse = z.infer<typeof editPurchaseOkResponse>;
 export const editPurchaseOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      purchaseId: z.string().optional(),
-      newStartDate: z.string().optional(),
-      newEndDate: z.string().optional(),
+      purchaseId: z.string(),
+      newStartDate: z.string(),
+      newEndDate: z.string(),
       newStartTime: z.number().optional(),
       newEndTime: z.number().optional(),
     })
@@ -53,9 +53,9 @@ export const editPurchaseOkResponseResponse = z.lazy(() => {
 export const editPurchaseOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchaseId: z.string().optional(),
-      newStartDate: z.string().optional(),
-      newEndDate: z.string().optional(),
+      purchaseId: z.string(),
+      newStartDate: z.string(),
+      newEndDate: z.string(),
       newStartTime: z.number().optional(),
       newEndTime: z.number().optional(),
     })
