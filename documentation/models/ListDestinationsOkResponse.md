@@ -4,4 +4,4 @@
 
 | Name         | Type           | Required | Description |
 | :----------- | :------------- | :------- | :---------- |
-| destinations | Destinations[] | ❌       |             |
+| destinations | Destinations[] | ✅       |             |

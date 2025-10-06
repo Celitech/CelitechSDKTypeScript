@@ -5,11 +5,11 @@ import { z } from 'zod';
  */
 export const topUpEsimOkResponsePurchase = z.lazy(() => {
   return z.object({
-    id: z.string().optional(),
-    packageId: z.string().optional(),
-    startDate: z.string().optional(),
-    endDate: z.string().optional(),
-    createdDate: z.string().optional(),
+    id: z.string(),
+    packageId: z.string(),
+    startDate: z.string(),
+    endDate: z.string(),
+    createdDate: z.string(),
     startTime: z.number().optional(),
     endTime: z.number().optional(),
   });
@@ -35,11 +35,11 @@ export type TopUpEsimOkResponsePurchase = z.infer<typeof topUpEsimOkResponsePurc
 export const topUpEsimOkResponsePurchaseResponse = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      packageId: z.string().optional(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
-      createdDate: z.string().optional(),
+      id: z.string(),
+      packageId: z.string(),
+      startDate: z.string(),
+      endDate: z.string(),
+      createdDate: z.string(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
     })
@@ -61,11 +61,11 @@ export const topUpEsimOkResponsePurchaseResponse = z.lazy(() => {
 export const topUpEsimOkResponsePurchaseRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      packageId: z.string().optional(),
-      startDate: z.string().optional(),
-      endDate: z.string().optional(),
-      createdDate: z.string().optional(),
+      id: z.string(),
+      packageId: z.string(),
+      startDate: z.string(),
+      endDate: z.string(),
+      createdDate: z.string(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
     })

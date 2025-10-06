@@ -5,8 +5,8 @@ import { z } from 'zod';
  */
 export const getPurchaseConsumptionOkResponse = z.lazy(() => {
   return z.object({
-    dataUsageRemainingInBytes: z.number().optional(),
-    status: z.string().optional(),
+    dataUsageRemainingInBytes: z.number(),
+    status: z.string(),
   });
 });
 
@@ -25,8 +25,8 @@ export type GetPurchaseConsumptionOkResponse = z.infer<typeof getPurchaseConsump
 export const getPurchaseConsumptionOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      dataUsageRemainingInBytes: z.number().optional(),
-      status: z.string().optional(),
+      dataUsageRemainingInBytes: z.number(),
+      status: z.string(),
     })
     .transform((data) => ({
       dataUsageRemainingInBytes: data['dataUsageRemainingInBytes'],
@@ -41,8 +41,8 @@ export const getPurchaseConsumptionOkResponseResponse = z.lazy(() => {
 export const getPurchaseConsumptionOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      dataUsageRemainingInBytes: z.number().optional(),
-      status: z.string().optional(),
+      dataUsageRemainingInBytes: z.number(),
+      status: z.string(),
     })
     .transform((data) => ({
       dataUsageRemainingInBytes: data['dataUsageRemainingInBytes'],

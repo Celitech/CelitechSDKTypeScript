@@ -6,8 +6,8 @@ import { History, history, historyRequest, historyResponse } from './history';
  */
 export const getEsimHistoryOkResponseEsim = z.lazy(() => {
   return z.object({
-    iccid: z.string().min(18).max(22).optional(),
-    history: z.array(history).optional(),
+    iccid: z.string().min(18).max(22),
+    history: z.array(history),
   });
 });
 
@@ -26,8 +26,8 @@ export type GetEsimHistoryOkResponseEsim = z.infer<typeof getEsimHistoryOkRespon
 export const getEsimHistoryOkResponseEsimResponse = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      history: z.array(historyResponse).optional(),
+      iccid: z.string().min(18).max(22),
+      history: z.array(historyResponse),
     })
     .transform((data) => ({
       iccid: data['iccid'],
@@ -42,8 +42,8 @@ export const getEsimHistoryOkResponseEsimResponse = z.lazy(() => {
 export const getEsimHistoryOkResponseEsimRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      history: z.array(historyRequest).optional(),
+      iccid: z.string().min(18).max(22),
+      history: z.array(historyRequest),
     })
     .transform((data) => ({
       iccid: data['iccid'],

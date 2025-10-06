@@ -5,7 +5,7 @@ import { z } from 'zod';
  */
 export const purchasesEsim = z.lazy(() => {
   return z.object({
-    iccid: z.string().min(18).max(22).optional(),
+    iccid: z.string().min(18).max(22),
   });
 });
 
@@ -23,7 +23,7 @@ export type PurchasesEsim = z.infer<typeof purchasesEsim>;
 export const purchasesEsimResponse = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
+      iccid: z.string().min(18).max(22),
     })
     .transform((data) => ({
       iccid: data['iccid'],
@@ -37,7 +37,7 @@ export const purchasesEsimResponse = z.lazy(() => {
 export const purchasesEsimRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
+      iccid: z.string().min(18).max(22),
     })
     .transform((data) => ({
       iccid: data['iccid'],

@@ -5,9 +5,9 @@ import { z } from 'zod';
  */
 export const getEsimMacOkResponseEsim = z.lazy(() => {
   return z.object({
-    iccid: z.string().min(18).max(22).optional(),
-    smdpAddress: z.string().optional(),
-    manualActivationCode: z.string().optional(),
+    iccid: z.string().min(18).max(22),
+    smdpAddress: z.string(),
+    manualActivationCode: z.string(),
   });
 });
 
@@ -27,9 +27,9 @@ export type GetEsimMacOkResponseEsim = z.infer<typeof getEsimMacOkResponseEsim>;
 export const getEsimMacOkResponseEsimResponse = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      smdpAddress: z.string().optional(),
-      manualActivationCode: z.string().optional(),
+      iccid: z.string().min(18).max(22),
+      smdpAddress: z.string(),
+      manualActivationCode: z.string(),
     })
     .transform((data) => ({
       iccid: data['iccid'],
@@ -45,9 +45,9 @@ export const getEsimMacOkResponseEsimResponse = z.lazy(() => {
 export const getEsimMacOkResponseEsimRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
-      smdpAddress: z.string().optional(),
-      manualActivationCode: z.string().optional(),
+      iccid: z.string().min(18).max(22),
+      smdpAddress: z.string(),
+      manualActivationCode: z.string(),
     })
     .transform((data) => ({
       iccid: data['iccid'],

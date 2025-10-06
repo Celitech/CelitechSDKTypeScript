@@ -5,13 +5,13 @@ import { z } from 'zod';
  */
 export const packages = z.lazy(() => {
   return z.object({
-    id: z.string().optional(),
-    destination: z.string().optional(),
-    destinationIso2: z.string().optional(),
-    dataLimitInBytes: z.number().optional(),
-    minDays: z.number().optional(),
-    maxDays: z.number().optional(),
-    priceInCents: z.number().optional(),
+    id: z.string(),
+    destination: z.string(),
+    destinationIso2: z.string(),
+    dataLimitInBytes: z.number(),
+    minDays: z.number(),
+    maxDays: z.number(),
+    priceInCents: z.number(),
   });
 });
 
@@ -35,13 +35,13 @@ export type Packages = z.infer<typeof packages>;
 export const packagesResponse = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      destination: z.string().optional(),
-      destinationISO2: z.string().optional(),
-      dataLimitInBytes: z.number().optional(),
-      minDays: z.number().optional(),
-      maxDays: z.number().optional(),
-      priceInCents: z.number().optional(),
+      id: z.string(),
+      destination: z.string(),
+      destinationISO2: z.string(),
+      dataLimitInBytes: z.number(),
+      minDays: z.number(),
+      maxDays: z.number(),
+      priceInCents: z.number(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -61,13 +61,13 @@ export const packagesResponse = z.lazy(() => {
 export const packagesRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      destination: z.string().optional(),
-      destinationIso2: z.string().optional(),
-      dataLimitInBytes: z.number().optional(),
-      minDays: z.number().optional(),
-      maxDays: z.number().optional(),
-      priceInCents: z.number().optional(),
+      id: z.string(),
+      destination: z.string(),
+      destinationIso2: z.string(),
+      dataLimitInBytes: z.number(),
+      minDays: z.number(),
+      maxDays: z.number(),
+      priceInCents: z.number(),
     })
     .transform((data) => ({
       id: data['id'],

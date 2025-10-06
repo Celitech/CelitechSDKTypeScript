@@ -5,9 +5,9 @@ import { z } from 'zod';
  */
 export const createPurchaseV2OkResponsePurchase = z.lazy(() => {
   return z.object({
-    id: z.string().optional(),
-    packageId: z.string().optional(),
-    createdDate: z.string().optional(),
+    id: z.string(),
+    packageId: z.string(),
+    createdDate: z.string(),
   });
 });
 
@@ -27,9 +27,9 @@ export type CreatePurchaseV2OkResponsePurchase = z.infer<typeof createPurchaseV2
 export const createPurchaseV2OkResponsePurchaseResponse = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      packageId: z.string().optional(),
-      createdDate: z.string().optional(),
+      id: z.string(),
+      packageId: z.string(),
+      createdDate: z.string(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -45,9 +45,9 @@ export const createPurchaseV2OkResponsePurchaseResponse = z.lazy(() => {
 export const createPurchaseV2OkResponsePurchaseRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().optional(),
-      packageId: z.string().optional(),
-      createdDate: z.string().optional(),
+      id: z.string(),
+      packageId: z.string(),
+      createdDate: z.string(),
     })
     .transform((data) => ({
       id: data['id'],

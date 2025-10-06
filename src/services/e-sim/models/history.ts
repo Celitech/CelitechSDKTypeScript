@@ -5,8 +5,8 @@ import { z } from 'zod';
  */
 export const history = z.lazy(() => {
   return z.object({
-    status: z.string().optional(),
-    statusDate: z.string().optional(),
+    status: z.string(),
+    statusDate: z.string(),
     date: z.number().optional(),
   });
 });
@@ -27,8 +27,8 @@ export type History = z.infer<typeof history>;
 export const historyResponse = z.lazy(() => {
   return z
     .object({
-      status: z.string().optional(),
-      statusDate: z.string().optional(),
+      status: z.string(),
+      statusDate: z.string(),
       date: z.number().optional(),
     })
     .transform((data) => ({
@@ -45,8 +45,8 @@ export const historyResponse = z.lazy(() => {
 export const historyRequest = z.lazy(() => {
   return z
     .object({
-      status: z.string().optional(),
-      statusDate: z.string().optional(),
+      status: z.string(),
+      statusDate: z.string(),
       date: z.number().optional(),
     })
     .transform((data) => ({

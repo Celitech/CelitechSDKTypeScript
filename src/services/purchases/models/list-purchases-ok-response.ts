@@ -6,8 +6,8 @@ import { Purchases, purchases, purchasesRequest, purchasesResponse } from './pur
  */
 export const listPurchasesOkResponse = z.lazy(() => {
   return z.object({
-    purchases: z.array(purchases).optional(),
-    afterCursor: z.string().optional().nullable(),
+    purchases: z.array(purchases),
+    afterCursor: z.string().nullable(),
   });
 });
 
@@ -26,8 +26,8 @@ export type ListPurchasesOkResponse = z.infer<typeof listPurchasesOkResponse>;
 export const listPurchasesOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      purchases: z.array(purchasesResponse).optional(),
-      afterCursor: z.string().optional().nullable(),
+      purchases: z.array(purchasesResponse),
+      afterCursor: z.string().nullable(),
     })
     .transform((data) => ({
       purchases: data['purchases'],
@@ -42,8 +42,8 @@ export const listPurchasesOkResponseResponse = z.lazy(() => {
 export const listPurchasesOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      purchases: z.array(purchasesRequest).optional(),
-      afterCursor: z.string().optional().nullable(),
+      purchases: z.array(purchasesRequest),
+      afterCursor: z.string().nullable(),
     })
     .transform((data) => ({
       purchases: data['purchases'],

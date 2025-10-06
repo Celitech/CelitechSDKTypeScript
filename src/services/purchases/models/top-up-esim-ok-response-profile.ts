@@ -5,7 +5,7 @@ import { z } from 'zod';
  */
 export const topUpEsimOkResponseProfile = z.lazy(() => {
   return z.object({
-    iccid: z.string().min(18).max(22).optional(),
+    iccid: z.string().min(18).max(22),
   });
 });
 
@@ -23,7 +23,7 @@ export type TopUpEsimOkResponseProfile = z.infer<typeof topUpEsimOkResponseProfi
 export const topUpEsimOkResponseProfileResponse = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
+      iccid: z.string().min(18).max(22),
     })
     .transform((data) => ({
       iccid: data['iccid'],
@@ -37,7 +37,7 @@ export const topUpEsimOkResponseProfileResponse = z.lazy(() => {
 export const topUpEsimOkResponseProfileRequest = z.lazy(() => {
   return z
     .object({
-      iccid: z.string().min(18).max(22).optional(),
+      iccid: z.string().min(18).max(22),
     })
     .transform((data) => ({
       iccid: data['iccid'],

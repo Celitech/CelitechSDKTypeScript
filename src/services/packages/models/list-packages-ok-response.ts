@@ -6,8 +6,8 @@ import { Packages, packages, packagesRequest, packagesResponse } from './package
  */
 export const listPackagesOkResponse = z.lazy(() => {
   return z.object({
-    packages: z.array(packages).optional(),
-    afterCursor: z.string().optional().nullable(),
+    packages: z.array(packages),
+    afterCursor: z.string().nullable(),
   });
 });
 
@@ -26,8 +26,8 @@ export type ListPackagesOkResponse = z.infer<typeof listPackagesOkResponse>;
 export const listPackagesOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      packages: z.array(packagesResponse).optional(),
-      afterCursor: z.string().optional().nullable(),
+      packages: z.array(packagesResponse),
+      afterCursor: z.string().nullable(),
     })
     .transform((data) => ({
       packages: data['packages'],
@@ -42,8 +42,8 @@ export const listPackagesOkResponseResponse = z.lazy(() => {
 export const listPackagesOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      packages: z.array(packagesRequest).optional(),
-      afterCursor: z.string().optional().nullable(),
+      packages: z.array(packagesRequest),
+      afterCursor: z.string().nullable(),
     })
     .transform((data) => ({
       packages: data['packages'],

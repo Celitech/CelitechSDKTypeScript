@@ -11,7 +11,7 @@ import {
  */
 export const getEsimHistoryOkResponse = z.lazy(() => {
   return z.object({
-    esim: getEsimHistoryOkResponseEsim.optional(),
+    esim: getEsimHistoryOkResponseEsim,
   });
 });
 
@@ -29,7 +29,7 @@ export type GetEsimHistoryOkResponse = z.infer<typeof getEsimHistoryOkResponse>;
 export const getEsimHistoryOkResponseResponse = z.lazy(() => {
   return z
     .object({
-      esim: getEsimHistoryOkResponseEsimResponse.optional(),
+      esim: getEsimHistoryOkResponseEsimResponse,
     })
     .transform((data) => ({
       esim: data['esim'],
@@ -43,7 +43,7 @@ export const getEsimHistoryOkResponseResponse = z.lazy(() => {
 export const getEsimHistoryOkResponseRequest = z.lazy(() => {
   return z
     .object({
-      esim: getEsimHistoryOkResponseEsimRequest.optional(),
+      esim: getEsimHistoryOkResponseEsimRequest,
     })
     .transform((data) => ({
       esim: data['esim'],
