@@ -83,6 +83,7 @@ export class PurchasesService extends BaseService {
    * @param {string} [params.iccid] - ID of the eSIM
    * @param {string} [params.afterDate] - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
    * @param {string} [params.beforeDate] - End date of the interval for filtering purchases in the format 'yyyy-MM-dd'
+   * @param {string} [params.email] - Email associated to the purchase.
    * @param {string} [params.referenceId] - The referenceId that was provided by the partner during the purchase or topup flow.
    * @param {string} [params.afterCursor] - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
    * @param {number} [params.limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
@@ -133,6 +134,10 @@ export class PurchasesService extends BaseService {
       .addQueryParam({
         key: 'beforeDate',
         value: params?.beforeDate,
+      })
+      .addQueryParam({
+        key: 'email',
+        value: params?.email,
       })
       .addQueryParam({
         key: 'referenceId',
