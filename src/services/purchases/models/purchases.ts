@@ -18,7 +18,7 @@ export const purchases = z.lazy(() => {
     esim: purchasesEsim.optional(),
     source: z.string().optional(),
     purchaseType: z.string().optional(),
-    referenceId: z.string().optional(),
+    referenceId: z.string().optional().nullable(),
   });
 });
 
@@ -58,7 +58,7 @@ export const purchasesResponse = z.lazy(() => {
       esim: purchasesEsimResponse.optional(),
       source: z.string().optional(),
       purchaseType: z.string().optional(),
-      referenceId: z.string().optional(),
+      referenceId: z.string().optional().nullable(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -94,7 +94,7 @@ export const purchasesRequest = z.lazy(() => {
       esim: purchasesEsimRequest.optional(),
       source: z.string().optional(),
       purchaseType: z.string().optional(),
-      referenceId: z.string().optional(),
+      referenceId: z.string().optional().nullable(),
     })
     .transform((data) => ({
       id: data['id'],
