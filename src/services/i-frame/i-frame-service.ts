@@ -6,8 +6,8 @@ import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
 import { TokenOkResponse, tokenOkResponseResponse } from './models/token-ok-response';
-import { _24 } from './models/_24';
-import { _25 } from './models/_25';
+import { BadRequest } from '../common/bad-request';
+import { Unauthorized } from '../common/unauthorized';
 
 export class IFrameService extends BaseService {
   /**
@@ -31,12 +31,12 @@ export class IFrameService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _24,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _25,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
