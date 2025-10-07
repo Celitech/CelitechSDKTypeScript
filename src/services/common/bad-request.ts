@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { ThrowableError } from '../../../http/errors/throwable-error';
+import { ThrowableError } from '../../http/errors/throwable-error';
 
-export type I_4Schema = {
+export type IBadRequestSchema = {
   message?: string;
 };
 
-export const _4Response = z.lazy(() => {
+export const badRequestResponse = z.lazy(() => {
   return z
     .object({
       message: z.string().optional(),
@@ -15,19 +15,19 @@ export const _4Response = z.lazy(() => {
     }));
 });
 
-export class _4 extends ThrowableError {
+export class BadRequest extends ThrowableError {
   constructor(
     public message: string,
     protected response?: unknown,
   ) {
     super(message);
 
-    const parsedResponse = _4Response.parse(response);
+    const parsedResponse = badRequestResponse.parse(response);
 
     this.message = parsedResponse.message || '';
   }
 
   public throw() {
-    throw new _4(this.message, this.response);
+    throw new BadRequest(this.message, this.response);
   }
 }
