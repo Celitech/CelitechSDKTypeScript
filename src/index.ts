@@ -13,6 +13,7 @@ export * from './services/packages';
 export * from './services/purchases';
 export * from './services/e-sim';
 export * from './services/i-frame';
+export * from './services/common';
 
 export * from './http';
 export { Environment } from './http/environment';

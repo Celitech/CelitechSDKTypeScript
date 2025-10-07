@@ -7,6 +7,7 @@ export const getEsimOkResponseEsim = z.lazy(() => {
   return z.object({
     iccid: z.string().min(18).max(22),
     smdpAddress: z.string(),
+    activationCode: z.string().min(1000).max(8000),
     manualActivationCode: z.string(),
     status: z.string(),
     isTopUpAllowed: z.boolean(),
@@ -18,6 +19,7 @@ export const getEsimOkResponseEsim = z.lazy(() => {
  * @typedef  {GetEsimOkResponseEsim} getEsimOkResponseEsim
  * @property {string} - ID of the eSIM
  * @property {string} - SM-DP+ Address
+ * @property {string} - QR Code of the eSIM as base64
  * @property {string} - The manual activation code
  * @property {string} - Status of the eSIM, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
  * @property {boolean} - Indicates whether the eSIM is currently eligible for a top-up. This flag should be checked before attempting a top-up request.
@@ -33,6 +35,7 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
     .object({
       iccid: z.string().min(18).max(22),
       smdpAddress: z.string(),
+      activationCode: z.string().min(1000).max(8000),
       manualActivationCode: z.string(),
       status: z.string(),
       isTopUpAllowed: z.boolean(),
@@ -40,6 +43,7 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
     .transform((data) => ({
       iccid: data['iccid'],
       smdpAddress: data['smdpAddress'],
+      activationCode: data['activationCode'],
       manualActivationCode: data['manualActivationCode'],
       status: data['status'],
       isTopUpAllowed: data['isTopUpAllowed'],
@@ -55,6 +59,7 @@ export const getEsimOkResponseEsimRequest = z.lazy(() => {
     .object({
       iccid: z.string().min(18).max(22),
       smdpAddress: z.string(),
+      activationCode: z.string().min(1000).max(8000),
       manualActivationCode: z.string(),
       status: z.string(),
       isTopUpAllowed: z.boolean(),
@@ -62,6 +67,7 @@ export const getEsimOkResponseEsimRequest = z.lazy(() => {
     .transform((data) => ({
       iccid: data['iccid'],
       smdpAddress: data['smdpAddress'],
+      activationCode: data['activationCode'],
       manualActivationCode: data['manualActivationCode'],
       status: data['status'],
       isTopUpAllowed: data['isTopUpAllowed'],

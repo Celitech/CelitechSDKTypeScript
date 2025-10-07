@@ -4,14 +4,13 @@ A list of all methods in the `ESimService` service. Click on the method name to 
 
 | Methods                           | Description      |
 | :-------------------------------- | :--------------- |
-| [getEsim](#getesim)               | Get eSIM Status  |
+| [getEsim](#getesim)               | Get eSIM         |
 | [getEsimDevice](#getesimdevice)   | Get eSIM Device  |
 | [getEsimHistory](#getesimhistory) | Get eSIM History |
-| [getEsimMac](#getesimmac)         | Get eSIM MAC     |
 
 ## getEsim
 
-Get eSIM Status
+Get eSIM
 
 - HTTP Method: `GET`
 - Endpoint: `/esim`
@@ -108,40 +107,6 @@ import { Celitech } from 'celitech-sdk';
   });
 
   const { data } = await celitech.eSim.getEsimHistory('1111222233334444555000');
-
-  console.log(data);
-})();
-```
-
-## getEsimMac
-
-Get eSIM MAC
-
-- HTTP Method: `GET`
-- Endpoint: `/esim/{iccid}/mac`
-
-**Parameters**
-
-| Name  | Type   | Required | Description    |
-| :---- | :----- | :------- | :------------- |
-| iccid | string | ✅       | ID of the eSIM |
-
-**Return Type**
-
-`GetEsimMacOkResponse`
-
-**Example Usage Code Snippet**
-
-```typescript
-import { Celitech } from 'celitech-sdk';
-
-(async () => {
-  const celitech = new Celitech({
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-  });
-
-  const { data } = await celitech.eSim.getEsimMac('1111222233334444555000');
 
   console.log(data);
 })();
