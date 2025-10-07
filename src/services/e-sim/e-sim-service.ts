@@ -6,18 +6,12 @@ import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
 import { GetEsimOkResponse, getEsimOkResponseResponse } from './models/get-esim-ok-response';
-import { _16 } from './models/_16';
-import { _17 } from './models/_17';
+import { BadRequest } from '../common/bad-request';
+import { Unauthorized } from '../common/unauthorized';
 import { GetEsimParams } from './request-params';
 import { GetEsimDeviceOkResponse, getEsimDeviceOkResponseResponse } from './models/get-esim-device-ok-response';
-import { _18 } from './models/_18';
-import { _19 } from './models/_19';
 import { GetEsimHistoryOkResponse, getEsimHistoryOkResponseResponse } from './models/get-esim-history-ok-response';
-import { _20 } from './models/_20';
-import { _21 } from './models/_21';
 import { GetEsimMacOkResponse, getEsimMacOkResponseResponse } from './models/get-esim-mac-ok-response';
-import { _22 } from './models/_22';
-import { _23 } from './models/_23';
 
 export class ESimService extends BaseService {
   /**
@@ -42,12 +36,12 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _16,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _17,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -84,12 +78,12 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _18,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _19,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -126,12 +120,12 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _20,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _21,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -168,12 +162,12 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _22,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _23,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })

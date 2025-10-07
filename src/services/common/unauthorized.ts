@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { ThrowableError } from '../../../http/errors/throwable-error';
+import { ThrowableError } from '../../http/errors/throwable-error';
 
-export type I_15Schema = {
+export type IUnauthorizedSchema = {
   message?: string;
 };
 
-export const _15Response = z.lazy(() => {
+export const unauthorizedResponse = z.lazy(() => {
   return z
     .object({
       message: z.string().optional(),
@@ -15,19 +15,19 @@ export const _15Response = z.lazy(() => {
     }));
 });
 
-export class _15 extends ThrowableError {
+export class Unauthorized extends ThrowableError {
   constructor(
     public message: string,
     protected response?: unknown,
   ) {
     super(message);
 
-    const parsedResponse = _15Response.parse(response);
+    const parsedResponse = unauthorizedResponse.parse(response);
 
     this.message = parsedResponse.message || '';
   }
 
   public throw() {
-    throw new _15(this.message, this.response);
+    throw new Unauthorized(this.message, this.response);
   }
 }

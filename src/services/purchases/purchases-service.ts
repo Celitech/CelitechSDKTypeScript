@@ -10,30 +10,20 @@ import {
   CreatePurchaseV2OkResponse,
   createPurchaseV2OkResponseResponse,
 } from './models/create-purchase-v2-ok-response';
-import { _4 } from './models/_4';
-import { _5 } from './models/_5';
+import { BadRequest } from '../common/bad-request';
+import { Unauthorized } from '../common/unauthorized';
 import { ListPurchasesOkResponse, listPurchasesOkResponseResponse } from './models/list-purchases-ok-response';
-import { _6 } from './models/_6';
-import { _7 } from './models/_7';
 import { ListPurchasesParams } from './request-params';
 import { CreatePurchaseRequest, createPurchaseRequestRequest } from './models/create-purchase-request';
 import { CreatePurchaseOkResponse, createPurchaseOkResponseResponse } from './models/create-purchase-ok-response';
-import { _8 } from './models/_8';
-import { _9 } from './models/_9';
 import { TopUpEsimRequest, topUpEsimRequestRequest } from './models/top-up-esim-request';
 import { TopUpEsimOkResponse, topUpEsimOkResponseResponse } from './models/top-up-esim-ok-response';
-import { _10 } from './models/_10';
-import { _11 } from './models/_11';
 import { EditPurchaseRequest, editPurchaseRequestRequest } from './models/edit-purchase-request';
 import { EditPurchaseOkResponse, editPurchaseOkResponseResponse } from './models/edit-purchase-ok-response';
-import { _12 } from './models/_12';
-import { _13 } from './models/_13';
 import {
   GetPurchaseConsumptionOkResponse,
   getPurchaseConsumptionOkResponseResponse,
 } from './models/get-purchase-consumption-ok-response';
-import { _14 } from './models/_14';
-import { _15 } from './models/_15';
 
 export class PurchasesService extends BaseService {
   /**
@@ -60,12 +50,12 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _4,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _5,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -111,12 +101,12 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _6,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _7,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -187,12 +177,12 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _8,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _9,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -226,12 +216,12 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _10,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _11,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -245,10 +235,17 @@ export class PurchasesService extends BaseService {
   }
 
   /**
-   * This endpoint allows you to modify the dates of an existing package with a future activation start time. Editing can only be performed for packages that have not been activated, and it cannot change the package size. The modification must not change the package duration category to ensure pricing consistency.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} Successful Response
-   */
+ * This endpoint allows you to modify the validity dates of an existing purchase.  
+**Behavior:**
+- If the purchase has **not yet been activated**, both the start and end dates can be updated.  
+- If the purchase is **already active**, only the **end date** can be updated, while the **start date must remain unchanged** (and should be passed as originally set).  
+- Updates must comply with the same pricing structure; the modification cannot alter the package size or change its duration category.  
+
+The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits.
+
+ * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+ * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} Successful Response
+ */
   async editPurchase(
     body: EditPurchaseRequest,
     requestConfig?: RequestConfig,
@@ -268,12 +265,12 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _12,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _13,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
@@ -311,12 +308,12 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _14,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _15,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })
