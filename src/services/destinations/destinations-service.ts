@@ -6,8 +6,8 @@ import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
 import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from './models/list-destinations-ok-response';
-import { __ } from './models/__';
-import { _1 } from './models/_1';
+import { BadRequest } from '../common/bad-request';
+import { Unauthorized } from '../common/unauthorized';
 
 export class DestinationsService extends BaseService {
   /**
@@ -31,12 +31,12 @@ export class DestinationsService extends BaseService {
         status: 200,
       })
       .addError({
-        error: __,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _1,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })

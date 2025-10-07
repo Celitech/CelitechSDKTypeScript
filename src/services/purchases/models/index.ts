@@ -17,15 +17,3 @@ export type { TopUpEsimOkResponseProfile } from './top-up-esim-ok-response-profi
 export type { EditPurchaseRequest } from './edit-purchase-request';
 export type { EditPurchaseOkResponse } from './edit-purchase-ok-response';
 export type { GetPurchaseConsumptionOkResponse } from './get-purchase-consumption-ok-response';
-export type { _4 } from './_4';
-export type { _5 } from './_5';
-export type { _6 } from './_6';
-export type { _7 } from './_7';
-export type { _8 } from './_8';
-export type { _9 } from './_9';
-export type { _10 } from './_10';
-export type { _11 } from './_11';
-export type { _12 } from './_12';
-export type { _13 } from './_13';
-export type { _14 } from './_14';
-export type { _15 } from './_15';

@@ -6,8 +6,8 @@ import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
 import { ListPackagesOkResponse, listPackagesOkResponseResponse } from './models/list-packages-ok-response';
-import { _2 } from './models/_2';
-import { _3 } from './models/_3';
+import { BadRequest } from '../common/bad-request';
+import { Unauthorized } from '../common/unauthorized';
 import { ListPackagesParams } from './request-params';
 
 export class PackagesService extends BaseService {
@@ -43,12 +43,12 @@ export class PackagesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: _2,
+        error: BadRequest,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: _3,
+        error: Unauthorized,
         contentType: ContentType.Json,
         status: 401,
       })

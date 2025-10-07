@@ -7,11 +7,3 @@ export type { GetEsimHistoryOkResponseEsim } from './get-esim-history-ok-respons
 export type { History } from './history';
 export type { GetEsimMacOkResponse } from './get-esim-mac-ok-response';
 export type { GetEsimMacOkResponseEsim } from './get-esim-mac-ok-response-esim';
-export type { _16 } from './_16';
-export type { _17 } from './_17';
-export type { _18 } from './_18';
-export type { _19 } from './_19';
-export type { _20 } from './_20';
-export type { _21 } from './_21';
-export type { _22 } from './_22';
-export type { _23 } from './_23';
