@@ -37,10 +37,16 @@ This SDK is compatible with the following versions: `TypeScript >= 4.8.4`
 
 ## Installation
 
-To get started with the SDK, we recommend installing using `npm`:
+To get started with the SDK, we recommend installing using `npm` or `yarn`:
 
 ```bash
 npm install celitech-sdk
+```
+
+or
+
+```bash
+yarn add celitech-sdk
 ```
 
 ## Authentication
