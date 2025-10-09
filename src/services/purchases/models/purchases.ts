@@ -8,11 +8,11 @@ import { PurchasesEsim, purchasesEsim, purchasesEsimRequest, purchasesEsimRespon
 export const purchases = z.lazy(() => {
   return z.object({
     id: z.string(),
-    startDate: z.string(),
-    endDate: z.string(),
+    startDate: z.string().nullable(),
+    endDate: z.string().nullable(),
     createdDate: z.string(),
-    startTime: z.number().optional(),
-    endTime: z.number().optional(),
+    startTime: z.number().optional().nullable(),
+    endTime: z.number().optional().nullable(),
     createdAt: z.number().optional(),
     package: package_,
     esim: purchasesEsim,
@@ -48,11 +48,11 @@ export const purchasesResponse = z.lazy(() => {
   return z
     .object({
       id: z.string(),
-      startDate: z.string(),
-      endDate: z.string(),
+      startDate: z.string().nullable(),
+      endDate: z.string().nullable(),
       createdDate: z.string(),
-      startTime: z.number().optional(),
-      endTime: z.number().optional(),
+      startTime: z.number().optional().nullable(),
+      endTime: z.number().optional().nullable(),
       createdAt: z.number().optional(),
       package: packageResponse,
       esim: purchasesEsimResponse,
@@ -84,11 +84,11 @@ export const purchasesRequest = z.lazy(() => {
   return z
     .object({
       id: z.string(),
-      startDate: z.string(),
-      endDate: z.string(),
+      startDate: z.string().nullable(),
+      endDate: z.string().nullable(),
       createdDate: z.string(),
-      startTime: z.number().optional(),
-      endTime: z.number().optional(),
+      startTime: z.number().optional().nullable(),
+      endTime: z.number().optional().nullable(),
       createdAt: z.number().optional(),
       package: packageRequest,
       esim: purchasesEsimRequest,

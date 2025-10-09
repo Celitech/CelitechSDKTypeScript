@@ -1,6 +1,6 @@
 {
-  "liblabVersion": "2.25.46",
-  "date": "2025-10-07T12:15:10.474Z",
+  "liblabVersion": "2.25.47",
+  "date": "2025-10-09T15:41:37.629Z",
   "config": {
     "apiId": 2802,
     "sdkName": "Celitech",
@@ -250,12 +250,6 @@
     },
     "multiTenant": true,
     "includeWatermark": false,
-    "language": "typescript",
-    "deliveryMethod": "zip",
-    "hooks": {
-      "enabled": false,
-      "sourceDir": ""
-    },
     "httpClient": "fetch",
     "githubRepoName": "CelitechSDKTypeScript",
     "ignoreFiles": [],
@@ -265,6 +259,12 @@
     "exportClassDefault": false,
     "generateEnumAs": "enum",
     "npmName": "celitech-sdk",
+    "language": "typescript",
+    "deliveryMethod": "zip",
+    "hooks": {
+      "enabled": false,
+      "sourceDir": ""
+    },
     "typescriptVersion": "5.3.3",
     "zodVersion": "3.22.0",
     "compilerOptions": {
@@ -397,6 +397,7 @@
     "documentation/models/EditPurchaseOkResponse.md",
     "documentation/models/GetPurchaseConsumptionOkResponse.md",
     "documentation/models/TokenOkResponse.md",
+    "scripts/prepublish.sh",
     "src/http/handlers/request-validation-handler.ts",
     ".devcontainer/devcontainer.json",
     "src/http/transport/request.ts",
