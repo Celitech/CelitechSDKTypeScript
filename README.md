@@ -1,4 +1,4 @@
-# Celitech TypeScript SDK 1.3.58
+# Celitech TypeScript SDK 1.3.59
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
@@ -6,8 +6,8 @@ Welcome to the Celitech SDK documentation. This guide will help you get started 
 
 ## Versions
 
-- API version: `1.3.58`
-- SDK version: `1.3.58`
+- API version: `1.3.59`
+- SDK version: `1.3.59`
 
 ## About the API
 
@@ -37,10 +37,16 @@ This SDK is compatible with the following versions: `TypeScript >= 4.8.4`
 
 ## Installation
 
-To get started with the SDK, we recommend installing using `npm`:
+To get started with the SDK, we recommend installing using `npm` or `yarn`:
 
 ```bash
 npm install celitech-sdk
+```
+
+or
+
+```bash
+yarn add celitech-sdk
 ```
 
 ## Authentication
