@@ -73,6 +73,7 @@ This endpoint can be used to list all the successful purchases made between a gi
 | limit       | number | ❌       | Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20                                                |
 | after       | number | ❌       | Epoch value representing the start of the time interval for filtering purchases                                                                                                                                     |
 | before      | number | ❌       | Epoch value representing the end of the time interval for filtering purchases                                                                                                                                       |
+| purchaseId  | string | ❌       | The id of a specific purchase.                                                                                                                                                                                      |
 
 **Return Type**
 
