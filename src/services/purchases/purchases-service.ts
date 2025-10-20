@@ -70,6 +70,7 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint can be used to list all the successful purchases made between a given interval.
+   * @param {string} [params.purchaseId] - ID of the purchase
    * @param {string} [params.iccid] - ID of the eSIM
    * @param {string} [params.afterDate] - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
    * @param {string} [params.beforeDate] - End date of the interval for filtering purchases in the format 'yyyy-MM-dd'
@@ -79,7 +80,6 @@ export class PurchasesService extends BaseService {
    * @param {number} [params.limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
    * @param {number} [params.after] - Epoch value representing the start of the time interval for filtering purchases
    * @param {number} [params.before] - Epoch value representing the end of the time interval for filtering purchases
-   * @param {string} [params.purchaseId] - The id of a specific purchase.
    * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListPurchasesOkResponse>>} Successful Response
    */
@@ -115,6 +115,10 @@ export class PurchasesService extends BaseService {
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
       .addQueryParam({
+        key: 'purchaseId',
+        value: params?.purchaseId,
+      })
+      .addQueryParam({
         key: 'iccid',
         value: params?.iccid,
       })
@@ -149,10 +153,6 @@ export class PurchasesService extends BaseService {
       .addQueryParam({
         key: 'before',
         value: params?.before,
-      })
-      .addQueryParam({
-        key: 'purchaseId',
-        value: params?.purchaseId,
       })
       .build();
     return this.client.call<ListPurchasesOkResponse>(request);
