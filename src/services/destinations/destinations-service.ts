@@ -12,8 +12,8 @@ import { Unauthorized } from '../common/unauthorized';
 export class DestinationsService extends BaseService {
   /**
    * List Destinations
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<ListDestinationsOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<ListDestinationsOkResponse>>} - Successful Response
    */
   async listDestinations(requestConfig?: RequestConfig): Promise<HttpResponse<ListDestinationsOkResponse>> {
     const request = new RequestBuilder()

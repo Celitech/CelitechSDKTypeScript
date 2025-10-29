@@ -9,8 +9,10 @@ import {
   CreateRequestParameters,
   RequestParameter,
   RequestPagination,
+  RequestCursorPagination,
   ResponseDefinition,
   ErrorDefinition,
+  isRequestCursorPagination,
 } from './types';
 import { OAuthTokenManager } from '../oauth/token-manager';
 
@@ -43,7 +45,7 @@ export class Request<PageSchema = unknown[]> {
 
   public retry: RetryOptions = {} as any;
 
-  public pagination?: RequestPagination<PageSchema>;
+  public pagination?: RequestPagination<PageSchema> | RequestCursorPagination<PageSchema>;
 
   public filename?: string;
 
@@ -195,17 +197,28 @@ export class Request<PageSchema = unknown[]> {
     return new HeaderSerializer().serialize(this.headers);
   }
 
-  public nextPage(): void {
+  public nextPage(cursor?: string): void {
     if (!this.pagination) {
       return;
     }
 
-    const offsetParam = this.getOffsetParam();
-    if (!offsetParam) {
+    // Check if this is cursor pagination using type guard
+    if (isRequestCursorPagination(this.pagination)) {
+      const cursorParam = this.getCursorParam();
+      if (cursorParam && cursor !== undefined) {
+        cursorParam.value = cursor;
+      }
       return;
     }
 
-    offsetParam.value = Number(offsetParam.value) + this.pagination.pageSize;
+    // Handle limit-offset pagination
+    const offsetParam = this.getOffsetParam();
+    if (offsetParam) {
+      if (this.pagination.pageSize === undefined) {
+        throw new Error('pageSize is required for limit-offset pagination');
+      }
+      offsetParam.value = Number(offsetParam.value) + this.pagination.pageSize;
+    }
   }
 
   private constructPath(): string {
@@ -215,6 +228,11 @@ export class Request<PageSchema = unknown[]> {
   private getOffsetParam(): RequestParameter | undefined {
     const offsetParam = this.getAllParams().find((param) => param.isOffset);
     return offsetParam;
+  }
+
+  private getCursorParam(): RequestParameter | undefined {
+    const cursorParam = this.getAllParams().find((param) => param.isCursor);
+    return cursorParam;
   }
 
   private getAllParams(): RequestParameter[] {

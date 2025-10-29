@@ -10,6 +10,7 @@ export const getEsimOkResponseEsim = z.lazy(() => {
     activationCode: z.string().min(1000).max(8000),
     manualActivationCode: z.string(),
     status: z.string(),
+    connectivityStatus: z.string().optional(),
     isTopUpAllowed: z.boolean(),
   });
 });
@@ -22,6 +23,7 @@ export const getEsimOkResponseEsim = z.lazy(() => {
  * @property {string} - QR Code of the eSIM as base64
  * @property {string} - The manual activation code
  * @property {string} - Status of the eSIM, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
+ * @property {string} - Status of the eSIM connectivity, possible values are 'ACTIVE' or 'NOT_ACTIVE'
  * @property {boolean} - Indicates whether the eSIM is currently eligible for a top-up. This flag should be checked before attempting a top-up request.
  */
 export type GetEsimOkResponseEsim = z.infer<typeof getEsimOkResponseEsim>;
@@ -38,6 +40,7 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
       activationCode: z.string().min(1000).max(8000),
       manualActivationCode: z.string(),
       status: z.string(),
+      connectivityStatus: z.string().optional(),
       isTopUpAllowed: z.boolean(),
     })
     .transform((data) => ({
@@ -46,6 +49,7 @@ export const getEsimOkResponseEsimResponse = z.lazy(() => {
       activationCode: data['activationCode'],
       manualActivationCode: data['manualActivationCode'],
       status: data['status'],
+      connectivityStatus: data['connectivityStatus'],
       isTopUpAllowed: data['isTopUpAllowed'],
     }));
 });
@@ -62,6 +66,7 @@ export const getEsimOkResponseEsimRequest = z.lazy(() => {
       activationCode: z.string().min(1000).max(8000),
       manualActivationCode: z.string(),
       status: z.string(),
+      connectivityStatus: z.string().optional(),
       isTopUpAllowed: z.boolean(),
     })
     .transform((data) => ({
@@ -70,6 +75,7 @@ export const getEsimOkResponseEsimRequest = z.lazy(() => {
       activationCode: data['activationCode'],
       manualActivationCode: data['manualActivationCode'],
       status: data['status'],
+      connectivityStatus: data['connectivityStatus'],
       isTopUpAllowed: data['isTopUpAllowed'],
     }));
 });

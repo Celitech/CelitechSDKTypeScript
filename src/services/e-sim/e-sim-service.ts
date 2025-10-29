@@ -15,9 +15,9 @@ import { GetEsimHistoryOkResponse, getEsimHistoryOkResponseResponse } from './mo
 export class ESimService extends BaseService {
   /**
    * Get eSIM
-   * @param {string} iccid - ID of the eSIM
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<GetEsimOkResponse>>} Successful Response
+   * @param {string} params.iccid - ID of the eSIM
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<GetEsimOkResponse>>} - Successful Response
    */
   async getEsim(params: GetEsimParams, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimOkResponse>> {
     const request = new RequestBuilder()
@@ -58,8 +58,8 @@ export class ESimService extends BaseService {
   /**
    * Get eSIM Device
    * @param {string} iccid - ID of the eSIM
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<GetEsimDeviceOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<GetEsimDeviceOkResponse>>} - Successful Response
    */
   async getEsimDevice(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimDeviceOkResponse>> {
     const request = new RequestBuilder()
@@ -100,8 +100,8 @@ export class ESimService extends BaseService {
   /**
    * Get eSIM History
    * @param {string} iccid - ID of the eSIM
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<GetEsimHistoryOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<GetEsimHistoryOkResponse>>} - Successful Response
    */
   async getEsimHistory(iccid: string, requestConfig?: RequestConfig): Promise<HttpResponse<GetEsimHistoryOkResponse>> {
     const request = new RequestBuilder()
