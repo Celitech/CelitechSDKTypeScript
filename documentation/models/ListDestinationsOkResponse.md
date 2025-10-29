@@ -2,6 +2,6 @@
 
 **Properties**
 
-| Name         | Type           | Required | Description |
-| :----------- | :------------- | :------- | :---------- |
-| destinations | Destinations[] | ✅       |             |
+| Name         | Type                              | Required | Description |
+| :----------- | :-------------------------------- | :------- | :---------- |
+| destinations | [Destinations](Destinations.md)[] | ✅       |             |
