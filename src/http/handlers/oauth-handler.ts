@@ -56,6 +56,7 @@ export class OAuthHandler implements RequestHandler {
       style: SerializationStyle.SIMPLE,
       isLimit: false,
       isOffset: false,
+      isCursor: false,
     });
   }
 }
