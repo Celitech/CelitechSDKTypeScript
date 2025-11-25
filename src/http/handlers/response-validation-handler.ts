@@ -25,7 +25,7 @@ export class ResponseValidationHandler implements RequestHandler {
   }
 
   private splitByDataChunks<T>(response: HttpResponse<T>): HttpResponse<T>[] {
-    if (!response.metadata.headers['content-type'].includes('text/event-stream')) {
+    if (!response.metadata.headers['content-type']?.includes('text/event-stream')) {
       return [response];
     }
 
