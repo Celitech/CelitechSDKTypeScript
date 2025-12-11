@@ -6,5 +6,4 @@ export interface ListPackagesParams {
   limit?: number;
   startTime?: number;
   endTime?: number;
-  duration?: number;
 }

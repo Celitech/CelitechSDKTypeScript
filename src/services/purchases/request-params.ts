@@ -1,4 +1,5 @@
 export interface ListPurchasesParams {
+  purchaseId?: string;
   iccid?: string;
   afterDate?: string;
   beforeDate?: string;
@@ -8,5 +9,4 @@ export interface ListPurchasesParams {
   limit?: number;
   after?: number;
   before?: number;
-  purchaseId?: string;
 }

@@ -10,7 +10,7 @@
 
 **Properties**
 
-| Name    | Type      | Required | Description    |
-| :------ | :-------- | :------- | :------------- |
-| iccid   | string    | ✅       | ID of the eSIM |
-| history | History[] | ✅       |                |
+| Name    | Type                    | Required | Description    |
+| :------ | :---------------------- | :------- | :------------- |
+| iccid   | string                  | ✅       | ID of the eSIM |
+| history | [History](History.md)[] | ✅       |                |

@@ -1,4 +1,5 @@
 export type { CreatePurchaseV2Request } from './create-purchase-v2-request';
+export { CreatePurchaseV2RequestDuration } from './create-purchase-v2-request-duration';
 export type { CreatePurchaseV2OkResponse } from './create-purchase-v2-ok-response';
 export type { CreatePurchaseV2OkResponsePurchase } from './create-purchase-v2-ok-response-purchase';
 export type { CreatePurchaseV2OkResponseProfile } from './create-purchase-v2-ok-response-profile';
@@ -11,6 +12,7 @@ export type { CreatePurchaseOkResponse } from './create-purchase-ok-response';
 export type { CreatePurchaseOkResponsePurchase } from './create-purchase-ok-response-purchase';
 export type { CreatePurchaseOkResponseProfile } from './create-purchase-ok-response-profile';
 export type { TopUpEsimRequest } from './top-up-esim-request';
+export { TopUpEsimRequestDuration } from './top-up-esim-request-duration';
 export type { TopUpEsimOkResponse } from './top-up-esim-ok-response';
 export type { TopUpEsimOkResponsePurchase } from './top-up-esim-ok-response-purchase';
 export type { TopUpEsimOkResponseProfile } from './top-up-esim-ok-response-profile';
