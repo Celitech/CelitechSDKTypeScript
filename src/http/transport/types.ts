@@ -31,7 +31,7 @@ export interface CreateRequestParameters<Page = unknown[]> {
   requestContentType: ContentType;
   validation: ValidationOptions;
   retry: RetryOptions;
-  pagination?: RequestPagination<Page>;
+  pagination?: RequestPagination<Page> | RequestCursorPagination<Page>;
   filename?: string;
   filenames?: string[];
   scopes?: Set<string>;
@@ -46,10 +46,24 @@ export interface RequestParameter {
   style: SerializationStyle;
   isLimit: boolean;
   isOffset: boolean;
+  isCursor: boolean;
 }
 
 export interface RequestPagination<Page> {
-  pageSize: number;
+  pageSize?: number;
   pagePath: string[];
   pageSchema?: ZodType<Page, any, any>;
+}
+
+export interface RequestCursorPagination<Page> {
+  pagePath: string[];
+  pageSchema?: ZodType<Page, any, any>;
+  cursorPath: string[];
+  cursorSchema?: ZodType<string | null | undefined>;
+}
+
+export function isRequestCursorPagination<Page>(
+  pagination: RequestPagination<Page> | RequestCursorPagination<Page> | undefined,
+): pagination is RequestCursorPagination<Page> {
+  return !!pagination && 'cursorPath' in pagination;
 }

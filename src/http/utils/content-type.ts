@@ -15,7 +15,21 @@ export function getContentTypeDefinition(contentType: string): ContentType {
     return ContentType.EventStream;
   }
 
+  // Check for JSON content types (including text/json) before text types
+  if (ct === 'application/json' || ct === 'text/json' || ct.includes('+json')) {
+    return ContentType.Json;
+  }
+
+  if (ct === 'application/javascript') {
+    return ContentType.Text;
+  }
+
   if (ct.startsWith('text/')) {
+    return ContentType.Text;
+  }
+
+  // SVG is text-based XML, not binary
+  if (ct === 'image/svg+xml') {
     return ContentType.Text;
   }
 
@@ -27,9 +41,10 @@ export function getContentTypeDefinition(contentType: string): ContentType {
     return ContentType.Binary;
   }
 
-  if (ct === 'application/json') {
-    return ContentType.Json;
+  // Wildcard content type
+  if (ct === '*/*') {
+    return ContentType.Binary;
   }
 
-  return ContentType.Json;
+  return ContentType.Binary;
 }

@@ -28,8 +28,8 @@ import {
 export class PurchasesService extends BaseService {
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} - Successful Response
    */
   async createPurchaseV2(
     body: CreatePurchaseV2Request,
@@ -70,6 +70,7 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint can be used to list all the successful purchases made between a given interval.
+   * @param {string} [params.purchaseId] - ID of the purchase
    * @param {string} [params.iccid] - ID of the eSIM
    * @param {string} [params.afterDate] - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
    * @param {string} [params.beforeDate] - End date of the interval for filtering purchases in the format 'yyyy-MM-dd'
@@ -79,9 +80,8 @@ export class PurchasesService extends BaseService {
    * @param {number} [params.limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
    * @param {number} [params.after] - Epoch value representing the start of the time interval for filtering purchases
    * @param {number} [params.before] - Epoch value representing the end of the time interval for filtering purchases
-   * @param {string} [params.purchaseId] - The id of a specific purchase.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<ListPurchasesOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<ListPurchasesOkResponse>>} - Successful Response
    */
   async listPurchases(
     params?: ListPurchasesParams,
@@ -114,6 +114,10 @@ export class PurchasesService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
+      .addQueryParam({
+        key: 'purchaseId',
+        value: params?.purchaseId,
+      })
       .addQueryParam({
         key: 'iccid',
         value: params?.iccid,
@@ -150,18 +154,14 @@ export class PurchasesService extends BaseService {
         key: 'before',
         value: params?.before,
       })
-      .addQueryParam({
-        key: 'purchaseId',
-        value: params?.purchaseId,
-      })
       .build();
     return this.client.call<ListPurchasesOkResponse>(request);
   }
 
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<CreatePurchaseOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<CreatePurchaseOkResponse>>} - Successful Response
    */
   async createPurchase(
     body: CreatePurchaseRequest,
@@ -201,9 +201,9 @@ export class PurchasesService extends BaseService {
   }
 
   /**
-   * This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM Status endpoint, which returns the `isTopUpAllowed` flag.
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} Successful Response
+   * This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM endpoint, which returns the `isTopUpAllowed` flag.
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} - Successful Response
    */
   async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
     const request = new RequestBuilder()
@@ -248,8 +248,8 @@ export class PurchasesService extends BaseService {
 
 The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits.
 
- * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
- * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} Successful Response
+ * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+ * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} - Successful Response
  */
   async editPurchase(
     body: EditPurchaseRequest,
@@ -291,8 +291,8 @@ The end date can be extended or shortened as long as it adheres to the same pric
   /**
    * This endpoint can be called for consumption notifications (e.g. every 1 hour or when the user clicks a button). It returns the data balance (consumption) of purchased packages.
    * @param {string} purchaseId - ID of the purchase
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<GetPurchaseConsumptionOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<GetPurchaseConsumptionOkResponse>>} - Successful Response
    */
   async getPurchaseConsumption(
     purchaseId: string,
