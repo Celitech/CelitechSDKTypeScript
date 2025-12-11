@@ -4,6 +4,7 @@ import {
   CreateRequestParameters,
   RequestParameter,
   RequestPagination,
+  RequestCursorPagination,
   ResponseDefinition,
   ErrorDefinition,
 } from './types';
@@ -121,6 +122,11 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     return this;
   }
 
+  setCursorPagination(pagination: RequestCursorPagination<Page>): RequestBuilder<Page> {
+    this.params.pagination = pagination;
+    return this;
+  }
+
   setScopes(scopes: string[]): RequestBuilder<Page> {
     this.params.scopes = new Set(scopes);
     return this;
@@ -144,6 +150,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       encode: true,
       isLimit: false,
       isOffset: false,
+      isCursor: false,
     });
     return this;
   }
@@ -161,6 +168,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       encode: true,
       isLimit: false,
       isOffset: false,
+      isCursor: false,
     });
     return this;
   }
@@ -178,6 +186,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       encode: true,
       isLimit: false,
       isOffset: false,
+      isCursor: false,
     });
     return this;
   }
@@ -212,13 +221,14 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       encode: param.encode ?? true,
       isLimit: !!param.isLimit,
       isOffset: !!param.isOffset,
+      isCursor: !!param.isCursor,
     });
 
     return this;
   }
 
   addQueryParam(param: Partial<RequestParameter>): RequestBuilder<Page> {
-    if (param.value === undefined || param.key === undefined) {
+    if (param.key === undefined) {
       return this;
     }
 
@@ -230,6 +240,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       encode: param.encode ?? true,
       isLimit: !!param.isLimit,
       isOffset: !!param.isOffset,
+      isCursor: !!param.isCursor,
     });
 
     return this;
@@ -248,6 +259,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       encode: param.encode ?? false,
       isLimit: !!param.isLimit,
       isOffset: !!param.isOffset,
+      isCursor: !!param.isCursor,
     });
 
     return this;
