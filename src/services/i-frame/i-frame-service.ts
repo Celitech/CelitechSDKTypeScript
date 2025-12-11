@@ -12,8 +12,8 @@ import { Unauthorized } from '../common/unauthorized';
 export class IFrameService extends BaseService {
   /**
    * Generate a new token to be used in the iFrame
-   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<TokenOkResponse>>} Successful Response
+   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<TokenOkResponse>>} - Successful Response
    */
   async token(requestConfig?: RequestConfig): Promise<HttpResponse<TokenOkResponse>> {
     const request = new RequestBuilder()

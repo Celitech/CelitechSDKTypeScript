@@ -10,6 +10,7 @@ export const purchases = z.lazy(() => {
     id: z.string(),
     startDate: z.string().nullable(),
     endDate: z.string().nullable(),
+    duration: z.number().optional().nullable(),
     createdDate: z.string(),
     startTime: z.number().optional().nullable(),
     endTime: z.number().optional().nullable(),
@@ -28,6 +29,7 @@ export const purchases = z.lazy(() => {
  * @property {string} - ID of the purchase
  * @property {string} - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
  * @property {string} - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} - Duration of the package in days. Possible values are 1, 2, 7, 14, 30, or 90.
  * @property {string} - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
  * @property {number} - Epoch value representing the start time of the package's validity
  * @property {number} - Epoch value representing the end time of the package's validity
@@ -50,6 +52,7 @@ export const purchasesResponse = z.lazy(() => {
       id: z.string(),
       startDate: z.string().nullable(),
       endDate: z.string().nullable(),
+      duration: z.number().optional().nullable(),
       createdDate: z.string(),
       startTime: z.number().optional().nullable(),
       endTime: z.number().optional().nullable(),
@@ -64,6 +67,7 @@ export const purchasesResponse = z.lazy(() => {
       id: data['id'],
       startDate: data['startDate'],
       endDate: data['endDate'],
+      duration: data['duration'],
       createdDate: data['createdDate'],
       startTime: data['startTime'],
       endTime: data['endTime'],
@@ -86,6 +90,7 @@ export const purchasesRequest = z.lazy(() => {
       id: z.string(),
       startDate: z.string().nullable(),
       endDate: z.string().nullable(),
+      duration: z.number().optional().nullable(),
       createdDate: z.string(),
       startTime: z.number().optional().nullable(),
       endTime: z.number().optional().nullable(),
@@ -100,6 +105,7 @@ export const purchasesRequest = z.lazy(() => {
       id: data['id'],
       startDate: data['startDate'],
       endDate: data['endDate'],
+      duration: data['duration'],
       createdDate: data['createdDate'],
       startTime: data['startTime'],
       endTime: data['endTime'],

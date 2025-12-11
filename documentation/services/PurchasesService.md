@@ -7,7 +7,7 @@ A list of all methods in the `PurchasesService` service. Click on the method nam
 | [createPurchaseV2](#createpurchasev2)             | This endpoint is used to purchase a new eSIM by providing the package details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | [listPurchases](#listpurchases)                   | This endpoint can be used to list all the successful purchases made between a given interval.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | [createPurchase](#createpurchase)                 | This endpoint is used to purchase a new eSIM by providing the package details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [topUpEsim](#topupesim)                           | This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM Status endpoint, which returns the `isTopUpAllowed` flag.                                                                                                                                                                                                                                                                                                                                                                                             |
+| [topUpEsim](#topupesim)                           | This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM endpoint, which returns the `isTopUpAllowed` flag.                                                                                                                                                                                                                                                                                                                                                                                                    |
 | [editPurchase](#editpurchase)                     | This endpoint allows you to modify the validity dates of an existing purchase. **Behavior:** - If the purchase has **not yet been activated**, both the start and end dates can be updated. - If the purchase is **already active**, only the **end date** can be updated, while the **start date must remain unchanged** (and should be passed as originally set). - Updates must comply with the same pricing structure; the modification cannot alter the package size or change its duration category. The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits. |
 | [getPurchaseConsumption](#getpurchaseconsumption) | This endpoint can be called for consumption notifications (e.g. every 1 hour or when the user clicks a button). It returns the data balance (consumption) of purchased packages.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
@@ -42,8 +42,6 @@ import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
   const createPurchaseV2Request: CreatePurchaseV2Request = {
     destination: 'FRA',
     dataLimitInGb: 1,
-    startDate: '2023-11-01',
-    endDate: '2023-11-20',
     quantity: 1,
   };
 
@@ -64,6 +62,7 @@ This endpoint can be used to list all the successful purchases made between a gi
 
 | Name        | Type   | Required | Description                                                                                                                                                                                                         |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| purchaseId  | string | ❌       | ID of the purchase                                                                                                                                                                                                  |
 | iccid       | string | ❌       | ID of the eSIM                                                                                                                                                                                                      |
 | afterDate   | string | ❌       | Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                       |
 | beforeDate  | string | ❌       | End date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                         |
@@ -73,7 +72,6 @@ This endpoint can be used to list all the successful purchases made between a gi
 | limit       | number | ❌       | Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20                                                |
 | after       | number | ❌       | Epoch value representing the start of the time interval for filtering purchases                                                                                                                                     |
 | before      | number | ❌       | Epoch value representing the end of the time interval for filtering purchases                                                                                                                                       |
-| purchaseId  | string | ❌       | The id of a specific purchase.                                                                                                                                                                                      |
 
 **Return Type**
 
@@ -139,7 +137,7 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
 
 ## topUpEsim
 
-This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM Status endpoint, which returns the `isTopUpAllowed` flag.
+This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM endpoint, which returns the `isTopUpAllowed` flag.
 
 - HTTP Method: `POST`
 - Endpoint: `/purchases/topup`
@@ -168,8 +166,6 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
   const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555000',
     dataLimitInGb: 1,
-    startDate: '2023-11-01',
-    endDate: '2023-11-20',
   };
 
   const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
