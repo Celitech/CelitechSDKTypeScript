@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the CreatePurchaseV2Request model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const createPurchaseV2Request = z.lazy(() => {
   return z.object({
@@ -29,14 +31,15 @@ export const createPurchaseV2Request = z.lazy(() => {
  * @property {number} - Number of eSIMs to purchase.
  * @property {string} - Email address where the purchase confirmation email will be sent (including QR Code & activation steps)
  * @property {string} - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
- * @property {string} - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters and numbers. This feature is available to platforms with Diamond tier only.
+ * @property {string} - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters, numbers, dots (.), ampersands (&), and spaces. This feature is available to platforms with Diamond tier only.
  * @property {string} - Customize the email subject brand. The `emailBrand` parameter cannot exceed 25 characters in length and must contain only letters, numbers, and spaces. This feature is available to platforms with Diamond tier only.
  */
 export type CreatePurchaseV2Request = z.infer<typeof createPurchaseV2Request>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the CreatePurchaseV2Request application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const createPurchaseV2RequestResponse = z.lazy(() => {
   return z
@@ -67,8 +70,9 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the CreatePurchaseV2Request application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const createPurchaseV2RequestRequest = z.lazy(() => {
   return z

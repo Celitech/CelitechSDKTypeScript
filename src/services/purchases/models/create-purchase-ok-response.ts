@@ -13,7 +13,9 @@ import {
 } from './create-purchase-ok-response-profile';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the CreatePurchaseOkResponse model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const createPurchaseOkResponse = z.lazy(() => {
   return z.object({
@@ -31,8 +33,9 @@ export const createPurchaseOkResponse = z.lazy(() => {
 export type CreatePurchaseOkResponse = z.infer<typeof createPurchaseOkResponse>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the CreatePurchaseOkResponse application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const createPurchaseOkResponseResponse = z.lazy(() => {
   return z
@@ -47,8 +50,9 @@ export const createPurchaseOkResponseResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the CreatePurchaseOkResponse application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const createPurchaseOkResponseRequest = z.lazy(() => {
   return z

@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the CreatePurchaseRequest model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const createPurchaseRequest = z.lazy(() => {
   return z.object({
@@ -27,7 +29,7 @@ export const createPurchaseRequest = z.lazy(() => {
  * @property {string} - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
  * @property {string} - Email address where the purchase confirmation email will be sent (including QR Code & activation steps)
  * @property {string} - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
- * @property {string} - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters and numbers. This feature is available to platforms with Diamond tier only.
+ * @property {string} - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters, numbers, dots (.), ampersands (&), and spaces. This feature is available to platforms with Diamond tier only.
  * @property {string} - Customize the email subject brand. The `emailBrand` parameter cannot exceed 25 characters in length and must contain only letters, numbers, and spaces. This feature is available to platforms with Diamond tier only.
  * @property {number} - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months.
  * @property {number} - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time.
@@ -35,8 +37,9 @@ export const createPurchaseRequest = z.lazy(() => {
 export type CreatePurchaseRequest = z.infer<typeof createPurchaseRequest>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the CreatePurchaseRequest application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const createPurchaseRequestResponse = z.lazy(() => {
   return z
@@ -67,8 +70,9 @@ export const createPurchaseRequestResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the CreatePurchaseRequest application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const createPurchaseRequestRequest = z.lazy(() => {
   return z
