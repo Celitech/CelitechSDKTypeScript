@@ -9,6 +9,11 @@ import { TokenOkResponse, tokenOkResponseResponse } from './models/token-ok-resp
 import { BadRequest } from '../common/bad-request';
 import { Unauthorized } from '../common/unauthorized';
 
+/**
+ * Service class for IFrameService operations.
+ * Provides methods to interact with IFrameService-related API endpoints.
+ * All methods return promises and handle request/response serialization automatically.
+ */
 export class IFrameService extends BaseService {
   /**
    * Generate a new token to be used in the iFrame
