@@ -9,6 +9,11 @@ import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from '
 import { BadRequest } from '../common/bad-request';
 import { Unauthorized } from '../common/unauthorized';
 
+/**
+ * Service class for DestinationsService operations.
+ * Provides methods to interact with DestinationsService-related API endpoints.
+ * All methods return promises and handle request/response serialization automatically.
+ */
 export class DestinationsService extends BaseService {
   /**
    * List Destinations
