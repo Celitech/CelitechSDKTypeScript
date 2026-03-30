@@ -2,7 +2,9 @@ import { z } from 'zod';
 import { Packages, packages, packagesRequest, packagesResponse } from './packages';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the ListPackagesOkResponse model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const listPackagesOkResponse = z.lazy(() => {
   return z.object({
@@ -20,8 +22,9 @@ export const listPackagesOkResponse = z.lazy(() => {
 export type ListPackagesOkResponse = z.infer<typeof listPackagesOkResponse>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the ListPackagesOkResponse application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const listPackagesOkResponseResponse = z.lazy(() => {
   return z
@@ -36,8 +39,9 @@ export const listPackagesOkResponseResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the ListPackagesOkResponse application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const listPackagesOkResponseRequest = z.lazy(() => {
   return z

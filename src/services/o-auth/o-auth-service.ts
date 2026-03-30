@@ -8,6 +8,11 @@ import { Environment } from '../../http/environment';
 import { GetAccessTokenRequest, getAccessTokenRequestRequest } from './models/get-access-token-request';
 import { GetAccessTokenOkResponse, getAccessTokenOkResponseResponse } from './models/get-access-token-ok-response';
 
+/**
+ * Service class for OAuthService operations.
+ * Provides methods to interact with OAuthService-related API endpoints.
+ * All methods return promises and handle request/response serialization automatically.
+ */
 export class OAuthService extends BaseService {
   /**
    * This endpoint was added by liblab

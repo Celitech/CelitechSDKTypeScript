@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the TopUpEsimRequest model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const topUpEsimRequest = z.lazy(() => {
   return z.object({
@@ -22,7 +24,7 @@ export const topUpEsimRequest = z.lazy(() => {
  *
  * @typedef  {TopUpEsimRequest} topUpEsimRequest
  * @property {string} - ID of the eSIM
- * @property {number} - Size of the package in GB. The available options are 0.5, 1, 2, 3, 5, 8, 20GB
+ * @property {number} - Size of the package in GB. The available options are 0.5, 1, 2, 3, 5, 8, 20, 50GB
  * @property {string} - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
  * @property {string} - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
  * @property {number} - Duration of the package in days. Available values are 1, 2, 7, 14, 30, or 90. Either provide startDate/endDate or duration.
@@ -35,8 +37,9 @@ export const topUpEsimRequest = z.lazy(() => {
 export type TopUpEsimRequest = z.infer<typeof topUpEsimRequest>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the TopUpEsimRequest application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const topUpEsimRequestResponse = z.lazy(() => {
   return z
@@ -67,8 +70,9 @@ export const topUpEsimRequestResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the TopUpEsimRequest application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const topUpEsimRequestRequest = z.lazy(() => {
   return z
