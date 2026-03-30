@@ -3,7 +3,9 @@ import { Package_, packageRequest, packageResponse, package_ } from './package_'
 import { PurchasesEsim, purchasesEsim, purchasesEsimRequest, purchasesEsimResponse } from './purchases-esim';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the Purchases model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const purchases = z.lazy(() => {
   return z.object({
@@ -43,8 +45,9 @@ export const purchases = z.lazy(() => {
 export type Purchases = z.infer<typeof purchases>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the Purchases application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const purchasesResponse = z.lazy(() => {
   return z
@@ -81,8 +84,9 @@ export const purchasesResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the Purchases application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const purchasesRequest = z.lazy(() => {
   return z
