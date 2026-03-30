@@ -10,6 +10,11 @@ import { BadRequest } from '../common/bad-request';
 import { Unauthorized } from '../common/unauthorized';
 import { ListPackagesParams } from './request-params';
 
+/**
+ * Service class for PackagesService operations.
+ * Provides methods to interact with PackagesService-related API endpoints.
+ * All methods return promises and handle request/response serialization automatically.
+ */
 export class PackagesService extends BaseService {
   /**
    * List Packages

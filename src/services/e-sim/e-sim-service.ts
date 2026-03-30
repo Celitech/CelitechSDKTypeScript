@@ -12,6 +12,11 @@ import { GetEsimParams } from './request-params';
 import { GetEsimDeviceOkResponse, getEsimDeviceOkResponseResponse } from './models/get-esim-device-ok-response';
 import { GetEsimHistoryOkResponse, getEsimHistoryOkResponseResponse } from './models/get-esim-history-ok-response';
 
+/**
+ * Service class for ESimService operations.
+ * Provides methods to interact with ESimService-related API endpoints.
+ * All methods return promises and handle request/response serialization automatically.
+ */
 export class ESimService extends BaseService {
   /**
    * Get eSIM

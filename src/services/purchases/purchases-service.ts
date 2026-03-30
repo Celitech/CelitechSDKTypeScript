@@ -25,6 +25,11 @@ import {
   getPurchaseConsumptionOkResponseResponse,
 } from './models/get-purchase-consumption-ok-response';
 
+/**
+ * Service class for PurchasesService operations.
+ * Provides methods to interact with PurchasesService-related API endpoints.
+ * All methods return promises and handle request/response serialization automatically.
+ */
 export class PurchasesService extends BaseService {
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.

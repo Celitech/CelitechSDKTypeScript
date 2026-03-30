@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the Packages model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const packages = z.lazy(() => {
   return z.object({
@@ -9,6 +11,7 @@ export const packages = z.lazy(() => {
     destination: z.string(),
     destinationIso2: z.string(),
     dataLimitInBytes: z.number(),
+    dataLimitInGb: z.number(),
     minDays: z.number(),
     maxDays: z.number(),
     priceInCents: z.number(),
@@ -22,6 +25,7 @@ export const packages = z.lazy(() => {
  * @property {string} - ISO3 representation of the package's destination.
  * @property {string} - ISO2 representation of the package's destination.
  * @property {number} - Size of the package in Bytes
+ * @property {number} - Size of the package in GB
  * @property {number} - Min number of days for the package
  * @property {number} - Max number of days for the package
  * @property {number} - Price of the package in cents
@@ -29,8 +33,9 @@ export const packages = z.lazy(() => {
 export type Packages = z.infer<typeof packages>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the Packages application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const packagesResponse = z.lazy(() => {
   return z
@@ -39,6 +44,7 @@ export const packagesResponse = z.lazy(() => {
       destination: z.string(),
       destinationISO2: z.string(),
       dataLimitInBytes: z.number(),
+      dataLimitInGB: z.number(),
       minDays: z.number(),
       maxDays: z.number(),
       priceInCents: z.number(),
@@ -48,6 +54,7 @@ export const packagesResponse = z.lazy(() => {
       destination: data['destination'],
       destinationIso2: data['destinationISO2'],
       dataLimitInBytes: data['dataLimitInBytes'],
+      dataLimitInGb: data['dataLimitInGB'],
       minDays: data['minDays'],
       maxDays: data['maxDays'],
       priceInCents: data['priceInCents'],
@@ -55,8 +62,9 @@ export const packagesResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the Packages application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const packagesRequest = z.lazy(() => {
   return z
@@ -65,6 +73,7 @@ export const packagesRequest = z.lazy(() => {
       destination: z.string(),
       destinationIso2: z.string(),
       dataLimitInBytes: z.number(),
+      dataLimitInGb: z.number(),
       minDays: z.number(),
       maxDays: z.number(),
       priceInCents: z.number(),
@@ -74,6 +83,7 @@ export const packagesRequest = z.lazy(() => {
       destination: data['destination'],
       destinationISO2: data['destinationIso2'],
       dataLimitInBytes: data['dataLimitInBytes'],
+      dataLimitInGB: data['dataLimitInGb'],
       minDays: data['minDays'],
       maxDays: data['maxDays'],
       priceInCents: data['priceInCents'],
