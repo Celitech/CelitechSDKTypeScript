@@ -10,7 +10,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "tsc --noEmit",
-    "build": "tsup-node src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsc --outDir dist",
     "prepublishOnly": "chmod +x ./scripts/prepublish.sh && ./scripts/prepublish.sh && npm run build",
     "test-example": "cd examples && tsc --noEmit"
   },
@@ -25,11 +25,9 @@
     "README.md"
   ],
   "author": "CELITECH",
-  "license": "MIT",
   "devDependencies": {
     "typescript": "5.3.3",
-    "@types/node": "^22.13.9",
-    "tsup": "^6.7.0"
+    "@types/node": "^22.14.0"
   },
   "dependencies": {
     "zod": "3.22.0"

@@ -1,4 +1,9 @@
-import { HttpResponse, PaginatedHttpResponse, CursorPaginatedHttpResponse, SdkConfig } from './types';
+import {
+  HttpResponse,
+  PaginatedHttpResponse,
+  CursorPaginatedHttpResponse,
+  SdkConfig,
+} from './types';
 import { RequestHandlerChain } from './handlers/handler-chain';
 import { HookHandler } from './handlers/hook-handler';
 import { ResponseValidationHandler } from './handlers/response-validation-handler';
@@ -46,6 +51,16 @@ export class HttpClient {
   }
 
   /**
+   * Executes a standard HTTP request and returns only the data directly.
+   * @template T - The expected response data type
+   * @param request - The HTTP request to execute
+   * @returns A promise that resolves to the response data
+   */
+  callDirect<T>(request: Request): Promise<T> {
+    return this.call<T>(request).then((response) => response.data as T);
+  }
+
+  /**
    * Executes a streaming HTTP request that yields responses incrementally.
    * @template T - The expected response data type for each chunk
    * @param request - The HTTP request to execute
@@ -63,7 +78,9 @@ export class HttpClient {
    * @returns A promise that resolves to the paginated HTTP response
    * @throws Error if the response contains no data to paginate through
    */
-  public async callPaginated<FullResponse, Page>(request: Request<Page>): Promise<PaginatedHttpResponse<Page>> {
+  public async callPaginated<FullResponse, Page>(
+    request: Request<Page>,
+  ): Promise<PaginatedHttpResponse<Page>> {
     const response = await this.call<FullResponse>(request as any);
 
     if (!response.data) {
@@ -157,7 +174,10 @@ export class HttpClient {
    * @param data - The full response data to extract the cursor from
    * @returns The next cursor string, null if no more pages, or undefined if not cursor pagination
    */
-  private getNextCursor<FullResponse, Page>(request: Request<Page>, data: FullResponse): string | null | undefined {
+  private getNextCursor<FullResponse, Page>(
+    request: Request<Page>,
+    data: FullResponse,
+  ): string | null | undefined {
     if (!isRequestCursorPagination(request.pagination)) {
       return undefined;
     }

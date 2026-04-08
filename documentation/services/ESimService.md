@@ -36,7 +36,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.eSim.getEsim({
+  const data = await celitech.eSim.getEsim({
     iccid: '1111222233334444555000',
   });
 
@@ -72,7 +72,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.eSim.getEsimDevice('1111222233334444555000');
+  const data = await celitech.eSim.getEsimDevice('1111222233334444555000');
 
   console.log(data);
 })();
@@ -106,7 +106,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.eSim.getEsimHistory('1111222233334444555000');
+  const data = await celitech.eSim.getEsimHistory('1111222233334444555000');
 
   console.log(data);
 })();

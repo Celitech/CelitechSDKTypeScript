@@ -11,7 +11,9 @@ export class CookieSerializer {
    * @param cookieParams - Map of cookie names to their parameter values
    * @returns A record of cookie names to serialized values, or undefined if no cookies
    */
-  public serialize(cookieParams: Map<string, RequestParameter> | undefined): Record<string, string> | undefined {
+  public serialize(
+    cookieParams: Map<string, RequestParameter> | undefined,
+  ): Record<string, string> | undefined {
     if (!cookieParams || !cookieParams.size) {
       return undefined;
     }
