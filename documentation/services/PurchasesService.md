@@ -42,10 +42,17 @@ import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
   const createPurchaseV2Request: CreatePurchaseV2Request = {
     destination: 'FRA',
     dataLimitInGb: 1,
+    startDate: '2023-11-01',
+    endDate: '2023-11-20',
+    duration: 30,
     quantity: 1,
+    email: 'example@domain.com',
+    referenceId: 'abc111222333444',
+    networkBrand: 'CELITECH',
+    emailBrand: 'CELITECH',
   };
 
-  const { data } = await celitech.purchases.createPurchaseV2(createPurchaseV2Request);
+  const data = await celitech.purchases.createPurchaseV2(createPurchaseV2Request);
 
   console.log(data);
 })();
@@ -88,7 +95,17 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.purchases.listPurchases({});
+  const data = await celitech.purchases.listPurchases({
+    purchaseId: '4973fa15-6979-4daa-9cf3-672620df819c',
+    iccid: '1111222233334444555000',
+    afterDate: '2023-11-01',
+    beforeDate: '2023-11-20',
+    email: 'example@gmail.com',
+    referenceId: 'abc111222333444',
+    afterCursor:
+      'Y3JlYXRlZEF0OjE1OTk0OTMwOTgsZGVzdGluYXRpb246QVVTLG1pbkRheXM6MCxkYXRhTGltaXRJbkJ5dGVzOjUzNjg3MDkxMjA',
+    limit: 20,
+  });
 
   console.log(data);
 })();
@@ -127,9 +144,13 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     dataLimitInGb: 1,
     startDate: '2023-11-01',
     endDate: '2023-11-20',
+    email: 'example@domain.com',
+    referenceId: 'abc111222333444',
+    networkBrand: 'CELITECH',
+    emailBrand: 'CELITECH',
   };
 
-  const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
+  const data = await celitech.purchases.createPurchase(createPurchaseRequest);
 
   console.log(data);
 })();
@@ -166,9 +187,15 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
   const topUpEsimRequest: TopUpEsimRequest = {
     iccid: '1111222233334444555000',
     dataLimitInGb: 1,
+    startDate: '2023-11-01',
+    endDate: '2023-11-20',
+    duration: 30,
+    email: 'example@domain.com',
+    referenceId: 'abc111222333444',
+    emailBrand: 'CELITECH',
   };
 
-  const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
+  const data = await celitech.purchases.topUpEsim(topUpEsimRequest);
 
   console.log(data);
 })();
@@ -208,7 +235,7 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
   };
 
-  const { data } = await celitech.purchases.editPurchase(editPurchaseRequest);
+  const data = await celitech.purchases.editPurchase(editPurchaseRequest);
 
   console.log(data);
 })();
@@ -242,7 +269,9 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.purchases.getPurchaseConsumption('4973fa15-6979-4daa-9cf3-672620df819c');
+  const data = await celitech.purchases.getPurchaseConsumption(
+    '4973fa15-6979-4daa-9cf3-672620df819c',
+  );
 
   console.log(data);
 })();

@@ -40,7 +40,14 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.packages.listPackages({});
+  const data = await celitech.packages.listPackages({
+    destination: 'FRA',
+    startDate: '2023-11-01',
+    endDate: '2023-11-20',
+    afterCursor:
+      'Y3JlYXRlZEF0OjE1OTk0OTMwOTgsZGVzdGluYXRpb246QVVTLG1pbkRheXM6MCxkYXRhTGltaXRJbkJ5dGVzOjUzNjg3MDkxMjA',
+    limit: 20,
+  });
 
   console.log(data);
 })();
