@@ -11,11 +11,43 @@ export class BaseService {
   /** The HTTP client instance used to make API requests */
   public client: HttpClient;
 
+  /** Service-level configuration overrides */
+  protected serviceConfig?: Partial<SdkConfig>;
+
   constructor(
     public config: SdkConfig,
     protected tokenManager: OAuthTokenManager,
   ) {
     this.client = new HttpClient(this.config);
+  }
+
+  /**
+   * Sets service-level configuration that applies to all methods in this service.
+   * @param config - Partial configuration to override SDK-level defaults
+   * @returns This service instance for method chaining
+   */
+  setConfig(config: Partial<SdkConfig>): this {
+    this.serviceConfig = config;
+    return this;
+  }
+
+  /**
+   * Resolves configuration from the hierarchy: requestConfig > methodConfig > serviceConfig > sdkConfig
+   * Merges all config levels into a single resolved config object.
+   * @param methodConfig - Method-level configuration override
+   * @param requestConfig - Request-level configuration override
+   * @returns Merged configuration with all overrides applied
+   */
+  protected getResolvedConfig(
+    methodConfig?: Partial<SdkConfig>,
+    requestConfig?: Partial<SdkConfig>,
+  ): SdkConfig {
+    return {
+      ...this.config,
+      ...this.serviceConfig,
+      ...methodConfig,
+      ...requestConfig,
+    } as SdkConfig;
   }
 
   set baseUrl(baseUrl: string) {

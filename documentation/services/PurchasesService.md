@@ -45,7 +45,7 @@ import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
     quantity: 1,
   };
 
-  const { data } = await celitech.purchases.createPurchaseV2(createPurchaseV2Request);
+  const data = await celitech.purchases.createPurchaseV2(createPurchaseV2Request);
 
   console.log(data);
 })();
@@ -88,7 +88,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.purchases.listPurchases({});
+  const data = await celitech.purchases.listPurchases({});
 
   console.log(data);
 })();
@@ -129,7 +129,7 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
   };
 
-  const { data } = await celitech.purchases.createPurchase(createPurchaseRequest);
+  const data = await celitech.purchases.createPurchase(createPurchaseRequest);
 
   console.log(data);
 })();
@@ -168,7 +168,7 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     dataLimitInGb: 1,
   };
 
-  const { data } = await celitech.purchases.topUpEsim(topUpEsimRequest);
+  const data = await celitech.purchases.topUpEsim(topUpEsimRequest);
 
   console.log(data);
 })();
@@ -208,7 +208,7 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
   };
 
-  const { data } = await celitech.purchases.editPurchase(editPurchaseRequest);
+  const data = await celitech.purchases.editPurchase(editPurchaseRequest);
 
   console.log(data);
 })();
@@ -242,7 +242,9 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.purchases.getPurchaseConsumption('4973fa15-6979-4daa-9cf3-672620df819c');
+  const data = await celitech.purchases.getPurchaseConsumption(
+    '4973fa15-6979-4daa-9cf3-672620df819c',
+  );
 
   console.log(data);
 })();

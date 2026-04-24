@@ -5,7 +5,16 @@ import { Request } from './transport/request';
 /**
  * Standard HTTP methods supported by the SDK.
  */
-export type HttpMethod = 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
+export type HttpMethod =
+  | 'CONNECT'
+  | 'DELETE'
+  | 'GET'
+  | 'HEAD'
+  | 'OPTIONS'
+  | 'PATCH'
+  | 'POST'
+  | 'PUT'
+  | 'TRACE';
 
 /**
  * SDK configuration interface.
@@ -144,15 +153,14 @@ export interface Options<T> {
   retry?: RetryOptions;
 }
 
-export interface RequestConfig {
-  retry?: RetryOptions;
-  validation?: ValidationOptions;
-  baseUrl?: string;
-}
-
 export interface RetryOptions {
   attempts: number;
   delayMs?: number;
+  maxDelayMs?: number;
+  backoffFactor?: number;
+  jitterMs?: number;
+  statusCodesToRetry?: number[];
+  httpMethodsToRetry?: HttpMethod[];
 }
 
 export interface ValidationOptions {

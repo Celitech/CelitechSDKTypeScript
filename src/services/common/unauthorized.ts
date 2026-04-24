@@ -28,6 +28,8 @@ export class Unauthorized extends ThrowableError {
   }
 
   public throw() {
-    throw new Unauthorized(this.message, this.response);
+    const error = new Unauthorized(this.message, this.response);
+    error.metadata = this.metadata;
+    throw error;
   }
 }
