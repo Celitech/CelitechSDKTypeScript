@@ -1,8 +1,15 @@
+import { HttpMetadata } from '../types';
+
 /**
  * Error class that can be thrown explicitly via a throw() method.
  * Extends the built-in Error class with a convenience method for throwing.
  */
 export class ThrowableError extends Error {
+  /**
+   * Optional metadata about the HTTP response that triggered this error.
+   */
+  public metadata?: HttpMetadata;
+
   /**
    * Creates a new throwable error.
    * @param message - The error message

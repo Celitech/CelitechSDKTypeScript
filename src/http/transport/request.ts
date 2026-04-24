@@ -51,10 +51,6 @@ export class Request<PageSchema = unknown[]> {
 
   public requestContentType: ContentType;
 
-  public validation: ValidationOptions = {} as any;
-
-  public retry: RetryOptions = {} as any;
-
   public pagination?: RequestPagination<PageSchema> | RequestCursorPagination<PageSchema>;
 
   public filename?: string;
@@ -81,8 +77,6 @@ export class Request<PageSchema = unknown[]> {
     this.errors = params.errors;
     this.requestSchema = params.requestSchema;
     this.requestContentType = params.requestContentType;
-    this.retry = params.retry;
-    this.validation = params.validation;
     this.pagination = params.pagination;
     this.filename = params.filename;
     this.filenames = params.filenames;
@@ -230,8 +224,6 @@ export class Request<PageSchema = unknown[]> {
       responses: overrides?.responses ?? this.responses,
       requestSchema: overrides?.requestSchema ?? this.requestSchema,
       requestContentType: overrides?.requestContentType ?? this.requestContentType,
-      retry: overrides?.retry ?? this.retry,
-      validation: overrides?.validation ?? this.validation,
       filename: overrides?.filename ?? this.filename,
       filenames: overrides?.filenames ?? this.filenames,
       scopes: overrides?.scopes,

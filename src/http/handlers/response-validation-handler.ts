@@ -68,7 +68,11 @@ export class ResponseValidationHandler implements RequestHandler {
 
     const contentType = responseDefinition.contentType;
     const contentTypeHandlers: {
-      [key: string]: (req: Request, resDef: ResponseDefinition, res: HttpResponse<T>) => HttpResponse<T>;
+      [key: string]: (
+        req: Request,
+        resDef: ResponseDefinition,
+        res: HttpResponse<T>,
+      ) => HttpResponse<T>;
     } = {
       [ContentType.Binary]: this.decodeFile,
       [ContentType.Image]: this.decodeFile,
@@ -177,7 +181,7 @@ export class ResponseValidationHandler implements RequestHandler {
    * @returns The validated data (parsed if validation enabled, raw otherwise)
    */
   private validate<T>(request: Request, response: ResponseDefinition, data: any): T {
-    if (request.validation?.responseValidation) {
+    if (request.config.validation?.responseValidation ?? true) {
       return response.schema.parse(data);
     }
     return data;
@@ -190,7 +194,10 @@ export class ResponseValidationHandler implements RequestHandler {
    * @param response - The HTTP response
    * @returns True if the response should have content, false otherwise
    */
-  private hasContent<T>(responseDefinition: ResponseDefinition, response: HttpResponse<T>): boolean {
+  private hasContent<T>(
+    responseDefinition: ResponseDefinition,
+    response: HttpResponse<T>,
+  ): boolean {
     return (
       !!responseDefinition.schema &&
       !(responseDefinition.schema instanceof ZodUndefined) &&
