@@ -15,6 +15,7 @@ export const createPurchaseRequest = z.lazy(() => {
     referenceId: z.string().optional(),
     networkBrand: z.string().optional(),
     emailBrand: z.string().optional(),
+    language: z.string().optional(),
     startTime: z.number().optional(),
     endTime: z.number().optional(),
   });
@@ -31,6 +32,7 @@ export const createPurchaseRequest = z.lazy(() => {
  * @property {string} - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
  * @property {string} - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters, numbers, dots (.), ampersands (&), and spaces. This feature is available to platforms with Diamond tier only.
  * @property {string} - Customize the email subject brand. The `emailBrand` parameter cannot exceed 25 characters in length and must contain only letters, numbers, and spaces. This feature is available to platforms with Diamond tier only.
+ * @property {CreatePurchaseRequestLanguage} - Language of the confirmation email sent to the customer.
  * @property {number} - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months.
  * @property {number} - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time.
  */
@@ -52,6 +54,7 @@ export const createPurchaseRequestResponse = z.lazy(() => {
       referenceId: z.string().optional(),
       networkBrand: z.string().optional(),
       emailBrand: z.string().optional(),
+      language: z.string().optional(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
     })
@@ -64,6 +67,7 @@ export const createPurchaseRequestResponse = z.lazy(() => {
       referenceId: data['referenceId'],
       networkBrand: data['networkBrand'],
       emailBrand: data['emailBrand'],
+      language: data['language'],
       startTime: data['startTime'],
       endTime: data['endTime'],
     }));
@@ -85,6 +89,7 @@ export const createPurchaseRequestRequest = z.lazy(() => {
       referenceId: z.string().optional(),
       networkBrand: z.string().optional(),
       emailBrand: z.string().optional(),
+      language: z.string().optional(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
     })
@@ -97,6 +102,7 @@ export const createPurchaseRequestRequest = z.lazy(() => {
       referenceId: data['referenceId'],
       networkBrand: data['networkBrand'],
       emailBrand: data['emailBrand'],
+      language: data['language'],
       startTime: data['startTime'],
       endTime: data['endTime'],
     }));

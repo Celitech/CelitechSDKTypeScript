@@ -1,5 +1,5 @@
 ```typescript
-import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
+import { Celitech, CreatePurchaseV2Request, CreatePurchaseV2RequestLanguage } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
