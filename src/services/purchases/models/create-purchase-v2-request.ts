@@ -17,6 +17,7 @@ export const createPurchaseV2Request = z.lazy(() => {
     referenceId: z.string().optional(),
     networkBrand: z.string().optional(),
     emailBrand: z.string().optional(),
+    language: z.string().optional(),
   });
 });
 
@@ -33,6 +34,7 @@ export const createPurchaseV2Request = z.lazy(() => {
  * @property {string} - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
  * @property {string} - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters, numbers, dots (.), ampersands (&), and spaces. This feature is available to platforms with Diamond tier only.
  * @property {string} - Customize the email subject brand. The `emailBrand` parameter cannot exceed 25 characters in length and must contain only letters, numbers, and spaces. This feature is available to platforms with Diamond tier only.
+ * @property {CreatePurchaseV2RequestLanguage} - Language of the confirmation email sent to the customer.
  */
 export type CreatePurchaseV2Request = z.infer<typeof createPurchaseV2Request>;
 
@@ -54,6 +56,7 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
       referenceId: z.string().optional(),
       networkBrand: z.string().optional(),
       emailBrand: z.string().optional(),
+      language: z.string().optional(),
     })
     .transform((data) => ({
       destination: data['destination'],
@@ -66,6 +69,7 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
       referenceId: data['referenceId'],
       networkBrand: data['networkBrand'],
       emailBrand: data['emailBrand'],
+      language: data['language'],
     }));
 });
 
@@ -87,6 +91,7 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
       referenceId: z.string().optional(),
       networkBrand: z.string().optional(),
       emailBrand: z.string().optional(),
+      language: z.string().optional(),
     })
     .transform((data) => ({
       destination: data['destination'],
@@ -99,5 +104,6 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
       referenceId: data['referenceId'],
       networkBrand: data['networkBrand'],
       emailBrand: data['emailBrand'],
+      language: data['language'],
     }));
 });

@@ -31,7 +31,7 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
+import { Celitech, CreatePurchaseV2Request, CreatePurchaseV2RequestLanguage } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
@@ -114,7 +114,7 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
+import { Celitech, CreatePurchaseRequest, CreatePurchaseRequestLanguage } from 'celitech-sdk';
 
 (async () => {
   const celitech = new Celitech({
