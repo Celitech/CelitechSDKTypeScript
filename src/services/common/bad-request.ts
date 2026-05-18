@@ -28,6 +28,8 @@ export class BadRequest extends ThrowableError {
   }
 
   public throw() {
-    throw new BadRequest(this.message, this.response);
+    const error = new BadRequest(this.message, this.response);
+    error.metadata = this.metadata;
+    throw error;
   }
 }
