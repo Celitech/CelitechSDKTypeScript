@@ -6,7 +6,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.destinations.listDestinations();
+  const data = await celitech.destinations.listDestinations();
 
   console.log(data);
 })();
