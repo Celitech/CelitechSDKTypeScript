@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { Destinations, destinations, destinationsRequest, destinationsResponse } from './destinations';
+import {
+  Destinations,
+  destinations,
+  destinationsRequest,
+  destinationsResponse,
+} from './destinations';
 
 /**
  * Zod schema for the ListDestinationsOkResponse model.
