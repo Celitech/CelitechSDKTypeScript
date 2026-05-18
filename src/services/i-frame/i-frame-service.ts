@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { BaseService } from '../base-service';
-import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
+import { ContentType, HttpResponse, SdkConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
@@ -15,15 +15,28 @@ import { Unauthorized } from '../common/unauthorized';
  * All methods return promises and handle request/response serialization automatically.
  */
 export class IFrameService extends BaseService {
+  protected tokenConfig?: Partial<SdkConfig>;
+
+  /**
+   * Sets method-level configuration for token.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setTokenConfig(config: Partial<SdkConfig>): this {
+    this.tokenConfig = config;
+    return this;
+  }
+
   /**
    * Generate a new token to be used in the iFrame
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<TokenOkResponse>>} - Successful Response
    */
-  async token(requestConfig?: RequestConfig): Promise<HttpResponse<TokenOkResponse>> {
+  async token(requestConfig?: Partial<SdkConfig>): Promise<TokenOkResponse> {
+    const resolvedConfig = this.getResolvedConfig(this.tokenConfig, requestConfig);
     const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
       .setMethod('POST')
       .setPath('/iframe/token')
       .setRequestSchema(z.any())
@@ -45,10 +58,7 @@ export class IFrameService extends BaseService {
         contentType: ContentType.Json,
         status: 401,
       })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
       .build();
-    return this.client.call<TokenOkResponse>(request);
+    return this.client.callDirect<TokenOkResponse>(request);
   }
 }

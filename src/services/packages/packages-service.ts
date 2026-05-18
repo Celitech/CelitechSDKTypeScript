@@ -1,11 +1,14 @@
 import { z } from 'zod';
 import { BaseService } from '../base-service';
-import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
+import { ContentType, HttpResponse, SdkConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
-import { ListPackagesOkResponse, listPackagesOkResponseResponse } from './models/list-packages-ok-response';
+import {
+  ListPackagesOkResponse,
+  listPackagesOkResponseResponse,
+} from './models/list-packages-ok-response';
 import { BadRequest } from '../common/bad-request';
 import { Unauthorized } from '../common/unauthorized';
 import { ListPackagesParams } from './request-params';
@@ -16,6 +19,18 @@ import { ListPackagesParams } from './request-params';
  * All methods return promises and handle request/response serialization automatically.
  */
 export class PackagesService extends BaseService {
+  protected listPackagesConfig?: Partial<SdkConfig>;
+
+  /**
+   * Sets method-level configuration for listPackages.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setListPackagesConfig(config: Partial<SdkConfig>): this {
+    this.listPackagesConfig = config;
+    return this;
+  }
+
   /**
    * List Packages
    * @param {string} [params.destination] - ISO representation of the package's destination. Supports both ISO2 (e.g., 'FR') and ISO3 (e.g., 'FRA') country codes.
@@ -25,16 +40,26 @@ export class PackagesService extends BaseService {
    * @param {number} [params.limit] - Maximum number of packages to be returned in the response. The value must be greater than 0 and less than or equal to 160. If not provided, the default value is 20
    * @param {number} [params.startTime] - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months
    * @param {number} [params.endTime] - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListPackagesOkResponse>>} - Successful Response
    */
   async listPackages(
     params?: ListPackagesParams,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<ListPackagesOkResponse>> {
+    requestConfig?: Partial<SdkConfig>,
+  ): Promise<ListPackagesOkResponse> {
+    const resolvedConfig = this.getResolvedConfig(this.listPackagesConfig, requestConfig);
+    z.object({
+      destination: z.string().optional(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
+      afterCursor: z.string().optional(),
+      limit: z.number().optional(),
+      startTime: z.number().optional(),
+      endTime: z.number().optional(),
+    }).parse(params ?? {});
     const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
       .setMethod('GET')
       .setPath('/packages')
       .setRequestSchema(z.any())
@@ -56,9 +81,6 @@ export class PackagesService extends BaseService {
         contentType: ContentType.Json,
         status: 401,
       })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
       .addQueryParam({
         key: 'destination',
         value: params?.destination,
@@ -88,6 +110,6 @@ export class PackagesService extends BaseService {
         value: params?.endTime,
       })
       .build();
-    return this.client.call<ListPackagesOkResponse>(request);
+    return this.client.callDirect<ListPackagesOkResponse>(request);
   }
 }
