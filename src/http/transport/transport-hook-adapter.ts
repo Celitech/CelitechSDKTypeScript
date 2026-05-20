@@ -33,7 +33,11 @@ export class TransportHookAdapter<T> {
       method: newRequest.method,
       path: newRequest.path,
       body: newRequest.body,
-      queryParams: this.hookParamsToTransportParams(newRequest.queryParams, request.queryParams, true),
+      queryParams: this.hookParamsToTransportParams(
+        newRequest.queryParams,
+        request.queryParams,
+        true,
+      ),
       headers: this.hookParamsToTransportParams(newRequest.headers, request.headers, false),
       pathParams: this.hookParamsToTransportParams(newRequest.pathParams, request.headers, false),
     });
@@ -68,7 +72,11 @@ export class TransportHookAdapter<T> {
    * @param params - Additional parameters to pass to the hook
    * @returns The HttpError from the hook
    */
-  public async onError(request: Request, response: HttpResponse<T>, params: Map<string, string>): Promise<HttpError> {
+  public async onError(
+    request: Request,
+    response: HttpResponse<T>,
+    params: Map<string, string>,
+  ): Promise<HttpError> {
     const hookRequest = this.requestToHookRequest(request);
     return this.hook.onError(hookRequest, response, params);
   }

@@ -1,0 +1,40 @@
+{
+  "endpoints": {
+    "/destinations": {
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.destinations.listDestinations({\n      accept: \"application/json\",\n  });\n\n  console.log(data);\n})();\n"
+    },
+    "/packages": {
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.packages.listPackages({\n      accept: \"application/json\",\n  });\n\n  console.log(data);\n})();\n"
+    },
+    "/purchases/v2": {
+      "post": "import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  \n  const createPurchaseV2Request: CreatePurchaseV2Request = {};\n\n  const data = await celitech.v2.createPurchaseV2(\n  createPurchaseV2Request,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/purchases/topup": {
+      "post": "import { Celitech, TopUpESimRequest } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  \n  const topUpESimRequest: TopUpESimRequest = {};\n\n  const data = await celitech.topup.topUpESim(\n  topUpESimRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/purchases/edit": {
+      "post": "import { Celitech, EditPurchaseRequest } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  \n  const editPurchaseRequest: EditPurchaseRequest = {};\n\n  const data = await celitech.edit.editPurchase(\n  editPurchaseRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/purchases/{purchaseId}/consumption": {
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.consumption.getPurchaseConsumption(\n  \"purchaseId\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/purchases": {
+      "post": "import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  \n  const createPurchaseRequest: CreatePurchaseRequest = {};\n\n  const data = await celitech.purchases.createPurchase(\n  createPurchaseRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n",
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.purchases.listPurchases({\n      accept: \"application/json\",\n  });\n\n  console.log(data);\n})();\n"
+    },
+    "/esim/{iccid}/device": {
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.device.getESimDevice(\n  \"iccid\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/esim/{iccid}/history": {
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.history.getESimHistory(\n  \"iccid\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/esim": {
+      "get": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.esim.getESim({\n      accept: \"application/json\",\n  });\n\n  console.log(data);\n})();\n"
+    },
+    "/iframe/token": {
+      "post": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.token_.generateToken({\n      accept: \"application/json\",\n  });\n\n  console.log(data);\n})();\n"
+    }
+  },
+  "example": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.destinations.listDestinations({\n      accept: \"application/json\",\n  });\n\n  console.log(data);\n})();\n",
+  "authentication": {}
+}
