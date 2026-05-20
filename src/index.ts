@@ -7,12 +7,12 @@ import { PurchasesService } from './services/purchases';
 import { ESimService } from './services/e-sim';
 import { IFrameService } from './services/i-frame';
 
-export * from './services/o-auth';
 export * from './services/destinations';
 export * from './services/packages';
 export * from './services/purchases';
 export * from './services/e-sim';
 export * from './services/i-frame';
+export * from './services/o-auth';
 export * from './services/common';
 
 export * from './http';

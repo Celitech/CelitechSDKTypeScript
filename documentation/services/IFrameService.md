@@ -28,7 +28,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.iFrame.token();
+  const data = await celitech.iFrame.token();
 
   console.log(data);
 })();

@@ -40,7 +40,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.packages.listPackages({});
+  const data = await celitech.packages.listPackages({});
 
   console.log(data);
 })();

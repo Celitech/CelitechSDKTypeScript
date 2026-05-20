@@ -56,7 +56,10 @@ export class HookHandler implements RequestHandler {
     if (error) {
       const decodedBody = new TextDecoder().decode(arrayBuffer);
       const json = JSON.parse(decodedBody);
-      new error.error((json as any)?.message || '', json).throw();
+      const customError = new error.error((json as any)?.message || '', json);
+      // Attach metadata to custom error for analytics tracking
+      customError.metadata = response.metadata;
+      customError.throw();
     }
 
     const decodedBody = new TextDecoder().decode(arrayBuffer);
