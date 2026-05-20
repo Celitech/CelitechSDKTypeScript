@@ -50,8 +50,6 @@ export interface CreateRequestParameters<Page = unknown[]> {
   errors: ErrorDefinition[];
   requestSchema: ZodType;
   requestContentType: ContentType;
-  validation: ValidationOptions;
-  retry: RetryOptions;
   pagination?: RequestPagination<Page> | RequestCursorPagination<Page>;
   filename?: string;
   filenames?: string[];

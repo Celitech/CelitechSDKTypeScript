@@ -121,7 +121,9 @@ export class Serializer {
       param.style === SerializationStyle.SPACE_DELIMITED ||
       param.style === SerializationStyle.PIPE_DELIMITED
     ) {
-      return value.map((val) => `${encodeURIComponent(param.key || '')}=${encodeURIComponent(`${val}`)}`).join('&');
+      return value
+        .map((val) => `${encodeURIComponent(param.key || '')}=${encodeURIComponent(`${val}`)}`)
+        .join('&');
     }
 
     return `${value.join(',')}`;
