@@ -1,11 +1,14 @@
 import { z } from 'zod';
 import { BaseService } from '../base-service';
-import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
+import { ContentType, HttpResponse, SdkConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
-import { ListDestinationsOkResponse, listDestinationsOkResponseResponse } from './models/list-destinations-ok-response';
+import {
+  ListDestinationsOkResponse,
+  listDestinationsOkResponseResponse,
+} from './models/list-destinations-ok-response';
 import { BadRequest } from '../common/bad-request';
 import { Unauthorized } from '../common/unauthorized';
 
@@ -15,15 +18,28 @@ import { Unauthorized } from '../common/unauthorized';
  * All methods return promises and handle request/response serialization automatically.
  */
 export class DestinationsService extends BaseService {
+  protected listDestinationsConfig?: Partial<SdkConfig>;
+
+  /**
+   * Sets method-level configuration for listDestinations.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setListDestinationsConfig(config: Partial<SdkConfig>): this {
+    this.listDestinationsConfig = config;
+    return this;
+  }
+
   /**
    * List Destinations
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListDestinationsOkResponse>>} - Successful Response
    */
-  async listDestinations(requestConfig?: RequestConfig): Promise<HttpResponse<ListDestinationsOkResponse>> {
+  async listDestinations(requestConfig?: Partial<SdkConfig>): Promise<ListDestinationsOkResponse> {
+    const resolvedConfig = this.getResolvedConfig(this.listDestinationsConfig, requestConfig);
     const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
       .setMethod('GET')
       .setPath('/destinations')
       .setRequestSchema(z.any())
@@ -45,10 +61,7 @@ export class DestinationsService extends BaseService {
         contentType: ContentType.Json,
         status: 401,
       })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
       .build();
-    return this.client.call<ListDestinationsOkResponse>(request);
+    return this.client.callDirect<ListDestinationsOkResponse>(request);
   }
 }

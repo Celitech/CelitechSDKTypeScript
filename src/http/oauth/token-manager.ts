@@ -54,7 +54,11 @@ export class OAuthTokenManager {
    * @throws Error if client credentials are missing or token request fails
    */
   public async getToken(scopes: Set<string>, config: SdkConfig): Promise<OAuthToken> {
-    if (this.token?.hasAllScopes(scopes) && this.token?.expiresAt && this.token.expiresAt - Date.now() > 5000) {
+    if (
+      this.token?.hasAllScopes(scopes) &&
+      this.token?.expiresAt &&
+      this.token.expiresAt - Date.now() > 5000
+    ) {
       return this.token;
     }
 
@@ -67,29 +71,31 @@ export class OAuthTokenManager {
     const oAuth = new OAuthService(
       {
         ...config,
-        baseUrl: config.oAuthBaseUrl || config.baseUrl || config.environment || 'https://auth.celitech.net',
+        baseUrl:
+          config.oAuthBaseUrl ||
+          config.baseUrl ||
+          config.environment ||
+          'https://auth.celitech.net',
       },
       this,
     );
-    const response = await oAuth.getAccessToken(
-      {
-        grantType: 'client_credentials',
-        clientId: config.clientId,
-        clientSecret: config.clientSecret,
-      },
-      {},
-    );
+    const response = await oAuth.getAccessToken({
+      grantType: 'client_credentials',
+      clientId: config.clientId,
+      clientSecret: config.clientSecret,
+      scope: Array.from(scopes).join(' '),
+    });
 
-    if (!response.data?.accessToken) {
+    if (!response?.accessToken) {
       throw new Error(
         `OAuthError: token endpoint response did not return access token. Response: ${(JSON.stringify(response), undefined, 2)}.`,
       );
     }
 
     this.token = new OAuthToken(
-      response.data.accessToken,
+      response.accessToken,
       updatedScopes,
-      response.data?.expiresIn ? response.data?.expiresIn * 1000 + Date.now() : null,
+      response?.expiresIn ? response?.expiresIn * 1000 + Date.now() : null,
     );
 
     return this.token;
