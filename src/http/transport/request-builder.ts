@@ -8,7 +8,7 @@ import {
   ResponseDefinition,
   ErrorDefinition,
 } from './types';
-import { ContentType, HttpMethod, SdkConfig, RequestConfig, RetryOptions, ValidationOptions } from '../types';
+import { ContentType, HttpMethod, SdkConfig } from '../types';
 import { Environment } from '../environment';
 import { SerializationStyle } from '../serialization/base-serializer';
 import { OAuthTokenManager } from '../oauth/token-manager';
@@ -31,59 +31,81 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
       baseUrl: Environment.DEFAULT,
       method: 'GET',
       path: '',
-      config: {} as SdkConfig,
+      config: {
+        clientId: '',
+        clientSecret: '',
+        retry: {
+          attempts: 3,
+          delayMs: 150,
+          maxDelayMs: 5000,
+          backoffFactor: 2,
+          jitterMs: 50,
+          httpMethodsToRetry: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+        },
+        validation: { responseValidation: true },
+      } as SdkConfig,
       responses: [],
       errors: [],
       requestSchema: z.any(),
       requestContentType: ContentType.Json,
-      retry: {
-        attempts: 3,
-        delayMs: 150,
-      },
-      validation: {
-        responseValidation: true,
-      },
       pathParams: new Map(),
       queryParams: new Map(),
       headers: new Map(),
       cookies: new Map(),
       tokenManager: new OAuthTokenManager(),
     };
+    this.addHeaderParam({
+      key: 'User-Agent',
+      value: 'postman-codegen/1.1.2 celitech-sdk/2.0.0 (typescript)',
+    });
   }
 
-  setRetryAttempts(sdkConfig?: SdkConfig, requestConfig?: RequestConfig): RequestBuilder<Page> {
-    if (requestConfig?.retry?.attempts !== undefined) {
-      this.params.retry.attempts = requestConfig.retry.attempts;
-    } else if (sdkConfig?.retry?.attempts !== undefined) {
-      this.params.retry.attempts = sdkConfig.retry.attempts;
+  setConfig(config: SdkConfig): RequestBuilder<Page> {
+    // Merge user config with default config, preserving defaults for unspecified nested properties
+    let mergedRetry = config.retry ?? this.params.config.retry;
+    if (config.retry !== undefined && this.params.config.retry !== undefined) {
+      mergedRetry = { ...this.params.config.retry, ...config.retry };
     }
 
+    let mergedValidation = config.validation ?? this.params.config.validation;
+    if (config.validation !== undefined && this.params.config.validation !== undefined) {
+      mergedValidation = { ...this.params.config.validation, ...config.validation };
+    }
+
+    this.params.config = {
+      ...this.params.config,
+      ...config,
+      ...(mergedRetry !== undefined && { retry: mergedRetry }),
+      ...(mergedValidation !== undefined && { validation: mergedValidation }),
+    } as SdkConfig;
     return this;
   }
 
-  setRetryDelayMs(sdkConfig?: SdkConfig, requestConfig?: RequestConfig): RequestBuilder<Page> {
-    if (requestConfig?.retry?.delayMs !== undefined) {
-      this.params.retry.delayMs = requestConfig.retry.delayMs;
-    } else if (sdkConfig?.retry?.delayMs !== undefined) {
-      this.params.retry.delayMs = sdkConfig.retry.delayMs;
+  /**
+   * Sets the base URL for the request using hierarchical configuration resolution.
+   *
+   * Resolution logic:
+   * 1. First tries to resolve 'baseUrl' (string) from the resolved config
+   * 2. If no 'baseUrl' found, falls back to 'environment' (enum) from the resolved config
+   * 3. 'baseUrl' always takes precedence over 'environment'
+   *
+   * @param config - Resolved configuration from all hierarchy levels
+   * @returns This builder instance for method chaining
+   */
+  setBaseUrl(config?: SdkConfig): RequestBuilder<Page> {
+    if (!config) {
+      return this;
     }
 
-    return this;
-  }
-
-  setResponseValidation(sdkConfig: SdkConfig, requestConfig?: RequestConfig): RequestBuilder<Page> {
-    if (requestConfig?.validation?.responseValidation !== undefined) {
-      this.params.validation.responseValidation = requestConfig.validation.responseValidation;
-    } else if (sdkConfig?.validation?.responseValidation !== undefined) {
-      this.params.validation.responseValidation = sdkConfig.validation.responseValidation;
+    // First try baseUrl string
+    if ('baseUrl' in config && typeof config.baseUrl === 'string' && config.baseUrl) {
+      this.params.baseUrl = config.baseUrl;
+      return this;
     }
 
-    return this;
-  }
-
-  setBaseUrl(baseUrl: string | undefined): RequestBuilder<Page> {
-    if (baseUrl) {
-      this.params.baseUrl = baseUrl;
+    // If no baseUrl string, try environment enum
+    if ('environment' in config && config.environment) {
+      this.params.baseUrl = config.environment as string;
     }
 
     return this;
@@ -96,11 +118,6 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
 
   setPath(path: string): RequestBuilder<Page> {
     this.params.path = path;
-    return this;
-  }
-
-  setConfig(config: SdkConfig): RequestBuilder<Page> {
-    this.params.config = config;
     return this;
   }
 
@@ -155,7 +172,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
 
     this.params.headers.set('Authorization', {
       key: 'Authorization',
-      value: `${prefix ?? 'BEARER'} ${accessToken}`,
+      value: `${prefix ?? 'Bearer'} ${accessToken}`,
       explode: false,
       style: SerializationStyle.SIMPLE,
       encode: true,
