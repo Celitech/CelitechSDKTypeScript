@@ -23,7 +23,9 @@ export class ValidationError extends Error {
 
     const error = [
       `ValidationError:`,
-      ...zodError.issues.map((issue) => `  Property: ${issue.path.join('.')}. Message: ${issue.message}`),
+      ...zodError.issues.map(
+        (issue) => `  Property: ${issue.path.join('.')}. Message: ${issue.message}`,
+      ),
       '  Validated:',
       ...actual.split('\n').map((line) => `  ${line}`),
     ].join('\n');

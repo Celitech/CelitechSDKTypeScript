@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "declarationMap": true,
-    "lib": ["es2018", "dom"],
+    "lib": ["es2018", "dom", "DOM.Iterable"],
     "sourceMap": true
   },
   "include": ["src/"]
