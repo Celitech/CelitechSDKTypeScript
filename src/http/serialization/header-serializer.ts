@@ -11,7 +11,9 @@ export class HeaderSerializer extends Serializer {
    * @param headerParams - Map of header names to their parameter values
    * @returns A HeadersInit object with serialized header values, or undefined if no headers
    */
-  public serialize(headerParams: Map<string, RequestParameter> | undefined): HeadersInit | undefined {
+  public serialize(
+    headerParams: Map<string, RequestParameter> | undefined,
+  ): HeadersInit | undefined {
     if (!headerParams || !headerParams.size) {
       return undefined;
     }
