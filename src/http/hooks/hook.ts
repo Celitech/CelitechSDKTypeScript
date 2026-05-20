@@ -1,7 +1,16 @@
 /**
  * Standard HTTP methods supported by the SDK.
  */
-type HttpMethod = 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
+type HttpMethod =
+  | 'CONNECT'
+  | 'DELETE'
+  | 'GET'
+  | 'HEAD'
+  | 'OPTIONS'
+  | 'PATCH'
+  | 'POST'
+  | 'PUT'
+  | 'TRACE';
 
 /**
  * Represents an HTTP request with all its components.
@@ -96,5 +105,9 @@ export interface Hook {
    * @param params - Additional custom parameters
    * @returns A promise that resolves to an error object
    */
-  onError(request: HttpRequest, response: HttpResponse<any>, params: Map<string, string>): Promise<HttpError>;
+  onError(
+    request: HttpRequest,
+    response: HttpResponse<any>,
+    params: Map<string, string>,
+  ): Promise<HttpError>;
 }

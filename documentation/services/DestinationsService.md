@@ -13,9 +13,15 @@ List Destinations
 - HTTP Method: `GET`
 - Endpoint: `/destinations`
 
+**Parameters**
+
+| Name   | Type   | Required | Description |
+| :----- | :----- | :------- | :---------- |
+| accept | string | ✅       |             |
+
 **Return Type**
 
-`ListDestinationsOkResponse`
+`any`
 
 **Example Usage Code Snippet**
 
@@ -28,7 +34,9 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const { data } = await celitech.destinations.listDestinations();
+  const data = await celitech.destinations.listDestinations({
+    accept: 'application/json',
+  });
 
   console.log(data);
 })();

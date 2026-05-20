@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { BaseService } from '../base-service';
-import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
+import { ContentType, HttpResponse, SdkConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
-import { GetAccessTokenRequest, getAccessTokenRequestRequest } from './models/get-access-token-request';
-import { GetAccessTokenOkResponse, getAccessTokenOkResponseResponse } from './models/get-access-token-ok-response';
+import { OAuthTokenRequest, oAuthTokenRequestRequest } from './models/o-auth-token-request';
+import { OAuthTokenResponse, oAuthTokenResponseResponse } from './models/o-auth-token-response';
 
 /**
  * Service class for OAuthService operations.
@@ -14,34 +14,44 @@ import { GetAccessTokenOkResponse, getAccessTokenOkResponseResponse } from './mo
  * All methods return promises and handle request/response serialization automatically.
  */
 export class OAuthService extends BaseService {
+  protected getAccessTokenConfig?: Partial<SdkConfig>;
+
   /**
-   * This endpoint was added by liblab
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<GetAccessTokenOkResponse>>} - Successful Response
+   * Sets method-level configuration for getAccessToken.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setGetAccessTokenConfig(config: Partial<SdkConfig>): this {
+    this.getAccessTokenConfig = config;
+    return this;
+  }
+
+  /**
+   *
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<OAuthTokenResponse>>} - OAuth token
    */
   async getAccessToken(
-    body: GetAccessTokenRequest,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<GetAccessTokenOkResponse>> {
+    body: OAuthTokenRequest,
+    requestConfig?: Partial<SdkConfig>,
+  ): Promise<OAuthTokenResponse> {
+    const resolvedConfig = this.getResolvedConfig(this.getAccessTokenConfig, requestConfig);
     const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
       .setMethod('POST')
       .setPath('/oauth2/token')
-      .setRequestSchema(getAccessTokenRequestRequest)
+      .setRequestSchema(oAuthTokenRequestRequest)
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.FormUrlEncoded)
       .addResponse({
-        schema: getAccessTokenOkResponseResponse,
+        schema: oAuthTokenResponseResponse,
         contentType: ContentType.Json,
         status: 200,
       })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
       .addHeaderParam({ key: 'Content-Type', value: 'application/x-www-form-urlencoded' })
       .addBody(body)
       .build();
-    return this.client.call<GetAccessTokenOkResponse>(request);
+    return this.client.callDirect<OAuthTokenResponse>(request);
   }
 }
