@@ -15,7 +15,10 @@ export class CustomHook implements Hook {
    * @param params - Additional custom parameters
    * @returns A promise that resolves to the unmodified request
    */
-  public async beforeRequest(request: HttpRequest, params: Map<string, string>): Promise<HttpRequest> {
+  public async beforeRequest(
+    request: HttpRequest,
+    params: Map<string, string>,
+  ): Promise<HttpRequest> {
     return request;
   }
 

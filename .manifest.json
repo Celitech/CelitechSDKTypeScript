@@ -1,32 +1,22 @@
 {
-  "liblabVersion": "2.25.53",
-  "date": "2026-05-12T12:42:39.319Z",
+  "sdkGenVersion": "1.1.2",
+  "date": "2026-05-20T11:13:03.788Z",
   "config": {
-    "apiId": 3121,
-    "sdkName": "Celitech",
-    "sdkVersion": "1.3.64",
-    "languages": ["typescript"],
-    "auth": ["oauth"],
-    "docs": ["snippets", "enhancedApiSpec"],
-    "liblabVersion": "2",
-    "deliveryMethods": ["zip"],
-    "rawConfig": {
-      "sdkName": "Celitech",
-      "apiName": "Celitech",
-      "apiVersion": "1.3.64",
-      "specFilePath": "swagger.yaml",
-      "languages": ["typescript", "python", "php", "java", "go", "csharp"],
-      "docs": ["snippets", "enhancedApiSpec"],
-      "auth": ["oauth"],
-      "customizations": {
-        "devContainer": true,
-        "generateEnv": true,
-        "inferServiceNames": false,
-        "includeOptionalSnippetParameters": false,
-        "deprecatedOperations": {
-          "include": true
+    "languages": [
+      "typescript"
+    ],
+    "deliveryMethods": [
+      "zip"
+    ],
+    "languageOptions": {
+      "java": {
+        "sdkVersion": "1.3.63",
+        "githubRepoName": "CelitechSDKJava",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
         },
-        "injectedModels": [],
         "license": {
           "type": "MIT"
         },
@@ -35,12 +25,6 @@
             "enabled": true,
             "refreshBuffer": 5000
           }
-        },
-        "responseHeaders": false,
-        "retry": {
-          "enabled": true,
-          "maxAttempts": 3,
-          "retryDelay": 150
         },
         "environmentVariables": [
           {
@@ -51,103 +35,19 @@
             "name": "CLIENT_SECRET",
             "description": "Client Secret parameter"
           }
-        ]
-      },
-      "languageOptions": {
-        "typescript": {
-          "githubRepoName": "CelitechSDKTypeScript",
-          "sdkVersion": "1.3.64",
-          "liblabVersion": "2",
-          "npmName": "celitech-sdk"
+        ],
+        "devContainer": true,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": false,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "deprecatedOperations": {
+          "include": true
         },
-        "python": {
-          "githubRepoName": "CelitechSDKPython",
-          "sdkVersion": "1.3.64",
-          "liblabVersion": "2",
-          "pypiPackageName": "celitech-sdk"
-        },
-        "php": {
-          "githubRepoName": "CelitechSDKPHP",
-          "sdkVersion": "1.3.64",
-          "liblabVersion": "2",
-          "packageName": "celitech-sdk/sdk"
-        },
-        "java": {
-          "githubRepoName": "CelitechSDKJava",
-          "sdkVersion": "1.3.64",
-          "liblabVersion": "2",
-          "groupId": "io.github.celitech",
-          "artifactId": "celitech-sdk",
-          "developers": [
-            {
-              "name": "CELITECH",
-              "email": "info@celitech.com",
-              "organization": "Celitech",
-              "organizationUrl": "https://www.celitech.com"
-            }
-          ],
-          "homepage": "https://docs.celitech.com/"
-        },
-        "go": {
-          "githubRepoName": "CelitechSDKGo",
-          "sdkVersion": "1.3.64",
-          "liblabVersion": "2",
-          "goModuleName": "github.com/Celitech/CelitechSDKGo"
-        },
-        "csharp": {
-          "githubRepoName": "CelitechSDKCSharp",
-          "sdkVersion": "1.3.64",
-          "liblabVersion": "2",
-          "packageId": "Celitech.SDK"
-        }
-      },
-      "integrations": {
-        "enhancedApiSpec": {
-          "provider": "redocly",
-          "githubRepoName": "CelitechAPIReference",
-          "redocly": {
-            "openapiPath": "swagger.yaml"
-          }
-        }
-      },
-      "publishing": {
-        "githubOrg": "Celitech"
-      }
-    },
-    "liblabConfigVersion": "1.0.0",
-    "apiVersion": "1.3.64",
-    "apiName": "Celitech",
-    "specFilePath": "swagger.yaml",
-    "createDocs": false,
-    "languageOptions": {
-      "csharp": {
-        "githubRepoName": "CelitechSDKCSharp",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.3.64",
-        "packageId": "Celitech.SDK",
-        "useOptionalWrapper": false,
-        "validateResponses": false
-      },
-      "go": {
-        "githubRepoName": "CelitechSDKGo",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.3.64",
-        "goModuleName": "github.com/Celitech/CelitechSDKGo"
-      },
-      "java": {
-        "githubRepoName": "CelitechSDKJava",
-        "homepage": "https://docs.celitech.com/",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.3.64",
         "groupId": "io.github.celitech",
         "artifactId": "celitech-sdk",
-        "includeKotlinSnippets": false,
+        "homepage": "https://docs.celitech.com/",
         "developers": [
           {
             "name": "CELITECH",
@@ -157,84 +57,212 @@
           }
         ]
       },
+      "typescript": {
+        "sdkVersion": "1.3.63",
+        "githubRepoName": "CelitechSDKTypeScript",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "oauth": {
+            "enabled": true,
+            "refreshBuffer": 5000
+          }
+        },
+        "environmentVariables": [
+          {
+            "name": "CLIENT_ID",
+            "description": "Client ID parameter"
+          },
+          {
+            "name": "CLIENT_SECRET",
+            "description": "Client Secret parameter"
+          }
+        ],
+        "devContainer": true,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": false,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "deprecatedOperations": {
+          "include": true
+        },
+        "npmName": "celitech-sdk"
+      },
       "python": {
+        "sdkVersion": "1.3.63",
         "githubRepoName": "CelitechSDKPython",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.3.64",
-        "alwaysInitializeOptionals": true,
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "oauth": {
+            "enabled": true,
+            "refreshBuffer": 5000
+          }
+        },
+        "environmentVariables": [
+          {
+            "name": "CLIENT_ID",
+            "description": "Client ID parameter"
+          },
+          {
+            "name": "CLIENT_SECRET",
+            "description": "Client Secret parameter"
+          }
+        ],
+        "devContainer": true,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": false,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "deprecatedOperations": {
+          "include": true
+        },
         "pypiPackageName": "celitech-sdk"
       },
+      "go": {
+        "sdkVersion": "1.3.63",
+        "githubRepoName": "CelitechSDKGo",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "oauth": {
+            "enabled": true,
+            "refreshBuffer": 5000
+          }
+        },
+        "environmentVariables": [
+          {
+            "name": "CLIENT_ID",
+            "description": "Client ID parameter"
+          },
+          {
+            "name": "CLIENT_SECRET",
+            "description": "Client Secret parameter"
+          }
+        ],
+        "devContainer": true,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": false,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "deprecatedOperations": {
+          "include": true
+        },
+        "goModuleName": "github.com/Celitech/CelitechSDKGo"
+      },
+      "csharp": {
+        "sdkVersion": "1.3.63",
+        "githubRepoName": "CelitechSDKCSharp",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "oauth": {
+            "enabled": true,
+            "refreshBuffer": 5000
+          }
+        },
+        "environmentVariables": [
+          {
+            "name": "CLIENT_ID",
+            "description": "Client ID parameter"
+          },
+          {
+            "name": "CLIENT_SECRET",
+            "description": "Client Secret parameter"
+          }
+        ],
+        "devContainer": true,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": false,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "deprecatedOperations": {
+          "include": true
+        },
+        "packageId": "Celitech.SDK",
+        "useOptionalWrapper": false
+      },
       "php": {
+        "sdkVersion": "1.3.63",
         "githubRepoName": "CelitechSDKPHP",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.3.64",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "oauth": {
+            "enabled": true,
+            "refreshBuffer": 5000
+          }
+        },
+        "environmentVariables": [
+          {
+            "name": "CLIENT_ID",
+            "description": "Client ID parameter"
+          },
+          {
+            "name": "CLIENT_SECRET",
+            "description": "Client Secret parameter"
+          }
+        ],
+        "devContainer": true,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": false,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "deprecatedOperations": {
+          "include": true
+        },
         "packageName": "celitech-sdk/sdk"
-      },
-      "typescript": {
-        "githubRepoName": "CelitechSDKTypeScript",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.3.64",
-        "bundle": true,
-        "denoteCommon": false,
-        "exportClassDefault": false,
-        "generateEnumAs": "enum",
-        "httpClient": "fetch",
-        "npmName": "celitech-sdk"
       }
     },
-    "validationsToIgnore": [],
-    "publishing": {
-      "githubOrg": "Celitech",
-      "platform": "github"
-    },
-    "integrations": {
-      "enhancedApiSpec": {
-        "githubRepoName": "CelitechAPIReference",
-        "targetBranch": "main",
-        "provider": "redocly",
-        "redocly": {
-          "openapiPath": "swagger.yaml"
-        }
-      }
-    },
-    "analytics": {
-      "streaming": false,
-      "pagination": false
-    },
-    "authentication": {
-      "oauth": {
-        "enabled": true,
-        "basic": false,
-        "refreshBuffer": 5000
-      }
-    },
-    "devContainer": true,
-    "environmentVariables": [
-      {
-        "description": "Client ID parameter",
-        "name": "CLIENT_ID"
-      },
-      {
-        "description": "Client Secret parameter",
-        "name": "CLIENT_SECRET"
-      }
-    ],
-    "generateEnv": true,
-    "includeOptionalSnippetParameters": false,
-    "license": {
-      "type": "MIT",
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT",
-      "path": "MIT.ejs"
-    },
+    "includeWatermark": false,
     "responseHeaders": false,
-    "buildAllModels": false,
+    "sdkName": "Celitech",
+    "sdkVersion": "1.3.63",
+    "auth": [
+      "oauth"
+    ],
+    "apiVersion": "1.3.63",
+    "publishing": {
+      "githubOrg": "Celitech"
+    },
+    "customCode": {
+      "trackChanges": true
+    },
     "retry": {
       "enabled": true,
       "maxAttempts": 3,
@@ -242,22 +270,48 @@
       "maxDelay": 5000,
       "retryDelayJitter": 50,
       "backOffFactor": 2,
-      "httpCodesToRetry": [408, 429, 500, 502, 503, 504],
-      "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+      "httpMethodsToRetry": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD",
+        "OPTIONS"
+      ]
     },
+    "license": {
+      "type": "MIT",
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT",
+      "path": "MIT.ejs"
+    },
+    "authentication": {
+      "oauth": {
+        "enabled": true,
+        "refreshBuffer": 5000
+      }
+    },
+    "environmentVariables": [
+      {
+        "name": "CLIENT_ID",
+        "description": "Client ID parameter"
+      },
+      {
+        "name": "CLIENT_SECRET",
+        "description": "Client Secret parameter"
+      }
+    ],
+    "devContainer": true,
+    "generateEnv": true,
+    "includeOptionalSnippetParameters": false,
+    "injectedModels": [],
+    "inferServiceNames": false,
     "deprecatedOperations": {
       "include": true
     },
-    "multiTenant": true,
-    "includeWatermark": false,
     "httpClient": "fetch",
     "githubRepoName": "CelitechSDKTypeScript",
-    "ignoreFiles": [],
-    "renameIllegalModelProperties": true,
-    "bundle": true,
-    "denoteCommon": false,
-    "exportClassDefault": false,
-    "generateEnumAs": "enum",
     "npmName": "celitech-sdk",
     "language": "typescript",
     "deliveryMethod": "zip",
@@ -270,28 +324,35 @@
     "compilerOptions": {
       "target": "es6",
       "module": "Node16",
-      "lib": ["es2018", "dom"]
+      "lib": [
+        "es2018",
+        "dom",
+        "DOM.Iterable"
+      ]
     },
+    "generateEnumAs": "enum",
     "namingStrategy": "base",
     "usesFormData": false,
     "fileOutput": "/tmp",
-    "inferServiceNames": false,
     "httpLibrary": {
       "name": "fetch",
       "packages": {},
-      "languages": ["typescript"],
+      "languages": [
+        "typescript"
+      ],
       "types": {
         "packageName": "@types/isomorphic-fetch",
         "version": "^0.0.36"
       }
     },
+    "multiTenant": false,
     "customQueries": {
       "paths": [],
       "rawQueries": [],
       "queriesData": []
     },
     "ai": false,
-    "specType": "openapi",
+    "specType": "postman",
     "multipleResponses": {
       "enabled": false
     }
@@ -322,92 +383,62 @@
     "src/http/handlers/oauth-handler.ts",
     "src/http/oauth/token-manager.ts",
     "src/http/handlers/retry-handler.ts",
-    "src/services/o-auth/models/get-access-token-ok-response.ts",
-    "src/services/o-auth/models/get-access-token-request.ts",
-    "src/services/destinations/models/list-destinations-ok-response.ts",
-    "src/services/destinations/models/destinations.ts",
-    "src/services/common/bad-request.ts",
-    "src/services/common/unauthorized.ts",
-    "src/services/packages/models/list-packages-ok-response.ts",
-    "src/services/packages/models/packages.ts",
-    "src/services/purchases/models/create-purchase-v2-ok-response.ts",
-    "src/services/purchases/models/create-purchase-v2-ok-response-purchase.ts",
-    "src/services/purchases/models/create-purchase-v2-ok-response-profile.ts",
-    "src/services/purchases/models/create-purchase-v2-request.ts",
-    "src/services/purchases/models/list-purchases-ok-response.ts",
-    "src/services/purchases/models/purchases.ts",
-    "src/services/purchases/models/package_.ts",
-    "src/services/purchases/models/purchases-esim.ts",
-    "src/services/purchases/models/create-purchase-ok-response.ts",
-    "src/services/purchases/models/create-purchase-ok-response-purchase.ts",
-    "src/services/purchases/models/create-purchase-ok-response-profile.ts",
+    "src/services/v2/models/create-purchase-v2-request.ts",
+    "src/services/topup/models/top-up-e-sim-request.ts",
+    "src/services/edit/models/edit-purchase-request.ts",
     "src/services/purchases/models/create-purchase-request.ts",
-    "src/services/purchases/models/top-up-esim-ok-response.ts",
-    "src/services/purchases/models/top-up-esim-ok-response-purchase.ts",
-    "src/services/purchases/models/top-up-esim-ok-response-profile.ts",
-    "src/services/purchases/models/top-up-esim-request.ts",
-    "src/services/purchases/models/edit-purchase-ok-response.ts",
-    "src/services/purchases/models/edit-purchase-request.ts",
-    "src/services/purchases/models/get-purchase-consumption-ok-response.ts",
-    "src/services/e-sim/models/get-esim-ok-response.ts",
-    "src/services/e-sim/models/get-esim-ok-response-esim.ts",
-    "src/services/e-sim/models/get-esim-device-ok-response.ts",
-    "src/services/e-sim/models/device.ts",
-    "src/services/e-sim/models/get-esim-history-ok-response.ts",
-    "src/services/e-sim/models/get-esim-history-ok-response-esim.ts",
-    "src/services/e-sim/models/history.ts",
-    "src/services/i-frame/models/token-ok-response.ts",
+    "src/services/o-auth/models/o-auth-token-response.ts",
+    "src/services/o-auth/models/o-auth-token-request.ts",
     "src/services/o-auth/models/grant-type.ts",
-    "src/services/purchases/models/create-purchase-v2-request-language.ts",
-    "src/services/purchases/models/create-purchase-request-language.ts",
-    "documentation/models/ListDestinationsOkResponse.md",
-    "documentation/models/BadRequest.md",
-    "documentation/models/Unauthorized.md",
-    "documentation/models/ListPackagesOkResponse.md",
-    "documentation/models/ListPurchasesOkResponse.md",
-    "documentation/models/TopUpEsimRequest.md",
-    "documentation/models/EditPurchaseOkResponse.md",
+    "documentation/models/CreatePurchaseV2Request.md",
+    "documentation/models/TopUpESimRequest.md",
     "documentation/models/EditPurchaseRequest.md",
-    "documentation/models/GetPurchaseConsumptionOkResponse.md",
-    "documentation/models/TokenOkResponse.md",
+    "documentation/models/CreatePurchaseRequest.md",
     "src/services/base-service.ts",
-    "src/services/o-auth/o-auth-service.ts",
     "src/services/destinations/destinations-service.ts",
     "src/services/packages/packages-service.ts",
+    "src/services/v2/v2-service.ts",
+    "src/services/topup/topup-service.ts",
+    "src/services/edit/edit-service.ts",
+    "src/services/consumption/consumption-service.ts",
     "src/services/purchases/purchases-service.ts",
-    "src/services/e-sim/e-sim-service.ts",
-    "src/services/i-frame/i-frame-service.ts",
+    "src/services/device/device-service.ts",
+    "src/services/history/history-service.ts",
+    "src/services/esim/esim-service.ts",
+    "src/services/token_/token-service.ts",
+    "src/services/o-auth/o-auth-service.ts",
     "src/index.ts",
-    "src/services/o-auth/models/index.ts",
-    "src/services/destinations/models/index.ts",
-    "src/services/packages/models/index.ts",
+    "src/services/v2/models/index.ts",
+    "src/services/topup/models/index.ts",
+    "src/services/edit/models/index.ts",
     "src/services/purchases/models/index.ts",
-    "src/services/e-sim/models/index.ts",
-    "src/services/i-frame/models/index.ts",
-    "src/services/common/index.ts",
-    "src/services/o-auth/index.ts",
+    "src/services/o-auth/models/index.ts",
     "src/services/destinations/index.ts",
     "src/services/packages/index.ts",
+    "src/services/v2/index.ts",
+    "src/services/topup/index.ts",
+    "src/services/edit/index.ts",
+    "src/services/consumption/index.ts",
     "src/services/purchases/index.ts",
-    "src/services/e-sim/index.ts",
-    "src/services/i-frame/index.ts",
+    "src/services/device/index.ts",
+    "src/services/history/index.ts",
+    "src/services/esim/index.ts",
+    "src/services/token_/index.ts",
+    "src/services/o-auth/index.ts",
     "src/http/index.ts",
     "src/http/handlers/handler-chain.ts",
-    "documentation/snippets/destinations-get.md",
-    "documentation/snippets/packages-get.md",
-    "documentation/snippets/purchases-v2-post.md",
-    "documentation/snippets/purchases-get.md",
-    "documentation/snippets/purchases-post.md",
-    "documentation/snippets/purchases-topup-post.md",
-    "documentation/snippets/purchases-edit-post.md",
-    "documentation/snippets/purchases-{purchaseId}-consumption-get.md",
-    "documentation/snippets/esim-get.md",
-    "documentation/snippets/esim-{iccid}-device-get.md",
-    "documentation/snippets/esim-{iccid}-history-get.md",
-    "documentation/snippets/iframe-token-post.md",
+    "documentation/snippets/snippets.json",
+    "src/services/destinations/request-params.ts",
     "src/services/packages/request-params.ts",
+    "src/services/v2/request-params.ts",
+    "src/services/topup/request-params.ts",
+    "src/services/edit/request-params.ts",
+    "src/services/consumption/request-params.ts",
     "src/services/purchases/request-params.ts",
-    "src/services/e-sim/request-params.ts",
+    "src/services/device/request-params.ts",
+    "src/services/history/request-params.ts",
+    "src/services/esim/request-params.ts",
+    "src/services/token_/request-params.ts",
     "src/http/handlers/hook-handler.ts",
     "src/http/hooks/custom-hook.ts",
     "src/http/hooks/hook.ts",
@@ -422,19 +453,127 @@
     "src/http/utils/response-matcher.ts",
     "src/http/utils/content-type.ts",
     "src/http/errors/validation-error.ts",
-    "documentation/models/CreatePurchaseV2Request.md",
-    "documentation/models/CreatePurchaseRequest.md",
-    "documentation/models/GetEsimOkResponse.md",
-    "documentation/models/GetEsimDeviceOkResponse.md",
-    "documentation/models/GetEsimHistoryOkResponse.md",
-    "documentation/models/CreatePurchaseV2OkResponse.md",
-    "documentation/models/CreatePurchaseOkResponse.md",
-    "documentation/models/TopUpEsimOkResponse.md",
     "documentation/services/DestinationsService.md",
     "documentation/services/PackagesService.md",
-    "documentation/services/IFrameService.md",
-    "documentation/services/ESimService.md",
+    "documentation/services/V2Service.md",
+    "documentation/services/TopupService.md",
+    "documentation/services/EditService.md",
+    "documentation/services/ConsumptionService.md",
+    "documentation/services/DeviceService.md",
+    "documentation/services/HistoryService.md",
+    "documentation/services/EsimService.md",
+    "documentation/services/Token_Service.md",
     "documentation/services/PurchasesService.md",
     "README.md"
-  ]
+  ],
+  "fileHashes": {
+    ".devcontainer/devcontainer.json": "024bd02da112675e1953072f2531a906668769ad7af67c7420cb64ace71a7aff",
+    ".env.example": "69a3ee82f15d8bcc221e9c34c99e5a851d8b318ac2ac7e78f97ef32b743b303e",
+    ".gitignore": "5f515684cbf8243009414e638b28e93a70a884b81e3e16c38bb01124419e44b2",
+    "LICENSE": "3ec558dc6e9c9355ab4b28c942caa92bf90b0b82c12d7838d2ef92467ad135c1",
+    "README.md": "9ede0515c959c2fb82333a4b4bee126ed6d017bc85cd085e5a55f35c8e1f33f9",
+    "documentation/models/CreatePurchaseRequest.md": "0d8fa2b6292124b2fba3c7481dd8e5e7645a35315c9da8ece14881aef01ed6e3",
+    "documentation/models/CreatePurchaseV2Request.md": "547a232d6d0ff4fa1c2d27102181aa5b12f3a23a86e791eca5d0eb829b3fdbea",
+    "documentation/models/EditPurchaseRequest.md": "e1d7c3e0741723ce8d793af3c02bc912e974b8c74eb2148e6f027c75f381d1a3",
+    "documentation/models/TopUpESimRequest.md": "2815625d2bd7b2525d6de395224ad073a8cbb69e9758c55bd6af7e58c4cc852f",
+    "documentation/services/ConsumptionService.md": "70cc300f21dca20c270265a078df825f158b6e7c1d1ee2262d72ab1a318a5aee",
+    "documentation/services/DestinationsService.md": "4ea538ef3c13808112c85085f472810b7f8025508a0aebfe40a791fd80b3a239",
+    "documentation/services/DeviceService.md": "a700bb1d45ca31ed3ef27bf3c1dcbd17d58f6e76092ef3f3044d6d70a5f9f54f",
+    "documentation/services/EditService.md": "f2f63f208c97a14dfb794156a31b6c6e6490ce2231eed482e1f4ef4556c37a57",
+    "documentation/services/EsimService.md": "a1fb0fdaf24c67edd4280f32129f1e9be94b58390e02b15ac71ccbfefbc5cff3",
+    "documentation/services/HistoryService.md": "27e199cd78d219a38b1dcb7e1b762f34148d6acd9a052c3a4d4109a6a9b7511d",
+    "documentation/services/PackagesService.md": "c8837ebf62fb043f8eb1db42de47301b7ea8975847badfb2c8a935e4533977de",
+    "documentation/services/PurchasesService.md": "462343c86855af88919d921633b527ee8313f446a82416543492e4caee53f5f4",
+    "documentation/services/Token_Service.md": "e41d96d6e8e1b98e224c2655cbab2a63f5011d2329fcc851d78dd223b1548139",
+    "documentation/services/TopupService.md": "81255bf4809b2ba6af2c2f67312551e2f55da2cea8eb4246139f128ffbde88f1",
+    "documentation/services/V2Service.md": "045cc90da893a53c7acb553cc1291dbc2bdb39840eeb80388dca956091fa38a2",
+    "documentation/snippets/snippets.json": "8e95114055439aa37568552bf8e658a82d7cdb3cdf8f984bdcf5fac02dd32070",
+    "examples/README.md": "e65e8841469f1e5e3804778f2079752f09e3ca80817625ecc5dd2cd1e78fe3d3",
+    "examples/package.json": "b3b3fe31f1a1e07ac81df7cc83cf79f3aff7a517284e917132a6f73127a9d340",
+    "examples/src/index.ts": "b1faf05f46a5ab8a27701ae8dc096ffd403047651a3b508a72d01c919a591498",
+    "examples/tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63",
+    "package.json": "5618898e9cb2a2f05aaa06838160c7d32dda53449a528cf15c9df59bf9b6ada2",
+    "prettier.config.js": "2fe33fda52344779fcf235afa8152cfd356880dc3161da09403dc26231bc72d9",
+    "scripts/prepublish.sh": "651cd87546cc25d69210f55dc4310d47007c53b719da1da8b3bd9acb098defcf",
+    "src/http/client.ts": "031aefbfda9b27c903a0bed6d0a11e271d6bfed9a8c179ced9511dd72b21d45c",
+    "src/http/environment.ts": "7c1286541ba08a7234b2c2605e05ddcfc851368ce25f6fbdab041ce387188930",
+    "src/http/error.ts": "095eb2f095a7868a5a1fcb4cf543560e143c06766c9693f9efb67b0601c242a5",
+    "src/http/errors/throwable-error.ts": "9d57355a464ea142f9ae090918cf2a4c13e0f719027fabf890e3274ea1140db6",
+    "src/http/errors/validation-error.ts": "8835718fafeca5327ada4e6cbb7859f40d7460b98973812f2a012017bde8e2c8",
+    "src/http/handlers/handler-chain.ts": "7963ae4f81949a07b9265abd5c9aeef8f7b6d99260874f9e8d6f82a916d85699",
+    "src/http/handlers/hook-handler.ts": "a0237af8d91407e29603d39b54724d619120e7c8f5f90d651870c0f3710b0d8b",
+    "src/http/handlers/oauth-handler.ts": "b6e7ce8e3918137897906a298193d4aa7edf59c5b3ecb5a2615c353d40ea2e4c",
+    "src/http/handlers/request-validation-handler.ts": "bd1876f4ec4775443a3dfec45a4a46a19c6bfb00d4d5bcab4076bf424ef700d8",
+    "src/http/handlers/response-validation-handler.ts": "f46b2e056b8122aa7c6c7b8e63f7af53389ca650c41f4bba9b94133999c93506",
+    "src/http/handlers/retry-handler.ts": "eb8df536acbb0e603e6f39014fc73c5df2ca50b9796a6b948a4050bffa4693e4",
+    "src/http/handlers/terminating-handler.ts": "8b820d772559c271507977bd3bc59b0afd979f5fc24397419dcb97059a3b076c",
+    "src/http/hooks/custom-hook.ts": "906e418d5f24ae314500dea157f0b101a179ff3c16ef8dbb158cce51ed306ee7",
+    "src/http/hooks/hook.ts": "6548e301970d9e7927540b554548d22a9bd5fd47c2bfd7136e9efcc186f8ffff",
+    "src/http/index.ts": "3cfa49aaef43876f9663305a24262d67b223d0327924e513d5eb584a67e448ee",
+    "src/http/oauth/token-manager.ts": "fea35506882ca7a0ef6ea07bec1fa189d4b5c68f2357d00ee465ee33dc54859b",
+    "src/http/serialization/base-serializer.ts": "91fb56323ba2f45af568ee4a02f7657bb7aac29112db52aa3ca71080d8837dce",
+    "src/http/serialization/cookie-serializer.ts": "c1dbf938f2071615638fa4e833b740948b16e28f98f475d38cf6701fa27bafb6",
+    "src/http/serialization/header-serializer.ts": "7409385d6841c188c50e08082d661111e89ed843f2954de973d291c95e948a38",
+    "src/http/serialization/path-serializer.ts": "e6f269f8d87aa3e3119e300899b118a7b03a3fe22c738b19a8ecfca2e750c91d",
+    "src/http/serialization/query-serializer.ts": "3a17740986421462d63a55e3b869ef5bb571a96e7077aec965b63f9a19705d47",
+    "src/http/transport/request-builder.ts": "33eac506b41a92557e20b57fa38061b86e13a67ab185a2349b4f9b4b629910cd",
+    "src/http/transport/request-fetch-adapter.ts": "b0450435eb0e943c6094438ff471cc3a2e138e046eb7724c5576aeba7dd4d938",
+    "src/http/transport/request.ts": "9f2329868fd0c261a48d3519326c8d89292bdfd08d45c62f3bcfe29e178842bc",
+    "src/http/transport/transport-hook-adapter.ts": "97e375180a5ffe6328cbea3d84fce1f21b418ca8fbf81dcdb4a01579ca968ee1",
+    "src/http/transport/types.ts": "8fbc50078605e07741974f8ada48da0f2353961f49b47731e2d8b7b4d924002c",
+    "src/http/types.ts": "25ca66c05577f8230862cc98127029fd8609ef5a930881ae0230437ede8ccc27",
+    "src/http/utils/content-type.ts": "992a513126a88ddd0243b83bd72e35e5d8c34afa0fcc47344f382631019d83ed",
+    "src/http/utils/line-decoder.ts": "69064c7c0be06a3dc8862a915667342a8f54ecb2d3be08566b7d2ae83c64e16b",
+    "src/http/utils/response-matcher.ts": "7870d29287e4f887348a25bf7bb2c0c6cce076baa6442c1787278bc883dd5a4c",
+    "src/index.ts": "b33fbbe52c346977a1d82dc477646e664d12391d16f9a36c81007478f01f2311",
+    "src/services/base-service.ts": "19a2e6d948c88702f21b33836a4b948df74c09c94633cc49faec5bd2535d6bf4",
+    "src/services/consumption/consumption-service.ts": "d5191367e3a20b4bd0c605b7ccdfa763b111be82f14ab0ec4bb31430692f6d33",
+    "src/services/consumption/index.ts": "805a9f75a98a337740b6698acfc5925da09d0bf089a93ba47a2c08e541e8dd32",
+    "src/services/consumption/request-params.ts": "9a9611a32e6b4bbd1b1c57541310e32aa3b094d3678431e7c14b8e898b3326b3",
+    "src/services/destinations/destinations-service.ts": "899871ba425d0141c5b8ab1b915c229ac4ac318be09e7ce76a1ca11289d4b617",
+    "src/services/destinations/index.ts": "caec54fd5241521fbd5d356f6475bb7554f3b33e9b97571863f4ff2eabf0b482",
+    "src/services/destinations/request-params.ts": "c651cc9dd32a412c82bb7161eaf0fc952b7a6af7393ad962659f8683192a36ea",
+    "src/services/device/device-service.ts": "4dd303825de1d710101a8f593d5afd15e912810d093aa289c6757599a9510984",
+    "src/services/device/index.ts": "32ccc1354b12b2ea3f1d9baabf5eb7cb11ec6b01412bb038fa08afaf4df214f9",
+    "src/services/device/request-params.ts": "001948010774f678807059e95b13f6222124a22655b1c257448ca12f1f0967ff",
+    "src/services/edit/edit-service.ts": "f117b196d4e2d78479d1fdd0142aa1adecc9a72aad48c0f156afff18d6234860",
+    "src/services/edit/index.ts": "67ab9982415f44a84f6192689cd4f0e778eb6c3d3673524309fdfa9298f564fe",
+    "src/services/edit/models/edit-purchase-request.ts": "9b54e1f93bf3d1ecb3bfb3541b938e601bc7d8cb37e4d0bbf1f19b968582c4c5",
+    "src/services/edit/models/index.ts": "466210d0803cb903bfbd8f9e5365480c8021ee25c3b704baa85ae09ba1878483",
+    "src/services/edit/request-params.ts": "a1639ddb81a6dd01607277731e6b486146e5557ae7131f8a7b8467441b209028",
+    "src/services/esim/esim-service.ts": "84aec500c8d8b63ecfe674b70863558fa22b1e51bf40fa1f486a6a50a2ec4ddd",
+    "src/services/esim/index.ts": "4be89fbe65db7b62c59638e0f57bed8670d53b2854c6419b16d9c878ade39966",
+    "src/services/esim/request-params.ts": "391fe91f17d21652b40391937768efe3340e39cf9abbacc16565b9c973101f87",
+    "src/services/history/history-service.ts": "19ff5fc58b94e96ab77eee05171889487b8f5883b3a4b249a0e145621f54ac04",
+    "src/services/history/index.ts": "f24b6fe25164840b0fe87d619e67264818d818acf5466f7e8aeb01945bbd9dd2",
+    "src/services/history/request-params.ts": "c0fed95b1382a7820ddbecdc78a27b264e844648a2d39c6af92ced3b0e7bb859",
+    "src/services/o-auth/index.ts": "7f6f724c9350d8ffa5ec90ae05e8723acb6044545e951b8c428b4ac0c085ddfb",
+    "src/services/o-auth/models/grant-type.ts": "7590e1dedc1eb086b1425fcb01675e1f4dd9fa6ad3826455bcb68e0773a42567",
+    "src/services/o-auth/models/index.ts": "73547ab9ff964a99a5ccb41863de9fc31e2e82179c566e32dd0e59dbb0ba1a78",
+    "src/services/o-auth/models/o-auth-token-request.ts": "31632b8e94ad2d8f19e66b826051ee04dfd4baceed286359fb211a5d9b62d5ee",
+    "src/services/o-auth/models/o-auth-token-response.ts": "d9de812f0a97a237bf7acb529874374c74674a45cfb16a8cbf0f437bef778881",
+    "src/services/o-auth/o-auth-service.ts": "488baebcefc279018721c8ff57f314b6208dfe982984fadbcd0159f6acd6dd1b",
+    "src/services/packages/index.ts": "268ba1a1b9494fa85b4351d7d102847fd192a3f6d39a604120839d3c011597d3",
+    "src/services/packages/packages-service.ts": "fc25dd49f8b7b6a675099ff117b42afad2994e85a25b2574d16d4a915caa4d45",
+    "src/services/packages/request-params.ts": "7f7a460ae56a293c9c070573ba6ebf0c0134d0cafafbe095d706c96166c172b1",
+    "src/services/purchases/index.ts": "79c4efaf8ebbcc152fa0ae2db3dee1120ee24d97af6cd5cf5758b1d098634908",
+    "src/services/purchases/models/create-purchase-request.ts": "826cc02e43020a1beabbaaf135640ead62a438abc9db5475254f468bc1242036",
+    "src/services/purchases/models/index.ts": "1970b303589c21eaeafec5e93eecc468dd08ecd1199ee891c5b0c41713faff19",
+    "src/services/purchases/purchases-service.ts": "7ba3584a7ebe7181822caea18c1a25b0fc8db6d98a471b4617ee6094d3592a54",
+    "src/services/purchases/request-params.ts": "297b93ea874ba96fa600f285f81e3e806dea39b7e786981cf0bbad1d44e61da0",
+    "src/services/token_/index.ts": "61757979d724e0412cd8eb5aa6da4da220277e2945a4ec9666bb2f5f6a9af3c2",
+    "src/services/token_/request-params.ts": "0d630a5e10020c630feaf7a7af9d722f6fe620c2f59d79cf942e2e500cddaf06",
+    "src/services/token_/token-service.ts": "c8108bb168202e5410011807a12f706f8dbc2859560f49c036bbd970473bc7c0",
+    "src/services/topup/index.ts": "7aaf4e8e3c6b685384618f0542a5445691dbdf13ae9720ad5bc997f02b78646c",
+    "src/services/topup/models/index.ts": "6f2d2d1d644c182a7c133680973c6aaa66612e51389ddda7ad65c53b213afc9e",
+    "src/services/topup/models/top-up-e-sim-request.ts": "5fe7f519f1e9f18d3d8a5099f707cfeb307c972d78919741b4dc1efd8dfefc4f",
+    "src/services/topup/request-params.ts": "512d03882b279568dd7b652c67a323da06155ee69e4dc4957c49205bfe52520e",
+    "src/services/topup/topup-service.ts": "ea79b4c6437454d799c7af6d78315b2cd5d2efdbf75220f60d686e8b04f96e18",
+    "src/services/v2/index.ts": "85bf20605a0afd38ff8aceb17f73f1f418da035cd737813f3ba67b1a3456de1c",
+    "src/services/v2/models/create-purchase-v2-request.ts": "7d44e53a34454b96f48997e0f4f01a7436882a4897f0ecb0108cba188cfd8929",
+    "src/services/v2/models/index.ts": "df48666fedf36c20a77af92e3e788586a716dc53691afa6492efefa9b66f7d59",
+    "src/services/v2/request-params.ts": "c71bfcf9d7807e251e0ab6f24340acb79ab0e0278f6b08beda6764705104dcd9",
+    "src/services/v2/v2-service.ts": "a71a3726ee01a70bbe52d2ea016bc64a9264c9adf5220e09a10be27543e0df10",
+    "tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63"
+  }
 }
