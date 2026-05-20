@@ -1,29 +1,15 @@
 import { z } from 'zod';
 import { BaseService } from '../base-service';
-import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
+import { ContentType, HttpResponse, SdkConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
-import { CreatePurchaseV2Request, createPurchaseV2RequestRequest } from './models/create-purchase-v2-request';
 import {
-  CreatePurchaseV2OkResponse,
-  createPurchaseV2OkResponseResponse,
-} from './models/create-purchase-v2-ok-response';
-import { BadRequest } from '../common/bad-request';
-import { Unauthorized } from '../common/unauthorized';
-import { ListPurchasesOkResponse, listPurchasesOkResponseResponse } from './models/list-purchases-ok-response';
-import { ListPurchasesParams } from './request-params';
-import { CreatePurchaseRequest, createPurchaseRequestRequest } from './models/create-purchase-request';
-import { CreatePurchaseOkResponse, createPurchaseOkResponseResponse } from './models/create-purchase-ok-response';
-import { TopUpEsimRequest, topUpEsimRequestRequest } from './models/top-up-esim-request';
-import { TopUpEsimOkResponse, topUpEsimOkResponseResponse } from './models/top-up-esim-ok-response';
-import { EditPurchaseRequest, editPurchaseRequestRequest } from './models/edit-purchase-request';
-import { EditPurchaseOkResponse, editPurchaseOkResponseResponse } from './models/edit-purchase-ok-response';
-import {
-  GetPurchaseConsumptionOkResponse,
-  getPurchaseConsumptionOkResponseResponse,
-} from './models/get-purchase-consumption-ok-response';
+  CreatePurchaseRequest,
+  createPurchaseRequestRequest,
+} from './models/create-purchase-request';
+import { CreatePurchaseParams, ListPurchasesParams } from './request-params';
 
 /**
  * Service class for PurchasesService operations.
@@ -31,50 +17,70 @@ import {
  * All methods return promises and handle request/response serialization automatically.
  */
 export class PurchasesService extends BaseService {
+  protected createPurchaseConfig: Partial<SdkConfig> = { environment: Environment.API };
+
+  protected listPurchasesConfig: Partial<SdkConfig> = { environment: Environment.API };
+
+  /**
+   * Sets method-level configuration for createPurchase.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setCreatePurchaseConfig(config: Partial<SdkConfig>): this {
+    this.createPurchaseConfig = config;
+    return this;
+  }
+
+  /**
+   * Sets method-level configuration for listPurchases.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setListPurchasesConfig(config: Partial<SdkConfig>): this {
+    this.listPurchasesConfig = config;
+    return this;
+  }
+
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} - Successful Response
+   * @param {string} params.accept -
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<any>>} - OK
    */
-  async createPurchaseV2(
-    body: CreatePurchaseV2Request,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<CreatePurchaseV2OkResponse[]>> {
+  async createPurchase(
+    body: CreatePurchaseRequest,
+    params: CreatePurchaseParams,
+    requestConfig?: Partial<SdkConfig>,
+  ): Promise<any> {
+    const resolvedConfig = this.getResolvedConfig(this.createPurchaseConfig, requestConfig);
+    z.object({ accept: z.string().nullable() }).parse(params ?? {});
     const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
       .setMethod('POST')
-      .setPath('/purchases/v2')
-      .setRequestSchema(createPurchaseV2RequestRequest)
+      .setPath('/purchases')
+      .setRequestSchema(createPurchaseRequestRequest)
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
       .addResponse({
-        schema: z.array(createPurchaseV2OkResponseResponse),
+        schema: z.any(),
         contentType: ContentType.Json,
         status: 200,
       })
-      .addError({
-        error: BadRequest,
-        contentType: ContentType.Json,
-        status: 400,
+      .addHeaderParam({
+        key: 'Accept',
+        value: params?.accept,
       })
-      .addError({
-        error: Unauthorized,
-        contentType: ContentType.Json,
-        status: 401,
-      })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
       .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
-    return this.client.call<CreatePurchaseV2OkResponse[]>(request);
+    return this.client.callDirect<any>(request);
   }
 
   /**
    * This endpoint can be used to list all the successful purchases made between a given interval.
+   * @param {string} params.accept -
    * @param {string} [params.purchaseId] - ID of the purchase
    * @param {string} [params.iccid] - ID of the eSIM
    * @param {string} [params.afterDate] - Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'
@@ -82,19 +88,33 @@ export class PurchasesService extends BaseService {
    * @param {string} [params.email] - Email associated to the purchase.
    * @param {string} [params.referenceId] - The referenceId that was provided by the partner during the purchase or topup flow.
    * @param {string} [params.afterCursor] - To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data.
-   * @param {number} [params.limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
-   * @param {number} [params.after] - Epoch value representing the start of the time interval for filtering purchases
-   * @param {number} [params.before] - Epoch value representing the end of the time interval for filtering purchases
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<ListPurchasesOkResponse>>} - Successful Response
+   * @param {string} [params.limit] - Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20
+   * @param {string} [params.after] - Epoch value representing the start of the time interval for filtering purchases
+   * @param {string} [params.before] - Epoch value representing the end of the time interval for filtering purchases
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<any>>} - OK
    */
   async listPurchases(
-    params?: ListPurchasesParams,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<ListPurchasesOkResponse>> {
+    params: ListPurchasesParams,
+    requestConfig?: Partial<SdkConfig>,
+  ): Promise<any> {
+    const resolvedConfig = this.getResolvedConfig(this.listPurchasesConfig, requestConfig);
+    z.object({
+      accept: z.string().nullable(),
+      purchaseId: z.string().optional().nullable(),
+      iccid: z.string().optional().nullable(),
+      afterDate: z.string().optional().nullable(),
+      beforeDate: z.string().optional().nullable(),
+      email: z.string().optional().nullable(),
+      referenceId: z.string().optional().nullable(),
+      afterCursor: z.string().optional().nullable(),
+      limit: z.string().optional().nullable(),
+      after: z.string().optional().nullable(),
+      before: z.string().optional().nullable(),
+    }).parse(params ?? {});
     const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
       .setMethod('GET')
       .setPath('/purchases')
       .setRequestSchema(z.any())
@@ -102,23 +122,10 @@ export class PurchasesService extends BaseService {
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
       .addResponse({
-        schema: listPurchasesOkResponseResponse,
+        schema: z.any(),
         contentType: ContentType.Json,
         status: 200,
       })
-      .addError({
-        error: BadRequest,
-        contentType: ContentType.Json,
-        status: 400,
-      })
-      .addError({
-        error: Unauthorized,
-        contentType: ContentType.Json,
-        status: 401,
-      })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
       .addQueryParam({
         key: 'purchaseId',
         value: params?.purchaseId,
@@ -159,182 +166,11 @@ export class PurchasesService extends BaseService {
         key: 'before',
         value: params?.before,
       })
-      .build();
-    return this.client.call<ListPurchasesOkResponse>(request);
-  }
-
-  /**
-   * This endpoint is used to purchase a new eSIM by providing the package details.
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<CreatePurchaseOkResponse>>} - Successful Response
-   */
-  async createPurchase(
-    body: CreatePurchaseRequest,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<CreatePurchaseOkResponse>> {
-    const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
-      .setMethod('POST')
-      .setPath('/purchases')
-      .setRequestSchema(createPurchaseRequestRequest)
-      .setScopes([])
-      .setTokenManager(this.tokenManager)
-      .setRequestContentType(ContentType.Json)
-      .addResponse({
-        schema: createPurchaseOkResponseResponse,
-        contentType: ContentType.Json,
-        status: 200,
-      })
-      .addError({
-        error: BadRequest,
-        contentType: ContentType.Json,
-        status: 400,
-      })
-      .addError({
-        error: Unauthorized,
-        contentType: ContentType.Json,
-        status: 401,
-      })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
-      .addBody(body)
-      .build();
-    return this.client.call<CreatePurchaseOkResponse>(request);
-  }
-
-  /**
-   * This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM endpoint, which returns the `isTopUpAllowed` flag.
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} - Successful Response
-   */
-  async topUpEsim(body: TopUpEsimRequest, requestConfig?: RequestConfig): Promise<HttpResponse<TopUpEsimOkResponse>> {
-    const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
-      .setMethod('POST')
-      .setPath('/purchases/topup')
-      .setRequestSchema(topUpEsimRequestRequest)
-      .setScopes([])
-      .setTokenManager(this.tokenManager)
-      .setRequestContentType(ContentType.Json)
-      .addResponse({
-        schema: topUpEsimOkResponseResponse,
-        contentType: ContentType.Json,
-        status: 200,
-      })
-      .addError({
-        error: BadRequest,
-        contentType: ContentType.Json,
-        status: 400,
-      })
-      .addError({
-        error: Unauthorized,
-        contentType: ContentType.Json,
-        status: 401,
-      })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
-      .addBody(body)
-      .build();
-    return this.client.call<TopUpEsimOkResponse>(request);
-  }
-
-  /**
- * This endpoint allows you to modify the validity dates of an existing purchase.  
-**Behavior:**
-- If the purchase has **not yet been activated**, both the start and end dates can be updated.  
-- If the purchase is **already active**, only the **end date** can be updated, while the **start date must remain unchanged** (and should be passed as originally set).  
-- Updates must comply with the same pricing structure; the modification cannot alter the package size or change its duration category.  
-
-The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits.
-
- * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
- * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} - Successful Response
- */
-  async editPurchase(
-    body: EditPurchaseRequest,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<EditPurchaseOkResponse>> {
-    const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
-      .setMethod('POST')
-      .setPath('/purchases/edit')
-      .setRequestSchema(editPurchaseRequestRequest)
-      .setScopes([])
-      .setTokenManager(this.tokenManager)
-      .setRequestContentType(ContentType.Json)
-      .addResponse({
-        schema: editPurchaseOkResponseResponse,
-        contentType: ContentType.Json,
-        status: 200,
-      })
-      .addError({
-        error: BadRequest,
-        contentType: ContentType.Json,
-        status: 400,
-      })
-      .addError({
-        error: Unauthorized,
-        contentType: ContentType.Json,
-        status: 401,
-      })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
-      .addBody(body)
-      .build();
-    return this.client.call<EditPurchaseOkResponse>(request);
-  }
-
-  /**
-   * This endpoint can be called for consumption notifications (e.g. every 1 hour or when the user clicks a button). It returns the data balance (consumption) of purchased packages.
-   * @param {string} purchaseId - ID of the purchase
-   * @param {RequestConfig} [requestConfig] - The request configuration for retry and validation.
-   * @returns {Promise<HttpResponse<GetPurchaseConsumptionOkResponse>>} - Successful Response
-   */
-  async getPurchaseConsumption(
-    purchaseId: string,
-    requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<GetPurchaseConsumptionOkResponse>> {
-    const request = new RequestBuilder()
-      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
-      .setConfig(this.config)
-      .setMethod('GET')
-      .setPath('/purchases/{purchaseId}/consumption')
-      .setRequestSchema(z.any())
-      .setScopes([])
-      .setTokenManager(this.tokenManager)
-      .setRequestContentType(ContentType.Json)
-      .addResponse({
-        schema: getPurchaseConsumptionOkResponseResponse,
-        contentType: ContentType.Json,
-        status: 200,
-      })
-      .addError({
-        error: BadRequest,
-        contentType: ContentType.Json,
-        status: 400,
-      })
-      .addError({
-        error: Unauthorized,
-        contentType: ContentType.Json,
-        status: 401,
-      })
-      .setRetryAttempts(this.config, requestConfig)
-      .setRetryDelayMs(this.config, requestConfig)
-      .setResponseValidation(this.config, requestConfig)
-      .addPathParam({
-        key: 'purchaseId',
-        value: purchaseId,
+      .addHeaderParam({
+        key: 'Accept',
+        value: params?.accept,
       })
       .build();
-    return this.client.call<GetPurchaseConsumptionOkResponse>(request);
+    return this.client.callDirect<any>(request);
   }
 }
