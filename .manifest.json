@@ -1,6 +1,6 @@
 {
-  "sdkGenVersion": "1.1.2",
-  "date": "2026-05-20T14:57:25.007Z",
+  "sdkGenVersion": "1.3.3",
+  "date": "2026-06-01T09:18:28.388Z",
   "config": {
     "languages": [
       "typescript"
@@ -10,7 +10,7 @@
     ],
     "languageOptions": {
       "java": {
-        "sdkVersion": "2.0.0",
+        "sdkVersion": "2.0.1",
         "githubRepoName": "CelitechSDKJava",
         "retry": {
           "enabled": true,
@@ -58,7 +58,7 @@
         ]
       },
       "typescript": {
-        "sdkVersion": "2.0.0",
+        "sdkVersion": "2.0.1",
         "githubRepoName": "CelitechSDKTypeScript",
         "retry": {
           "enabled": true,
@@ -96,7 +96,7 @@
         "npmName": "celitech-sdk"
       },
       "python": {
-        "sdkVersion": "2.0.0",
+        "sdkVersion": "2.0.1",
         "githubRepoName": "CelitechSDKPython",
         "retry": {
           "enabled": true,
@@ -134,7 +134,7 @@
         "pypiPackageName": "celitech-sdk"
       },
       "go": {
-        "sdkVersion": "2.0.0",
+        "sdkVersion": "2.0.1",
         "githubRepoName": "CelitechSDKGo",
         "retry": {
           "enabled": true,
@@ -172,7 +172,7 @@
         "goModuleName": "github.com/Celitech/CelitechSDKGo"
       },
       "csharp": {
-        "sdkVersion": "2.0.0",
+        "sdkVersion": "2.0.1",
         "githubRepoName": "CelitechSDKCSharp",
         "retry": {
           "enabled": true,
@@ -211,7 +211,7 @@
         "useOptionalWrapper": false
       },
       "php": {
-        "sdkVersion": "2.0.0",
+        "sdkVersion": "2.0.1",
         "githubRepoName": "CelitechSDKPHP",
         "retry": {
           "enabled": true,
@@ -252,11 +252,11 @@
     "includeWatermark": false,
     "responseHeaders": false,
     "sdkName": "Celitech",
-    "sdkVersion": "2.0.0",
+    "sdkVersion": "2.0.1",
     "auth": [
       "oauth"
     ],
-    "apiVersion": "2.0.0",
+    "apiVersion": "2.0.1",
     "publishing": {
       "githubOrg": "Celitech"
     },
@@ -492,7 +492,7 @@
     ".env.example": "69a3ee82f15d8bcc221e9c34c99e5a851d8b318ac2ac7e78f97ef32b743b303e",
     ".gitignore": "5f515684cbf8243009414e638b28e93a70a884b81e3e16c38bb01124419e44b2",
     "LICENSE": "3ec558dc6e9c9355ab4b28c942caa92bf90b0b82c12d7838d2ef92467ad135c1",
-    "README.md": "0a7dcf3c7cfddfd16bb2f214e22b87932248e262f9253cb4a161f31200be520c",
+    "README.md": "f5514d4294ecb46c051a1b0632f4880b19577659f9a9b0e518c5bbcc1b33d989",
     "documentation/models/BadRequest.md": "2d66fdc5bcc1464db5d59459cd3459df6add6a2892fe15948df55d3efe667f52",
     "documentation/models/CreatePurchaseOkResponse.md": "12eaef6821541e6130ae315330b90d6b3b5de78180262c3837eccd47ac4b45af",
     "documentation/models/CreatePurchaseRequest.md": "b1ed5629b7de26918fd504b7f2755991100aa4dbe944eda31d07e86e58177f45",
@@ -518,10 +518,10 @@
     "documentation/services/PurchasesService.md": "0e3d8fdd5f44c331ad9315b82cb700ecb6d9ab5ea90fb80fb6afe28d7f192c94",
     "documentation/snippets/snippets.json": "b4677e56cc1004b9da5401ac08fbac65461475d6c8cf136592a8cdd5210e1525",
     "examples/README.md": "e65e8841469f1e5e3804778f2079752f09e3ca80817625ecc5dd2cd1e78fe3d3",
-    "examples/package.json": "730f317fa18317fbc07de71b98bc3f2235f6fba9d61726a1e6bcf4fbdecee3ea",
+    "examples/package.json": "4f9157507336634ace35c434f2ab79b4a77af5ca843672c33599442e040782e4",
     "examples/src/index.ts": "87594814df2f33342997004e4fab82e78f3b5524562d48b58410dc81b3f03db9",
     "examples/tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63",
-    "package.json": "8b809424cfce13e3516e0c447b96c83b99c3c574d8184d069798f32402770b82",
+    "package.json": "067d6a8f74232d144801f5bc2713a7730fe3536b17a491c7ae4403685c78e252",
     "prettier.config.js": "2fe33fda52344779fcf235afa8152cfd356880dc3161da09403dc26231bc72d9",
     "scripts/prepublish.sh": "651cd87546cc25d69210f55dc4310d47007c53b719da1da8b3bd9acb098defcf",
     "src/http/client.ts": "031aefbfda9b27c903a0bed6d0a11e271d6bfed9a8c179ced9511dd72b21d45c",
@@ -530,10 +530,10 @@
     "src/http/errors/throwable-error.ts": "9d57355a464ea142f9ae090918cf2a4c13e0f719027fabf890e3274ea1140db6",
     "src/http/errors/validation-error.ts": "8835718fafeca5327ada4e6cbb7859f40d7460b98973812f2a012017bde8e2c8",
     "src/http/handlers/handler-chain.ts": "7963ae4f81949a07b9265abd5c9aeef8f7b6d99260874f9e8d6f82a916d85699",
-    "src/http/handlers/hook-handler.ts": "a0237af8d91407e29603d39b54724d619120e7c8f5f90d651870c0f3710b0d8b",
+    "src/http/handlers/hook-handler.ts": "512ab328695e199c2b9136a83e5cce4d9cfc94a8ead6f748385dc8e46cbc2638",
     "src/http/handlers/oauth-handler.ts": "b6e7ce8e3918137897906a298193d4aa7edf59c5b3ecb5a2615c353d40ea2e4c",
     "src/http/handlers/request-validation-handler.ts": "bd1876f4ec4775443a3dfec45a4a46a19c6bfb00d4d5bcab4076bf424ef700d8",
-    "src/http/handlers/response-validation-handler.ts": "f46b2e056b8122aa7c6c7b8e63f7af53389ca650c41f4bba9b94133999c93506",
+    "src/http/handlers/response-validation-handler.ts": "552cd80a2c275ac38274e11e8178d287e10ae3cee3de0c8fdff1f9f6385bc5df",
     "src/http/handlers/retry-handler.ts": "eb8df536acbb0e603e6f39014fc73c5df2ca50b9796a6b948a4050bffa4693e4",
     "src/http/handlers/terminating-handler.ts": "8b820d772559c271507977bd3bc59b0afd979f5fc24397419dcb97059a3b076c",
     "src/http/hooks/custom-hook.ts": "906e418d5f24ae314500dea157f0b101a179ff3c16ef8dbb158cce51ed306ee7",
@@ -545,7 +545,7 @@
     "src/http/serialization/header-serializer.ts": "7409385d6841c188c50e08082d661111e89ed843f2954de973d291c95e948a38",
     "src/http/serialization/path-serializer.ts": "e6f269f8d87aa3e3119e300899b118a7b03a3fe22c738b19a8ecfca2e750c91d",
     "src/http/serialization/query-serializer.ts": "3a17740986421462d63a55e3b869ef5bb571a96e7077aec965b63f9a19705d47",
-    "src/http/transport/request-builder.ts": "b484ef3de8b80234490f43314a24d4ceb613216a00545e70395293af9742c2e0",
+    "src/http/transport/request-builder.ts": "7895d97bd91807e777b182b70e21bc1cd8a25f43a267cd26baa3c7c175403798",
     "src/http/transport/request-fetch-adapter.ts": "b0450435eb0e943c6094438ff471cc3a2e138e046eb7724c5576aeba7dd4d938",
     "src/http/transport/request.ts": "9f2329868fd0c261a48d3519326c8d89292bdfd08d45c62f3bcfe29e178842bc",
     "src/http/transport/transport-hook-adapter.ts": "97e375180a5ffe6328cbea3d84fce1f21b418ca8fbf81dcdb4a01579ca968ee1",
