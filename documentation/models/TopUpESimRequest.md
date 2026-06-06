@@ -1,17 +1,16 @@
-# CreatePurchaseV2Request
+# TopUpESimRequest
 
 **Properties**
 
 | Name          | Type   | Required | Description |
 | :------------ | :----- | :------- | :---------- |
-| destination   | string | ❌       |             |
+| iccid         | string | ❌       |             |
 | dataLimitInGb | number | ❌       |             |
-| quantity      | number | ❌       |             |
 | startDate     | string | ❌       |             |
 | endDate       | string | ❌       |             |
 | duration      | number | ❌       |             |
 | email         | string | ❌       |             |
 | referenceId   | string | ❌       |             |
-| networkBrand  | string | ❌       |             |
 | emailBrand    | string | ❌       |             |
-| language      | string | ❌       |             |
+| startTime     | number | ❌       |             |
+| endTime       | number | ❌       |             |

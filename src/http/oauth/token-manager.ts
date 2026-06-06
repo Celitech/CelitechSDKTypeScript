@@ -57,7 +57,7 @@ export class OAuthTokenManager {
     if (
       this.token?.hasAllScopes(scopes) &&
       this.token?.expiresAt &&
-      this.token.expiresAt - Date.now() > 5000
+      this.token.expiresAt - Date.now() > 30000
     ) {
       return this.token;
     }
