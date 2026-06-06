@@ -5,4 +5,6 @@
 export enum Environment {
   /** DEFAULT environment base URL */
   DEFAULT = 'https://api.celitech.net/v1',
+  /** API environment base URL */
+  API = 'https://api.celitech.net/v1',
 }

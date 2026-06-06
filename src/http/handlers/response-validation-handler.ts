@@ -151,11 +151,13 @@ export class ResponseValidationHandler implements RequestHandler {
     if (decodedBody.startsWith('data: ')) {
       decodedBody = decodedBody.substring(6);
     }
+    if (decodedBody.trim().length === 0) {
+      return { ...response, data: undefined as T };
+    }
     // Note: this assumes that the content of data is a valid JSON string
-    const json = JSON.parse(decodedBody);
     return {
       ...response,
-      data: this.validate<T>(request, responseDefinition, json),
+      data: this.validate<T>(request, responseDefinition, this.parseJson(decodedBody)),
     };
   }
 
@@ -165,11 +167,26 @@ export class ResponseValidationHandler implements RequestHandler {
     response: HttpResponse<T>,
   ): HttpResponse<T> {
     const decodedBody = new TextDecoder().decode(response.raw);
-    const json = JSON.parse(decodedBody);
+    if (decodedBody.trim().length === 0) {
+      return { ...response, data: undefined as T };
+    }
     return {
       ...response,
-      data: this.validate<T>(request, responseDefinition, json),
+      data: this.validate<T>(request, responseDefinition, this.parseJson(decodedBody)),
     };
+  }
+
+  /**
+   * Parses a JSON response body, rethrowing parse failures as a plain Error
+   * so callers don't have to special-case SyntaxError.
+   */
+  private parseJson(decodedBody: string): unknown {
+    try {
+      return JSON.parse(decodedBody);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : String(e);
+      throw new Error(`Failed to parse JSON response body: ${message}`);
+    }
   }
 
   /**

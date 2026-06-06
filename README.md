@@ -13,6 +13,10 @@ Welcome to the CELITECH API documentation!
 
 Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/)
 
+Contact Support:
+Name: CELITECH
+Email: support@celitech.com
+
 ## Table of Contents
 
 - [Setup & Configuration](#setup--configuration)
@@ -101,7 +105,7 @@ import { Celitech } from 'celitech-sdk';
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const data = await celitech.destinations.listDestinations();
+  const data = await celitech.celitech.listDestinations();
 
   console.log(data);
 })();
@@ -114,13 +118,9 @@ The SDK provides various services to interact with the API.
 <details>
 <summary>Below is a list of all available services with links to their detailed documentation:</summary>
 
-| Name                                                                 |
-| :------------------------------------------------------------------- |
-| [DestinationsService](documentation/services/DestinationsService.md) |
-| [PackagesService](documentation/services/PackagesService.md)         |
-| [PurchasesService](documentation/services/PurchasesService.md)       |
-| [ESimService](documentation/services/ESimService.md)                 |
-| [IFrameService](documentation/services/IFrameService.md)             |
+| Name                                                         |
+| :----------------------------------------------------------- |
+| [CelitechService](documentation/services/CelitechService.md) |
 
 </details>
 
@@ -131,35 +131,13 @@ The SDK includes several models that represent the data structures used in API r
 <details>
 <summary>Below is a list of all available models with links to their detailed documentation:</summary>
 
-| Name                                                                                         | Description |
-| :------------------------------------------------------------------------------------------- | :---------- |
-| [ListDestinationsOkResponse](documentation/models/ListDestinationsOkResponse.md)             |             |
-| [BadRequest](documentation/models/BadRequest.md)                                             |             |
-| [Unauthorized](documentation/models/Unauthorized.md)                                         |             |
-| [ListPackagesOkResponse](documentation/models/ListPackagesOkResponse.md)                     |             |
-| [BadRequest](documentation/models/BadRequest.md)                                             |             |
-| [Unauthorized](documentation/models/Unauthorized.md)                                         |             |
-| [CreatePurchaseV2OkResponse](documentation/models/CreatePurchaseV2OkResponse.md)             |             |
-| [CreatePurchaseV2Request](documentation/models/CreatePurchaseV2Request.md)                   |             |
-| [BadRequest](documentation/models/BadRequest.md)                                             |             |
-| [Unauthorized](documentation/models/Unauthorized.md)                                         |             |
-| [ListPurchasesOkResponse](documentation/models/ListPurchasesOkResponse.md)                   |             |
-| [CreatePurchaseOkResponse](documentation/models/CreatePurchaseOkResponse.md)                 |             |
-| [CreatePurchaseRequest](documentation/models/CreatePurchaseRequest.md)                       |             |
-| [TopUpEsimOkResponse](documentation/models/TopUpEsimOkResponse.md)                           |             |
-| [TopUpEsimRequest](documentation/models/TopUpEsimRequest.md)                                 |             |
-| [EditPurchaseOkResponse](documentation/models/EditPurchaseOkResponse.md)                     |             |
-| [EditPurchaseRequest](documentation/models/EditPurchaseRequest.md)                           |             |
-| [GetPurchaseConsumptionOkResponse](documentation/models/GetPurchaseConsumptionOkResponse.md) |             |
-| [GetEsimOkResponse](documentation/models/GetEsimOkResponse.md)                               |             |
-| [BadRequest](documentation/models/BadRequest.md)                                             |             |
-| [Unauthorized](documentation/models/Unauthorized.md)                                         |             |
-| [GetEsimDeviceOkResponse](documentation/models/GetEsimDeviceOkResponse.md)                   |             |
-| [GetEsimHistoryOkResponse](documentation/models/GetEsimHistoryOkResponse.md)                 |             |
-| [TokenOkResponse](documentation/models/TokenOkResponse.md)                                   |             |
-| [BadRequest](documentation/models/BadRequest.md)                                             |             |
-| [Unauthorized](documentation/models/Unauthorized.md)                                         |             |
-| [GrantType](documentation/models/GrantType.md)                                               |             |
+| Name                                                                       | Description |
+| :------------------------------------------------------------------------- | :---------- |
+| [CreatePurchaseV2Request](documentation/models/CreatePurchaseV2Request.md) |             |
+| [TopUpESimRequest](documentation/models/TopUpESimRequest.md)               |             |
+| [EditPurchaseRequest](documentation/models/EditPurchaseRequest.md)         |             |
+| [CreatePurchaseRequest](documentation/models/CreatePurchaseRequest.md)     |             |
+| [GrantType](documentation/models/GrantType.md)                             |             |
 
 </details>
 

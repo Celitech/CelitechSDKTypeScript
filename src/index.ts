@@ -1,102 +1,49 @@
 import { Environment } from './http/environment';
 import { SdkConfig } from './http/types';
 import { OAuthTokenManager } from './http/oauth/token-manager';
-import { DestinationsService } from './services/destinations';
-import { PackagesService } from './services/packages';
-import { PurchasesService } from './services/purchases';
-import { ESimService } from './services/e-sim';
-import { IFrameService } from './services/i-frame';
+import { CelitechService } from './services/celitech';
 
-export * from './services/destinations';
-export * from './services/packages';
-export * from './services/purchases';
-export * from './services/e-sim';
-export * from './services/i-frame';
+export * from './services/celitech';
 export * from './services/o-auth';
-export * from './services/common';
 
 export * from './http';
 export { Environment } from './http/environment';
 
 export class Celitech {
-  public readonly destinations: DestinationsService;
-
-  public readonly packages: PackagesService;
-
-  public readonly purchases: PurchasesService;
-
-  public readonly eSim: ESimService;
-
-  public readonly iFrame: IFrameService;
+  public readonly celitech: CelitechService;
 
   protected tokenManager: OAuthTokenManager = new OAuthTokenManager();
 
   constructor(public config: SdkConfig) {
-    this.destinations = new DestinationsService(this.config, this.tokenManager);
-
-    this.packages = new PackagesService(this.config, this.tokenManager);
-
-    this.purchases = new PurchasesService(this.config, this.tokenManager);
-
-    this.eSim = new ESimService(this.config, this.tokenManager);
-
-    this.iFrame = new IFrameService(this.config, this.tokenManager);
+    this.celitech = new CelitechService(this.config, this.tokenManager);
   }
 
   set baseUrl(baseUrl: string) {
-    this.destinations.baseUrl = baseUrl;
-    this.packages.baseUrl = baseUrl;
-    this.purchases.baseUrl = baseUrl;
-    this.eSim.baseUrl = baseUrl;
-    this.iFrame.baseUrl = baseUrl;
+    this.celitech.baseUrl = baseUrl;
   }
 
   set environment(environment: Environment) {
-    this.destinations.baseUrl = environment;
-    this.packages.baseUrl = environment;
-    this.purchases.baseUrl = environment;
-    this.eSim.baseUrl = environment;
-    this.iFrame.baseUrl = environment;
+    this.celitech.baseUrl = environment;
   }
 
   set timeoutMs(timeoutMs: number) {
-    this.destinations.timeoutMs = timeoutMs;
-    this.packages.timeoutMs = timeoutMs;
-    this.purchases.timeoutMs = timeoutMs;
-    this.eSim.timeoutMs = timeoutMs;
-    this.iFrame.timeoutMs = timeoutMs;
+    this.celitech.timeoutMs = timeoutMs;
   }
 
   set clientId(clientId: string) {
-    this.destinations.clientId = clientId;
-    this.packages.clientId = clientId;
-    this.purchases.clientId = clientId;
-    this.eSim.clientId = clientId;
-    this.iFrame.clientId = clientId;
+    this.celitech.clientId = clientId;
   }
 
   set clientSecret(clientSecret: string) {
-    this.destinations.clientSecret = clientSecret;
-    this.packages.clientSecret = clientSecret;
-    this.purchases.clientSecret = clientSecret;
-    this.eSim.clientSecret = clientSecret;
-    this.iFrame.clientSecret = clientSecret;
+    this.celitech.clientSecret = clientSecret;
   }
 
   set oAuthBaseUrl(oAuthBaseUrl: string) {
-    this.destinations.oAuthBaseUrl = oAuthBaseUrl;
-    this.packages.oAuthBaseUrl = oAuthBaseUrl;
-    this.purchases.oAuthBaseUrl = oAuthBaseUrl;
-    this.eSim.oAuthBaseUrl = oAuthBaseUrl;
-    this.iFrame.oAuthBaseUrl = oAuthBaseUrl;
+    this.celitech.oAuthBaseUrl = oAuthBaseUrl;
   }
 
   set accessToken(accessToken: string) {
-    this.destinations.accessToken = accessToken;
-    this.packages.accessToken = accessToken;
-    this.purchases.accessToken = accessToken;
-    this.eSim.accessToken = accessToken;
-    this.iFrame.accessToken = accessToken;
+    this.celitech.accessToken = accessToken;
   }
 }
 
