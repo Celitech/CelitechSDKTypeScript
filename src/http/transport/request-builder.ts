@@ -56,7 +56,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     };
     this.addHeaderParam({
       key: 'User-Agent',
-      value: 'postman-codegen/1.1.2 celitech-sdk/2.0.0 (typescript)',
+      value: 'postman-codegen/1.4.0 celitech-sdk/2.0.2 (typescript)',
     });
   }
 
@@ -201,21 +201,38 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     return this;
   }
 
-  addApiKeyAuth(apiKey?: string, keyName?: string): RequestBuilder<Page> {
+  addApiKeyAuth(
+    apiKey?: string,
+    keyName?: string,
+    location?: 'header' | 'query' | 'cookie',
+  ): RequestBuilder<Page> {
     if (apiKey === undefined) {
       return this;
     }
 
-    this.params.headers.set(keyName ?? 'X-API-KEY', {
-      key: keyName ?? 'X-API-KEY',
+    const resolvedKeyName = keyName ?? 'X-API-KEY';
+    const resolvedLocation = location ?? 'header';
+    // Query params use `form`/explode-true so they render as `key=value`;
+    // headers and cookies render the value plainly (`simple`/explode-false).
+    const isQuery = resolvedLocation === 'query';
+    const param = {
+      key: resolvedKeyName,
       value: apiKey,
-      explode: false,
-      style: SerializationStyle.SIMPLE,
+      explode: isQuery,
+      style: isQuery ? SerializationStyle.FORM : SerializationStyle.SIMPLE,
       encode: true,
       isLimit: false,
       isOffset: false,
       isCursor: false,
-    });
+    };
+
+    if (resolvedLocation === 'query') {
+      this.params.queryParams.set(resolvedKeyName, param);
+    } else if (resolvedLocation === 'cookie') {
+      this.params.cookies.set(resolvedKeyName, param);
+    } else {
+      this.params.headers.set(resolvedKeyName, param);
+    }
     return this;
   }
 
