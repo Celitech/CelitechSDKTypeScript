@@ -55,7 +55,15 @@ export class HookHandler implements RequestHandler {
 
     if (error) {
       const decodedBody = new TextDecoder().decode(arrayBuffer);
-      const json = JSON.parse(decodedBody);
+      let json: unknown = undefined;
+      if (decodedBody.trim().length > 0) {
+        try {
+          json = JSON.parse(decodedBody);
+        } catch {
+          // Body present but not valid JSON — pass undefined payload so the
+          // typed error still surfaces instead of a SyntaxError crash.
+        }
+      }
       const customError = new error.error((json as any)?.message || '', json);
       // Attach metadata to custom error for analytics tracking
       customError.metadata = response.metadata;
