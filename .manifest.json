@@ -1,6 +1,6 @@
 {
-  "sdkGenVersion": "1.4.0",
-  "date": "2026-06-08T09:39:30.241Z",
+  "sdkGenVersion": "1.5.0",
+  "date": "2026-06-18T14:59:39.169Z",
   "config": {
     "languages": [
       "typescript"
@@ -10,7 +10,7 @@
     ],
     "languageOptions": {
       "java": {
-        "sdkVersion": "2.0.2",
+        "sdkVersion": "2.0.4",
         "githubRepoName": "CelitechSDKJava",
         "retry": {
           "enabled": true,
@@ -58,7 +58,7 @@
         ]
       },
       "typescript": {
-        "sdkVersion": "2.0.2",
+        "sdkVersion": "2.0.4",
         "githubRepoName": "CelitechSDKTypeScript",
         "retry": {
           "enabled": true,
@@ -96,7 +96,7 @@
         "npmName": "celitech-sdk"
       },
       "python": {
-        "sdkVersion": "2.0.2",
+        "sdkVersion": "2.0.4",
         "githubRepoName": "CelitechSDKPython",
         "retry": {
           "enabled": true,
@@ -134,7 +134,7 @@
         "pypiPackageName": "celitech-sdk"
       },
       "go": {
-        "sdkVersion": "2.0.2",
+        "sdkVersion": "2.0.4",
         "githubRepoName": "CelitechSDKGo",
         "retry": {
           "enabled": true,
@@ -172,7 +172,7 @@
         "goModuleName": "github.com/Celitech/CelitechSDKGo/v2"
       },
       "csharp": {
-        "sdkVersion": "2.0.2",
+        "sdkVersion": "2.0.4",
         "githubRepoName": "CelitechSDKCSharp",
         "retry": {
           "enabled": true,
@@ -211,7 +211,7 @@
         "useOptionalWrapper": false
       },
       "php": {
-        "sdkVersion": "2.0.2",
+        "sdkVersion": "2.0.4",
         "githubRepoName": "CelitechSDKPHP",
         "retry": {
           "enabled": true,
@@ -252,11 +252,11 @@
     "includeWatermark": false,
     "responseHeaders": false,
     "sdkName": "Celitech",
-    "sdkVersion": "2.0.2",
+    "sdkVersion": "2.0.4",
     "auth": [
       "oauth"
     ],
-    "apiVersion": "2.0.2",
+    "apiVersion": "2.0.4",
     "publishing": {
       "githubOrg": "Celitech"
     },
@@ -364,6 +364,7 @@
     ".gitignore",
     "LICENSE",
     "scripts/prepublish.sh",
+    ".github/workflows/release.yml",
     ".env.example",
     ".devcontainer/devcontainer.json",
     "examples/package.json",
@@ -490,9 +491,10 @@
   "fileHashes": {
     ".devcontainer/devcontainer.json": "024bd02da112675e1953072f2531a906668769ad7af67c7420cb64ace71a7aff",
     ".env.example": "69a3ee82f15d8bcc221e9c34c99e5a851d8b318ac2ac7e78f97ef32b743b303e",
+    ".github/workflows/release.yml": "216d94aecc4f957380cdc3f63b7f13e49e3df8e0b13ca3628607ec6135ec9361",
     ".gitignore": "5f515684cbf8243009414e638b28e93a70a884b81e3e16c38bb01124419e44b2",
     "LICENSE": "3ec558dc6e9c9355ab4b28c942caa92bf90b0b82c12d7838d2ef92467ad135c1",
-    "README.md": "3585c4fd42608e6fd2295535761b18bf006398a921bc573b27dc85918b6aa519",
+    "README.md": "e2009c70e37aa9a08dd5aec6b1c0e22826a8cb88537afaf4aa129dd14d412fcb",
     "documentation/models/BadRequest.md": "2d66fdc5bcc1464db5d59459cd3459df6add6a2892fe15948df55d3efe667f52",
     "documentation/models/CreatePurchaseOkResponse.md": "12eaef6821541e6130ae315330b90d6b3b5de78180262c3837eccd47ac4b45af",
     "documentation/models/CreatePurchaseRequest.md": "b1ed5629b7de26918fd504b7f2755991100aa4dbe944eda31d07e86e58177f45",
@@ -515,13 +517,13 @@
     "documentation/services/ESimService.md": "da8e1c14d318dfa6c2205f5d2f5e33354c48b79f59cc9559b86fb25f3ec1bf84",
     "documentation/services/IFrameService.md": "364a9d7c6d7629c1d81e7695935f9279a6d942165513213d6f982f0f673a4455",
     "documentation/services/PackagesService.md": "b9238ed7db2bd39cba26bdeaaa33c1142c0cb680a9edb1f51333f91b8de4115f",
-    "documentation/services/PurchasesService.md": "0e3d8fdd5f44c331ad9315b82cb700ecb6d9ab5ea90fb80fb6afe28d7f192c94",
-    "documentation/snippets/snippets.json": "b4677e56cc1004b9da5401ac08fbac65461475d6c8cf136592a8cdd5210e1525",
+    "documentation/services/PurchasesService.md": "c727f2b03acb56bb9b738952c0b43981a373356aa10408c777484dd2c25b8b84",
+    "documentation/snippets/snippets.json": "acc0a064d5036619032407d65ce5dacd68bc701179c5ffa82ae2391d38aedb4b",
     "examples/README.md": "e65e8841469f1e5e3804778f2079752f09e3ca80817625ecc5dd2cd1e78fe3d3",
-    "examples/package.json": "bdc51d25b04538de8eba1766f109a8eaefbf1e69bd757dc78091513496026ed4",
+    "examples/package.json": "8e4490520ef0c3ea525541eeb721d725ce0e30a97b4970ccf077c675f0ea1638",
     "examples/src/index.ts": "87594814df2f33342997004e4fab82e78f3b5524562d48b58410dc81b3f03db9",
     "examples/tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63",
-    "package.json": "ed7e3daa877002c13b25a9ba3e3305978f3c494230e4d2550e53a145a66f5195",
+    "package.json": "f6900a55f43f867561e06f6723bbbc7c65b608e963f20687736563d28b6ad403",
     "prettier.config.js": "2fe33fda52344779fcf235afa8152cfd356880dc3161da09403dc26231bc72d9",
     "scripts/prepublish.sh": "651cd87546cc25d69210f55dc4310d47007c53b719da1da8b3bd9acb098defcf",
     "src/http/client.ts": "031aefbfda9b27c903a0bed6d0a11e271d6bfed9a8c179ced9511dd72b21d45c",
@@ -545,7 +547,7 @@
     "src/http/serialization/header-serializer.ts": "7409385d6841c188c50e08082d661111e89ed843f2954de973d291c95e948a38",
     "src/http/serialization/path-serializer.ts": "e6f269f8d87aa3e3119e300899b118a7b03a3fe22c738b19a8ecfca2e750c91d",
     "src/http/serialization/query-serializer.ts": "3a17740986421462d63a55e3b869ef5bb571a96e7077aec965b63f9a19705d47",
-    "src/http/transport/request-builder.ts": "f3f66d572b387e85dc95188ec8babcfc16fc7b28a23cb9ec1771bd7456b269f3",
+    "src/http/transport/request-builder.ts": "b4d0e4d045ceb6de7ef90bfa0726e566e54e6fa12e3fc3b038d614a57f92249d",
     "src/http/transport/request-fetch-adapter.ts": "b0450435eb0e943c6094438ff471cc3a2e138e046eb7724c5576aeba7dd4d938",
     "src/http/transport/request.ts": "9f2329868fd0c261a48d3519326c8d89292bdfd08d45c62f3bcfe29e178842bc",
     "src/http/transport/transport-hook-adapter.ts": "97e375180a5ffe6328cbea3d84fce1f21b418ca8fbf81dcdb4a01579ca968ee1",
