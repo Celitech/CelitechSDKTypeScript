@@ -56,7 +56,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     };
     this.addHeaderParam({
       key: 'User-Agent',
-      value: 'postman-codegen/1.5.0 celitech-sdk/2.0.4 (typescript)',
+      value: 'postman-codegen/1.6.0 celitech-sdk/2.0.0 (typescript)',
     });
   }
 

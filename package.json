@@ -1,7 +1,7 @@
 {
   "name": "celitech-sdk",
-  "version": "2.0.4",
-  "description": "Welcome to the CELITECH API documentation!  Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/)",
+  "version": "2.0.0",
+  "description": "Welcome to the CELITECH API documentation!  Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:support@celitech.com) | [Blog](https://www.celitech.com/blog/)   Contact Support:  Name: CELITECH  Email: support@celitech.com",
   "source": "./src/index.ts",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -24,7 +24,7 @@
     "dist",
     "README.md"
   ],
-  "author": "CELITECH",
+  "author": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Celitech/CelitechSDKTypeScript.git"
@@ -36,7 +36,7 @@
     "tsup": "^6.7.0"
   },
   "dependencies": {
-    "zod": "3.22.0"
+    "zod": "3.22.3"
   },
   "exports": {
     ".": {
