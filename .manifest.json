@@ -1,6 +1,6 @@
 {
-  "sdkGenVersion": "1.5.0",
-  "date": "2026-06-18T14:59:39.169Z",
+  "sdkGenVersion": "1.6.0",
+  "date": "2026-07-15T12:00:29.529Z",
   "config": {
     "languages": [
       "typescript"
@@ -10,7 +10,7 @@
     ],
     "languageOptions": {
       "java": {
-        "sdkVersion": "2.0.4",
+        "sdkVersion": "2.0.5",
         "githubRepoName": "CelitechSDKJava",
         "retry": {
           "enabled": true,
@@ -58,7 +58,7 @@
         ]
       },
       "typescript": {
-        "sdkVersion": "2.0.4",
+        "sdkVersion": "2.0.5",
         "githubRepoName": "CelitechSDKTypeScript",
         "retry": {
           "enabled": true,
@@ -96,7 +96,7 @@
         "npmName": "celitech-sdk"
       },
       "python": {
-        "sdkVersion": "2.0.4",
+        "sdkVersion": "2.0.5",
         "githubRepoName": "CelitechSDKPython",
         "retry": {
           "enabled": true,
@@ -134,7 +134,7 @@
         "pypiPackageName": "celitech-sdk"
       },
       "go": {
-        "sdkVersion": "2.0.4",
+        "sdkVersion": "2.0.5",
         "githubRepoName": "CelitechSDKGo",
         "retry": {
           "enabled": true,
@@ -172,7 +172,7 @@
         "goModuleName": "github.com/Celitech/CelitechSDKGo/v2"
       },
       "csharp": {
-        "sdkVersion": "2.0.4",
+        "sdkVersion": "2.0.5",
         "githubRepoName": "CelitechSDKCSharp",
         "retry": {
           "enabled": true,
@@ -211,7 +211,7 @@
         "useOptionalWrapper": false
       },
       "php": {
-        "sdkVersion": "2.0.4",
+        "sdkVersion": "2.0.5",
         "githubRepoName": "CelitechSDKPHP",
         "retry": {
           "enabled": true,
@@ -252,11 +252,11 @@
     "includeWatermark": false,
     "responseHeaders": false,
     "sdkName": "Celitech",
-    "sdkVersion": "2.0.4",
+    "sdkVersion": "2.0.5",
     "auth": [
       "oauth"
     ],
-    "apiVersion": "2.0.4",
+    "apiVersion": "2.0.5",
     "publishing": {
       "githubOrg": "Celitech"
     },
@@ -320,7 +320,7 @@
       "sourceDir": ""
     },
     "typescriptVersion": "5.3.3",
-    "zodVersion": "3.22.0",
+    "zodVersion": "3.22.3",
     "compilerOptions": {
       "target": "es6",
       "module": "Node16",
@@ -491,39 +491,39 @@
   "fileHashes": {
     ".devcontainer/devcontainer.json": "024bd02da112675e1953072f2531a906668769ad7af67c7420cb64ace71a7aff",
     ".env.example": "69a3ee82f15d8bcc221e9c34c99e5a851d8b318ac2ac7e78f97ef32b743b303e",
-    ".github/workflows/release.yml": "216d94aecc4f957380cdc3f63b7f13e49e3df8e0b13ca3628607ec6135ec9361",
+    ".github/workflows/release.yml": "760d126ffef1fce9171b86d4222253f908c3b407b5aa547c8069b024f3e918a6",
     ".gitignore": "5f515684cbf8243009414e638b28e93a70a884b81e3e16c38bb01124419e44b2",
     "LICENSE": "3ec558dc6e9c9355ab4b28c942caa92bf90b0b82c12d7838d2ef92467ad135c1",
-    "README.md": "e2009c70e37aa9a08dd5aec6b1c0e22826a8cb88537afaf4aa129dd14d412fcb",
+    "README.md": "7e4d2f281f6650bef47a884e22b08ef81c5266bb3aa7437a810942d0e3c5cc53",
     "documentation/models/BadRequest.md": "2d66fdc5bcc1464db5d59459cd3459df6add6a2892fe15948df55d3efe667f52",
     "documentation/models/CreatePurchaseOkResponse.md": "12eaef6821541e6130ae315330b90d6b3b5de78180262c3837eccd47ac4b45af",
-    "documentation/models/CreatePurchaseRequest.md": "b1ed5629b7de26918fd504b7f2755991100aa4dbe944eda31d07e86e58177f45",
+    "documentation/models/CreatePurchaseRequest.md": "98ec9c3f00f38defc3435922d1753fa411fbd917a53b74308ea78be4fabca6ed",
     "documentation/models/CreatePurchaseV2OkResponse.md": "6d6bd7d835cb60bd23ac0395b43e86c830efe46e57673c27ec20e118ea633ab0",
-    "documentation/models/CreatePurchaseV2Request.md": "8996661fa5dbce1c4c175dca09e808480d305d7dc73dd096ff74e37f4bbcc487",
+    "documentation/models/CreatePurchaseV2Request.md": "78fdc8a9570e02c5114ab438289872ce0b42deef1ead71836d7397f702e5c83e",
     "documentation/models/EditPurchaseOkResponse.md": "20da550dbb8f15dbea22547f53e9b8bf1bfabe9fc0fbc09e183ccafbf4882868",
     "documentation/models/EditPurchaseRequest.md": "1bd6238abc05ea2becdb984e37f5ade64ab4cd453ce5eff6a722779612b6f13b",
     "documentation/models/GetEsimDeviceOkResponse.md": "ab9373996dda042b80add8037d0cefffced871014f8814e82998442264e714d0",
     "documentation/models/GetEsimHistoryOkResponse.md": "313714c0f54c9e095d30a028eb457870a4db5e432e5323b6852912cd0e03acad",
     "documentation/models/GetEsimOkResponse.md": "6f0797698004b25fb0db683dea3d228386c39c1db99cf96ca2601c581bc9751e",
-    "documentation/models/GetPurchaseConsumptionOkResponse.md": "9d0b3c3a9d1595b533483b02f48abbcaae4fb25a244a88a1c8613b9e00c2d7dd",
+    "documentation/models/GetPurchaseConsumptionOkResponse.md": "0a20e00195dcf4817586782d2cc4a025e24f7118bf5a2dbce4cacf5f236dd4d7",
     "documentation/models/ListDestinationsOkResponse.md": "8c3dd073e3125ffc02dad4d48614adefad068c7208cdfe5c37ab138f1b20e64b",
     "documentation/models/ListPackagesOkResponse.md": "869c6e50f81b197283a871c9dc3d13855a667f4e6c5bb1efbc8750765efadc45",
     "documentation/models/ListPurchasesOkResponse.md": "d20f9786f0297e98121bbbd13c85590f54864e985ca9c60ad4ecbdd7d0a20bb7",
     "documentation/models/TokenOkResponse.md": "2b8a2430d491a084144aa58aaee5379e256866920a5d23cf136ecfb1d6bba7ff",
     "documentation/models/TopUpEsimOkResponse.md": "8acc9ce879999b41cdf50a2778e8bcea4e02d53f0959c889160f91ff2d188302",
-    "documentation/models/TopUpEsimRequest.md": "111fa6f1d0b68a2ff4426f399d62145f07f88641bdfc91bf406ab8f76ca65942",
+    "documentation/models/TopUpEsimRequest.md": "526d97e17df3544d7d0c281e468202bfe128fdb33d3fa6eedc7a7e9c1cc31346",
     "documentation/models/Unauthorized.md": "6246c5a7efbec4cb46d0747c34ac2fc48a144ae88d97279ada230e588b4371c9",
     "documentation/services/DestinationsService.md": "56c3d5d6d3231a8f9e3894aa81ff403d237d531b82733490b93209990054a0d1",
     "documentation/services/ESimService.md": "da8e1c14d318dfa6c2205f5d2f5e33354c48b79f59cc9559b86fb25f3ec1bf84",
     "documentation/services/IFrameService.md": "364a9d7c6d7629c1d81e7695935f9279a6d942165513213d6f982f0f673a4455",
-    "documentation/services/PackagesService.md": "b9238ed7db2bd39cba26bdeaaa33c1142c0cb680a9edb1f51333f91b8de4115f",
+    "documentation/services/PackagesService.md": "1cb37afe8cd6d987615f3f9bbc321ea87e3aa214400e7056a8e3618c83f1df03",
     "documentation/services/PurchasesService.md": "c727f2b03acb56bb9b738952c0b43981a373356aa10408c777484dd2c25b8b84",
     "documentation/snippets/snippets.json": "acc0a064d5036619032407d65ce5dacd68bc701179c5ffa82ae2391d38aedb4b",
     "examples/README.md": "e65e8841469f1e5e3804778f2079752f09e3ca80817625ecc5dd2cd1e78fe3d3",
-    "examples/package.json": "8e4490520ef0c3ea525541eeb721d725ce0e30a97b4970ccf077c675f0ea1638",
+    "examples/package.json": "82ad715e99346e5ea3ed9b36158a8064902f3461efa4e8255e097e770ebd3510",
     "examples/src/index.ts": "87594814df2f33342997004e4fab82e78f3b5524562d48b58410dc81b3f03db9",
     "examples/tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63",
-    "package.json": "f6900a55f43f867561e06f6723bbbc7c65b608e963f20687736563d28b6ad403",
+    "package.json": "a0358330b1d9e75e659d1b033132eabe16972aa0206acacddc2f8f7da38668ba",
     "prettier.config.js": "2fe33fda52344779fcf235afa8152cfd356880dc3161da09403dc26231bc72d9",
     "scripts/prepublish.sh": "651cd87546cc25d69210f55dc4310d47007c53b719da1da8b3bd9acb098defcf",
     "src/http/client.ts": "031aefbfda9b27c903a0bed6d0a11e271d6bfed9a8c179ced9511dd72b21d45c",
@@ -547,7 +547,7 @@
     "src/http/serialization/header-serializer.ts": "7409385d6841c188c50e08082d661111e89ed843f2954de973d291c95e948a38",
     "src/http/serialization/path-serializer.ts": "e6f269f8d87aa3e3119e300899b118a7b03a3fe22c738b19a8ecfca2e750c91d",
     "src/http/serialization/query-serializer.ts": "3a17740986421462d63a55e3b869ef5bb571a96e7077aec965b63f9a19705d47",
-    "src/http/transport/request-builder.ts": "b4d0e4d045ceb6de7ef90bfa0726e566e54e6fa12e3fc3b038d614a57f92249d",
+    "src/http/transport/request-builder.ts": "93cae3c8d821180ceea79877685433217b1c3dcf583641116599bad8e26e02cf",
     "src/http/transport/request-fetch-adapter.ts": "b0450435eb0e943c6094438ff471cc3a2e138e046eb7724c5576aeba7dd4d938",
     "src/http/transport/request.ts": "9f2329868fd0c261a48d3519326c8d89292bdfd08d45c62f3bcfe29e178842bc",
     "src/http/transport/transport-hook-adapter.ts": "97e375180a5ffe6328cbea3d84fce1f21b418ca8fbf81dcdb4a01579ca968ee1",
@@ -590,32 +590,32 @@
     "src/services/packages/index.ts": "5b4ca40f1578343cfaa72394a7a521705a2f81d1ea18cf832c4388178ca53f77",
     "src/services/packages/models/index.ts": "3bda43a1972ab98e2bd6c6318d3f79a57e848695d847845d82e4bf22a32dee0b",
     "src/services/packages/models/list-packages-ok-response.ts": "41317006e938acf403c1f165713f1a046c14c91ee7d3807829dc5be878824c7a",
-    "src/services/packages/models/packages.ts": "6caa6ee9bba97278f209ad59c24c2b456f3d0f1b9de84958efe70f1f26fdf876",
-    "src/services/packages/packages-service.ts": "98f5c1cf691689d1ad6fff496ea0af3751d5380a53155325b17f45eb9dc0002b",
-    "src/services/packages/request-params.ts": "e75e2b69018732eab7db2ec4074a575bd5ecd8410896c98077ce27a10abbf8c2",
+    "src/services/packages/models/packages.ts": "0a748b927a4774022845c43c9aea5ef8716727e157bf7228942a2847d22108f9",
+    "src/services/packages/packages-service.ts": "17715d200dd084bf82336da737850c417d61b45e3e63a41750b0af5366d0af38",
+    "src/services/packages/request-params.ts": "f57c1113998893149c26c1ff7f4f786e479e96f078d52d7e85037d09abb918e3",
     "src/services/purchases/index.ts": "79c4efaf8ebbcc152fa0ae2db3dee1120ee24d97af6cd5cf5758b1d098634908",
     "src/services/purchases/models/create-purchase-ok-response-profile.ts": "f8d666dd5852d8ce4e20100b5015fdfdcc22f83b26e1ae5510516482397fb24e",
     "src/services/purchases/models/create-purchase-ok-response-purchase.ts": "726b7f3cf87a8c8a8e95a3e4e3dba2776e2ffd24f94e8b5bf6b3e9a21d46501b",
     "src/services/purchases/models/create-purchase-ok-response.ts": "00c3ddeee08d7fa71af197996d2bf000e24564cd1b3d6166b527b27c58bb82c1",
     "src/services/purchases/models/create-purchase-request-language.ts": "0c41b3bf444744b1f019d43c5f3b504f4e04258f93f316f1b08ac7311e11494f",
-    "src/services/purchases/models/create-purchase-request.ts": "579d3012c75a2cfc6c53677a9b85df15a68db198cacb4071189e5a6bcbc03f66",
+    "src/services/purchases/models/create-purchase-request.ts": "455d13046167165f2ce0800f93cd167c9957195f96bf3ce7addc19aea0bfcf04",
     "src/services/purchases/models/create-purchase-v2-ok-response-profile.ts": "a7873d7a29b7f4fcf750dbf6d62fefb1f250a56e9b50492598863499bf64f5d7",
     "src/services/purchases/models/create-purchase-v2-ok-response-purchase.ts": "9c66f8920b33e2d1aa432ea762429ff210b1359637bc8ad8597834f628f3612d",
     "src/services/purchases/models/create-purchase-v2-ok-response.ts": "308853faabae773992e0f1d74c49ae355a6a773524a9eb8dc77cf353a4337c10",
     "src/services/purchases/models/create-purchase-v2-request-language.ts": "1ba327151bec5408584b3bc347c87f72b578abdb566c5dc7cc79193c41241e64",
-    "src/services/purchases/models/create-purchase-v2-request.ts": "a2ec6cbca6fb3eb907a4c0d4060c01aa9bd5101123db6720fec3499a343de166",
+    "src/services/purchases/models/create-purchase-v2-request.ts": "11fa77f2c48d229a9dd551ce1fd7d9229f3b74665c46012596d69d89cc38631d",
     "src/services/purchases/models/edit-purchase-ok-response.ts": "68e54cc3d3d2d4d3ac77c605889eac361cb922bb8242aa222d95d7aa21e09383",
     "src/services/purchases/models/edit-purchase-request.ts": "4b740937283baf3550b0ff442096bbfe97326d3e3b8d6fe683639e3b08bc6387",
-    "src/services/purchases/models/get-purchase-consumption-ok-response.ts": "f0f71de1f3fb658b49bc828e1f2dd422c5dd1e8588197d13a9ed64bc3660649f",
+    "src/services/purchases/models/get-purchase-consumption-ok-response.ts": "3f78b780211d96cee8705fb60f603accecf6cb59c9734527c9378f26a9b123fb",
     "src/services/purchases/models/index.ts": "f2d6607ca72cbf1415240c9a914bd1b0f1fbc6e56b38243a3ad316175e98cd9b",
     "src/services/purchases/models/list-purchases-ok-response.ts": "b8fca1695075c7277aae844bec4f33c677083faccf96108005602e0df6de374a",
-    "src/services/purchases/models/package_.ts": "2b427b7e9f7b0b221aedf6825bf6f18f23869bc598433e72a9903d01a83e5f0e",
+    "src/services/purchases/models/package_.ts": "7761f6d990616c382435714626f8cf70a242a6aeb3e3ce40653ceedb59f8a7d1",
     "src/services/purchases/models/purchases-esim.ts": "b95934d20a1a697bf7f7e2f19d3ef169c3f859d33e1512fbda0f8574c35276ed",
-    "src/services/purchases/models/purchases.ts": "25703549d332851ecd39ffc7a74df2e01c1aadc6f30b870e4b958e79186f4d4c",
+    "src/services/purchases/models/purchases.ts": "3f9b9462c77ba36eb0fe62471aa02533db6ebb646e6d410c9a284d71375ae90d",
     "src/services/purchases/models/top-up-esim-ok-response-profile.ts": "09e389d761a41fd37f2ebbd448e592d246ea9ff8e722accff2295e6b2d3e79de",
     "src/services/purchases/models/top-up-esim-ok-response-purchase.ts": "70bb628ebefbc94556ba793c327225a6041760392678fcedf074772f1b78c518",
     "src/services/purchases/models/top-up-esim-ok-response.ts": "4cdb2424ab9c3fb5b8e531e1e460a257f427b6af0b231eb35ef3e7b0bd32f682",
-    "src/services/purchases/models/top-up-esim-request.ts": "0112adabaf57c2fe6657d956bf5ce67aab376ed1acf26f4d3637b39a78ba4e2d",
+    "src/services/purchases/models/top-up-esim-request.ts": "352a3ca419e7326a844aae0c7b454a877b9f16ef18f49cd20e27a5d75afa95f8",
     "src/services/purchases/purchases-service.ts": "dbf288c93e7d7ef94ed8d5617dfb32256e97c74dceea6a02103d42f3fcc648cd",
     "src/services/purchases/request-params.ts": "938ee013d8bb9fd1bc421359c2659990343a1917a5044308b3756837dc3f5dcf",
     "tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63"

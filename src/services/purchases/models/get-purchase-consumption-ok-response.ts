@@ -16,8 +16,8 @@ export const getPurchaseConsumptionOkResponse = z.lazy(() => {
 /**
  *
  * @typedef  {GetPurchaseConsumptionOkResponse} getPurchaseConsumptionOkResponse
- * @property {number} - Remaining balance of the package in bytes
- * @property {number} - Remaining balance of the package in GB
+ * @property {number} - Remaining balance of the package in bytes. Returns `-1` for unlimited packages.
+ * @property {number} - Remaining balance of the package in GB. Returns `-1` for unlimited packages.
  * @property {string} - Status of the connectivity, possible values are 'ACTIVE' or 'NOT_ACTIVE'
  */
 export type GetPurchaseConsumptionOkResponse = z.infer<typeof getPurchaseConsumptionOkResponse>;

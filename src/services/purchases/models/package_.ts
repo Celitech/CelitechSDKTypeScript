@@ -21,8 +21,8 @@ export const package_ = z.lazy(() => {
  *
  * @typedef  {Package_} package_
  * @property {string} - ID of the package
- * @property {number} - Size of the package in Bytes
- * @property {number} - Size of the package in GB
+ * @property {number} - Size of the package in Bytes. A value of `-1` indicates an unlimited package.
+ * @property {number} - Size of the package in GB. A value of `-1` indicates an unlimited (date-based) package.
  * @property {string} - ISO3 representation of the package's destination.
  * @property {string} - ISO2 representation of the package's destination.
  * @property {string} - Name of the package's destination
