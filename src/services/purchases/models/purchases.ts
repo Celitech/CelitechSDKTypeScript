@@ -36,7 +36,7 @@ export const purchases = z.lazy(() => {
  * @property {string} - ID of the purchase
  * @property {string} - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
  * @property {string} - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {number} - Duration of the package in days. Possible values are 1, 2, 7, 14, 30, or 90.
+ * @property {number} - Duration of the package in days. Possible values are 1, 2, 7, 14, 30, or 90. `null` for unlimited (date-based) packages.
  * @property {string} - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
  * @property {number} - Epoch value representing the start time of the package's validity
  * @property {number} - Epoch value representing the end time of the package's validity
