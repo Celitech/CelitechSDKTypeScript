@@ -1,6 +1,6 @@
 {
-  "sdkGenVersion": "1.6.0",
-  "date": "2026-07-15T12:00:29.529Z",
+  "sdkGenVersion": "1.7.0",
+  "date": "2026-07-20T09:14:38.764Z",
   "config": {
     "languages": [
       "typescript"
@@ -10,7 +10,7 @@
     ],
     "languageOptions": {
       "java": {
-        "sdkVersion": "2.0.5",
+        "sdkVersion": "2.0.6",
         "githubRepoName": "CelitechSDKJava",
         "retry": {
           "enabled": true,
@@ -58,7 +58,7 @@
         ]
       },
       "typescript": {
-        "sdkVersion": "2.0.5",
+        "sdkVersion": "2.0.6",
         "githubRepoName": "CelitechSDKTypeScript",
         "retry": {
           "enabled": true,
@@ -96,7 +96,7 @@
         "npmName": "celitech-sdk"
       },
       "python": {
-        "sdkVersion": "2.0.5",
+        "sdkVersion": "2.0.6",
         "githubRepoName": "CelitechSDKPython",
         "retry": {
           "enabled": true,
@@ -134,7 +134,7 @@
         "pypiPackageName": "celitech-sdk"
       },
       "go": {
-        "sdkVersion": "2.0.5",
+        "sdkVersion": "2.0.6",
         "githubRepoName": "CelitechSDKGo",
         "retry": {
           "enabled": true,
@@ -172,7 +172,7 @@
         "goModuleName": "github.com/Celitech/CelitechSDKGo/v2"
       },
       "csharp": {
-        "sdkVersion": "2.0.5",
+        "sdkVersion": "2.0.6",
         "githubRepoName": "CelitechSDKCSharp",
         "retry": {
           "enabled": true,
@@ -211,7 +211,7 @@
         "useOptionalWrapper": false
       },
       "php": {
-        "sdkVersion": "2.0.5",
+        "sdkVersion": "2.0.6",
         "githubRepoName": "CelitechSDKPHP",
         "retry": {
           "enabled": true,
@@ -252,11 +252,11 @@
     "includeWatermark": false,
     "responseHeaders": false,
     "sdkName": "Celitech",
-    "sdkVersion": "2.0.5",
+    "sdkVersion": "2.0.6",
     "auth": [
       "oauth"
     ],
-    "apiVersion": "2.0.5",
+    "apiVersion": "2.0.6",
     "publishing": {
       "githubOrg": "Celitech"
     },
@@ -278,7 +278,8 @@
         "PATCH",
         "HEAD",
         "OPTIONS"
-      ]
+      ],
+      "maxRetryAfterDelay": 60000
     },
     "license": {
       "type": "MIT",
@@ -491,10 +492,10 @@
   "fileHashes": {
     ".devcontainer/devcontainer.json": "024bd02da112675e1953072f2531a906668769ad7af67c7420cb64ace71a7aff",
     ".env.example": "69a3ee82f15d8bcc221e9c34c99e5a851d8b318ac2ac7e78f97ef32b743b303e",
-    ".github/workflows/release.yml": "760d126ffef1fce9171b86d4222253f908c3b407b5aa547c8069b024f3e918a6",
+    ".github/workflows/release.yml": "df80cf60d4eded2e1c435e7bd2a6d5f571cb6b59d368a8fec752f15b17623885",
     ".gitignore": "5f515684cbf8243009414e638b28e93a70a884b81e3e16c38bb01124419e44b2",
     "LICENSE": "3ec558dc6e9c9355ab4b28c942caa92bf90b0b82c12d7838d2ef92467ad135c1",
-    "README.md": "7e4d2f281f6650bef47a884e22b08ef81c5266bb3aa7437a810942d0e3c5cc53",
+    "README.md": "92f50a61f888faa79c8c2ba195afb8535262af460a6a35374b0883f6c6420779",
     "documentation/models/BadRequest.md": "2d66fdc5bcc1464db5d59459cd3459df6add6a2892fe15948df55d3efe667f52",
     "documentation/models/CreatePurchaseOkResponse.md": "12eaef6821541e6130ae315330b90d6b3b5de78180262c3837eccd47ac4b45af",
     "documentation/models/CreatePurchaseRequest.md": "98ec9c3f00f38defc3435922d1753fa411fbd917a53b74308ea78be4fabca6ed",
@@ -520,10 +521,10 @@
     "documentation/services/PurchasesService.md": "c727f2b03acb56bb9b738952c0b43981a373356aa10408c777484dd2c25b8b84",
     "documentation/snippets/snippets.json": "acc0a064d5036619032407d65ce5dacd68bc701179c5ffa82ae2391d38aedb4b",
     "examples/README.md": "e65e8841469f1e5e3804778f2079752f09e3ca80817625ecc5dd2cd1e78fe3d3",
-    "examples/package.json": "82ad715e99346e5ea3ed9b36158a8064902f3461efa4e8255e097e770ebd3510",
+    "examples/package.json": "d2e262a24f263a5401c67f151bde8329dae4f834a695c06c31ef5f8180a2e103",
     "examples/src/index.ts": "87594814df2f33342997004e4fab82e78f3b5524562d48b58410dc81b3f03db9",
     "examples/tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63",
-    "package.json": "a0358330b1d9e75e659d1b033132eabe16972aa0206acacddc2f8f7da38668ba",
+    "package.json": "c8333077abf28d3ca4f7773c866a11d55d97589b87a0720a62f8e9bdb18cdb22",
     "prettier.config.js": "2fe33fda52344779fcf235afa8152cfd356880dc3161da09403dc26231bc72d9",
     "scripts/prepublish.sh": "651cd87546cc25d69210f55dc4310d47007c53b719da1da8b3bd9acb098defcf",
     "src/http/client.ts": "031aefbfda9b27c903a0bed6d0a11e271d6bfed9a8c179ced9511dd72b21d45c",
@@ -547,7 +548,7 @@
     "src/http/serialization/header-serializer.ts": "7409385d6841c188c50e08082d661111e89ed843f2954de973d291c95e948a38",
     "src/http/serialization/path-serializer.ts": "e6f269f8d87aa3e3119e300899b118a7b03a3fe22c738b19a8ecfca2e750c91d",
     "src/http/serialization/query-serializer.ts": "3a17740986421462d63a55e3b869ef5bb571a96e7077aec965b63f9a19705d47",
-    "src/http/transport/request-builder.ts": "93cae3c8d821180ceea79877685433217b1c3dcf583641116599bad8e26e02cf",
+    "src/http/transport/request-builder.ts": "cede3eceb887141299c99790732db1283c89f42ff1bd030f3772e33fae4cafb9",
     "src/http/transport/request-fetch-adapter.ts": "b0450435eb0e943c6094438ff471cc3a2e138e046eb7724c5576aeba7dd4d938",
     "src/http/transport/request.ts": "9f2329868fd0c261a48d3519326c8d89292bdfd08d45c62f3bcfe29e178842bc",
     "src/http/transport/transport-hook-adapter.ts": "97e375180a5ffe6328cbea3d84fce1f21b418ca8fbf81dcdb4a01579ca968ee1",
