@@ -12,9 +12,8 @@ export const topUpEsimOkResponseProfile = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {TopUpEsimOkResponseProfile} topUpEsimOkResponseProfile
- * @property {string} - ID of the eSIM
+ * @typedef {TopUpEsimOkResponseProfile} topUpEsimOkResponseProfile
+ * @property {string} iccid - ID of the eSIM
  */
 export type TopUpEsimOkResponseProfile = z.infer<typeof topUpEsimOkResponseProfile>;
 

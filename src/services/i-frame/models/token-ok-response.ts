@@ -12,9 +12,8 @@ export const tokenOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {TokenOkResponse} tokenOkResponse
- * @property {string} - The generated token
+ * @typedef {TokenOkResponse} tokenOkResponse
+ * @property {string} token - The generated token
  */
 export type TokenOkResponse = z.infer<typeof tokenOkResponse>;
 

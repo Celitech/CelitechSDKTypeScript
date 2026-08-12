@@ -12,9 +12,8 @@ export const purchasesEsim = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {PurchasesEsim} purchasesEsim
- * @property {string} - ID of the eSIM
+ * @typedef {PurchasesEsim} purchasesEsim
+ * @property {string} iccid - ID of the eSIM
  */
 export type PurchasesEsim = z.infer<typeof purchasesEsim>;
 

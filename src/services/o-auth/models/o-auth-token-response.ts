@@ -13,10 +13,9 @@ export const oAuthTokenResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {OAuthTokenResponse} oAuthTokenResponse
- * @property {string}
- * @property {number}
+ * @typedef {OAuthTokenResponse} oAuthTokenResponse
+ * @property {string} accessToken
+ * @property {number} expiresIn
  */
 export type OAuthTokenResponse = z.infer<typeof oAuthTokenResponse>;
 

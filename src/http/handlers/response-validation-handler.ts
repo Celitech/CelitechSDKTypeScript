@@ -78,7 +78,6 @@ export class ResponseValidationHandler implements RequestHandler {
       [ContentType.Image]: this.decodeFile,
       [ContentType.MultipartFormData]: this.decodeMultipartFormData,
       [ContentType.Text]: this.decodeText,
-      [ContentType.Xml]: this.decodeText,
       [ContentType.FormUrlEncoded]: this.decodeFormUrlEncoded,
       [ContentType.EventStream]: this.decodeEventStream,
     };
@@ -199,7 +198,7 @@ export class ResponseValidationHandler implements RequestHandler {
    */
   private validate<T>(request: Request, response: ResponseDefinition, data: any): T {
     if (request.config.validation?.responseValidation ?? true) {
-      return response.schema.parse(data);
+      return response.schema.parse(data) as T;
     }
     return data;
   }

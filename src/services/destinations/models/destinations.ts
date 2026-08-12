@@ -15,12 +15,11 @@ export const destinations = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {Destinations} destinations
- * @property {string} - Name of the destination
- * @property {string} - ISO3 representation of the destination
- * @property {string} - ISO2 representation of the destination
- * @property {string[]} - This array indicates the geographical area covered by a specific destination. If the destination represents a single country, the array will include that country. However, if the destination represents a broader regional scope, the array will be populated with the names of the countries belonging to that region.
+ * @typedef {Destinations} destinations
+ * @property {string} name - Name of the destination
+ * @property {string} destination - ISO3 representation of the destination
+ * @property {string} destinationIso2 - ISO2 representation of the destination
+ * @property {string[]} supportedCountries - This array indicates the geographical area covered by a specific destination. If the destination represents a single country, the array will include that country. However, if the destination represents a broader regional scope, the array will be populated with the names of the countries belonging to that region.
  */
 export type Destinations = z.infer<typeof destinations>;
 

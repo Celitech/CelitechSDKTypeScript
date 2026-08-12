@@ -14,11 +14,10 @@ export const createPurchaseOkResponseProfile = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {CreatePurchaseOkResponseProfile} createPurchaseOkResponseProfile
- * @property {string} - ID of the eSIM
- * @property {string} - QR Code of the eSIM as base64
- * @property {string} - Manual Activation Code of the eSIM
+ * @typedef {CreatePurchaseOkResponseProfile} createPurchaseOkResponseProfile
+ * @property {string} iccid - ID of the eSIM
+ * @property {string} activationCode - QR Code of the eSIM as base64
+ * @property {string} manualActivationCode - Manual Activation Code of the eSIM
  */
 export type CreatePurchaseOkResponseProfile = z.infer<typeof createPurchaseOkResponseProfile>;
 

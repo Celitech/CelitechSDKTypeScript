@@ -14,11 +14,10 @@ export const history = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {History} history
- * @property {string} - The status of the eSIM at a given time, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
- * @property {string} - The date when the eSIM status changed in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {number} - Epoch value representing the date when the eSIM status changed
+ * @typedef {History} history
+ * @property {string} status - The status of the eSIM at a given time, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
+ * @property {string} statusDate - The date when the eSIM status changed in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} date - Epoch value representing the date when the eSIM status changed
  */
 export type History = z.infer<typeof history>;
 
