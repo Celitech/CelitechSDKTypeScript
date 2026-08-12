@@ -31,21 +31,20 @@ export const purchases = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {Purchases} purchases
- * @property {string} - ID of the purchase
- * @property {string} - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {string} - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {number} - Duration of the package in days. Possible values are 1, 2, 7, 14, 30, or 90. `null` for unlimited (date-based) packages.
- * @property {string} - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {number} - Epoch value representing the start time of the package's validity
- * @property {number} - Epoch value representing the end time of the package's validity
- * @property {number} - Epoch value representing the date of creation of the purchase
- * @property {Package_}
- * @property {PurchasesEsim}
- * @property {string} - The `source` indicates whether the purchase was made from the API, dashboard, landing-page, promo-page or iframe. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
- * @property {string} - The `purchaseType` indicates whether this is the initial purchase that creates the eSIM (First Purchase) or a subsequent top-up on an existing eSIM (Top-up Purchase).
- * @property {string} - The `referenceId` that was provided by the partner during the purchase or top-up flow. This identifier can be used for analytics and debugging purposes.
+ * @typedef {Purchases} purchases
+ * @property {string} id - ID of the purchase
+ * @property {string} startDate - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {string} endDate - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} duration - Duration of the package in days. Possible values are 1, 2, 7, 14, 30, or 90. `null` for unlimited (date-based) packages.
+ * @property {string} createdDate - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} startTime - Epoch value representing the start time of the package's validity
+ * @property {number} endTime - Epoch value representing the end time of the package's validity
+ * @property {number} createdAt - Epoch value representing the date of creation of the purchase
+ * @property {Package_} package
+ * @property {PurchasesEsim} esim
+ * @property {string} source - The `source` indicates whether the purchase was made from the API, dashboard, landing-page, promo-page or iframe. For purchases made before September 8, 2023, the value will be displayed as 'Not available'.
+ * @property {string} purchaseType - The `purchaseType` indicates whether this is the initial purchase that creates the eSIM (First Purchase) or a subsequent top-up on an existing eSIM (Top-up Purchase).
+ * @property {string} referenceId - The `referenceId` that was provided by the partner during the purchase or top-up flow. This identifier can be used for analytics and debugging purposes.
  */
 export type Purchases = z.infer<typeof purchases>;
 

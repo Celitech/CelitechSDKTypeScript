@@ -18,15 +18,14 @@ export const getEsimOkResponseEsim = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {GetEsimOkResponseEsim} getEsimOkResponseEsim
- * @property {string} - ID of the eSIM
- * @property {string} - SM-DP+ Address
- * @property {string} - QR Code of the eSIM as base64
- * @property {string} - The manual activation code
- * @property {string} - Status of the eSIM, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
- * @property {string} - Status of the eSIM connectivity, possible values are 'ACTIVE' or 'NOT_ACTIVE'
- * @property {boolean} - Indicates whether the eSIM is currently eligible for a top-up. This flag should be checked before attempting a top-up request.
+ * @typedef {GetEsimOkResponseEsim} getEsimOkResponseEsim
+ * @property {string} iccid - ID of the eSIM
+ * @property {string} smdpAddress - SM-DP+ Address
+ * @property {string} activationCode - QR Code of the eSIM as base64
+ * @property {string} manualActivationCode - The manual activation code
+ * @property {string} status - Status of the eSIM, possible values are 'RELEASED', 'DOWNLOADED', 'INSTALLED', 'ENABLED', 'DELETED', or 'ERROR'
+ * @property {string} connectivityStatus - Status of the eSIM connectivity, possible values are 'ACTIVE' or 'NOT_ACTIVE'
+ * @property {boolean} isTopUpAllowed - Indicates whether the eSIM is currently eligible for a top-up. This flag should be checked before attempting a top-up request.
  */
 export type GetEsimOkResponseEsim = z.infer<typeof getEsimOkResponseEsim>;
 

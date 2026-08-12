@@ -13,9 +13,8 @@ export const getEsimDeviceOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {GetEsimDeviceOkResponse} getEsimDeviceOkResponse
- * @property {Device}
+ * @typedef {GetEsimDeviceOkResponse} getEsimDeviceOkResponse
+ * @property {Device} device
  */
 export type GetEsimDeviceOkResponse = z.infer<typeof getEsimDeviceOkResponse>;
 

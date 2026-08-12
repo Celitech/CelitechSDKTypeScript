@@ -15,12 +15,11 @@ export const oAuthTokenRequest = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {OAuthTokenRequest} oAuthTokenRequest
- * @property {GrantType}
- * @property {string}
- * @property {string}
- * @property {string}
+ * @typedef {OAuthTokenRequest} oAuthTokenRequest
+ * @property {GrantType} grantType
+ * @property {string} clientId
+ * @property {string} clientSecret
+ * @property {string} scope
  */
 export type OAuthTokenRequest = z.infer<typeof oAuthTokenRequest>;
 

@@ -19,16 +19,15 @@ export const packages = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {Packages} packages
- * @property {string} - ID of the package
- * @property {string} - ISO3 representation of the package's destination.
- * @property {string} - ISO2 representation of the package's destination.
- * @property {number} - Size of the package in Bytes. A value of `-1` indicates an unlimited package.
- * @property {number} - Size of the package in GB. A value of `-1` indicates an unlimited (date-based) package.
- * @property {number} - Min number of days for the package
- * @property {number} - Max number of days for the package
- * @property {number} - Price of the package in cents
+ * @typedef {Packages} packages
+ * @property {string} id - ID of the package
+ * @property {string} destination - ISO3 representation of the package's destination.
+ * @property {string} destinationIso2 - ISO2 representation of the package's destination.
+ * @property {number} dataLimitInBytes - Size of the package in Bytes. A value of `-1` indicates an unlimited package.
+ * @property {number} dataLimitInGb - Size of the package in GB. A value of `-1` indicates an unlimited (date-based) package.
+ * @property {number} minDays - Min number of days for the package
+ * @property {number} maxDays - Max number of days for the package
+ * @property {number} priceInCents - Price of the package in cents
  */
 export type Packages = z.infer<typeof packages>;
 
