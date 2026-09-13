@@ -16,13 +16,12 @@ export const editPurchaseOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {EditPurchaseOkResponse} editPurchaseOkResponse
- * @property {string} - ID of the purchase
- * @property {string} - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {string} - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {number} - Epoch value representing the new start time of the package's validity
- * @property {number} - Epoch value representing the new end time of the package's validity
+ * @typedef {EditPurchaseOkResponse} editPurchaseOkResponse
+ * @property {string} purchaseId - ID of the purchase
+ * @property {string} newStartDate - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {string} newEndDate - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} newStartTime - Epoch value representing the new start time of the package's validity
+ * @property {number} newEndTime - Epoch value representing the new end time of the package's validity
  */
 export type EditPurchaseOkResponse = z.infer<typeof editPurchaseOkResponse>;
 

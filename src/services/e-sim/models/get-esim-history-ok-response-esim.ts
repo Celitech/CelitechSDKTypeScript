@@ -14,10 +14,9 @@ export const getEsimHistoryOkResponseEsim = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {GetEsimHistoryOkResponseEsim} getEsimHistoryOkResponseEsim
- * @property {string} - ID of the eSIM
- * @property {History[]}
+ * @typedef {GetEsimHistoryOkResponseEsim} getEsimHistoryOkResponseEsim
+ * @property {string} iccid - ID of the eSIM
+ * @property {History[]} history
  */
 export type GetEsimHistoryOkResponseEsim = z.infer<typeof getEsimHistoryOkResponseEsim>;
 
