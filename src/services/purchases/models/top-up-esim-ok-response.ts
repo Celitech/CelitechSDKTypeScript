@@ -25,10 +25,9 @@ export const topUpEsimOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {TopUpEsimOkResponse} topUpEsimOkResponse
- * @property {TopUpEsimOkResponsePurchase}
- * @property {TopUpEsimOkResponseProfile}
+ * @typedef {TopUpEsimOkResponse} topUpEsimOkResponse
+ * @property {TopUpEsimOkResponsePurchase} purchase
+ * @property {TopUpEsimOkResponseProfile} profile
  */
 export type TopUpEsimOkResponse = z.infer<typeof topUpEsimOkResponse>;
 
