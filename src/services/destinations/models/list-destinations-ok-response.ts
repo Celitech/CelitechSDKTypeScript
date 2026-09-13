@@ -18,9 +18,8 @@ export const listDestinationsOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {ListDestinationsOkResponse} listDestinationsOkResponse
- * @property {Destinations[]}
+ * @typedef {ListDestinationsOkResponse} listDestinationsOkResponse
+ * @property {Destinations[]} destinations
  */
 export type ListDestinationsOkResponse = z.infer<typeof listDestinationsOkResponse>;
 

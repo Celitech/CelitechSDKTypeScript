@@ -25,10 +25,9 @@ export const createPurchaseOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {CreatePurchaseOkResponse} createPurchaseOkResponse
- * @property {CreatePurchaseOkResponsePurchase}
- * @property {CreatePurchaseOkResponseProfile}
+ * @typedef {CreatePurchaseOkResponse} createPurchaseOkResponse
+ * @property {CreatePurchaseOkResponsePurchase} purchase
+ * @property {CreatePurchaseOkResponseProfile} profile
  */
 export type CreatePurchaseOkResponse = z.infer<typeof createPurchaseOkResponse>;
 

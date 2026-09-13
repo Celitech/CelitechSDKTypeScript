@@ -15,12 +15,11 @@ export const device = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {Device} device
- * @property {string} - Name of the OEM
- * @property {string} - Name of the Device
- * @property {string} - Model of the Device
- * @property {string} - Serial Number of the eSIM
+ * @typedef {Device} device
+ * @property {string} oem - Name of the OEM
+ * @property {string} hardwareName - Name of the Device
+ * @property {string} hardwareModel - Model of the Device
+ * @property {string} eid - Serial Number of the eSIM
  */
 export type Device = z.infer<typeof device>;
 

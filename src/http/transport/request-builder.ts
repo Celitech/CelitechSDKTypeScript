@@ -35,7 +35,6 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
         clientId: '',
         clientSecret: '',
         retry: {
-          attempts: 3,
           delayMs: 150,
           maxDelayMs: 5000,
           backoffFactor: 2,
@@ -56,7 +55,7 @@ export class RequestBuilder<Page extends unknown[] = unknown[]> {
     };
     this.addHeaderParam({
       key: 'User-Agent',
-      value: 'postman-codegen/1.7.0 celitech-sdk/2.0.6 (typescript)',
+      value: 'postman-codegen/2.6.0 celitech-sdk/2.0.6 (typescript)',
     });
   }
 
