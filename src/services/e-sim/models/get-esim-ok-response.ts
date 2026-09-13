@@ -18,9 +18,8 @@ export const getEsimOkResponse = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {GetEsimOkResponse} getEsimOkResponse
- * @property {GetEsimOkResponseEsim}
+ * @typedef {GetEsimOkResponse} getEsimOkResponse
+ * @property {GetEsimOkResponseEsim} esim
  */
 export type GetEsimOkResponse = z.infer<typeof getEsimOkResponse>;
 

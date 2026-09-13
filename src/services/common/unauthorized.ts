@@ -21,14 +21,22 @@ export class Unauthorized extends ThrowableError {
     protected response?: unknown,
   ) {
     super(message);
+  }
 
-    const parsedResponse = unauthorizedResponse.parse(response);
+  static from(message: string, response?: unknown): Unauthorized {
+    const error = new Unauthorized(message, response);
+    const result = unauthorizedResponse.safeParse(response);
+    const parsedResponse = (result.success ? result.data : response || {}) as z.infer<
+      typeof unauthorizedResponse
+    >;
 
-    this.message = parsedResponse.message || '';
+    error.message = parsedResponse.message || '';
+
+    return error;
   }
 
   public throw() {
-    const error = new Unauthorized(this.message, this.response);
+    const error = Unauthorized.from(this.message, this.response);
     error.metadata = this.metadata;
     throw error;
   }
