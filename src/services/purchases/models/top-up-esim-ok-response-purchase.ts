@@ -18,15 +18,14 @@ export const topUpEsimOkResponsePurchase = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {TopUpEsimOkResponsePurchase} topUpEsimOkResponsePurchase
- * @property {string} - ID of the purchase
- * @property {string} - ID of the package
- * @property {string} - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {string} - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {string} - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
- * @property {number} - Epoch value representing the start time of the package's validity
- * @property {number} - Epoch value representing the end time of the package's validity
+ * @typedef {TopUpEsimOkResponsePurchase} topUpEsimOkResponsePurchase
+ * @property {string} id - ID of the purchase
+ * @property {string} packageId - ID of the package
+ * @property {string} startDate - Start date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {string} endDate - End date of the package's validity in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {string} createdDate - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @property {number} startTime - Epoch value representing the start time of the package's validity
+ * @property {number} endTime - Epoch value representing the end time of the package's validity
  */
 export type TopUpEsimOkResponsePurchase = z.infer<typeof topUpEsimOkResponsePurchase>;
 

@@ -35,6 +35,42 @@
       "post": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.iFrame.token();\n\n  console.log(data);\n})();\n"
     }
   },
+  "methodResponses": {
+    "/destinations": {
+      "get": "{ 'destinations': [{ 'name': 'test-value', 'destination': 'test-value', 'destinationIso2': 'test-value', 'supportedCountries': ['test-value'] }] }"
+    },
+    "/packages": {
+      "get": "{ 'packages': [{ 'id': 'test-value', 'destination': 'test-value', 'destinationIso2': 'test-value', 'dataLimitInBytes': 1, 'dataLimitInGb': 1, 'minDays': 1, 'maxDays': 1, 'priceInCents': 1 }], 'afterCursor': 'test-value' }"
+    },
+    "/purchases/v2": {
+      "post": "[{ 'purchase': { 'id': 'test-value', 'packageId': 'test-value', 'createdDate': 'test-value' }, 'profile': { 'iccid': 'test-value', 'activationCode': 'test-value', 'manualActivationCode': 'test-value', 'iosActivationLink': 'test-value', 'androidActivationLink': 'test-value' } }]"
+    },
+    "/purchases": {
+      "get": "{ 'purchases': [{ 'id': 'test-value', 'startDate': 'test-value', 'endDate': 'test-value', 'duration': 1, 'createdDate': 'test-value', 'startTime': 1, 'endTime': 1, 'createdAt': 1, 'package': { 'id': 'test-value', 'dataLimitInBytes': 1, 'dataLimitInGb': 1, 'destination': 'test-value', 'destinationIso2': 'test-value', 'destinationName': 'test-value', 'priceInCents': 1 }, 'esim': { 'iccid': 'test-value' }, 'source': 'test-value', 'purchaseType': 'test-value', 'referenceId': 'test-value' }], 'afterCursor': 'test-value' }",
+      "post": "{ 'purchase': { 'id': 'test-value', 'packageId': 'test-value', 'startDate': 'test-value', 'endDate': 'test-value', 'createdDate': 'test-value', 'startTime': 1, 'endTime': 1 }, 'profile': { 'iccid': 'test-value', 'activationCode': 'test-value', 'manualActivationCode': 'test-value' } }"
+    },
+    "/purchases/topup": {
+      "post": "{ 'purchase': { 'id': 'test-value', 'packageId': 'test-value', 'startDate': 'test-value', 'endDate': 'test-value', 'createdDate': 'test-value', 'startTime': 1, 'endTime': 1 }, 'profile': { 'iccid': 'test-value' } }"
+    },
+    "/purchases/edit": {
+      "post": "{ 'purchaseId': 'test-value', 'newStartDate': 'test-value', 'newEndDate': 'test-value', 'newStartTime': 1, 'newEndTime': 1 }"
+    },
+    "/purchases/{purchaseId}/consumption": {
+      "get": "{ 'dataUsageRemainingInBytes': 1, 'dataUsageRemainingInGb': 1, 'status': 'test-value' }"
+    },
+    "/esim": {
+      "get": "{ 'esim': { 'iccid': 'test-value', 'smdpAddress': 'test-value', 'activationCode': 'test-value', 'manualActivationCode': 'test-value', 'status': 'test-value', 'connectivityStatus': 'test-value', 'isTopUpAllowed': true } }"
+    },
+    "/esim/{iccid}/device": {
+      "get": "{ 'device': { 'oem': 'test-value', 'hardwareName': 'test-value', 'hardwareModel': 'test-value', 'eid': 'test-value' } }"
+    },
+    "/esim/{iccid}/history": {
+      "get": "{ 'esim': { 'iccid': 'test-value', 'history': [{ 'status': 'test-value', 'statusDate': 'test-value', 'date': 1 }] } }"
+    },
+    "/iframe/token": {
+      "post": "{ 'token': 'test-value' }"
+    }
+  },
   "example": "import { Celitech } from 'celitech-sdk';\n\n(async () => {\n  const celitech = new Celitech({\n\tclientId: 'CLIENT_ID',\n\tclientSecret: 'CLIENT_SECRET',\n});\n\n  const data = await celitech.destinations.listDestinations();\n\n  console.log(data);\n})();\n",
   "authentication": {}
 }

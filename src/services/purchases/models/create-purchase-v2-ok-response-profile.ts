@@ -16,13 +16,12 @@ export const createPurchaseV2OkResponseProfile = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {CreatePurchaseV2OkResponseProfile} createPurchaseV2OkResponseProfile
- * @property {string} - ID of the eSIM
- * @property {string} - QR Code of the eSIM as base64
- * @property {string} - Manual Activation Code of the eSIM
- * @property {string} - iOS Activation Link of the eSIM
- * @property {string} - Android Activation Link of the eSIM
+ * @typedef {CreatePurchaseV2OkResponseProfile} createPurchaseV2OkResponseProfile
+ * @property {string} iccid - ID of the eSIM
+ * @property {string} activationCode - QR Code of the eSIM as base64
+ * @property {string} manualActivationCode - Manual Activation Code of the eSIM
+ * @property {string} iosActivationLink - iOS Activation Link of the eSIM
+ * @property {string} androidActivationLink - Android Activation Link of the eSIM
  */
 export type CreatePurchaseV2OkResponseProfile = z.infer<typeof createPurchaseV2OkResponseProfile>;
 
