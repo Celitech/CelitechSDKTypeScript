@@ -16,13 +16,12 @@ export const editPurchaseRequest = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {EditPurchaseRequest} editPurchaseRequest
- * @property {string} - ID of the purchase
- * @property {string} - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
- * @property {string} - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
- * @property {number} - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months.
- * @property {number} - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time.
+ * @typedef {EditPurchaseRequest} editPurchaseRequest
+ * @property {string} purchaseId - ID of the purchase
+ * @property {string} startDate - Start date of the package's validity in the format 'yyyy-MM-dd'. This date can be set to the current day or any day within the next 12 months.
+ * @property {string} endDate - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
+ * @property {number} startTime - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months.
+ * @property {number} endTime - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time.
  */
 export type EditPurchaseRequest = z.infer<typeof editPurchaseRequest>;
 

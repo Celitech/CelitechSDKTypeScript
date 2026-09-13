@@ -21,14 +21,22 @@ export class BadRequest extends ThrowableError {
     protected response?: unknown,
   ) {
     super(message);
+  }
 
-    const parsedResponse = badRequestResponse.parse(response);
+  static from(message: string, response?: unknown): BadRequest {
+    const error = new BadRequest(message, response);
+    const result = badRequestResponse.safeParse(response);
+    const parsedResponse = (result.success ? result.data : response || {}) as z.infer<
+      typeof badRequestResponse
+    >;
 
-    this.message = parsedResponse.message || '';
+    error.message = parsedResponse.message || '';
+
+    return error;
   }
 
   public throw() {
-    const error = new BadRequest(this.message, this.response);
+    const error = BadRequest.from(this.message, this.response);
     error.metadata = this.metadata;
     throw error;
   }

@@ -14,11 +14,10 @@ export const createPurchaseV2OkResponsePurchase = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {CreatePurchaseV2OkResponsePurchase} createPurchaseV2OkResponsePurchase
- * @property {string} - ID of the purchase
- * @property {string} - ID of the package
- * @property {string} - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
+ * @typedef {CreatePurchaseV2OkResponsePurchase} createPurchaseV2OkResponsePurchase
+ * @property {string} id - ID of the purchase
+ * @property {string} packageId - ID of the package
+ * @property {string} createdDate - Creation date of the purchase in the format 'yyyy-MM-ddThh:mm:ssZZ'
  */
 export type CreatePurchaseV2OkResponsePurchase = z.infer<typeof createPurchaseV2OkResponsePurchase>;
 
