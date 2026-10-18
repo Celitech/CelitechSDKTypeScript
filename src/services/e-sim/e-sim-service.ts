@@ -6,9 +6,8 @@ import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { ThrowableError } from '../../http/errors/throwable-error';
 import { Environment } from '../../http/environment';
 import { GetEsimOkResponse, getEsimOkResponseResponse } from './models/get-esim-ok-response';
-import { BadRequest } from '../common/bad-request';
-import { Unauthorized } from '../common/unauthorized';
-import { GetEsimParams } from './request-params';
+import { ErrorResponse } from '../common/error-response';
+import { GetEsimParams, SuspendEsimParams } from './request-params';
 import {
   GetEsimDeviceOkResponse,
   getEsimDeviceOkResponseResponse,
@@ -17,6 +16,10 @@ import {
   GetEsimHistoryOkResponse,
   getEsimHistoryOkResponseResponse,
 } from './models/get-esim-history-ok-response';
+import {
+  SuspendEsimOkResponse,
+  suspendEsimOkResponseResponse,
+} from './models/suspend-esim-ok-response';
 
 /**
  * Service class for ESimService operations.
@@ -29,6 +32,8 @@ export class ESimService extends BaseService {
   protected getEsimDeviceConfig?: Partial<SdkConfig>;
 
   protected getEsimHistoryConfig?: Partial<SdkConfig>;
+
+  protected suspendEsimConfig?: Partial<SdkConfig>;
 
   /**
    * Sets method-level configuration for getEsim.
@@ -61,6 +66,16 @@ export class ESimService extends BaseService {
   }
 
   /**
+   * Sets method-level configuration for suspendEsim.
+   * @param config - Partial configuration to override service-level defaults
+   * @returns This service instance for method chaining
+   */
+  setSuspendEsimConfig(config: Partial<SdkConfig>): this {
+    this.suspendEsimConfig = config;
+    return this;
+  }
+
+  /**
    * Get eSIM
    * @param {string} params.iccid - ID of the eSIM
    * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
@@ -87,14 +102,29 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
       })
       .addQueryParam({
         key: 'iccid',
@@ -130,14 +160,29 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
       })
       .addPathParam({
         key: 'iccid',
@@ -173,14 +218,29 @@ export class ESimService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
       })
       .addPathParam({
         key: 'iccid',
@@ -188,5 +248,70 @@ export class ESimService extends BaseService {
       })
       .build();
     return this.client.callDirect<GetEsimHistoryOkResponse>(request);
+  }
+
+  /**
+   * Suspends an eSIM to prevent abuse. All of the eSIM's packages are terminated and its connectivity is switched off. The eSIM is not refunded: the charge stays.
+   * @param {string} iccid - ID of the eSIM
+   * @param {string} [params.idempotencyKey] - Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces.
+   * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<SuspendEsimOkResponse>>} - Successful Response
+   */
+  async suspendEsim(
+    iccid: string,
+    params?: SuspendEsimParams,
+    requestConfig?: Partial<SdkConfig>,
+  ): Promise<SuspendEsimOkResponse> {
+    const resolvedConfig = this.getResolvedConfig(this.suspendEsimConfig, requestConfig);
+    z.object({ idempotencyKey: z.string().optional() }).parse(params ?? {});
+    const request = new RequestBuilder()
+      .setConfig(resolvedConfig)
+      .setBaseUrl(resolvedConfig)
+      .setMethod('POST')
+      .setPath('/esim/{iccid}/suspend')
+      .setRequestSchema(z.any())
+      .setScopes([])
+      .setTokenManager(this.tokenManager)
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: suspendEsimOkResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 400,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
+      })
+      .addPathParam({
+        key: 'iccid',
+        value: iccid,
+      })
+      .addHeaderParam({
+        key: 'Idempotency-Key',
+        value: params?.idempotencyKey,
+      })
+      .build();
+    return this.client.callDirect<SuspendEsimOkResponse>(request);
   }
 }

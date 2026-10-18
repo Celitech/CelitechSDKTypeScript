@@ -13,7 +13,11 @@ export const topUpEsimRequest = z.lazy(() => {
     endDate: z.string().optional(),
     duration: z.number().optional(),
     email: z.string().optional(),
-    referenceId: z.string().optional(),
+    referenceId: z
+      .string()
+      .max(255)
+      .regex(/^[a-zA-Z0-9\-_.@+]+$/)
+      .optional(),
     emailBrand: z.string().optional(),
     startTime: z.number().optional(),
     endTime: z.number().optional(),
@@ -28,7 +32,7 @@ export const topUpEsimRequest = z.lazy(() => {
  * @property {string} endDate - End date of the package's validity in the format 'yyyy-MM-dd'. End date can be maximum 90 days after Start date.
  * @property {number} duration - Duration of the package in days. Available values are 1, 2, 7, 14, 30, or 90. Either provide startDate/endDate or duration. Not supported for unlimited packages (`dataLimitInGB` = -1), which are date-based — provide startDate/endDate instead.
  * @property {string} email - Email address where the purchase confirmation email will be sent (excluding QR Code & activation steps).
- * @property {string} referenceId - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
+ * @property {string} referenceId - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes. Letters, digits, `-`, `_`, `.`, `@` and `+` are allowed (so an email address works), up to 255 characters.
  * @property {string} emailBrand - Customize the email subject brand. The `emailBrand` parameter cannot exceed 25 characters in length and must contain only letters, numbers, and spaces. This feature is available to platforms with Diamond tier only.
  * @property {number} startTime - Epoch value representing the start time of the package's validity. This timestamp can be set to the current time or any time within the next 12 months.
  * @property {number} endTime - Epoch value representing the end time of the package's validity. End time can be maximum 90 days after Start time.
@@ -49,7 +53,11 @@ export const topUpEsimRequestResponse = z.lazy(() => {
       endDate: z.string().optional(),
       duration: z.number().optional(),
       email: z.string().optional(),
-      referenceId: z.string().optional(),
+      referenceId: z
+        .string()
+        .max(255)
+        .regex(/^[a-zA-Z0-9\-_.@+]+$/)
+        .optional(),
       emailBrand: z.string().optional(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
@@ -82,7 +90,11 @@ export const topUpEsimRequestRequest = z.lazy(() => {
       endDate: z.string().optional(),
       duration: z.number().optional(),
       email: z.string().optional(),
-      referenceId: z.string().optional(),
+      referenceId: z
+        .string()
+        .max(255)
+        .regex(/^[a-zA-Z0-9\-_.@+]+$/)
+        .optional(),
       emailBrand: z.string().optional(),
       startTime: z.number().optional(),
       endTime: z.number().optional(),
