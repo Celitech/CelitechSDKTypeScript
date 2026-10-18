@@ -56,8 +56,7 @@ export class OAuthTokenManager {
   public async getToken(scopes: Set<string>, config: SdkConfig): Promise<OAuthToken> {
     if (
       this.token?.hasAllScopes(scopes) &&
-      this.token?.expiresAt &&
-      this.token.expiresAt - Date.now() > 5000
+      (this.token.expiresAt == null || this.token.expiresAt - Date.now() > 5000)
     ) {
       return this.token;
     }

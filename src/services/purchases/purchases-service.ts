@@ -13,13 +13,18 @@ import {
   CreatePurchaseV2OkResponse,
   createPurchaseV2OkResponseResponse,
 } from './models/create-purchase-v2-ok-response';
-import { BadRequest } from '../common/bad-request';
-import { Unauthorized } from '../common/unauthorized';
+import { ErrorResponse } from '../common/error-response';
+import {
+  CreatePurchaseParams,
+  CreatePurchaseV2Params,
+  EditPurchaseParams,
+  ListPurchasesParams,
+  TopUpEsimParams,
+} from './request-params';
 import {
   ListPurchasesOkResponse,
   listPurchasesOkResponseResponse,
 } from './models/list-purchases-ok-response';
-import { ListPurchasesParams } from './request-params';
 import {
   CreatePurchaseRequest,
   createPurchaseRequestRequest,
@@ -120,14 +125,17 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.
+   * @param {string} [params.idempotencyKey] - Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces.
    * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<CreatePurchaseV2OkResponse[]>>} - Successful Response
    */
   async createPurchaseV2(
     body: CreatePurchaseV2Request,
+    params?: CreatePurchaseV2Params,
     requestConfig?: Partial<SdkConfig>,
   ): Promise<CreatePurchaseV2OkResponse[]> {
     const resolvedConfig = this.getResolvedConfig(this.createPurchaseV2Config, requestConfig);
+    z.object({ idempotencyKey: z.string().optional() }).parse(params ?? {});
     const request = new RequestBuilder()
       .setConfig(resolvedConfig)
       .setBaseUrl(resolvedConfig)
@@ -143,14 +151,33 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
+      })
+      .addHeaderParam({
+        key: 'Idempotency-Key',
+        value: params?.idempotencyKey,
       })
       .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
@@ -205,14 +232,29 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
       })
       .addQueryParam({
         key: 'purchaseId',
@@ -260,14 +302,17 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint is used to purchase a new eSIM by providing the package details.
+   * @param {string} [params.idempotencyKey] - Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces.
    * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<CreatePurchaseOkResponse>>} - Successful Response
    */
   async createPurchase(
     body: CreatePurchaseRequest,
+    params?: CreatePurchaseParams,
     requestConfig?: Partial<SdkConfig>,
   ): Promise<CreatePurchaseOkResponse> {
     const resolvedConfig = this.getResolvedConfig(this.createPurchaseConfig, requestConfig);
+    z.object({ idempotencyKey: z.string().optional() }).parse(params ?? {});
     const request = new RequestBuilder()
       .setConfig(resolvedConfig)
       .setBaseUrl(resolvedConfig)
@@ -283,14 +328,33 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
+      })
+      .addHeaderParam({
+        key: 'Idempotency-Key',
+        value: params?.idempotencyKey,
       })
       .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
@@ -300,14 +364,17 @@ export class PurchasesService extends BaseService {
 
   /**
    * This endpoint is used to top-up an existing eSIM with the previously associated destination by providing its ICCID and package details. To determine if an eSIM can be topped up, use the Get eSIM endpoint, which returns the `isTopUpAllowed` flag.
+   * @param {string} [params.idempotencyKey] - Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces.
    * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<TopUpEsimOkResponse>>} - Successful Response
    */
   async topUpEsim(
     body: TopUpEsimRequest,
+    params?: TopUpEsimParams,
     requestConfig?: Partial<SdkConfig>,
   ): Promise<TopUpEsimOkResponse> {
     const resolvedConfig = this.getResolvedConfig(this.topUpEsimConfig, requestConfig);
+    z.object({ idempotencyKey: z.string().optional() }).parse(params ?? {});
     const request = new RequestBuilder()
       .setConfig(resolvedConfig)
       .setBaseUrl(resolvedConfig)
@@ -323,14 +390,33 @@ export class PurchasesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
+      })
+      .addHeaderParam({
+        key: 'Idempotency-Key',
+        value: params?.idempotencyKey,
       })
       .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
@@ -347,14 +433,17 @@ export class PurchasesService extends BaseService {
 
 The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits.
 
+ * @param {string} [params.idempotencyKey] - Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces.
  * @param {Partial<SdkConfig>} [requestConfig] - The request configuration for retry and validation.
  * @returns {Promise<HttpResponse<EditPurchaseOkResponse>>} - Successful Response
  */
   async editPurchase(
     body: EditPurchaseRequest,
+    params?: EditPurchaseParams,
     requestConfig?: Partial<SdkConfig>,
   ): Promise<EditPurchaseOkResponse> {
     const resolvedConfig = this.getResolvedConfig(this.editPurchaseConfig, requestConfig);
+    z.object({ idempotencyKey: z.string().optional() }).parse(params ?? {});
     const request = new RequestBuilder()
       .setConfig(resolvedConfig)
       .setBaseUrl(resolvedConfig)
@@ -370,14 +459,33 @@ The end date can be extended or shortened as long as it adheres to the same pric
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
+      })
+      .addHeaderParam({
+        key: 'Idempotency-Key',
+        value: params?.idempotencyKey,
       })
       .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
@@ -411,14 +519,29 @@ The end date can be extended or shortened as long as it adheres to the same pric
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
       })
       .addPathParam({
         key: 'purchaseId',
