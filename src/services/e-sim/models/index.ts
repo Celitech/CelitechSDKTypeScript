@@ -5,3 +5,4 @@ export type { Device } from './device';
 export type { GetEsimHistoryOkResponse } from './get-esim-history-ok-response';
 export type { GetEsimHistoryOkResponseEsim } from './get-esim-history-ok-response-esim';
 export type { History } from './history';
+export type { SuspendEsimOkResponse } from './suspend-esim-ok-response';

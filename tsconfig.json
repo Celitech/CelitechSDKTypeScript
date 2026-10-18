@@ -12,7 +12,6 @@
     "noImplicitAny": true,
     "baseUrl": "./",
     "declaration": true,
-    "moduleResolution": "Node16",
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "declarationMap": true,
