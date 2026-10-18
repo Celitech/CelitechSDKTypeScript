@@ -20,9 +20,10 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 
 **Parameters**
 
-| Name | Type                                                            | Required | Description       |
-| :--- | :-------------------------------------------------------------- | :------- | :---------------- |
-| body | [CreatePurchaseV2Request](../models/CreatePurchaseV2Request.md) | ✅       | The request body. |
+| Name           | Type                                                            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body           | [CreatePurchaseV2Request](../models/CreatePurchaseV2Request.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| idempotencyKey | string                                                          | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
 
 **Return Type**
 
@@ -45,7 +46,7 @@ import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
     quantity: 1,
   };
 
-  const data = await celitech.purchases.createPurchaseV2(createPurchaseV2Request);
+  const data = await celitech.purchases.createPurchaseV2(createPurchaseV2Request, {});
 
   console.log(data);
 })();
@@ -103,9 +104,10 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 
 **Parameters**
 
-| Name | Type                                                        | Required | Description       |
-| :--- | :---------------------------------------------------------- | :------- | :---------------- |
-| body | [CreatePurchaseRequest](../models/CreatePurchaseRequest.md) | ✅       | The request body. |
+| Name           | Type                                                        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------- | :---------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body           | [CreatePurchaseRequest](../models/CreatePurchaseRequest.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| idempotencyKey | string                                                      | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
 
 **Return Type**
 
@@ -129,7 +131,7 @@ import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
   };
 
-  const data = await celitech.purchases.createPurchase(createPurchaseRequest);
+  const data = await celitech.purchases.createPurchase(createPurchaseRequest, {});
 
   console.log(data);
 })();
@@ -144,9 +146,10 @@ This endpoint is used to top-up an existing eSIM with the previously associated 
 
 **Parameters**
 
-| Name | Type                                              | Required | Description       |
-| :--- | :------------------------------------------------ | :------- | :---------------- |
-| body | [TopUpEsimRequest](../models/TopUpEsimRequest.md) | ✅       | The request body. |
+| Name           | Type                                              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------- | :------------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body           | [TopUpEsimRequest](../models/TopUpEsimRequest.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| idempotencyKey | string                                            | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
 
 **Return Type**
 
@@ -168,7 +171,7 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
     dataLimitInGb: 1,
   };
 
-  const data = await celitech.purchases.topUpEsim(topUpEsimRequest);
+  const data = await celitech.purchases.topUpEsim(topUpEsimRequest, {});
 
   console.log(data);
 })();
@@ -183,9 +186,10 @@ This endpoint allows you to modify the validity dates of an existing purchase. *
 
 **Parameters**
 
-| Name | Type                                                    | Required | Description       |
-| :--- | :------------------------------------------------------ | :------- | :---------------- |
-| body | [EditPurchaseRequest](../models/EditPurchaseRequest.md) | ✅       | The request body. |
+| Name           | Type                                                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------- | :------------------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body           | [EditPurchaseRequest](../models/EditPurchaseRequest.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| idempotencyKey | string                                                  | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
 
 **Return Type**
 
@@ -208,7 +212,7 @@ import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
     endDate: '2023-11-20',
   };
 
-  const data = await celitech.purchases.editPurchase(editPurchaseRequest);
+  const data = await celitech.purchases.editPurchase(editPurchaseRequest, {});
 
   console.log(data);
 })();
