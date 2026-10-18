@@ -14,7 +14,11 @@ export const createPurchaseV2Request = z.lazy(() => {
     duration: z.number().optional(),
     quantity: z.number().gte(1).lte(5),
     email: z.string().optional(),
-    referenceId: z.string().optional(),
+    referenceId: z
+      .string()
+      .max(255)
+      .regex(/^[a-zA-Z0-9\-_.@+]+$/)
+      .optional(),
     networkBrand: z.string().optional(),
     emailBrand: z.string().optional(),
     language: z.string().optional(),
@@ -30,7 +34,7 @@ export const createPurchaseV2Request = z.lazy(() => {
  * @property {number} duration - Duration of the package in days. Available values are 1, 2, 7, 14, 30, or 90. Either provide startDate/endDate or duration. Not supported for unlimited packages (`dataLimitInGB` = -1), which are date-based — provide startDate/endDate instead.
  * @property {number} quantity - Number of eSIMs to purchase.
  * @property {string} email - Email address where the purchase confirmation email will be sent (including QR Code & activation steps)
- * @property {string} referenceId - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes.
+ * @property {string} referenceId - An identifier provided by the partner to link this purchase to their booking or transaction for analytics and debugging purposes. Letters, digits, `-`, `_`, `.`, `@` and `+` are allowed (so an email address works), up to 255 characters.
  * @property {string} networkBrand - Customize the network brand of the issued eSIM. The `networkBrand` parameter cannot exceed 15 characters in length and must contain only letters, numbers, dots (.), ampersands (&), and spaces. This feature is available to platforms with Diamond tier only.
  * @property {string} emailBrand - Customize the email subject brand. The `emailBrand` parameter cannot exceed 25 characters in length and must contain only letters, numbers, and spaces. This feature is available to platforms with Diamond tier only.
  * @property {CreatePurchaseV2RequestLanguage} language - Language of the confirmation email sent to the customer.
@@ -52,7 +56,11 @@ export const createPurchaseV2RequestResponse = z.lazy(() => {
       duration: z.number().optional(),
       quantity: z.number().gte(1).lte(5),
       email: z.string().optional(),
-      referenceId: z.string().optional(),
+      referenceId: z
+        .string()
+        .max(255)
+        .regex(/^[a-zA-Z0-9\-_.@+]+$/)
+        .optional(),
       networkBrand: z.string().optional(),
       emailBrand: z.string().optional(),
       language: z.string().optional(),
@@ -87,7 +95,11 @@ export const createPurchaseV2RequestRequest = z.lazy(() => {
       duration: z.number().optional(),
       quantity: z.number().gte(1).lte(5),
       email: z.string().optional(),
-      referenceId: z.string().optional(),
+      referenceId: z
+        .string()
+        .max(255)
+        .regex(/^[a-zA-Z0-9\-_.@+]+$/)
+        .optional(),
       networkBrand: z.string().optional(),
       emailBrand: z.string().optional(),
       language: z.string().optional(),

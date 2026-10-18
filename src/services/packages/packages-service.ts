@@ -9,8 +9,7 @@ import {
   ListPackagesOkResponse,
   listPackagesOkResponseResponse,
 } from './models/list-packages-ok-response';
-import { BadRequest } from '../common/bad-request';
-import { Unauthorized } from '../common/unauthorized';
+import { ErrorResponse } from '../common/error-response';
 import { ListPackagesParams } from './request-params';
 
 /**
@@ -76,14 +75,29 @@ export class PackagesService extends BaseService {
         status: 200,
       })
       .addError({
-        error: BadRequest,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 400,
       })
       .addError({
-        error: Unauthorized,
+        error: ErrorResponse,
         contentType: ContentType.Json,
         status: 401,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 409,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 422,
+      })
+      .addError({
+        error: ErrorResponse,
+        contentType: ContentType.Json,
+        status: 503,
       })
       .addQueryParam({
         key: 'destination',
