@@ -71,7 +71,7 @@ export class Serializer {
       return `${encodeURIComponent(param.key || '')}=${encodeURIComponent(`${param.value}`)}`;
     }
 
-    return `${param.value}`;
+    return param.encode ? encodeURIComponent(`${param.value}`) : `${param.value}`;
   }
 
   /**

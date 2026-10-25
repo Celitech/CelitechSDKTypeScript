@@ -1,5 +1,3 @@
-import { ZodError } from 'zod';
-import { ValidationError } from '../errors/validation-error';
 import { Request } from '../transport/request';
 import { ContentType, HttpResponse, RequestHandler } from '../types';
 
@@ -48,10 +46,16 @@ export class RequestValidationHandler implements RequestHandler {
   /**
    * Validates and serializes the request body based on its content type.
    * @param request - The HTTP request to validate
-   * @throws ValidationError if Zod schema validation fails
+   * Never throws: delegates to validateBody, which still renames properties back to their wire
+   * names when the customer's serde layer is off, but never enforces constraint validation.
    */
   validateRequest(request: Request): void {
-    const requestValidationEnabled = request.config.validation?.requestValidation ?? true;
+    // Always true here, even though Fern's client validates nothing when the serde layer is
+    // off: unlike Fern, this SDK still renames idiomatic property names back to their wire
+    // names in the same schema used for validation, so running it is required to produce a
+    // correct wire body — it is not an optional validation step to opt out of. validateBody
+    // itself never throws in this mode; see its own comment below.
+    const requestValidationEnabled = true;
 
     if (
       request.requestContentType === ContentType.Text ||
@@ -66,28 +70,52 @@ export class RequestValidationHandler implements RequestHandler {
     } else {
       // ContentType.Json and everything else (arbitrary/unrecognized content types) serialize the
       // same way: validate-then-stringify, or stringify as-is when validation is disabled.
-      request.body = requestValidationEnabled
-        ? JSON.stringify(this.validateBody(request, request.body))
-        : JSON.stringify(request.body);
+      const serializedBody = requestValidationEnabled
+        ? this.validateBody(request, request.body)
+        : request.body;
+      request.body = JSON.stringify(this.mergeAdditionalBodyParameters(request, serializedBody));
     }
   }
 
   /**
+   * Shallow-merges `requestOptions.additionalBodyParameters` into a JSON object body, using the
+   * keys verbatim as wire names so a caller can send a field this SDK version does not declare.
+   * The caller's keys win over the generated ones. An absent body becomes the extras; an array
+   * or primitive body is returned untouched, since named keys cannot be merged into either.
+   */
+  private mergeAdditionalBodyParameters(request: Request, body: unknown): unknown {
+    const { additionalBodyParameters } = request.config as {
+      additionalBodyParameters?: Record<string, unknown>;
+    };
+    if (!additionalBodyParameters) {
+      return body;
+    }
+    if (body === undefined || body === null) {
+      return { ...additionalBodyParameters };
+    }
+    if (typeof body !== 'object' || Array.isArray(body)) {
+      return body;
+    }
+    return { ...body, ...additionalBodyParameters };
+  }
+
+  /**
    * Validates a request body against its schema.
-   * @throws ValidationError if Zod schema validation fails
+   * Never throws when the serde layer is off: unlike Fern, this SDK still renames idiomatic
+   * property names back to their wire names via the schema's own transform, so it must still run.
+   * A body that fails a declared constraint falls back to the untransformed value instead of
+   * rejecting the call.
    */
   private validateBody(request: Request, body: unknown): unknown {
     if (!request.requestSchema) {
       return body;
     }
-    try {
-      return request.requestSchema.parse(body);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        throw new ValidationError(error, body);
-      }
-      throw error;
-    }
+    // Fern's client performs no request validation when the serde layer is off — but unlike
+    // Fern, this SDK still renames idiomatic property names back to their wire names via the
+    // schema's own .transform(), so it must still run. Never throws: a body that fails a
+    // declared constraint falls back to the untransformed value instead of rejecting the call.
+    const result = request.requestSchema.safeParse(body);
+    return result.success ? result.data : body;
   }
 
   /**
@@ -131,6 +159,12 @@ export class RequestValidationHandler implements RequestHandler {
       const params = new URLSearchParams();
       for (const [key, value] of Object.entries(validatedBody)) {
         if (value == null) continue;
+        if (Array.isArray(value)) {
+          for (const item of value) {
+            if (item != null) params.append(key, `${item}`);
+          }
+          continue;
+        }
         params.append(key, `${value}`);
       }
       return params.toString();

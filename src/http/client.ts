@@ -2,8 +2,12 @@ import {
   HttpResponse,
   PaginatedHttpResponse,
   CursorPaginatedHttpResponse,
-  SdkConfig,
+  BaseClientOptions,
 } from './types';
+import { WithRawResponse } from './response-promise';
+import { Page } from './page';
+import { SseStream } from './utils/sse-stream';
+import { RawResponse } from './utils/fetcher';
 import { RequestHandlerChain } from './handlers/handler-chain';
 import { HookHandler } from './handlers/hook-handler';
 import { ResponseValidationHandler } from './handlers/response-validation-handler';
@@ -11,6 +15,7 @@ import { RequestValidationHandler } from './handlers/request-validation-handler'
 import { CustomHook } from './hooks/custom-hook';
 import { TerminatingHandler } from './handlers/terminating-handler';
 import { RetryHandler } from './handlers/retry-handler';
+import { LoggingHandler } from './handlers/logging-handler';
 import { Request } from './transport/request';
 import { isRequestCursorPagination } from './transport/types';
 import { OAuthHandler } from './handlers/oauth-handler';
@@ -29,13 +34,20 @@ export class HttpClient {
    * @param hook - Optional custom hook for request/response interception
    */
   constructor(
-    private config: SdkConfig,
+    private config: BaseClientOptions,
     hook = new CustomHook(),
   ) {
     this.requestHandlerChain.addHandler(new ResponseValidationHandler());
     this.requestHandlerChain.addHandler(new RequestValidationHandler());
     this.requestHandlerChain.addHandler(new OAuthHandler());
     this.requestHandlerChain.addHandler(new RetryHandler());
+    // Deliberately placed before HookHandler (not after): keeping HookHandler's status->thrown-error
+    // conversion inside LoggingHandler's try/catch is what lets it log "error" for every HTTP error
+    // status, not just transport failures. The tradeoff is that a custom hook's `beforeRequest`
+    // mutation (if any) happens after this logs the request, so a hook-rewritten URL/header
+    // wouldn't show up in the "HTTP Request" log line — only in "HTTP Response"/"HTTP Error", since
+    // those come from the real call either way.
+    this.requestHandlerChain.addHandler(new LoggingHandler());
     this.requestHandlerChain.addHandler(new HookHandler(hook));
     this.requestHandlerChain.addHandler(new TerminatingHandler());
   }
@@ -61,6 +73,22 @@ export class HttpClient {
   }
 
   /**
+   * Executes a standard HTTP request and returns the data alongside response metadata.
+   * @template T - The expected response data type
+   * @param request - The HTTP request to execute
+   * @returns A promise that resolves to the response data and raw response metadata
+   */
+  callWithRawResponse<T>(request: Request): Promise<WithRawResponse<T>> {
+    // `rawResponse` (not `metadata`) — fernMode's request-fetch-adapter/request-axios-adapter
+    // always populate it (independent of the unrelated `responseHeaders` config flag) precisely
+    // so this real, Fern-shaped `RawResponse` is available here.
+    return this.call<T>(request).then((response) => ({
+      data: response.data as T,
+      rawResponse: response.rawResponse!,
+    }));
+  }
+
+  /**
    * Executes a streaming HTTP request that yields responses incrementally.
    * @template T - The expected response data type for each chunk
    * @param request - The HTTP request to execute
@@ -68,6 +96,63 @@ export class HttpClient {
    */
   async *stream<T>(request: Request): AsyncGenerator<HttpResponse<T>> {
     yield* this.requestHandlerChain.streamChain(request);
+  }
+
+  /**
+   * Sends a streaming request and resolves once the response arrives, rejecting if the request fails first.
+   * @template T - The expected response data type for each event
+   * @param request - The HTTP request to execute
+   * @returns A promise that resolves to the event stream and raw response metadata
+   */
+  async openStream<T>(request: Request): Promise<WithRawResponse<SseStream<T>>> {
+    let openedResponse: RawResponse | undefined;
+    let markOpen: (rawResponse: RawResponse) => void = () => undefined;
+    const opened = new Promise<RawResponse>((resolve) => {
+      markOpen = resolve;
+    });
+    request.onStreamOpen = (rawResponse) => {
+      openedResponse = rawResponse;
+      markOpen(rawResponse);
+    };
+    const responses = this.stream<T>(request);
+    const first = responses.next();
+    first.catch(() => undefined);
+    const rawResponse = await Promise.race([
+      opened,
+      first.then((head) => openedResponse ?? this.rawResponseBeforeOpen(head, responses, request)),
+    ]);
+    return { data: new SseStream<T>(this.replayFirst(first, responses)), rawResponse };
+  }
+
+  private async rawResponseBeforeOpen<T>(
+    head: IteratorResult<HttpResponse<T>>,
+    responses: AsyncGenerator<HttpResponse<T>>,
+    request: Request,
+  ): Promise<RawResponse> {
+    if (!head.done && head.value.rawResponse !== undefined) {
+      return head.value.rawResponse;
+    }
+    await responses.return(undefined);
+    const abortReason: unknown = request.config.abortSignal?.reason;
+    throw abortReason instanceof Error
+      ? abortReason
+      : new Error('The stream ended before its response arrived.');
+  }
+
+  private async *replayFirst<T>(
+    first: Promise<IteratorResult<HttpResponse<T>>>,
+    rest: AsyncGenerator<HttpResponse<T>>,
+  ): AsyncGenerator<HttpResponse<T>> {
+    try {
+      const head = await first;
+      if (head.done) {
+        return;
+      }
+      yield head.value;
+      yield* rest;
+    } finally {
+      await rest.return(undefined);
+    }
   }
 
   /**
@@ -123,6 +208,70 @@ export class HttpClient {
   }
 
   /**
+   * Executes a cursor-paginated request and wraps the result in a `Page`, matching Fern's own
+   * pagination surface exactly (see `Page`'s own doc). Fetches the first page eagerly; awaiting the
+   * returned `Page` for its first batch, or iterating it directly with `for await`, both work.
+   * @template FullResponse - The complete response type from the API
+   * @template T - The type of a single item in the page
+   * @param request - The cursor-paginated request to execute
+   * @returns A `Page` over every item, fetching subsequent pages on demand
+   */
+  public async loadCursorPaginated<FullResponse, T>(
+    request: Request<T[]>,
+  ): Promise<Page<T, FullResponse>> {
+    const initial = await this.callWithRawResponse<FullResponse>(request as unknown as Request);
+    return new Page<T, FullResponse>({
+      response: initial.data,
+      rawResponse: initial.rawResponse,
+      hasNextPage: (response) => !!this.getNextCursor<FullResponse, T[]>(request, response),
+      getItems: (response) => this.getPage<FullResponse, T[]>(request, response),
+      loadPage: (response) => {
+        request.nextPage(this.getNextCursor<FullResponse, T[]>(request, response) ?? undefined);
+        return this.callWithRawResponse<FullResponse>(request as unknown as Request);
+      },
+    });
+  }
+
+  /**
+   * Executes a limit-offset-paginated request and wraps the result in a `Page`, matching Fern's own
+   * pagination surface exactly.
+   * @template FullResponse - The complete response type from the API
+   * @template T - The type of a single item in the page
+   * @param request - The limit-offset-paginated request to execute
+   * @returns A `Page` over every item, fetching subsequent pages on demand
+   */
+  public async loadPaginated<FullResponse, T>(
+    request: Request<T[]>,
+  ): Promise<Page<T, FullResponse>> {
+    const initial = await this.callWithRawResponse<FullResponse>(request as unknown as Request);
+    return new Page<T, FullResponse>({
+      response: initial.data,
+      rawResponse: initial.rawResponse,
+      // A page shorter than the requested size is the last page — the same heuristic the classic
+      // (non-fernMode) pagination loop uses (see build-paginated-service-method.ts's `hasMore`).
+      // Checking only `length > 0` would keep fetching forever once the API's last page happens to
+      // be exactly full, or if the server clamps an out-of-range offset back to the same page
+      // instead of ever returning empty.
+      hasNextPage: (response) => {
+        const data = this.getPage<FullResponse, T[]>(request, response);
+        const pagination = request.pagination;
+        const pageSize =
+          pagination && !isRequestCursorPagination(pagination) ? pagination.pageSize : undefined;
+        return data.length > 0 && (pageSize === undefined || data.length >= pageSize);
+      },
+      getItems: (response) => this.getPage<FullResponse, T[]>(request, response),
+      loadPage: (response) => {
+        // No declared `pageSize` (stepless offset — gap doc row 200) means `nextPage()` has no
+        // fixed increment to fall back on; the only signal for how far the offset actually moved
+        // is how many items this just-fetched page returned.
+        const offsetIncrement = this.getPage<FullResponse, T[]>(request, response).length;
+        request.nextPage(undefined, offsetIncrement);
+        return this.callWithRawResponse<FullResponse>(request as unknown as Request);
+      },
+    });
+  }
+
+  /**
    * Updates the base URL for all subsequent requests.
    * @param url - The new base URL to use
    */
@@ -134,7 +283,7 @@ export class HttpClient {
    * Updates the SDK configuration.
    * @param config - The new SDK configuration
    */
-  setConfig(config: SdkConfig): void {
+  setConfig(config: BaseClientOptions): void {
     this.config = config;
   }
 
@@ -157,7 +306,7 @@ export class HttpClient {
       curr = curr[segment];
     }
 
-    const page = request.pagination.pageSchema?.parse(curr);
+    const page = curr;
     if (!page) {
       throw new Error(
         `error getting page data. Curr: ${JSON.stringify(curr)}. PagePath: ${request.pagination.pagePath}. Data: ${JSON.stringify(data)}`,
@@ -190,6 +339,7 @@ export class HttpClient {
       curr = curr[segment];
     }
 
-    return request.pagination.cursorSchema?.parse(curr) ?? null;
+    // Fern's generated client performs no validation at all when the serde layer is off.
+    return curr ?? null;
   }
 }

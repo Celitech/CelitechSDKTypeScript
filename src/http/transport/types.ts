@@ -1,8 +1,15 @@
-import { ZodType } from 'zod';
-import { ContentType, HttpMethod, SdkConfig, RetryOptions, ValidationOptions } from '../types';
+import * as core from '../../core';
+import {
+  ContentType,
+  HttpMethod,
+  BaseClientOptions,
+  RetryOptions,
+  ValidationOptions,
+} from '../types';
 import { SerializationStyle } from '../serialization/base-serializer';
 import { OAuthTokenManager } from '../oauth/token-manager';
-import { ThrowableError } from '../errors/throwable-error';
+import { CelitechApiError } from '../errors/throwable-error';
+import { RawResponse } from '../utils/fetcher';
 
 /**
  * Defines an expected response format with schema validation.
@@ -10,7 +17,7 @@ import { ThrowableError } from '../errors/throwable-error';
  */
 export interface ResponseDefinition {
   /** Schema for validating the response body */
-  schema: ZodType;
+  schema: core.cast.CastSchema<any, any>;
   /** The content type of this response (e.g., 'application/json') */
   contentType: ContentType;
   /** The HTTP status code this definition applies to */
@@ -23,14 +30,28 @@ export interface ResponseDefinition {
  */
 export interface ErrorDefinition {
   /** The error class to instantiate, exposing a static `from` factory */
-  error: (new (...args: any[]) => ThrowableError) & {
-    from(message: string, response?: unknown): ThrowableError;
+  error: (new (...args: any[]) => CelitechApiError) & {
+    from(message: string, response?: unknown): CelitechApiError;
   };
   /** The content type of this error response */
   contentType: ContentType;
   /** The HTTP status code this error applies to */
   status: number;
 }
+
+export type StreamEventShape =
+  | { type: 'json'; messageTerminator: string; rawText?: boolean }
+  | {
+      type: 'sse';
+      streamTerminator?: string;
+      eventDiscriminator?: string;
+      resumable?: boolean;
+      /**
+       * Hand each payload to the caller as text instead of parsing it. Set for an untyped
+       * (`type: string`) item schema, which does not describe what is inside `data:`.
+       */
+      rawText?: boolean;
+    };
 
 /**
  * Parameters required to create a Request instance.
@@ -47,12 +68,14 @@ export interface CreateRequestParameters<Page = unknown[]> {
   pathParams: Map<string, RequestParameter>;
   cookies: Map<string, RequestParameter>;
   path: string;
-  config: SdkConfig;
+  config: BaseClientOptions;
   responses: ResponseDefinition[];
   errors: ErrorDefinition[];
-  requestSchema: ZodType;
+  requestSchema: core.cast.CastSchema<any, any>;
   requestContentType: ContentType;
   pagination?: RequestPagination<Page> | RequestCursorPagination<Page>;
+  eventShape?: StreamEventShape;
+  onStreamOpen?: (rawResponse: RawResponse) => void;
   filename?: string;
   filenames?: string[];
   scopes?: Set<string>;
@@ -94,7 +117,7 @@ export interface RequestPagination<Page> {
   /** JSON path to extract page data from response */
   pagePath: string[];
   /** Schema for validating page data */
-  pageSchema?: ZodType<Page, any, any>;
+  pageSchema?: core.cast.CastSchema<any, Page>;
 }
 
 /**
@@ -107,11 +130,11 @@ export interface RequestCursorPagination<Page> {
   /** JSON path to extract page data from response */
   pagePath: string[];
   /** Schema for validating page data */
-  pageSchema?: ZodType<Page, any, any>;
+  pageSchema?: core.cast.CastSchema<any, Page>;
   /** JSON path to extract next cursor from response */
   cursorPath: string[];
   /** Schema for validating cursor value */
-  cursorSchema?: ZodType<any, any, any>;
+  cursorSchema?: core.cast.CastSchema<any, any>;
 }
 
 /**

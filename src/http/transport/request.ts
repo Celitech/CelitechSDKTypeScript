@@ -1,5 +1,11 @@
-import { ZodType } from 'zod';
-import { ContentType, HttpMethod, SdkConfig, RetryOptions, ValidationOptions } from '../types';
+import * as core from '../../core';
+import {
+  ContentType,
+  HttpMethod,
+  BaseClientOptions,
+  RetryOptions,
+  ValidationOptions,
+} from '../types';
 import { PathSerializer } from '../serialization/path-serializer';
 import { QuerySerializer } from '../serialization/query-serializer';
 import { HeaderSerializer } from '../serialization/header-serializer';
@@ -14,7 +20,9 @@ import {
   ResponseDefinition,
   ErrorDefinition,
   isRequestCursorPagination,
+  StreamEventShape,
 } from './types';
+import { RawResponse } from '../utils/fetcher';
 import { OAuthTokenManager } from '../oauth/token-manager';
 
 /**
@@ -41,17 +49,21 @@ export class Request<PageSchema = unknown[]> {
 
   public path: string;
 
-  public config: SdkConfig;
+  public config: BaseClientOptions;
 
   public responses: ResponseDefinition[];
 
   public errors: ErrorDefinition[];
 
-  public requestSchema: ZodType;
+  public requestSchema: core.cast.CastSchema<any, any>;
 
   public requestContentType: ContentType;
 
   public pagination?: RequestPagination<PageSchema> | RequestCursorPagination<PageSchema>;
+
+  public eventShape?: StreamEventShape;
+
+  public onStreamOpen?: (rawResponse: RawResponse) => void;
 
   public filename?: string;
 
@@ -78,6 +90,8 @@ export class Request<PageSchema = unknown[]> {
     this.requestSchema = params.requestSchema;
     this.requestContentType = params.requestContentType;
     this.pagination = params.pagination;
+    this.eventShape = params.eventShape;
+    this.onStreamOpen = params.onStreamOpen;
     this.filename = params.filename;
     this.filenames = params.filenames;
     this.scopes = params.scopes;
@@ -224,6 +238,8 @@ export class Request<PageSchema = unknown[]> {
       responses: overrides?.responses ?? this.responses,
       requestSchema: overrides?.requestSchema ?? this.requestSchema,
       requestContentType: overrides?.requestContentType ?? this.requestContentType,
+      eventShape: overrides?.eventShape ?? this.eventShape,
+      onStreamOpen: overrides?.onStreamOpen ?? this.onStreamOpen,
       filename: overrides?.filename ?? this.filename,
       filenames: overrides?.filenames ?? this.filenames,
       scopes: overrides?.scopes,
