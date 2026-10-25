@@ -1,5 +1,6 @@
-import { SdkConfig } from '../types';
-import { OAuthService } from '../../services/o-auth';
+import { BaseClientOptions } from '../types';
+import { Supplier } from '../utils/supplier';
+import { OAuthClient } from '../../api/resources/oAuth';
 
 /**
  * Represents an OAuth 2.0 access token with its associated metadata.
@@ -53,10 +54,10 @@ export class OAuthTokenManager {
    * @returns A promise that resolves to a valid OAuth token
    * @throws Error if client credentials are missing or token request fails
    */
-  public async getToken(scopes: Set<string>, config: SdkConfig): Promise<OAuthToken> {
+  public async getToken(scopes: Set<string>, config: BaseClientOptions): Promise<OAuthToken> {
     if (
       this.token?.hasAllScopes(scopes) &&
-      (this.token.expiresAt == null || this.token.expiresAt - Date.now() > 5000)
+      (this.token.expiresAt == null || this.token.expiresAt - Date.now() > 30000)
     ) {
       return this.token;
     }
@@ -67,34 +68,35 @@ export class OAuthTokenManager {
 
     const updatedScopes = new Set([...scopes, ...(this.token?.scopes || [])]);
 
-    const oAuth = new OAuthService(
+    const resolvedOAuthBaseUrl =
+      config.oAuthBaseUrl ||
+      (await Supplier.get(config.baseUrl)) ||
+      (await Supplier.get(config.environment)) ||
+      'https://auth.celitech.net';
+    const oAuth = new OAuthClient(
       {
         ...config,
-        baseUrl:
-          config.oAuthBaseUrl ||
-          config.baseUrl ||
-          config.environment ||
-          'https://auth.celitech.net',
+        baseUrl: resolvedOAuthBaseUrl,
       },
       this,
     );
     const response = await oAuth.getAccessToken({
-      grantType: 'client_credentials',
-      clientId: config.clientId,
-      clientSecret: config.clientSecret,
+      grant_type: 'client_credentials',
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
       scope: Array.from(scopes).join(' '),
     });
 
-    if (!response?.accessToken) {
+    if (!response?.access_token) {
       throw new Error(
         `OAuthError: token endpoint response did not return access token. Response: ${(JSON.stringify(response), undefined, 2)}.`,
       );
     }
 
     this.token = new OAuthToken(
-      response.accessToken,
+      response.access_token,
       updatedScopes,
-      response?.expiresIn ? response?.expiresIn * 1000 + Date.now() : null,
+      response?.expires_in ? response?.expires_in * 1000 + Date.now() : null,
     );
 
     return this.token;

@@ -1,3 +1,5 @@
+import { RawResponse } from '../utils/fetcher';
+
 /**
  * Standard HTTP methods supported by the SDK.
  */
@@ -57,16 +59,22 @@ export interface HttpResponse<T> {
   metadata: HttpMetadata;
   /** Raw response object from the HTTP client */
   raw: ArrayBuffer;
+  /** Fern drop-in parity (FSDK-429): populated regardless of the `raw` field's shape above. */
+  rawResponse?: RawResponse;
 }
 
 /**
  * Represents an HTTP error response.
  */
 export interface HttpError {
-  /** Error message or description */
-  error: string;
+  /** HTTP status code, if the error came from a response (absent for network-level failures) */
+  statusCode?: number;
+  /** Parsed response body, if any */
+  body?: unknown;
   /** Response metadata (status, headers, etc.) */
-  metadata: HttpMetadata;
+  rawResponse?: RawResponse;
+  /** The underlying cause, if this wraps another error */
+  cause?: unknown;
 }
 
 /**

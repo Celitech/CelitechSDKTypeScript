@@ -1,11 +1,15 @@
 import { Request } from '../transport/request';
-import { HttpResponse, RequestHandler, ContentType } from '../types';
-import { HttpError } from '../error';
+import { HttpResponse, RequestHandler } from '../types';
+import { CelitechApiError } from '../errors/throwable-error';
+import { decodeErrorBody } from '../utils/content-type';
+import { BadRequestError } from '../../api/errors/BadRequestError';
+import { UnauthorizedError } from '../../api/errors/UnauthorizedError';
+import { ConflictError } from '../../api/errors/ConflictError';
+import { UnprocessableEntityError } from '../../api/errors/UnprocessableEntityError';
+import { ServiceUnavailableError } from '../../api/errors/ServiceUnavailableError';
+import { ErrorResponse } from '../../api/types/ErrorResponse';
 import { Hook } from '../hooks/hook';
 import { TransportHookAdapter } from '../transport/transport-hook-adapter';
-import { getContentTypeDefinition } from '../utils/content-type';
-import { ThrowableError } from '../errors/throwable-error';
-import { ErrorDefinition } from '../transport/types';
 
 /**
  * Request handler that invokes custom hooks before requests and after responses.
@@ -52,42 +56,27 @@ export class HookHandler implements RequestHandler {
   ): Promise<never> {
     // Handle error responses
     const arrayBuffer = response.raw;
-
-    const rawContentType = response.metadata.headers['content-type']?.toLocaleLowerCase() || '';
-    const contentType = getContentTypeDefinition(rawContentType);
     const statusCode = response.metadata.status;
+    const body = decodeErrorBody(arrayBuffer, response.metadata.headers['content-type']);
 
-    const error = request.errors.find((error): error is ErrorDefinition => {
-      return error.contentType === contentType && error.status === statusCode;
-    });
-
-    if (error) {
-      const decodedBody = new TextDecoder().decode(arrayBuffer);
-      let json: unknown = undefined;
-      if (decodedBody.trim().length > 0) {
-        try {
-          json = JSON.parse(decodedBody);
-        } catch {
-          // Body present but not valid JSON — pass undefined payload so the
-          // typed error still surfaces instead of a SyntaxError crash.
-        }
-      }
-      const customError = error.error.from((json as any)?.message || '', json);
-      // Attach metadata to custom error for analytics tracking
-      customError.metadata = response.metadata;
-      customError.throw();
+    switch (statusCode) {
+      case 400:
+        throw new BadRequestError(body as ErrorResponse, response.rawResponse!);
+      case 401:
+        throw new UnauthorizedError(body as ErrorResponse, response.rawResponse!);
+      case 409:
+        throw new ConflictError(body as ErrorResponse, response.rawResponse!);
+      case 422:
+        throw new UnprocessableEntityError(body as ErrorResponse, response.rawResponse!);
+      case 503:
+        throw new ServiceUnavailableError(body as ErrorResponse, response.rawResponse!);
     }
 
     if (resolveUndeclaredError) {
       throw await resolveUndeclaredError();
     }
 
-    const decodedBody = new TextDecoder().decode(arrayBuffer);
-    throw new HttpError(
-      response.metadata,
-      arrayBuffer,
-      `Unexpected response body for error status.\nStatusCode: ${response.metadata.status}\nBody: ${decodedBody}`,
-    );
+    throw new CelitechApiError({ statusCode, body, rawResponse: response.rawResponse! });
   }
 
   /**

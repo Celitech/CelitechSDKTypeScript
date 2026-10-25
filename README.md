@@ -1,79 +1,249 @@
-# Celitech TypeScript SDK 2.0.10
+# Celitech TypeScript Library
 
-Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Celitech%2FTypeScript)
 
-## Versions
-
-- API version: `2.0.10`
-- SDK version: `2.0.10`
-
-## About the API
-
-Welcome to the CELITECH API documentation!
-
-Useful links: [Homepage](https://www.celitech.com) | [Support email](mailto:devops@celitech.com) | [Blog](https://www.celitech.com/blog/)
-
-# Introduction
-
-This is the reference documentation and schemas for the CELITECH API and webhooks. For tutorials and other documentation please refer to the [CELITECH Documentation](https://docs.celitech.com).
-
-"Partners" refers to online service providers that use our eSIM API. Access levels include Gold, Platinum, and Diamond.
-
-## API
-
-The CELITECH API is designed for use by partner platforms, including both web and mobile applications. It's assumed all endpoint calls are initiated from the backend of an integrated platform.
-
-API URL: `https://api.celitech.net/v1`
-
-## Authentication & Authorization
-
-CELITECH API uses the OAuth 2.0 protocol for authentication and authorization.
-The endpoints are protected using client credentials flow which is based on a token exchange. The token has a defined life span (typically 1 hour), after which a new token must be obtained.
-
-To begin, obtain OAuth 2.0 client credentials ( **CLIENT_ID** & **CLIENT_SECRET** ) from the [CELITECH Dashboard](https://www.dashboard.celitech.com/). Then your client application requests an access token from the CELITECH Authorization Server, extracts a token from the response, and sends the token to the CELITECH API that you want to access.
-
-Security Scheme Type: `OAuth2`
-
-Flow type: `clientCredentials`
-
-Token URL: `https://auth.celitech.net/oauth2/token`
+The Celitech TypeScript library provides convenient access to the Celitech APIs from TypeScript.
 
 ## Table of Contents
 
-- [Setup & Configuration](#setup--configuration)
-  - [Supported Language Versions](#supported-language-versions)
-  - [Installation](#installation)
+- [Documentation](#documentation)
+- [Reference](#reference)
+- [Usage](#usage)
+- [Environments](#environments)
+- [Request and Response Types](#request-and-response-types)
+- [Exception Handling](#exception-handling)
+- [Advanced](#advanced)
+  - [Subpackage Exports](#subpackage-exports)
+  - [Additional Headers](#additional-headers)
+  - [Additional Query String Parameters](#additional-query-string-parameters)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+  - [Aborting Requests](#aborting-requests)
+  - [Access Raw Response Data](#access-raw-response-data)
+  - [Logging](#logging)
+  - [Custom Fetch](#custom-fetch)
+  - [Custom Fetcher](#custom-fetcher)
   - [Runtime Compatibility](#runtime-compatibility)
-- [Authentication](#authentication)
-  - [OAuth Authentication](#oauth-authentication)
-  - [Environment Variables](#environment-variables)
-- [Setting a Custom Timeout](#setting-a-custom-timeout)
-- [Sample Usage](#sample-usage)
-- [Services](#services)
-- [Models](#models)
-- [License](#license)
+- [Contributing](#contributing)
 
-# Setup & Configuration
+## Documentation
 
-## Supported Language Versions
+API reference documentation is available [here](https://docs.celitech.com/).
 
-This SDK is compatible with the following versions: `TypeScript >= 4.8.4`
+## Reference
 
-## Installation
+A full reference for this library is available [here](./reference.md).
 
-To get started with the SDK, we recommend installing using `npm` or `yarn`:
+## Usage
 
-```bash
-npm install celitech-sdk
+Instantiate and use the client with the following:
+
+```typescript
+import { Celitech } from 'celitech-sdk';
+
+const client = new Celitech({
+  clientId: 'CLIENT_ID',
+  clientSecret: 'CLIENT_SECRET',
+});
+await client.destinations.listDestinations();
 ```
 
-or
+## Environments
 
-```bash
-yarn add celitech-sdk
+This SDK allows you to configure different environments for API requests.
+
+```typescript
+import { Celitech, CelitechApiEnvironment } from 'celitech-sdk';
+
+const client = new Celitech({
+  environment: CelitechApiEnvironment.Default,
+});
 ```
 
-## Runtime Compatibility
+## Request and Response Types
+
+The SDK exports all request and response types as TypeScript interfaces. Simply import them with the
+following namespace:
+
+```typescript
+import { CelitechApi } from "celitech-sdk";
+
+const request: CelitechApi.ListPackagesRequest = {
+    ...
+};
+```
+
+## Exception Handling
+
+When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
+will be thrown.
+
+```typescript
+import { CelitechApiError } from "celitech-sdk";
+
+try {
+    await client.destinations.listDestinations(...);
+} catch (err) {
+    if (err instanceof CelitechApiError) {
+        console.log(err.statusCode);
+        console.log(err.message);
+        console.log(err.body);
+        console.log(err.rawResponse);
+    }
+}
+```
+
+## Advanced
+
+### Subpackage Exports
+
+This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
+
+```typescript
+import { DestinationsClient } from 'celitech-sdk/destinations';
+
+const client = new DestinationsClient({...});
+```
+
+### Additional Headers
+
+If you would like to send additional headers as part of the request, use the `headers` request option.
+
+```typescript
+const response = await client.destinations.listDestinations(..., {
+    headers: {
+        'X-Custom-Header': 'custom value'
+    }
+});
+```
+
+### Additional Query String Parameters
+
+> [!NOTE]
+> The `queryParams` request option is accepted by the type signature but is not yet applied to the
+> outgoing request. Until it is wired up, put additional query string parameters in the URL you
+> pass to `client.fetch()` (see [Custom Fetch](#custom-fetch)).
+
+```typescript
+const response = await client.destinations.listDestinations(..., {
+    queryParams: {
+        'customQueryParamKey': 'custom query param value'
+    }
+});
+```
+
+### Retries
+
+The SDK retries requests that fail with a 408 (Timeout), 429 (Too Many Requests), or any 5XX server
+error, using exponential backoff, up to a configured retry limit (default: 2).
+
+Use the `maxRetries` request option to configure this behavior.
+
+```typescript
+const response = await client.destinations.listDestinations(..., {
+    maxRetries: 0 // override maxRetries at the request level
+});
+```
+
+### Timeouts
+
+The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
+
+```typescript
+const response = await client.destinations.listDestinations(..., {
+    timeoutInSeconds: 30 // override timeout to 30s
+});
+```
+
+### Aborting Requests
+
+The SDK allows users to abort requests at any point by passing in an abort signal.
+
+```typescript
+const controller = new AbortController();
+const response = await client.destinations.listDestinations(..., {
+    abortSignal: controller.signal
+});
+controller.abort(); // aborts the request
+```
+
+### Access Raw Response Data
+
+The SDK provides access to raw response data, including headers, through the `.withRawResponse()` method.
+The `.withRawResponse()` method returns a promise that resolves to an object with a `data` and a `rawResponse` property.
+
+```typescript
+const { data, rawResponse } = await client.destinations.listDestinations(...).withRawResponse();
+
+console.log(data);
+console.log(rawResponse.headers['X-My-Header']);
+```
+
+### Logging
+
+The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
+
+```typescript
+import { Celitech, logging } from "celitech-sdk";
+
+const client = new Celitech({
+    ...
+    logging: {
+        level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info
+        logger: new logging.ConsoleLogger(), // defaults to ConsoleLogger
+        silent: false, // defaults to true, set to false to enable logging
+    }
+});
+```
+
+The `logging` object can have the following properties:
+
+- `level`: The log level to use. Defaults to `logging.LogLevel.Info`.
+- `logger`: The logger to use. Defaults to a `logging.ConsoleLogger`.
+- `silent`: Whether to silence the logger. Defaults to `true`.
+
+To provide a custom logger, you can pass in an object that implements the `logging.ILogger` interface.
+
+### Custom Fetch
+
+The SDK provides a low-level `fetch` method for making custom HTTP requests while still
+benefiting from SDK-level configuration like authentication, retries, timeouts, and logging.
+This is useful for calling API endpoints not yet supported in the SDK.
+
+```typescript
+const response = await client.fetch(
+  '/v1/custom/endpoint',
+  {
+    method: 'GET',
+  },
+  {
+    timeoutInSeconds: 30,
+    maxRetries: 3,
+    headers: {
+      'X-Custom-Header': 'custom-value',
+    },
+  },
+);
+
+const data = await response.json();
+```
+
+### Custom Fetcher
+
+The SDK provides a way for you to customize the underlying fetch implementation it uses to send
+requests. If you're running in an unsupported environment, this provides a way for you to break
+glass and ensure the SDK works.
+
+```typescript
+import { Celitech } from "celitech-sdk";
+
+const client = new Celitech({
+    ...
+    fetch: // provide your implementation here
+});
+```
+
+### Runtime Compatibility
 
 The SDK works in the following runtimes:
 
@@ -84,120 +254,12 @@ The SDK works in the following runtimes:
 - Bun 1.0+
 - React Native
 
-## Authentication
+## Contributing
 
-### OAuth Authentication
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
 
-The Celitech API uses OAuth 2.0 for authentication.
-
-You need to provide your OAuth credentials when initializing the SDK. Tokens are automatically fetched, cached, and refreshed — you do not need to manage them yourself.
-
-```ts
-const sdk = new Celitech({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET' });
-```
-
-If you need to set or update the OAuth credentials after the SDK initialization, you can use:
-
-```ts
-const sdk = new Celitech();
-sdk.clientId = 'CLIENT_ID';
-sdk.clientSecret = 'CLIENT_SECRET';
-```
-
-## Environment Variables
-
-These are the environment variables for the SDK:
-
-| Name          | Description             |
-| :------------ | :---------------------- |
-| CLIENT_ID     | Client ID parameter     |
-| CLIENT_SECRET | Client Secret parameter |
-
-Environment variables are a way to configure your application outside the code. You can set these environment variables on the command line or use your project's existing tooling for managing environment variables.
-
-If you are using a `.env` file, a template with the variable names is provided in the `.env.example` file located in the same directory as this README.
-
-## Setting a Custom Timeout
-
-You can set a custom timeout for the SDK's HTTP requests as follows:
-
-```ts
-const celitech = new Celitech({ timeoutMs: 10000 });
-```
-
-# Sample Usage
-
-Below is a comprehensive example demonstrating how to authenticate and call a simple endpoint:
-
-```ts
-import { Celitech } from 'celitech-sdk';
-
-(async () => {
-  const celitech = new Celitech({
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-  });
-
-  const data = await celitech.destinations.listDestinations();
-
-  console.log(data);
-})();
-```
-
-## Services
-
-The SDK provides various services to interact with the API.
-
-<details>
-<summary>Below is a list of all available services with links to their detailed documentation:</summary>
-
-| Name                                                                 |
-| :------------------------------------------------------------------- |
-| [DestinationsService](documentation/services/DestinationsService.md) |
-| [PackagesService](documentation/services/PackagesService.md)         |
-| [PurchasesService](documentation/services/PurchasesService.md)       |
-| [ESimService](documentation/services/ESimService.md)                 |
-| [IFrameService](documentation/services/IFrameService.md)             |
-
-</details>
-
-## Models
-
-The SDK includes several models that represent the data structures used in API requests and responses. These models help in organizing and managing the data efficiently.
-
-<details>
-<summary>Below is a list of all available models with links to their detailed documentation:</summary>
-
-| Name                                                                                         | Description |
-| :------------------------------------------------------------------------------------------- | :---------- |
-| [ListDestinationsOkResponse](documentation/models/ListDestinationsOkResponse.md)             |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [ListPackagesOkResponse](documentation/models/ListPackagesOkResponse.md)                     |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [CreatePurchaseV2OkResponse](documentation/models/CreatePurchaseV2OkResponse.md)             |             |
-| [CreatePurchaseV2Request](documentation/models/CreatePurchaseV2Request.md)                   |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [ListPurchasesOkResponse](documentation/models/ListPurchasesOkResponse.md)                   |             |
-| [CreatePurchaseOkResponse](documentation/models/CreatePurchaseOkResponse.md)                 |             |
-| [CreatePurchaseRequest](documentation/models/CreatePurchaseRequest.md)                       |             |
-| [TopUpEsimOkResponse](documentation/models/TopUpEsimOkResponse.md)                           |             |
-| [TopUpEsimRequest](documentation/models/TopUpEsimRequest.md)                                 |             |
-| [EditPurchaseOkResponse](documentation/models/EditPurchaseOkResponse.md)                     |             |
-| [EditPurchaseRequest](documentation/models/EditPurchaseRequest.md)                           |             |
-| [GetPurchaseConsumptionOkResponse](documentation/models/GetPurchaseConsumptionOkResponse.md) |             |
-| [GetEsimOkResponse](documentation/models/GetEsimOkResponse.md)                               |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [GetEsimDeviceOkResponse](documentation/models/GetEsimDeviceOkResponse.md)                   |             |
-| [GetEsimHistoryOkResponse](documentation/models/GetEsimHistoryOkResponse.md)                 |             |
-| [SuspendEsimOkResponse](documentation/models/SuspendEsimOkResponse.md)                       |             |
-| [TokenOkResponse](documentation/models/TokenOkResponse.md)                                   |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [GrantType](documentation/models/GrantType.md)                                               |             |
-
-</details>
-
-## License
-
-This SDK is licensed under the MIT License.
-
-See the [LICENSE](LICENSE) file for more details.
+On the other hand, contributions to the README are always very welcome!

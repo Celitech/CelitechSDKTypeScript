@@ -1,6 +1,8 @@
-import { ZodType } from 'zod';
-import { Environment } from './environment';
+import { CelitechApiEnvironment } from './environment';
 import { Request } from './transport/request';
+import { Supplier } from './utils/supplier';
+import { ConsoleLogger, ILogger, LogConfig, LogLevel, Logger } from './utils/logger';
+import { RawResponse } from './utils/fetcher';
 
 /**
  * Standard HTTP methods supported by the SDK.
@@ -21,11 +23,20 @@ export type HttpMethod =
  * Contains all settings required to initialize and configure the SDK.
  */
 export interface BaseConfig {
+  /** Number of retries after the initial attempt (e.g. 1 = up to 2 total attempts). Ignored if `retry.attempts` (a total-attempts count) is also set. */
+  maxRetries?: number;
+  /** Configure SDK logging, or pass through an already-resolved `Logger` (e.g. one built for another client) unchanged. Silent by default — set `silent: false` to enable output. */
+  logging?: LogConfig | Logger;
   retry?: RetryOptions;
   validation?: ValidationOptions;
-  baseUrl?: string;
-  environment?: Environment;
-  timeoutMs?: number;
+  headers?: Record<string, string | Supplier<string | null | undefined> | null | undefined>;
+  fetch?: (url: any, init: any) => Promise<Response>;
+  stream?: { reconnectionEnabled?: boolean; maxReconnectionAttempts?: number };
+  abortSignal?: AbortSignal;
+  auth?: boolean;
+  baseUrl?: Supplier<string>;
+  timeoutInSeconds?: number;
+  environment?: Supplier<CelitechApiEnvironment | string>;
   oAuthBaseUrl?: string;
 }
 
@@ -41,7 +52,68 @@ interface TokenAuthConfig extends BaseConfig {
   accessToken: string;
 }
 
-export type SdkConfig = ClientCredentialAuthConfig | TokenAuthConfig;
+export type BaseClientOptions = ClientCredentialAuthConfig | TokenAuthConfig;
+
+/**
+ * Per-request configuration overrides — a narrower, request-scoped counterpart to the
+ * constructor-level config above.
+ */
+export interface BaseRequestOptions {
+  timeoutInSeconds?: number;
+  maxRetries?: number;
+  abortSignal?: AbortSignal;
+  queryParams?: Record<string, unknown>;
+  additionalBodyParameters?: Record<string, unknown>;
+  headers?: Record<string, string | Supplier<string | null | undefined> | null | undefined>;
+  stream?: { reconnectionEnabled?: boolean; maxReconnectionAttempts?: number };
+}
+
+export declare namespace core {
+  export namespace PassthroughRequest {
+    /**
+     * Per-call options for the root-client passthrough `fetch()` escape hatch.
+     */
+    export interface RequestOptions {
+      headers?: Record<string, string | Supplier<string | null | undefined> | null | undefined>;
+      timeoutInSeconds?: number;
+      maxRetries?: number;
+      abortSignal?: AbortSignal;
+    }
+  }
+}
+
+/**
+ * Constructor-level config with `logging` resolved to a real, level-filtering `Logger` instance,
+ * so downstream code never re-resolves it from the raw `LogConfig | Logger` input.
+ */
+export type NormalizedClientOptions<T extends BaseClientOptions = BaseClientOptions> = T & {
+  logging: Logger;
+};
+
+export function normalizeClientOptions<T extends BaseClientOptions = BaseClientOptions>(
+  options: T,
+): NormalizedClientOptions<T> {
+  return {
+    ...options,
+    logging: Logger.from(options.logging),
+  } as NormalizedClientOptions<T>;
+}
+
+type _LogConfig = LogConfig;
+type _LogLevel = LogLevel;
+type _ILogger = ILogger;
+const _LogLevelValue = LogLevel;
+type _ConsoleLoggerInstance = ConsoleLogger;
+const _ConsoleLoggerValue = ConsoleLogger;
+
+export namespace logging {
+  export type LogConfig = _LogConfig;
+  export type LogLevel = _LogLevel;
+  export const LogLevel = _LogLevelValue;
+  export type ILogger = _ILogger;
+  export type ConsoleLogger = _ConsoleLoggerInstance;
+  export const ConsoleLogger = _ConsoleLoggerValue;
+}
 
 /**
  * Metadata about an HTTP response.
@@ -67,6 +139,36 @@ export interface HttpResponse<T = unknown> {
   metadata: HttpMetadata;
   /** Raw response object from the HTTP client */
   raw: ArrayBuffer;
+  /** Server-sent event fields, present only on frames decoded from an SSE stream */
+  sse?: SseEventFields;
+  /** Lazy binary accessor, present only for binary/image response bodies */
+  binaryResponse?: BinaryResponse;
+  /**
+   * Fern drop-in parity (FSDK-429): unlike `raw` (an `ArrayBuffer` unless `responseHeaders` is
+   * configured on), this is always populated — `WithRawResponse`/thrown errors' `rawResponse`
+   * field need real response metadata regardless of that unrelated config flag.
+   */
+  rawResponse?: RawResponse;
+}
+
+/**
+ * A binary response body exposed as a lazy accessor instead of an eagerly-buffered value, so a
+ * caller can read (and cancel) the download incrementally. Mirrors Fern's own
+ * `core/fetcher/BinaryResponse.ts` shape.
+ */
+export interface BinaryResponse {
+  readonly bodyUsed: boolean;
+  stream(): ReadableStream<Uint8Array> | null;
+  arrayBuffer(): Promise<ArrayBuffer>;
+  blob(): Promise<Blob>;
+  bytes?(): Promise<Uint8Array>;
+}
+
+/** The `event:`, `id:` and `retry:` fields of a single server-sent event frame. */
+export interface SseEventFields {
+  event?: string;
+  id?: string;
+  retry?: number;
 }
 
 /**
@@ -146,8 +248,8 @@ export enum ContentType {
 }
 
 export interface Options<T> {
-  responseSchema: ZodType<T, any, any>;
-  requestSchema?: ZodType;
+  responseSchema: { parse: (raw: any) => any; safeParse: (raw: any) => any };
+  requestSchema?: { parse: (raw: any) => any; safeParse: (raw: any) => any };
   body?: any;
   requestContentType?: ContentType;
   responseContentType?: ContentType;
@@ -169,5 +271,6 @@ export interface RetryOptions {
 
 export interface ValidationOptions {
   responseValidation?: boolean;
+  /** No-op in this SDK: request bodies always run through their schema when the serde layer is off, to rename properties back to their wire names. */
   requestValidation?: boolean;
 }

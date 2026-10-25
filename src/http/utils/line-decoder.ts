@@ -23,9 +23,7 @@ export class LineDecoder {
     while ((lineEndIndex = this.lineBuffer.indexOf('\n')) >= 0) {
       const line = this.lineBuffer.slice(0, lineEndIndex + 1); // Include the newline character
       this.lineBuffer = this.lineBuffer.slice(lineEndIndex + 1);
-      if (line.length > 1) {
-        lines.push(this.encoder.encode(line));
-      }
+      lines.push(this.encoder.encode(line));
     }
 
     return lines;
