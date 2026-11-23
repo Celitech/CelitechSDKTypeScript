@@ -1,11 +1,11 @@
-# Celitech TypeScript SDK 2.0.10
+# Celitech TypeScript SDK 3.0.0
 
 Welcome to the Celitech SDK documentation. This guide will help you get started with integrating and using the Celitech SDK in your project.
 
 ## Versions
 
-- API version: `2.0.10`
-- SDK version: `2.0.10`
+- API version: `3.0.0`
+- SDK version: `3.0.0`
 
 ## About the API
 
@@ -26,7 +26,6 @@ The CELITECH API is designed for use by partner platforms, including both web an
 API URL: `https://api.celitech.net/v1`
 
 ## Authentication & Authorization
-
 CELITECH API uses the OAuth 2.0 protocol for authentication and authorization.
 The endpoints are protected using client credentials flow which is based on a token exchange. The token has a defined life span (typically 1 hour), after which a new token must be obtained.
 
@@ -92,16 +91,8 @@ The Celitech API uses OAuth 2.0 for authentication.
 
 You need to provide your OAuth credentials when initializing the SDK. Tokens are automatically fetched, cached, and refreshed — you do not need to manage them yourself.
 
-```ts
+```typescript
 const sdk = new Celitech({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET' });
-```
-
-If you need to set or update the OAuth credentials after the SDK initialization, you can use:
-
-```ts
-const sdk = new Celitech();
-sdk.clientId = 'CLIENT_ID';
-sdk.clientSecret = 'CLIENT_SECRET';
 ```
 
 ## Environment Variables
@@ -121,24 +112,24 @@ If you are using a `.env` file, a template with the variable names is provided i
 
 You can set a custom timeout for the SDK's HTTP requests as follows:
 
-```ts
-const celitech = new Celitech({ timeoutMs: 10000 });
+```typescript
+const celitech = new Celitech({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET', timeoutInSeconds: 10 });
 ```
 
 # Sample Usage
 
 Below is a comprehensive example demonstrating how to authenticate and call a simple endpoint:
 
-```ts
+```typescript
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const data = await celitech.destinations.listDestinations();
+  const data = await client.destinations.listDestinations();
 
   console.log(data);
 })();
@@ -168,31 +159,26 @@ The SDK includes several models that represent the data structures used in API r
 <details>
 <summary>Below is a list of all available models with links to their detailed documentation:</summary>
 
-| Name                                                                                         | Description |
-| :------------------------------------------------------------------------------------------- | :---------- |
-| [ListDestinationsOkResponse](documentation/models/ListDestinationsOkResponse.md)             |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [ListPackagesOkResponse](documentation/models/ListPackagesOkResponse.md)                     |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [CreatePurchaseV2OkResponse](documentation/models/CreatePurchaseV2OkResponse.md)             |             |
-| [CreatePurchaseV2Request](documentation/models/CreatePurchaseV2Request.md)                   |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [ListPurchasesOkResponse](documentation/models/ListPurchasesOkResponse.md)                   |             |
-| [CreatePurchaseOkResponse](documentation/models/CreatePurchaseOkResponse.md)                 |             |
-| [CreatePurchaseRequest](documentation/models/CreatePurchaseRequest.md)                       |             |
-| [TopUpEsimOkResponse](documentation/models/TopUpEsimOkResponse.md)                           |             |
-| [TopUpEsimRequest](documentation/models/TopUpEsimRequest.md)                                 |             |
-| [EditPurchaseOkResponse](documentation/models/EditPurchaseOkResponse.md)                     |             |
-| [EditPurchaseRequest](documentation/models/EditPurchaseRequest.md)                           |             |
-| [GetPurchaseConsumptionOkResponse](documentation/models/GetPurchaseConsumptionOkResponse.md) |             |
-| [GetEsimOkResponse](documentation/models/GetEsimOkResponse.md)                               |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [GetEsimDeviceOkResponse](documentation/models/GetEsimDeviceOkResponse.md)                   |             |
-| [GetEsimHistoryOkResponse](documentation/models/GetEsimHistoryOkResponse.md)                 |             |
-| [SuspendEsimOkResponse](documentation/models/SuspendEsimOkResponse.md)                       |             |
-| [TokenOkResponse](documentation/models/TokenOkResponse.md)                                   |             |
-| [ErrorResponse](documentation/models/ErrorResponse.md)                                       |             |
-| [GrantType](documentation/models/GrantType.md)                                               |             |
+| Name                                                                                     | Description |
+| :--------------------------------------------------------------------------------------- | :---------- |
+| [ListDestinationsResponse](documentation/models/ListDestinationsResponse.md)             |             |
+| [ErrorResponse](documentation/models/ErrorResponse.md)                                   |             |
+| [ListPackagesResponse](documentation/models/ListPackagesResponse.md)                     |             |
+| [CreatePurchaseV2Request](documentation/models/CreatePurchaseV2Request.md)               |             |
+| [CreatePurchaseV2ResponseItem](documentation/models/CreatePurchaseV2ResponseItem.md)     |             |
+| [ListPurchasesResponse](documentation/models/ListPurchasesResponse.md)                   |             |
+| [CreatePurchaseRequest](documentation/models/CreatePurchaseRequest.md)                   |             |
+| [CreatePurchaseResponse](documentation/models/CreatePurchaseResponse.md)                 |             |
+| [TopUpEsimRequest](documentation/models/TopUpEsimRequest.md)                             |             |
+| [TopUpEsimResponse](documentation/models/TopUpEsimResponse.md)                           |             |
+| [EditPurchaseRequest](documentation/models/EditPurchaseRequest.md)                       |             |
+| [EditPurchaseResponse](documentation/models/EditPurchaseResponse.md)                     |             |
+| [GetPurchaseConsumptionResponse](documentation/models/GetPurchaseConsumptionResponse.md) |             |
+| [GetEsimResponse](documentation/models/GetEsimResponse.md)                               |             |
+| [GetEsimDeviceResponse](documentation/models/GetEsimDeviceResponse.md)                   |             |
+| [GetEsimHistoryResponse](documentation/models/GetEsimHistoryResponse.md)                 |             |
+| [SuspendEsimResponse](documentation/models/SuspendEsimResponse.md)                       |             |
+| [TokenResponse](documentation/models/TokenResponse.md)                                   |             |
 
 </details>
 

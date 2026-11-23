@@ -1,0 +1,1 @@
+export { DestinationsClient } from './Client';

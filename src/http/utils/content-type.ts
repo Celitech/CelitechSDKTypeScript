@@ -8,7 +8,7 @@ import { ContentType } from '../types';
  * @returns The corresponding ContentType enum value
  */
 export function getContentTypeDefinition(contentType: string): ContentType {
-  const ct = contentType.toLowerCase();
+  const ct = contentType.split(';')[0].trim().toLowerCase();
 
   // XML is handled as text
   if (ct.startsWith('application/') && ct.includes('xml')) {
@@ -55,4 +55,39 @@ export function getContentTypeDefinition(contentType: string): ContentType {
   }
 
   return ContentType.Binary;
+}
+
+const JSON_ERROR_MEDIA_TYPES = new Set([
+  'application/hal+json',
+  'application/json',
+  'application/ld+json',
+  'application/problem+json',
+  'application/vnd.api+json',
+  'text/json',
+]);
+
+function isJsonErrorMediaType(mediaType: string): boolean {
+  return (
+    JSON_ERROR_MEDIA_TYPES.has(mediaType) ||
+    (mediaType.startsWith('application/vnd.') && mediaType.endsWith('+json'))
+  );
+}
+
+export function decodeErrorBody(
+  raw: ArrayBuffer | ArrayBufferView,
+  contentType: string | undefined,
+): unknown {
+  const text = new TextDecoder().decode(raw);
+  const mediaType = contentType?.split(';')[0]?.trim().toLowerCase() ?? '';
+  if (mediaType.length > 0 && !isJsonErrorMediaType(mediaType)) {
+    return text;
+  }
+  if (text.length === 0) {
+    return undefined;
+  }
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
 }

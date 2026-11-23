@@ -15,7 +15,7 @@ List Destinations
 
 **Return Type**
 
-`ListDestinationsOkResponse`
+[`CelitechApi.ListDestinationsResponse`](../models/ListDestinationsResponse.md)
 
 **Example Usage Code Snippet**
 
@@ -23,12 +23,12 @@ List Destinations
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const data = await celitech.destinations.listDestinations();
+  const data = await client.destinations.listDestinations();
 
   console.log(data);
 })();

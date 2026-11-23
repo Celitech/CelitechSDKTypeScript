@@ -20,33 +20,38 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 
 **Parameters**
 
-| Name           | Type                                                            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body           | [CreatePurchaseV2Request](../models/CreatePurchaseV2Request.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| idempotencyKey | string                                                          | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
+| Name    | Type                                                                        | Required | Description       |
+| :------ | :-------------------------------------------------------------------------- | :------- | :---------------- |
+| request | [CelitechApi.CreatePurchaseV2Request](../models/CreatePurchaseV2Request.md) | ✅        | The request body. |
 
 **Return Type**
 
-`CreatePurchaseV2OkResponse[]`
+[`CelitechApi.CreatePurchaseV2ResponseItem[]`](../models/CreatePurchaseV2ResponseItem.md)
 
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, CreatePurchaseV2Request } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const createPurchaseV2Request: CreatePurchaseV2Request = {
+  const data = await client.purchases.createPurchaseV2({
     destination: 'FRA',
-    dataLimitInGb: 1,
+    dataLimitInGB: 1,
+    startDate: '2023-11-01',
+    endDate: '2023-11-20',
+    duration: 30,
     quantity: 1,
-  };
-
-  const data = await celitech.purchases.createPurchaseV2(createPurchaseV2Request, {});
+    email: 'example@domain.com',
+    referenceId: 'abc111222333444',
+    networkBrand: 'CELITECH',
+    emailBrand: 'CELITECH',
+    language: 'en',
+  });
 
   console.log(data);
 })();
@@ -63,20 +68,20 @@ This endpoint can be used to list all the successful purchases made between a gi
 
 | Name        | Type   | Required | Description                                                                                                                                                                                                         |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| purchaseId  | string | ❌       | ID of the purchase                                                                                                                                                                                                  |
-| iccid       | string | ❌       | ID of the eSIM                                                                                                                                                                                                      |
-| afterDate   | string | ❌       | Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                       |
-| beforeDate  | string | ❌       | End date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                         |
-| email       | string | ❌       | Email associated to the purchase.                                                                                                                                                                                   |
-| referenceId | string | ❌       | The referenceId that was provided by the partner during the purchase or topup flow.                                                                                                                                 |
-| afterCursor | string | ❌       | To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data. |
-| limit       | number | ❌       | Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20                                                |
-| after       | number | ❌       | Epoch value representing the start of the time interval for filtering purchases                                                                                                                                     |
-| before      | number | ❌       | Epoch value representing the end of the time interval for filtering purchases                                                                                                                                       |
+| purchaseId  | string | ❌        | ID of the purchase                                                                                                                                                                                                  |
+| iccid       | string | ❌        | ID of the eSIM                                                                                                                                                                                                      |
+| afterDate   | string | ❌        | Start date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                       |
+| beforeDate  | string | ❌        | End date of the interval for filtering purchases in the format 'yyyy-MM-dd'                                                                                                                                         |
+| email       | string | ❌        | Email associated to the purchase.                                                                                                                                                                                   |
+| referenceId | string | ❌        | The referenceId that was provided by the partner during the purchase or topup flow.                                                                                                                                 |
+| afterCursor | string | ❌        | To get the next batch of results, use this parameter. It tells the API where to start fetching data after the last item you received. It helps you avoid repeats and efficiently browse through large sets of data. |
+| limit       | number | ❌        | Maximum number of purchases to be returned in the response. The value must be greater than 0 and less than or equal to 100. If not provided, the default value is 20                                                |
+| after       | number | ❌        | Epoch value representing the start of the time interval for filtering purchases                                                                                                                                     |
+| before      | number | ❌        | Epoch value representing the end of the time interval for filtering purchases                                                                                                                                       |
 
 **Return Type**
 
-`ListPurchasesOkResponse`
+[`CelitechApi.ListPurchasesResponse`](../models/ListPurchasesResponse.md)
 
 **Example Usage Code Snippet**
 
@@ -84,12 +89,12 @@ This endpoint can be used to list all the successful purchases made between a gi
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const data = await celitech.purchases.listPurchases({});
+  const data = await client.purchases.listPurchases();
 
   console.log(data);
 })();
@@ -104,34 +109,36 @@ This endpoint is used to purchase a new eSIM by providing the package details.
 
 **Parameters**
 
-| Name           | Type                                                        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :------------- | :---------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body           | [CreatePurchaseRequest](../models/CreatePurchaseRequest.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| idempotencyKey | string                                                      | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
+| Name    | Type                                                                    | Required | Description       |
+| :------ | :---------------------------------------------------------------------- | :------- | :---------------- |
+| request | [CelitechApi.CreatePurchaseRequest](../models/CreatePurchaseRequest.md) | ✅        | The request body. |
 
 **Return Type**
 
-`CreatePurchaseOkResponse`
+[`CelitechApi.CreatePurchaseResponse`](../models/CreatePurchaseResponse.md)
 
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, CreatePurchaseRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const createPurchaseRequest: CreatePurchaseRequest = {
+  const data = await client.purchases.createPurchase({
     destination: 'FRA',
-    dataLimitInGb: 1,
+    dataLimitInGB: 1,
     startDate: '2023-11-01',
     endDate: '2023-11-20',
-  };
-
-  const data = await celitech.purchases.createPurchase(createPurchaseRequest, {});
+    email: 'example@domain.com',
+    referenceId: 'abc111222333444',
+    networkBrand: 'CELITECH',
+    emailBrand: 'CELITECH',
+    language: 'en',
+  });
 
   console.log(data);
 })();
@@ -146,32 +153,35 @@ This endpoint is used to top-up an existing eSIM with the previously associated 
 
 **Parameters**
 
-| Name           | Type                                              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :------------- | :------------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body           | [TopUpEsimRequest](../models/TopUpEsimRequest.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| idempotencyKey | string                                            | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
+| Name    | Type                                                          | Required | Description       |
+| :------ | :------------------------------------------------------------ | :------- | :---------------- |
+| request | [CelitechApi.TopUpEsimRequest](../models/TopUpEsimRequest.md) | ✅        | The request body. |
 
 **Return Type**
 
-`TopUpEsimOkResponse`
+[`CelitechApi.TopUpEsimResponse`](../models/TopUpEsimResponse.md)
 
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const topUpEsimRequest: TopUpEsimRequest = {
+  const data = await client.purchases.topUpEsim({
     iccid: '1111222233334444555000',
-    dataLimitInGb: 1,
-  };
-
-  const data = await celitech.purchases.topUpEsim(topUpEsimRequest, {});
+    dataLimitInGB: 1,
+    startDate: '2023-11-01',
+    endDate: '2023-11-20',
+    duration: 30,
+    email: 'example@domain.com',
+    referenceId: 'abc111222333444',
+    emailBrand: 'CELITECH',
+  });
 
   console.log(data);
 })();
@@ -179,40 +189,44 @@ import { Celitech, TopUpEsimRequest } from 'celitech-sdk';
 
 ## editPurchase
 
-This endpoint allows you to modify the validity dates of an existing purchase. **Behavior:** - If the purchase has **not yet been activated**, both the start and end dates can be updated. - If the purchase is **already active**, only the **end date** can be updated, while the **start date must remain unchanged** (and should be passed as originally set). - Updates must comply with the same pricing structure; the modification cannot alter the package size or change its duration category. The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits.
+This endpoint allows you to modify the validity dates of an existing purchase.  
+
+**Behavior:**
+- If the purchase has **not yet been activated**, both the start and end dates can be updated.  
+- If the purchase is **already active**, only the **end date** can be updated, while the **start date must remain unchanged** (and should be passed as originally set).  
+- Updates must comply with the same pricing structure; the modification cannot alter the package size or change its duration category.  
+
+The end date can be extended or shortened as long as it adheres to the same pricing category and does not exceed the allowed duration limits.
 
 - HTTP Method: `POST`
 - Endpoint: `/purchases/edit`
 
 **Parameters**
 
-| Name           | Type                                                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :------------- | :------------------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body           | [EditPurchaseRequest](../models/EditPurchaseRequest.md) | ✅       | The request body.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| idempotencyKey | string                                                  | ❌       | Optional. A unique value (for example a UUID) that makes this request safe to retry. If a request with the same `Idempotency-Key` and the same body succeeds, repeating it returns the original response instead of performing the action again, and the response includes the header `Idempotent-Replayed: true`. Keys are scoped to your credentials and remembered for 3 days. Only successful (2xx) responses are remembered, so a request that failed can be retried with the same key. Reusing a key with a different request returns `422`; sending it while the original request is still being processed returns `409`. If the idempotency store is temporarily unavailable, the request is not processed and returns `503`; retry it. Must be 1 to 255 printable ASCII characters, without spaces. |
+| Name    | Type                                                                | Required | Description       |
+| :------ | :------------------------------------------------------------------ | :------- | :---------------- |
+| request | [CelitechApi.EditPurchaseRequest](../models/EditPurchaseRequest.md) | ✅        | The request body. |
 
 **Return Type**
 
-`EditPurchaseOkResponse`
+[`CelitechApi.EditPurchaseResponse`](../models/EditPurchaseResponse.md)
 
 **Example Usage Code Snippet**
 
 ```typescript
-import { Celitech, EditPurchaseRequest } from 'celitech-sdk';
+import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const editPurchaseRequest: EditPurchaseRequest = {
+  const data = await client.purchases.editPurchase({
     purchaseId: 'ae471106-c8b4-42cf-b83a-b061291f2922',
     startDate: '2023-11-01',
     endDate: '2023-11-20',
-  };
-
-  const data = await celitech.purchases.editPurchase(editPurchaseRequest, {});
+  });
 
   console.log(data);
 })();
@@ -229,11 +243,11 @@ This endpoint can be called for consumption notifications (e.g. every 1 hour or 
 
 | Name       | Type   | Required | Description        |
 | :--------- | :----- | :------- | :----------------- |
-| purchaseId | string | ✅       | ID of the purchase |
+| purchaseId | string | ✅        | ID of the purchase |
 
 **Return Type**
 
-`GetPurchaseConsumptionOkResponse`
+[`CelitechApi.GetPurchaseConsumptionResponse`](../models/GetPurchaseConsumptionResponse.md)
 
 **Example Usage Code Snippet**
 
@@ -241,14 +255,14 @@ This endpoint can be called for consumption notifications (e.g. every 1 hour or 
 import { Celitech } from 'celitech-sdk';
 
 (async () => {
-  const celitech = new Celitech({
+  const client = new Celitech({
     clientId: 'CLIENT_ID',
     clientSecret: 'CLIENT_SECRET',
   });
 
-  const data = await celitech.purchases.getPurchaseConsumption(
-    '4973fa15-6979-4daa-9cf3-672620df819c',
-  );
+  const data = await client.purchases.getPurchaseConsumption({
+    purchaseId: '4973fa15-6979-4daa-9cf3-672620df819c',
+  });
 
   console.log(data);
 })();

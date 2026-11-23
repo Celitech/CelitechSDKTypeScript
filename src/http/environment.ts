@@ -1,8 +1,6 @@
-/**
- * Available API environments with their base URLs.
- * Use these constants to configure the SDK for different environments (production, staging, etc.).
- */
-export enum Environment {
-  /** DEFAULT environment base URL */
-  DEFAULT = 'https://api.celitech.net/v1',
-}
+export const CelitechApiEnvironment = {
+  Default: 'https://api.celitech.net/v1',
+} as const;
+
+export type CelitechApiEnvironment =
+  (typeof CelitechApiEnvironment)[keyof typeof CelitechApiEnvironment];

@@ -1,7 +1,8 @@
 import { HttpMetadata } from '../types';
 import { Hook } from './hook';
 import { HttpRequest, HttpResponse } from './hook';
-import { HttpError } from '../error';
+import { CelitechApiError } from '../errors/throwable-error';
+import { decodeErrorBody } from '../utils/content-type';
 
 /**
  * Default implementation of the Hook interface that provides pass-through behavior.
@@ -50,7 +51,19 @@ export class CustomHook implements Hook {
     request: HttpRequest,
     response: HttpResponse<any>,
     params: Map<string, string>,
-  ): Promise<HttpError> {
-    return new HttpError(response.metadata, response.raw);
+  ): Promise<CelitechApiError> {
+    return new CelitechApiError({
+      statusCode: response.metadata.status,
+      body: this.parseErrorBody(response),
+      rawResponse: response.rawResponse!,
+    });
+  }
+
+  private parseErrorBody(response: HttpResponse<any>): unknown {
+    const raw: unknown = response.raw;
+    if (!(raw instanceof ArrayBuffer) && !ArrayBuffer.isView(raw)) {
+      return raw;
+    }
+    return decodeErrorBody(raw, response.metadata.headers['content-type']);
   }
 }

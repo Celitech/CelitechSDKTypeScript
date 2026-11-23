@@ -25,6 +25,10 @@ export class QuerySerializer extends Serializer {
       if (param.value === undefined || param.value === null) {
         return;
       }
+      // Matches Fern's QueryStringBuilder.add(): an empty array must drop the key, not send `key=`.
+      if (Array.isArray(param.value) && param.value.length === 0) {
+        return;
+      }
 
       return query.push(`${this.serializeValue(param)}`);
     });

@@ -1,6 +1,7 @@
 import { Request } from '../transport/request';
 import { HttpResponse, RequestHandler, HttpMethod } from '../types';
-import { HttpError } from '../error';
+import { CelitechApiError } from '../errors/throwable-error';
+import { Logger, sanitizeLogUrl } from '../utils/logger';
 
 /**
  * Request handler that automatically retries failed requests.
@@ -24,7 +25,7 @@ export class RetryHandler implements RequestHandler {
       throw new Error('No next handler set in retry handler.');
     }
 
-    const maxAttempts = request.config.retry?.attempts ?? 3;
+    const maxAttempts = this.resolveMaxAttempts(request);
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
@@ -34,6 +35,7 @@ export class RetryHandler implements RequestHandler {
           throw error;
         }
         const delayMs = this.calculateDelay(attempt, request, error);
+        this.logRetry(request, attempt, delayMs, error);
         await this.delay(delayMs);
       }
     }
@@ -53,7 +55,7 @@ export class RetryHandler implements RequestHandler {
       throw new Error('No next handler set in retry handler.');
     }
 
-    const maxAttempts = request.config.retry?.attempts ?? 3;
+    const maxAttempts = this.resolveMaxAttempts(request);
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
@@ -64,11 +66,47 @@ export class RetryHandler implements RequestHandler {
           throw error;
         }
         const delayMs = this.calculateDelay(attempt, request, error);
+        this.logRetry(request, attempt, delayMs, error);
         await this.delay(delayMs);
       }
     }
 
     throw new Error('Error retrying request.');
+  }
+
+  /**
+   * Resolves the maximum number of attempts (initial call + retries) from the retry config.
+   * `retry.attempts` takes precedence when both are set; `maxRetries` (Fern parity — a retry
+   * *count*, not a total-attempts count) is converted with a `+ 1` for the initial call.
+   * @param request - The HTTP request being retried
+   * @returns The maximum number of attempts
+   */
+  private resolveMaxAttempts(request: Request): number {
+    if (request.config.retry?.attempts !== undefined) {
+      return request.config.retry.attempts;
+    }
+    if (request.config.maxRetries !== undefined) {
+      return request.config.maxRetries + 1;
+    }
+    return 3;
+  }
+
+  /**
+   * Logs a retry decision via the SDK's configured logger (see `BaseClientOptions.logging`).
+   * @param request - The HTTP request being retried
+   * @param attempt - The attempt number that just failed (1-indexed)
+   * @param delayMs - The computed backoff delay before the next attempt
+   * @param error - The error that triggered the retry
+   */
+  private logRetry(request: Request, attempt: number, delayMs: number, error: unknown): void {
+    const log = Logger.from(request.config.logging);
+    if (!log.isWarn()) {
+      return;
+    }
+    const reason = error instanceof Error ? error.message : String(error);
+    log.warn(
+      `HTTP Retry: attempt=${attempt} delayMs=${delayMs} url=${sanitizeLogUrl(request.constructFullUrl())} reason=${reason}`,
+    );
   }
 
   /**
@@ -80,21 +118,24 @@ export class RetryHandler implements RequestHandler {
    * @returns True if the request should be retried, false otherwise
    */
   private shouldRetry(error: Error, request: Request): boolean {
-    if (!(error instanceof HttpError)) {
+    if (!(error instanceof CelitechApiError)) {
       return false;
     }
 
     const httpMethodsToRetry = request.config.retry?.httpMethodsToRetry ?? [
       'GET',
+      'POST',
       'PUT',
       'DELETE',
+      'PATCH',
       'HEAD',
       'OPTIONS',
     ];
 
+    const status = error.statusCode ?? 0;
     const shouldRetryStatus = request.config.retry?.statusCodesToRetry
-      ? request.config.retry.statusCodesToRetry.includes(error.metadata.status)
-      : error.metadata.status >= 500 || [408, 429].includes(error.metadata.status);
+      ? request.config.retry.statusCodesToRetry.includes(status)
+      : status >= 500 || [408, 429].includes(status);
 
     const shouldRetryMethod = httpMethodsToRetry.includes(request.method as HttpMethod);
 
@@ -110,16 +151,16 @@ export class RetryHandler implements RequestHandler {
    * @param error - The error that triggered the retry (carries the response headers)
    * @returns The delay in milliseconds, capped at the configured maximum delay
    */
-  private calculateDelay(attempt: number, request: Request, error?: HttpError): number {
+  private calculateDelay(attempt: number, request: Request, error?: CelitechApiError): number {
     const maxRetryAfterDelay = request.config.retry?.maxRetryAfterDelayMs ?? 60000;
     const headerDelay = this.retryAfterDelay(error, maxRetryAfterDelay);
     if (headerDelay !== null) {
       return Math.floor(headerDelay);
     }
 
-    const baseDelay = request.config.retry?.delayMs ?? 150;
+    const baseDelay = request.config.retry?.delayMs ?? 1000;
     const backoffFactor = request.config.retry?.backoffFactor ?? 2;
-    const maxDelay = request.config.retry?.maxDelayMs ?? 5000;
+    const maxDelay = request.config.retry?.maxDelayMs ?? 60000;
     const jitter = request.config.retry?.jitterMs ?? 50;
 
     // Calculate exponential backoff: initialDelay * (backoffFactor ^ (attempt - 1))
@@ -146,15 +187,16 @@ export class RetryHandler implements RequestHandler {
    * @returns The delay in milliseconds, or null to use exponential backoff
    */
   private retryAfterDelay(
-    error: HttpError | undefined,
+    error: CelitechApiError | undefined,
     maxRetryAfterDelayMs: number,
   ): number | null {
-    const headers = error?.metadata?.headers;
+    const headers = error?.rawResponse?.headers;
     if (!headers || maxRetryAfterDelayMs <= 0) {
       return null;
     }
-    // `headers` is a plain `Record<string, string>` from `HttpMetadata`.
-    const getHeader = (name: string): string | undefined => headers[name];
+    // `headers` is a real `Headers` instance under fernMode (matching Fern's own
+    // `RawResponse` shape).
+    const getHeader = (name: string): string | undefined => headers.get(name) ?? undefined;
 
     // retry-after-ms (milliseconds) is a non-standard but finer-grained hint some APIs send
     // (e.g. OpenAI); it takes precedence over the whole-second Retry-After.
