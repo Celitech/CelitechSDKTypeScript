@@ -1,50 +1,71 @@
-import { HttpMetadata } from '../types';
+import { RawResponse } from '../utils/fetcher';
 
 /**
- * Error class that can be thrown explicitly via a throw() method.
- * Extends the built-in Error class with a convenience method for throwing.
+ * Base class for every error thrown by this SDK.
+ * Exposes the HTTP status code, response body, raw response metadata, and (when available)
+ * the underlying cause, plus a `requestId` getter read from the `x-request-id` response header.
  */
-export class ThrowableError extends Error {
-  /**
-   * Optional metadata about the HTTP response that triggered this error.
-   */
-  public metadata?: HttpMetadata;
+export class CelitechApiError extends Error {
+  public readonly statusCode?: number;
+  public readonly body?: unknown;
+  public readonly rawResponse?: RawResponse;
+  public readonly cause?: unknown;
 
-  /**
-   * Creates a new throwable error.
-   * @param message - The error message
-   * @param response - Optional response data associated with the error
-   */
-  constructor(
-    public message: string,
-    protected response?: unknown,
-  ) {
-    super(message);
+  constructor(opts: {
+    message?: string;
+    statusCode?: number;
+    body?: unknown;
+    rawResponse?: RawResponse;
+    cause?: unknown;
+  }) {
+    super(buildMessage(opts));
+    Object.setPrototypeOf(this, new.target.prototype);
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, this.constructor);
+    }
+
+    this.name = 'CelitechApiError';
+    this.statusCode = opts.statusCode;
+    this.body = opts.body;
+    this.rawResponse = opts.rawResponse;
+    if (opts.cause != null) {
+      this.cause = opts.cause;
+    }
   }
 
   /**
-   * Creates an error instance from a response body.
-   * Parsing (which can throw) is kept out of the constructor so that constructing
-   * an error while handling an error response never throws. The base implementation
-   * simply constructs the instance; subclasses may override to populate typed fields.
-   *
-   * Contract: every subclass constructor must accept `(message, response?)`. The base
-   * uses `new this(message, response)`, so a subclass with a different constructor
-   * signature must override `from()`.
-   * @param message - The error message
-   * @param response - Optional response data associated with the error
-   * @returns A new error instance
+   * The `X-Request-Id` response header, else the first header whose name ends in `request-id` or
+   * `request_id` (any case), as in Fern's error class.
    */
-  static from(message: string, response?: unknown): ThrowableError {
-    return new this(message, response);
+  get requestId(): string | undefined {
+    const headers = this.rawResponse?.headers;
+    if (headers == null) {
+      return undefined;
+    }
+    const requestId = headers.get('X-Request-Id');
+    if (requestId != null) {
+      return requestId;
+    }
+    let fallback: string | undefined;
+    headers.forEach((value, name) => {
+      if (fallback === undefined && /request[-_]?id$/i.test(name)) {
+        fallback = value;
+      }
+    });
+    return fallback;
   }
+}
 
-  /**
-   * Throws this error instance.
-   * Convenience method for explicitly throwing the error.
-   * @throws This error instance
-   */
-  public throw() {
-    throw this;
+function buildMessage(opts: { message?: string; statusCode?: number; body?: unknown }): string {
+  const lines: string[] = [];
+  if (opts.message != null) {
+    lines.push(opts.message);
   }
+  if (opts.statusCode != null) {
+    lines.push(`Status code: ${opts.statusCode}`);
+  }
+  if (opts.body != null) {
+    lines.push(`Body: ${JSON.stringify(opts.body, undefined, 2)}`);
+  }
+  return lines.join('\n');
 }

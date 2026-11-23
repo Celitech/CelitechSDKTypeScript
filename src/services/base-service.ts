@@ -1,7 +1,7 @@
-import { Environment } from '../http/environment';
+import { CelitechApiEnvironment } from '../http/environment';
 import { HttpClient } from '../http/client';
-import { toBase64 as encodeBase64 } from '../http/utils/runtime';
-import { SdkConfig } from '../http/types';
+import { BaseClientOptions, NormalizedClientOptions, normalizeClientOptions } from '../http/types';
+import { Supplier } from '../http/utils/supplier';
 import { OAuthTokenManager } from '../http/oauth/token-manager';
 
 /**
@@ -10,16 +10,19 @@ import { OAuthTokenManager } from '../http/oauth/token-manager';
  */
 export class BaseService {
   /** The HTTP client instance used to make API requests */
-  public client: HttpClient;
+  protected client: HttpClient;
 
   /** Service-level configuration overrides */
-  protected serviceConfig?: Partial<SdkConfig>;
+  protected serviceConfig?: Partial<BaseClientOptions>;
+
+  protected readonly _options: NormalizedClientOptions<BaseClientOptions>;
 
   constructor(
-    public config: SdkConfig,
+    options: BaseClientOptions,
     protected tokenManager: OAuthTokenManager,
   ) {
-    this.client = new HttpClient(this.config);
+    this._options = normalizeClientOptions(options);
+    this.client = new HttpClient(this._options);
   }
 
   /**
@@ -27,7 +30,7 @@ export class BaseService {
    * @param config - Partial configuration to override SDK-level defaults
    * @returns This service instance for method chaining
    */
-  setConfig(config: Partial<SdkConfig>): this {
+  protected setConfig(config: Partial<BaseClientOptions>): this {
     this.serviceConfig = config;
     return this;
   }
@@ -73,10 +76,10 @@ export class BaseService {
    * @returns Merged configuration with all overrides applied
    */
   protected getResolvedConfig(
-    methodConfig?: Partial<SdkConfig>,
-    requestConfig?: Partial<SdkConfig>,
-  ): SdkConfig {
-    let merged: SdkConfig = { ...this.config } as SdkConfig;
+    methodConfig?: Partial<BaseClientOptions>,
+    requestConfig?: Partial<BaseClientOptions>,
+  ): BaseClientOptions {
+    let merged: BaseClientOptions = { ...this._options } as BaseClientOptions;
     if (this.serviceConfig) {
       merged = BaseService.deepMerge(merged, this.serviceConfig);
     }
@@ -89,35 +92,31 @@ export class BaseService {
     return merged;
   }
 
-  protected toBase64(str: string): string {
-    return encodeBase64(str);
+  protected set baseUrl(baseUrl: Supplier<string>) {
+    this._options.baseUrl = baseUrl;
   }
 
-  set baseUrl(baseUrl: string) {
-    this.config.baseUrl = baseUrl;
+  protected set timeoutInSeconds(timeoutInSeconds: number) {
+    this._options.timeoutInSeconds = timeoutInSeconds;
   }
 
-  set environment(environment: Environment) {
-    this.config.environment = environment;
+  protected set environment(environment: Supplier<CelitechApiEnvironment | string>) {
+    this._options.environment = environment;
   }
 
-  set timeoutMs(timeoutMs: number) {
-    this.config.timeoutMs = timeoutMs;
+  protected set clientId(clientId: string) {
+    this._options.clientId = clientId;
   }
 
-  set clientId(clientId: string) {
-    this.config.clientId = clientId;
+  protected set clientSecret(clientSecret: string) {
+    this._options.clientSecret = clientSecret;
   }
 
-  set clientSecret(clientSecret: string) {
-    this.config.clientSecret = clientSecret;
+  protected set oAuthBaseUrl(oAuthBaseUrl: string) {
+    this._options.oAuthBaseUrl = oAuthBaseUrl;
   }
 
-  set oAuthBaseUrl(oAuthBaseUrl: string) {
-    this.config.oAuthBaseUrl = oAuthBaseUrl;
-  }
-
-  set accessToken(accessToken: string) {
-    this.config.accessToken = accessToken;
+  protected set accessToken(accessToken: string) {
+    this._options.accessToken = accessToken;
   }
 }
